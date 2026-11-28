@@ -1,6 +1,6 @@
 {
  "piece": "P22",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "shop_meet_frank.meet": {
    "text": "91ac7305f8eebd82",
@@ -10,18 +10,18 @@
    "all": "e40aa4939390a239"
   },
   "shop_meet_frank.after": {
-   "text": "65b61978d543787e",
+   "text": "82ad4a3fa95eabb9",
    "traits": "894db1981578d660",
    "facts": "94f313c9c330584f",
    "facts2": "b0de75eb44281759",
-   "all": "0edf95153887e801"
+   "all": "21192fcc62edb9ca"
   },
   "shop_meet_danny.meet": {
-   "text": "ec5fbbc6a3f79840",
+   "text": "eebadd4baf59087c",
    "traits": "e24a6dbeedcf69e9",
    "facts": "37bac9a1e3711d03",
    "facts2": "86d4a370b5bae7c7",
-   "all": "cf93f4681ff30feb"
+   "all": "d20b1ac991f180d1"
   },
   "shop_meet_danny.after": {
    "text": "3279d643437fae5e",
@@ -30,7 +30,7 @@
    "facts2": "896e8f8ad26c5b50",
    "all": "47bc9e90a53d753b"
   },
-  "*": "7ea79c3b11c7e878"
+  "*": "e62288f9ea5fa14b"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -112,6 +112,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -207,37 +210,39 @@
    "row": "B10",
    "screen": "shop_meet_danny.meet",
    "verdict": "PASS",
-   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
-   "why": "the trigger needs him at the shop; his rows put him behind the counter on every visit",
+   "line": "A guy in his early twenties with the shop's name badge leans behind the counter with his phone, hood up.",
+   "why": "the trigger needs Danny at the shop (Mon-Sat 15-23, Sun 07-23); the picture 'young shop clerk leaning on counter phone' matches; the second line's 'night shift' is a detail, like the craft's own 'daylight' on a place, and no line of the screen claims night",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec5fbbc6a3f79840",
+    "text": "eebadd4baf59087c",
+    "traits": "e24a6dbeedcf69e9",
     "facts": "37bac9a1e3711d03",
     "facts2": "86d4a370b5bae7c7",
-    "all": "cf93f4681ff30feb"
+    "all": "d20b1ac991f180d1"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B10",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
-   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "line": "Whatever you buy in here, Mark's going to hear about it. Your face goes warm before you've picked anything up.",
+   "why": "Mark named as who'll hear, not as present; Frank present by the trigger (Mon-Sat 07-15); picture 'heavy shopkeeper behind counter newspaper' matches the meet screen's paper",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B10",
@@ -455,37 +460,39 @@
    "row": "B8",
    "screen": "shop_meet_danny.meet",
    "verdict": "PASS",
-   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
-   "why": "ages match the picture (52, 23); no garment of hers named",
+   "line": "a man of 23 in a hoodie with a name badge",
+   "why": "Danny 23 matches; 'early twenties' agrees; no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec5fbbc6a3f79840",
+    "text": "eebadd4baf59087c",
+    "traits": "e24a6dbeedcf69e9",
     "facts": "37bac9a1e3711d03",
     "facts2": "86d4a370b5bae7c7",
-    "all": "cf93f4681ff30feb"
+    "all": "d20b1ac991f180d1"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B8",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
-   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "line": "a heavy man of 52 behind a corner-shop till",
+   "why": "Frank 52 matches 'in his fifties'; no garment of hers; no number in prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B8",
@@ -1392,8 +1399,47 @@
    "note": false,
    "screen_hash": "7ea79c3b11c7e878",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in shop_meet_frank, shop_meet_danny)",
+   "why": "faces only; hood_shop's place picture belongs to P03",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e62288f9ea5fa14b",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "heavy shopkeeper behind counter newspaper \u00b7 corner shop owner at the till \u00b7 young shop clerk leaning on counter phone \u00b7 night shift shop clerk at till smirking",
+   "why": "every search line is 8 words or fewer, no digit, no 'woman of', no caption camera direction, no 'no ___', no name; roles in place of ages",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e62288f9ea5fa14b",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "young shop clerk leaning on counter phone",
+   "why": "one subject each, a common pose; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e62288f9ea5fa14b",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C286",
@@ -1676,37 +1722,39 @@
    "row": "C460",
    "screen": "shop_meet_danny.meet",
    "verdict": "PASS",
-   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
-   "why": "true on every reach",
+   "line": "A guy in his early twenties with the shop's name badge leans behind the counter with his phone, hood up.",
+   "why": "true on every reach: he is gated present; the face fits",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec5fbbc6a3f79840",
+    "text": "eebadd4baf59087c",
+    "traits": "e24a6dbeedcf69e9",
     "facts": "37bac9a1e3711d03",
     "facts2": "86d4a370b5bae7c7",
-    "all": "cf93f4681ff30feb"
+    "all": "d20b1ac991f180d1"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C460",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
-   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "line": "Whatever you buy in here, Mark's going to hear about it. Your face goes warm before you've picked anything up.",
+   "why": "true on every visit; the face fits",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C460",
@@ -1761,37 +1809,39 @@
    "row": "C461",
    "screen": "shop_meet_danny.meet",
    "verdict": "PASS",
-   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "line": "Hey, gorgeous. Laura's kid, right? You grew up.",
    "why": "texture and his manner; can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec5fbbc6a3f79840",
+    "text": "eebadd4baf59087c",
+    "traits": "e24a6dbeedcf69e9",
     "facts": "37bac9a1e3711d03",
     "facts2": "86d4a370b5bae7c7",
-    "all": "cf93f4681ff30feb"
+    "all": "d20b1ac991f180d1"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C461",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
-   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "line": "Small street. Everybody knows what everybody buys.",
+   "why": "texture and his manner; can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C461",
@@ -2667,19 +2717,20 @@
    "row": "C927",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "Done (5 min) back to the shop; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "line": "Done (5 min)",
+   "why": "the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C928",
@@ -2809,19 +2860,20 @@
    "row": "C931",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "Done (5 min) back to the shop; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "line": "Done (5 min) back to the shop; no time_of_day on the screen",
+   "why": "no time condition to mis-read",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C953",
@@ -2871,37 +2923,39 @@
    "row": "L106",
    "screen": "shop_meet_danny.meet",
    "verdict": "PASS",
-   "line": "\"A guy in his early twenties with the shop's name badge leans behind the counter...\"",
+   "line": "A guy in his early twenties with the shop's name badge leans behind the counter with his phone, hood up.",
    "why": "only he is named, and the trigger needs him present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ec5fbbc6a3f79840",
+    "text": "eebadd4baf59087c",
+    "traits": "e24a6dbeedcf69e9",
     "facts": "37bac9a1e3711d03",
     "facts2": "86d4a370b5bae7c7",
-    "all": "cf93f4681ff30feb"
+    "all": "d20b1ac991f180d1"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "L106",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "\"Whatever you buy in here, Mark's going to hear about it.\"",
-   "why": "true on every visit; Mark named as who'll hear, not as present; no number or garment",
+   "line": "Whatever you buy in here, Mark's going to hear about it. Your face goes warm before you've picked anything up.",
+   "why": "Mark named as absent; Frank gated present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "L106",
@@ -3008,19 +3062,20 @@
    "row": "L167",
    "screen": "shop_meet_frank.after",
    "verdict": "PASS",
-   "line": "Done (5 min) back to the shop; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a once-only meeting gated on Frank's presence; exit spends 5 min",
+   "line": "trigger: npc_at_location npc_frank hood_shop",
+   "why": "one row, no per-day-kind split",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "65b61978d543787e",
+    "text": "82ad4a3fa95eabb9",
+    "traits": "894db1981578d660",
     "facts": "94f313c9c330584f",
     "facts2": "b0de75eb44281759",
-    "all": "0edf95153887e801"
+    "all": "21192fcc62edb9ca"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "L168",
@@ -3077,8 +3132,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 16,
+ "answered": 16,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P05",
- "pass": 17,
+ "pass": 18,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -71,17 +71,21 @@
   "C1274": "ca72df83c67acc75",
   "C1278": "a511d81564cef526",
   "C1277": "2b934524a49c49e9",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
   "C2201": "1137a7018841fcb3",
@@ -661,8 +665,47 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "small cafe interior long counter espresso machine \u00b7 messy student apartment living room sofa",
+   "why": "every place line names the room or street and one or two details, nobody in it; no woman/man/girl/her/people word. Role words used as the room's kind ('student apartment', 'student flat') name the room the way the old first_term's \"dean's office\" / \"landlord's house\" did (LO's model, card P85), not a person in frame",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": false,
+   "pass": 18
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "small cafe interior long counter espresso machine \u00b7 messy student apartment living room sofa",
+   "why": "tags: each line 8 words or fewer, no age or digit, no camera direction, no 'no ___', no name; nothing moves, so no gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "21548e787d7f48ee",
+   "carried": false,
+   "pass": 18
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "small cafe interior long counter espresso machine \u00b7 messy student apartment living room sofa",
+   "why": "each is a common, filed room photo; no person, no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "abcad271992139b6",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C32",
@@ -1890,14 +1933,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "caf\u00e9 'at a cafe window table with a coffee' \u00b7 Zoe's 'on a messy sofa in a student apartment, clothes on the chairs'",
-   "why": "one tier-0 file each, her in it; neither claims anyone or says empty or alone",
+   "line": "small cafe interior long counter espresso machine \u00b7 messy student apartment living room sofa",
+   "why": "one file each, tier 0 (_t0.jpg), the place itself with nobody in it, searched by the room and one or two details, shown only while open (hours set)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "69a8103be1e1032a",
-   "carried": true,
-   "pass": 10
+   "row_hash": "9c523f03c9ecb512",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "media#3",
@@ -1955,14 +1998,14 @@
    "row": "media#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "image = \"locations/near_cafe_t0.jpg\" \u00b7 [\"woman of 18 at a cafe window table with a coffee\", \"young woman sitting in a small cafe across from a college\"]",
-   "why": "age and place in the words; no outfit named on purpose, since the card shows on every visit in any clothes (C1238 wins over naming one)",
+   "line": "small cafe interior long counter espresso machine \u00b7 messy student apartment living room sofa",
+   "why": "a place has no description field; its search words are short tag lines (rule 7), no age, no camera direction, no 'no ___', no garment",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "eff6dc1369755c34",
-   "carried": true,
-   "pass": 1
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "media#8",
@@ -1976,6 +2019,19 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 16
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "small cafe interior long counter espresso machine \u00b7 messy student apartment living room sofa",
+   "why": "a picture that exists: a plain room or street photo, one subject (the place)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "places#1",
@@ -2331,8 +2387,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

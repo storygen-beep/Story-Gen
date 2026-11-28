@@ -1,13 +1,13 @@
 {
  "piece": "P07",
- "pass": 26,
+ "pass": 29,
  "screens": {
   "opening.wake": {
-   "text": "cc3c063d9cef0f23",
+   "text": "fe88b99292a94d23",
    "traits": "44136fa355b3678a",
    "facts": "8211a28bc952c9a8",
    "facts2": "8211a28bc952c9a8",
-   "all": "b47c03f5d3c55a74"
+   "all": "f6aafa76647ea6bd"
   },
   "opening.kitchen_rent": {
    "text": "7dab9336c6fbdb16",
@@ -45,46 +45,46 @@
    "all": "6e76ba2921c19240"
   },
   "opening.bath": {
-   "text": "d00f9006696d287d",
+   "text": "836289484fa88730",
    "traits": "74c4f68e6476ecee",
    "facts": "47f33854a15bb2a0",
    "facts2": "95093214eadaa443",
-   "all": "6c38436dfb16a334"
+   "all": "95427115bb7e940e"
   },
   "opening.hall": {
-   "text": "20fd03b2cbe8ed50",
+   "text": "33c93f3eb4c7e5bc",
    "traits": "74c4f68e6476ecee",
    "facts": "afb887a64559e7f9",
    "facts2": "ce93dea924b820f0",
-   "all": "3cf39c92883eb5de"
+   "all": "801ef789b4124151"
   },
   "opening.room_past": {
-   "text": "82c1b173aeb2608a",
+   "text": "a6c8e47edcc17356",
    "traits": "74c4f68e6476ecee",
    "facts": "93f75fd78bfe05cf",
    "facts2": "4813fa938d77e462",
-   "all": "7914b2741aad07ad"
+   "all": "f2c955b1cf7e30d5"
   },
   "opening.room_spoke": {
-   "text": "2124ff3068418da1",
+   "text": "cb644f6e129e6228",
    "traits": "74c4f68e6476ecee",
    "facts": "f195d2fe11038f8c",
    "facts2": "45d959c38e033704",
-   "all": "291016bf6f76e02f"
+   "all": "7250673dfb1f4252"
   },
   "opening.room_waited": {
-   "text": "c5a401b11c0eddc1",
+   "text": "6bfbd40c7c318df2",
    "traits": "74c4f68e6476ecee",
    "facts": "5aeb7f3bf01bb2a5",
    "facts2": "6e56bdc0c43cc1b4",
-   "all": "8f4310de3e431de4"
+   "all": "0085aadee6088d54"
   },
   "opening.room": {
-   "text": "38c16857e4551e5b",
+   "text": "72ea3077a30a12b6",
    "traits": "44136fa355b3678a",
    "facts": "7f5851883cb8d732",
    "facts2": "7f5851883cb8d732",
-   "all": "47e327c8143e37a1"
+   "all": "3693ad293b06d5c6"
   },
   "opening.sums": {
    "text": "e01b11164a4a03ec",
@@ -115,11 +115,11 @@
    "all": "2f799028dcc6f434"
   },
   "talk_mom.hub": {
-   "text": "0f4660e14b94ab43",
+   "text": "b5b0227a7a171efc",
    "traits": "4b9cc244e3119951",
    "facts": "a8dd4b5a3c3490e0",
    "facts2": "d48da7894fcd432a",
-   "all": "4c25ee55de599eb7"
+   "all": "1dcde7b21c6733b2"
   },
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
@@ -136,11 +136,11 @@
    "all": "5593e1137ca9a97b"
   },
   "mom_living_room.hub": {
-   "text": "fa2c2d66908e634d",
+   "text": "3d2183ba76e908d0",
    "traits": "4b9cc244e3119951",
    "facts": "7b52a3219c796bed",
    "facts2": "d35574a6bc629447",
-   "all": "ea352dd9afd21c11"
+   "all": "a7c84a3ffc2eae7f"
   },
   "mom_living_room.talk": {
    "text": "eb78fbf9c5206259",
@@ -177,7 +177,7 @@
    "facts2": "b574bdfe31b183e7",
    "all": "4516d0eddae64654"
   },
-  "*": "06cb345f563fcf4d"
+  "*": "f117ca44b06e7107"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -314,17 +314,21 @@
   "C1284": "d631d4c69f1d3b74",
   "L120": "22461386046b4605",
   "C1278": "a511d81564cef526",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C520": "59faa2198bb751e1",
   "C519": "ff5e8d6189f0899a",
   "C1626": "e2077b8b174e635b",
@@ -505,18 +509,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "Mark in his chair weekdays 16:30\u201323, Sun 12\u201323; absent only Saturday nights, when the couch line shows",
+   "why": "Mark's line sits behind his presence; who_is_where puts him in the living room weekdays 17-23, Sat 10-19, Sun 12-23; the picture's new search words name only Mom on a couch",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B10",
@@ -558,19 +563,20 @@
    "row": "B10",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "07:12: Ryan leaves his room for the hall at 07:12 (his rows), and knocks from the hall; the towel is prose only (LO's waiver, NOTES 181)",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "07:12-07:20: Ryan's rows put him in his room 07:00-07:12 and the hall 07:12-07:25, so he opens his door at 07:12 and bangs from the hall; nobody in the bathroom (sheet).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B10",
@@ -631,18 +637,19 @@
    "screen": "opening.hall",
    "verdict": "PASS",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "07:20\u201307:23: Ryan in the hall 07:12\u201307:25; towel prose only (NOTES 181)",
+   "why": "07:20-07:23: Ryan in the hall by his 07:12-07:25 row ('waiting for the bathroom').",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B10",
@@ -703,72 +710,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "the beat names the usual outfit, and \"Keep your usual\" equips it; the other two buttons say \"instead\"",
+   "why": "07:25-07:30, her room, nobody named; the garments named are the ones this beat's buttons equip; the new search words ('naked girl getting dressed bedroom gif') say what the screen shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B10",
    "screen": "opening.room_past",
    "verdict": "PASS",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan still in the hall (row ends 07:25, end exclusive).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B10",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan in the hall; he waits at the bathroom door and does not go in before his 07:25 bathroom row.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B10",
    "screen": "opening.room_waited",
    "verdict": "PASS",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan in the hall.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B10",
@@ -812,18 +823,19 @@
    "screen": "opening.wake",
    "verdict": "PASS",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "07:00\u201307:05, alone in her room; no one placed",
+   "why": "Monday 07:00, her room, nobody present; the new search words claim nothing beyond the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B10",
@@ -885,18 +897,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "each presence line is behind npc_at_location; the garment lines behind clothing_item equipped",
+   "why": "each presence line behind npc_at_location; Mark at the kitchen table only 07-08 weekdays / Sat 08-10 / Sun 08-12 by his rows; the new search words name only Mom",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B10",
@@ -1132,19 +1145,20 @@
    "row": "B8",
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "each garment line sits behind clothing_item equipped; the Mom picture's search words name no garment of hers; no number disagrees with PLAN",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B8",
@@ -1186,19 +1200,20 @@
    "row": "B8",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "No garment is named but the towel, prose only by LO's waiver (NOTES 181); no number on this screen.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B8",
@@ -1259,18 +1274,19 @@
    "screen": "opening.hall",
    "verdict": "PASS",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "why": "No garment is named but the towel, prose only by LO's waiver (NOTES 181); no number on this screen.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B8",
@@ -1331,72 +1347,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "every garment named is taken, put back or put on by this beat's own wardrobeEffects",
+   "why": "the beat that equips her names them (C1158 'the beat that equips her'); the two other buttons say 'instead'; the towel dropped is prose only (NOTES 207); the search words name no garment; 5-minute exits agree with the card",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B8",
    "screen": "opening.room_past",
    "verdict": "PASS",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "why": "No garment is named but the towel, prose only by LO's waiver (NOTES 181); no number on this screen.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B8",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "why": "No garment is named but the towel, prose only by LO's waiver (NOTES 181); no number on this screen.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B8",
    "screen": "opening.room_waited",
    "verdict": "PASS",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "why": "No garment is named but the towel, prose only by LO's waiver (NOTES 181); no number on this screen.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "B8",
@@ -1444,14 +1464,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B8",
@@ -1512,19 +1533,20 @@
    "row": "B8",
    "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "no garment named; numbers agree with PLAN ($75, Sunday)",
+   "line": "Mom's eyes drop to the skirt. Her skirt.",
+   "why": "each garment line sits behind clothing_item equipped; the Mom picture's search words name no garment of hers; no number disagrees with PLAN",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "B8",
@@ -1637,18 +1659,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's eyes drop to the skirt. Her skirt.",
-   "why": "each garment line sits behind clothing_item equipped",
+   "why": "each garment line sits behind clothing_item equipped; the Mom picture's search words name no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1158",
@@ -1690,19 +1713,20 @@
    "row": "C1158",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "You grab the towel off the rail. It's the small one.",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1158",
@@ -1762,19 +1786,20 @@
    "row": "C1158",
    "screen": "opening.hall",
    "verdict": "PASS",
-   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "His eyes drop to where the towel ends on your wet thighs.",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1158",
@@ -1835,72 +1860,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "the beat that equips her names it (C1158 allows \"the beat that equips her\")",
+   "why": "the beat that equips her names them (C1158 'the beat that equips her'); the two other buttons say 'instead'; the towel dropped is prose only (NOTES 207); the search words name no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1158",
    "screen": "opening.room_past",
    "verdict": "PASS",
-   "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "The towel drops off your tits",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1158",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "The towel slides to your waist",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1158",
    "screen": "opening.room_waited",
    "verdict": "PASS",
-   "line": "Ryan's eyes go straight to the light switch.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "for a second the towel hangs open on your tits",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1158",
@@ -1948,14 +1977,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1158",
@@ -2017,18 +2047,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's eyes drop to the skirt. Her skirt.",
-   "why": "each garment line sits behind clothing_item equipped",
+   "why": "each garment line sits behind clothing_item equipped; the Mom picture's search words name no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1158",
@@ -2700,18 +2731,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's eyes drop to the skirt. Her skirt.",
-   "why": "each garment line sits behind clothing_item equipped",
+   "why": "each garment line sits behind clothing_item equipped; the Mom picture's search words name no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1206",
@@ -2753,19 +2785,20 @@
    "row": "C1206",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "You grab the towel off the rail. It's the small one.",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1206",
@@ -2825,19 +2858,20 @@
    "row": "C1206",
    "screen": "opening.hall",
    "verdict": "PASS",
-   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "His eyes drop to where the towel ends on your wet thighs.",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1206",
@@ -2898,72 +2932,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "the beat that equips her names it (C1158 allows \"the beat that equips her\")",
+   "why": "the beat that equips her names them (C1158 'the beat that equips her'); the two other buttons say 'instead'; the towel dropped is prose only (NOTES 207); the search words name no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1206",
    "screen": "opening.room_past",
    "verdict": "PASS",
-   "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "The towel drops off your tits",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1206",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "The towel slides to your waist",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1206",
    "screen": "opening.room_waited",
    "verdict": "PASS",
-   "line": "Ryan's eyes go straight to the light switch.",
-   "why": "the towel is prose only (LO's waiver, NOTES 181, held as prose not a garment); the strip is the act",
+   "line": "for a second the towel hangs open on your tits",
+   "why": "The only garment-like thing named is the towel, prose only by LO's waiver (NOTES 181); the strip in the shower is the act.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1206",
@@ -3011,14 +3049,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1206",
@@ -3080,18 +3119,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's eyes drop to the skirt. Her skirt.",
-   "why": "each garment line sits behind clothing_item equipped",
+   "why": "each garment line sits behind clothing_item equipped; the Mom picture's search words name no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1206",
@@ -3644,18 +3684,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "N/A",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "not the hand-over",
+   "why": "not the hand-over (the opening's hand-over is opening.sit_with_mom / ask_mom)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1631",
@@ -3697,19 +3738,20 @@
    "row": "C1631",
    "screen": "opening.bath",
    "verdict": "N/A",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "not the hand-over",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "Not the hand-over; the hand-over is opening.sit_with_mom / ask_mom.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1631",
@@ -3770,18 +3812,19 @@
    "screen": "opening.hall",
    "verdict": "N/A",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "not the hand-over",
+   "why": "Not the hand-over; the hand-over is opening.sit_with_mom / ask_mom.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1631",
@@ -3842,72 +3885,76 @@
    "screen": "opening.room",
    "verdict": "N/A",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "not the hand-over",
+   "why": "not the hand-over (the opening's hand-over is opening.sit_with_mom / ask_mom)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1631",
    "screen": "opening.room_past",
    "verdict": "N/A",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "not the hand-over",
+   "why": "Not the hand-over; the hand-over is opening.sit_with_mom / ask_mom.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1631",
    "screen": "opening.room_spoke",
    "verdict": "N/A",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "not the hand-over",
+   "why": "Not the hand-over; the hand-over is opening.sit_with_mom / ask_mom.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1631",
    "screen": "opening.room_waited",
    "verdict": "N/A",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "not the hand-over",
+   "why": "Not the hand-over; the hand-over is opening.sit_with_mom / ask_mom.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C1631",
@@ -3951,18 +3998,19 @@
    "screen": "opening.wake",
    "verdict": "N/A",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "not the hand-over",
+   "why": "not the hand-over (the opening's hand-over is opening.sit_with_mom / ask_mom)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1631",
@@ -4024,18 +4072,19 @@
    "screen": "talk_mom.hub",
    "verdict": "N/A",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "not the hand-over",
+   "why": "not the hand-over (the opening's hand-over is opening.sit_with_mom / ask_mom)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "45d1f77e233e111c",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C1631",
@@ -4311,8 +4360,142 @@
    "note": false,
    "screen_hash": "06cb345f563fcf4d",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 26
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "home_her_room: 'small bedroom interior single bed' / 'small single bedroom interior daylight' / 'narrow single bed small room'",
+   "why": "the one place picture in P07's builds is the room itself, no person word; hood_street carries no picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": "f117ca44b06e7107",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "'teen getting dressed after shower nude gif' / 'middle aged woman kitchen counter coffee mug'",
+   "why": "every line on P07's ten spots and home_her_room is 7 words or fewer, tags (place or act plus details, gif where something moves), no digit, no 'woman of', no camera direction, no 'no ___', no name; 'teen', 'mature', 'middle aged' read as the filed tag for an age band, not an age",
+   "cause": null,
+   "note": false,
+   "screen_hash": "f117ca44b06e7107",
+   "row_hash": "21548e787d7f48ee",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "naked girl getting dressed bedroom gif",
+   "why": "every other P07 spot asks one subject in a common act or pose (waking in bed, showering, dressing, Mom at a counter, Mom on a couch) and names no unbacked garment; opening.room's 'towel on floor' is not worn",
+   "cause": null,
+   "note": false,
+   "screen_hash": "f117ca44b06e7107",
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2209",
+   "screen": "opening.hall",
+   "verdict": "WAIVED",
+   "line": "teen in towel bathroom door steam gif",
+   "why": "the search words name the towel, which is prose only; LO, NOTES 181 (typed 2026-11-23): \"Yes\" to all ten fixes with the towel waived -- the towel in the opening (screens 4b-6) is prose only, not a garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
+    "facts2": "ce93dea924b820f0",
+    "all": "801ef789b4124151"
+   },
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2209",
+   "screen": "opening.room_past",
+   "verdict": "WAIVED",
+   "line": "towel drop teen tits gif",
+   "why": "the search words name the towel, which is prose only; LO, NOTES 181 (typed 2026-11-23): \"Yes\" to all ten fixes with the towel waived -- the towel in the opening (screens 4b-6) is prose only, not a garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
+    "facts2": "4813fa938d77e462",
+    "all": "f2c955b1cf7e30d5"
+   },
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2209",
+   "screen": "opening.room_spoke",
+   "verdict": "WAIVED",
+   "line": "towel slips to waist topless teen gif",
+   "why": "the search words name the towel, which is prose only; LO, NOTES 181 (typed 2026-11-23): \"Yes\" to all ten fixes with the towel waived -- the towel in the opening (screens 4b-6) is prose only, not a garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
+    "facts2": "45d959c38e033704",
+    "all": "7250673dfb1f4252"
+   },
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2209",
+   "screen": "opening.room_waited",
+   "verdict": "WAIVED",
+   "line": "teen opening towel flash gif",
+   "why": "the search words name the towel, which is prose only; LO, NOTES 181 (typed 2026-11-23): \"Yes\" to all ten fixes with the towel waived -- the towel in the opening (screens 4b-6) is prose only, not a garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
+    "facts2": "6e56bdc0c43cc1b4",
+    "all": "0085aadee6088d54"
+   },
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 28
+  },
+  {
+   "row": "C2209",
+   "screen": "opening.wake",
+   "verdict": "WAIVED",
+   "line": "girl pyjama top ridden up bed",
+   "why": "the search words name the pyjama top, which no clothing condition backs; LO, NOTES 179 (typed 2026-11-23): \"Yes to all ten, waive 9\" -- the pyjama top on screen 1 is prose only, not a garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
+    "facts": "8211a28bc952c9a8",
+    "facts2": "8211a28bc952c9a8",
+    "all": "f6aafa76647ea6bd"
+   },
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 28
   },
   {
    "row": "C239",
@@ -4729,18 +4912,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "Mark in his chair weekdays 16:30\u201323, Sun 12\u201323; absent only Saturday nights, when the couch line shows",
+   "why": "Mark placed behind his presence check, true at every minute it shows; search words claim nothing",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C460",
@@ -4782,19 +4966,20 @@
    "row": "C460",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "07:12: Ryan leaves his room for the hall at 07:12 (his rows), and knocks from the hall; the towel is prose only (LO's waiver, NOTES 181)",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "07:12-07:20: Ryan's rows put him in his room 07:00-07:12 and the hall 07:12-07:25, so he opens his door at 07:12 and bangs from the hall; nobody in the bathroom (sheet).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C460",
@@ -4855,18 +5040,19 @@
    "screen": "opening.hall",
    "verdict": "PASS",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "07:20\u201307:23: Ryan in the hall 07:12\u201307:25; towel prose only (NOTES 181)",
+   "why": "07:20-07:23: Ryan in the hall by his 07:12-07:25 row ('waiting for the bathroom').",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C460",
@@ -4927,72 +5113,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "the beat names the usual outfit, and \"Keep your usual\" equips it; the other two buttons say \"instead\"",
+   "why": "every claim true on all three dressing paths; the picture's words match the screen (towel down, dressing)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C460",
    "screen": "opening.room_past",
    "verdict": "PASS",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan still in the hall (row ends 07:25, end exclusive).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C460",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan in the hall; he waits at the bathroom door and does not go in before his 07:25 bathroom row.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C460",
    "screen": "opening.room_waited",
    "verdict": "PASS",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan in the hall.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C460",
@@ -5036,18 +5226,19 @@
    "screen": "opening.wake",
    "verdict": "PASS",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "07:00\u201307:05, alone in her room; no one placed",
+   "why": "Monday morning, nobody present, no past behind no flag; the pyjama top is LO's waiver (NOTES 179), not this row's claim about people or the past",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C460",
@@ -5109,18 +5300,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "each presence line is behind npc_at_location; the garment lines behind clothing_item equipped",
+   "why": "each presence and garment line behind its condition; true at every minute",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C460",
@@ -5194,18 +5386,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "texture that can't clash and lines that fit each PLAN entry; unchanged prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C461",
@@ -5247,19 +5440,20 @@
    "row": "C461",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "Texture, her reactions on her body, and lines that fit each person's PLAN entry (Ryan on her side, covering); nothing clashes with clothes, times or who is where.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C461",
@@ -5320,18 +5514,19 @@
    "screen": "opening.hall",
    "verdict": "PASS",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "Texture, her reactions on her body, and lines that fit each person's PLAN entry (Ryan on her side, covering); nothing clashes with clothes, times or who is where.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C461",
@@ -5392,72 +5587,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "texture that can't clash and lines that fit each PLAN entry; unchanged prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C461",
    "screen": "opening.room_past",
    "verdict": "PASS",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "Texture, her reactions on her body, and lines that fit each person's PLAN entry (Ryan on her side, covering); nothing clashes with clothes, times or who is where.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C461",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "Texture, her reactions on her body, and lines that fit each person's PLAN entry (Ryan on her side, covering); nothing clashes with clothes, times or who is where.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C461",
    "screen": "opening.room_waited",
    "verdict": "PASS",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "Texture, her reactions on her body, and lines that fit each person's PLAN entry (Ryan on her side, covering); nothing clashes with clothes, times or who is where.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C461",
@@ -5501,18 +5700,19 @@
    "screen": "opening.wake",
    "verdict": "PASS",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "texture that can't clash and lines that fit each PLAN entry; unchanged prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C461",
@@ -5574,18 +5774,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "dialogue fits each person's PLAN entry (Mark the pressure, Mom close, Ryan on her side)",
+   "why": "texture that can't clash and lines that fit each PLAN entry; unchanged prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C461",
@@ -7518,18 +7719,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "N/A",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "no schedule window authored here",
+   "why": "note row; no schedule window authored on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C921",
@@ -7571,19 +7773,20 @@
    "row": "C921",
    "screen": "opening.bath",
    "verdict": "N/A",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "no schedule window authored here",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "Note row. No schedule window is authored on this screen; the Ryan rows it reads (07:00-07:12, 07:12-07:25, 07:25-07:45) do not wrap midnight.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C921",
@@ -7644,18 +7847,19 @@
    "screen": "opening.hall",
    "verdict": "N/A",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "no schedule window authored here",
+   "why": "Note row. No schedule window is authored on this screen; the Ryan rows it reads (07:00-07:12, 07:12-07:25, 07:25-07:45) do not wrap midnight.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C921",
@@ -7716,72 +7920,76 @@
    "screen": "opening.room",
    "verdict": "N/A",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "no schedule window authored here",
+   "why": "note row; no schedule window authored on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C921",
    "screen": "opening.room_past",
    "verdict": "N/A",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "no schedule window authored here",
+   "why": "Note row. No schedule window is authored on this screen; the Ryan rows it reads (07:00-07:12, 07:12-07:25, 07:25-07:45) do not wrap midnight.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C921",
    "screen": "opening.room_spoke",
    "verdict": "N/A",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "no schedule window authored here",
+   "why": "Note row. No schedule window is authored on this screen; the Ryan rows it reads (07:00-07:12, 07:12-07:25, 07:25-07:45) do not wrap midnight.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C921",
    "screen": "opening.room_waited",
    "verdict": "N/A",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "no schedule window authored here",
+   "why": "Note row. No schedule window is authored on this screen; the Ryan rows it reads (07:00-07:12, 07:12-07:25, 07:25-07:45) do not wrap midnight.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C921",
@@ -7825,18 +8033,19 @@
    "screen": "opening.wake",
    "verdict": "N/A",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "no schedule window authored here",
+   "why": "note row; no schedule window authored on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C921",
@@ -7898,18 +8107,19 @@
    "screen": "talk_mom.hub",
    "verdict": "N/A",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "no schedule window authored here",
+   "why": "note row; no schedule window authored on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C921",
@@ -8188,19 +8398,20 @@
    "row": "C927",
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "every exit carries its minutes",
+   "line": "Talk / Leave: time_progression_minutes = 0",
+   "why": "note row; every exit states its minutes, none falls back to the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C927",
@@ -8242,19 +8453,20 @@
    "row": "C927",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "every exit carries its minutes",
+   "line": "Open the door (8)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C927",
@@ -8314,19 +8526,20 @@
    "row": "C927",
    "screen": "opening.hall",
    "verdict": "PASS",
-   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "every exit carries its minutes",
+   "line": "three choices (3 each)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C927",
@@ -8386,73 +8599,77 @@
    "row": "C927",
    "screen": "opening.room",
    "verdict": "PASS",
-   "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "every exit carries its minutes",
+   "line": "three outfit buttons (5 each)",
+   "why": "note row; every exit states its minutes, none falls back to the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C927",
    "screen": "opening.room_past",
    "verdict": "PASS",
-   "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "every exit carries its minutes",
+   "line": "Go to your room (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C927",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
-   "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "every exit carries its minutes",
+   "line": "Go to your room (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C927",
    "screen": "opening.room_waited",
    "verdict": "PASS",
-   "line": "Ryan's eyes go straight to the light switch.",
-   "why": "every exit carries its minutes",
+   "line": "Go to your room (2)",
+   "why": "Note row. Every exit states its minutes; none falls back to the 3-minute default.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C927",
@@ -8495,19 +8712,20 @@
    "row": "C927",
    "screen": "opening.wake",
    "verdict": "PASS",
-   "line": "Your pyjama top has ridden up in the night",
-   "why": "every exit carries its minutes",
+   "line": "Go down to the kitchen (5)",
+   "why": "note row; every exit states its minutes, none falls back to the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C927",
@@ -8568,19 +8786,20 @@
    "row": "C927",
    "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "every exit carries its minutes",
+   "line": "Talk / Leave: time_progression_minutes = 0",
+   "why": "note row; every exit states its minutes, none falls back to the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C927",
@@ -8963,18 +9182,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "N/A",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "no time_of_day",
+   "why": "note row; no time_of_day condition on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C931",
@@ -9016,19 +9236,20 @@
    "row": "C931",
    "screen": "opening.bath",
    "verdict": "N/A",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "no time_of_day",
+   "line": "Open the door (8)",
+   "why": "Note row. No time_of_day condition on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C931",
@@ -9088,19 +9309,20 @@
    "row": "C931",
    "screen": "opening.hall",
    "verdict": "N/A",
-   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "no time_of_day",
+   "line": "three choices (3 each)",
+   "why": "Note row. No time_of_day condition on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C931",
@@ -9161,72 +9383,76 @@
    "screen": "opening.room",
    "verdict": "N/A",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "no time_of_day",
+   "why": "note row; no time_of_day condition on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C931",
    "screen": "opening.room_past",
    "verdict": "N/A",
-   "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "no time_of_day",
+   "line": "Go to your room (2)",
+   "why": "Note row. No time_of_day condition on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C931",
    "screen": "opening.room_spoke",
    "verdict": "N/A",
-   "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "no time_of_day",
+   "line": "Go to your room (2)",
+   "why": "Note row. No time_of_day condition on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C931",
    "screen": "opening.room_waited",
    "verdict": "N/A",
-   "line": "Ryan's eyes go straight to the light switch.",
-   "why": "no time_of_day",
+   "line": "Go to your room (2)",
+   "why": "Note row. No time_of_day condition on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "C931",
@@ -9270,18 +9496,19 @@
    "screen": "opening.wake",
    "verdict": "N/A",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "no time_of_day",
+   "why": "note row; no time_of_day condition on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C931",
@@ -9343,18 +9570,19 @@
    "screen": "talk_mom.hub",
    "verdict": "N/A",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "no time_of_day",
+   "why": "note row; no time_of_day condition on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "C931",
@@ -9467,18 +9695,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "Mark in his chair weekdays 16:30\u201323, Sun 12\u201323; absent only Saturday nights, when the couch line shows",
+   "why": "only people the rows put there are named; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L106",
@@ -9520,19 +9749,20 @@
    "row": "L106",
    "screen": "opening.bath",
    "verdict": "PASS",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "07:12: Ryan leaves his room for the hall at 07:12 (his rows), and knocks from the hall; the towel is prose only (LO's waiver, NOTES 181)",
+   "line": "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door.",
+   "why": "07:12-07:20: Ryan's rows put him in his room 07:00-07:12 and the hall 07:12-07:25, so he opens his door at 07:12 and bangs from the hall; nobody in the bathroom (sheet).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L106",
@@ -9593,18 +9823,19 @@
    "screen": "opening.hall",
    "verdict": "PASS",
    "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "07:20\u201307:23: Ryan in the hall 07:12\u201307:25; towel prose only (NOTES 181)",
+   "why": "07:20-07:23: Ryan in the hall by his 07:12-07:25 row ('waiting for the bathroom').",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L106",
@@ -9665,72 +9896,76 @@
    "screen": "opening.room",
    "verdict": "PASS",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "the beat names the usual outfit, and \"Keep your usual\" equips it; the other two buttons say \"instead\"",
+   "why": "nobody named present in her room at 07:00-07:30; sheet: nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L106",
    "screen": "opening.room_past",
    "verdict": "PASS",
    "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan still in the hall (row ends 07:25, end exclusive).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L106",
    "screen": "opening.room_spoke",
    "verdict": "PASS",
    "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan in the hall; he waits at the bathroom door and does not go in before his 07:25 bathroom row.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L106",
    "screen": "opening.room_waited",
    "verdict": "PASS",
    "line": "Ryan's eyes go straight to the light switch.",
-   "why": "07:23\u201307:25: Ryan in the hall until 07:25",
+   "why": "07:23-07:25: Ryan in the hall.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L106",
@@ -9774,18 +10009,19 @@
    "screen": "opening.wake",
    "verdict": "PASS",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "07:00\u201307:05, alone in her room; no one placed",
+   "why": "nobody named present in her room at 07:00-07:30; sheet: nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L106",
@@ -9847,18 +10083,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "each presence line is behind npc_at_location; the garment lines behind clothing_item equipped",
+   "why": "only people the rows put there are named; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L106",
@@ -10010,18 +10247,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "N/A",
    "line": "Mom's on the couch. Mark's in his chair, the remote on his knee.",
-   "why": "no hours on these screens",
+   "why": "no row with different hours by day on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L167",
@@ -10063,19 +10301,20 @@
    "row": "L167",
    "screen": "opening.bath",
    "verdict": "N/A",
-   "line": "you get the bathroom a second before Ryan, your step-brother, opens his door",
-   "why": "no hours on these screens",
+   "line": "Open the door (8)",
+   "why": "One-time opening screen; no row with hours, nothing greyed by day.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d00f9006696d287d",
-    "facts": "08380921df914eef",
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
     "facts2": "95093214eadaa443",
-    "all": "ba6923f6931b26dc"
+    "all": "95427115bb7e940e"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L167",
@@ -10135,19 +10374,20 @@
    "row": "L167",
    "screen": "opening.hall",
    "verdict": "N/A",
-   "line": "Ryan's on the wall opposite, shirtless, a towel over his shoulder.",
-   "why": "no hours on these screens",
+   "line": "three choices (3 each)",
+   "why": "One-time opening screen; no row with hours, nothing greyed by day.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "20fd03b2cbe8ed50",
-    "facts": "1e0168afad0e9566",
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
     "facts2": "ce93dea924b820f0",
-    "all": "d67fa7135cdfe4b0"
+    "all": "801ef789b4124151"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L167",
@@ -10208,72 +10448,76 @@
    "screen": "opening.room",
    "verdict": "N/A",
    "line": "You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual.",
-   "why": "no hours on these screens",
+   "why": "no row with different hours by day on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38c16857e4551e5b",
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
     "facts": "7f5851883cb8d732",
     "facts2": "7f5851883cb8d732",
-    "all": "47e327c8143e37a1"
+    "all": "3693ad293b06d5c6"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L167",
    "screen": "opening.room_past",
    "verdict": "N/A",
-   "line": "Ryan flattens himself against the wall so nothing touches.",
-   "why": "no hours on these screens",
+   "line": "Go to your room (2)",
+   "why": "One-time opening screen; no row with hours, nothing greyed by day.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "82c1b173aeb2608a",
-    "facts": "a5e2fa448eeaeeaa",
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
     "facts2": "4813fa938d77e462",
-    "all": "00031c4323c44b1b"
+    "all": "f2c955b1cf7e30d5"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L167",
    "screen": "opening.room_spoke",
    "verdict": "N/A",
-   "line": "He turns to face the bathroom door and waits for you to move.",
-   "why": "no hours on these screens",
+   "line": "Go to your room (2)",
+   "why": "One-time opening screen; no row with hours, nothing greyed by day.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2124ff3068418da1",
-    "facts": "c0245549ec8bef74",
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
     "facts2": "45d959c38e033704",
-    "all": "45d0f1339f7d2482"
+    "all": "7250673dfb1f4252"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L167",
    "screen": "opening.room_waited",
    "verdict": "N/A",
-   "line": "Ryan's eyes go straight to the light switch.",
-   "why": "no hours on these screens",
+   "line": "Go to your room (2)",
+   "why": "One-time opening screen; no row with hours, nothing greyed by day.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c5a401b11c0eddc1",
-    "facts": "3dfaf2f3c5ecd85d",
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
     "facts2": "6e56bdc0c43cc1b4",
-    "all": "8df38831a530d3c0"
+    "all": "0085aadee6088d54"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 27
   },
   {
    "row": "L167",
@@ -10317,18 +10561,19 @@
    "screen": "opening.wake",
    "verdict": "N/A",
    "line": "Your pyjama top has ridden up in the night",
-   "why": "no hours on these screens",
+   "why": "no row with different hours by day on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc3c063d9cef0f23",
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
     "facts": "8211a28bc952c9a8",
     "facts2": "8211a28bc952c9a8",
-    "all": "b47c03f5d3c55a74"
+    "all": "f6aafa76647ea6bd"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L167",
@@ -10390,18 +10635,19 @@
    "screen": "talk_mom.hub",
    "verdict": "N/A",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "no hours on these screens",
+   "why": "no row with different hours by day on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 28
   },
   {
    "row": "L167",
@@ -11015,14 +11261,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "home_her_room: 'woman of 18 sitting cross-legged on a single bed in a small bedroom'",
-   "why": "one tier-0 file with her in it; the room has no hours, so it shows at every hour, and it names no one and never says empty or alone; hood_street carries no image",
+   "line": "home_her_room: locations/home_her_room_t0.jpg, 'small bedroom interior single bed'",
+   "why": "one file, tier 0, the room itself searched by the room and one or two details, nobody in it",
    "cause": null,
    "note": false,
-   "screen_hash": "1cd3b560243bdeb3",
-   "row_hash": "69a8103be1e1032a",
+   "screen_hash": "f117ca44b06e7107",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 18
+   "pass": 28
   },
   {
    "row": "media#3",
@@ -11078,16 +11324,174 @@
   },
   {
    "row": "media#7",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no spot",
+   "screen": "mom_living_room.hub",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.",
+   "why": "an everyday person picture, not a look or a walk-in, so no view is asked; age, living room and her clothes named; tags 'middle aged woman on couch watching tv' are short",
    "cause": null,
    "note": false,
-   "screen_hash": "219040e682a0b26e",
-   "row_hash": "eff6dc1369755c34",
-   "carried": true,
-   "pass": 4
+   "screen_hash": {
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
+    "facts": "7b52a3219c796bed",
+    "facts2": "d35574a6bc629447",
+    "all": "a7c84a3ffc2eae7f"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.bath",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.",
+   "why": "a body moment alone, no view asked; age, bathroom, bare; tags of 5-7 words with gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "836289484fa88730",
+    "traits": "74c4f68e6476ecee",
+    "facts": "47f33854a15bb2a0",
+    "facts2": "95093214eadaa443",
+    "all": "95427115bb7e940e"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.hall",
+   "verdict": "PASS",
+   "line": "Seen from across a narrow upstairs hall: a woman of 18 in a small white towel in a bathroom doorway, steam rolling out around her, legs wet. No man in frame.",
+   "why": "a look, and it says where it's seen from; age, hall, the towel the beat gives her (towel waived, NOTES 181); tags of 7 words with gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33c93f3eb4c7e5bc",
+    "traits": "74c4f68e6476ecee",
+    "facts": "afb887a64559e7f9",
+    "facts2": "ce93dea924b820f0",
+    "all": "801ef789b4124151"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.room",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.",
+   "why": "dressing alone, no view asked; age, bedroom and the jeans the line names; tags with gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "72ea3077a30a12b6",
+    "traits": "44136fa355b3678a",
+    "facts": "7f5851883cb8d732",
+    "facts2": "7f5851883cb8d732",
+    "all": "3693ad293b06d5c6"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.room_past",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a narrow upstairs hall, a small white towel dropping off her bare chest as she catches it, wet hair. No man in frame.",
+   "why": "a t4 body moment, not a look or a walk-in, so no view is asked; age, hall, the towel; tags 'towel drop teen tits gif' are short",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a6c8e47edcc17356",
+    "traits": "74c4f68e6476ecee",
+    "facts": "93f75fd78bfe05cf",
+    "facts2": "4813fa938d77e462",
+    "all": "f2c955b1cf7e30d5"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.room_spoke",
+   "verdict": "PASS",
+   "line": "A woman of 18 alone in a narrow upstairs hall, a small white towel slid to her waist, bare from the waist up, wet hair.",
+   "why": "a t4 body moment, no view asked; age, hall, the towel; tags with gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cb644f6e129e6228",
+    "traits": "74c4f68e6476ecee",
+    "facts": "f195d2fe11038f8c",
+    "facts2": "45d959c38e033704",
+    "all": "7250673dfb1f4252"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.room_waited",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a narrow upstairs hall, opening a small white towel to re-tie it at her chest, wet hair. No man in frame.",
+   "why": "a t4 body moment, no view asked; age, hall, the towel; tags with gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6bfbd40c7c318df2",
+    "traits": "74c4f68e6476ecee",
+    "facts": "5aeb7f3bf01bb2a5",
+    "facts2": "6e56bdc0c43cc1b4",
+    "all": "0085aadee6088d54"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "opening.wake",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a single bed in her small bedroom, the sheet kicked off, a thin pyjama top ridden up over her stomach, morning light. Alone.",
+   "why": "alone in bed, no view asked; age, bedroom, the pyjama top the line names (NOTES 179); still tags",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fe88b99292a94d23",
+    "traits": "44136fa355b3678a",
+    "facts": "8211a28bc952c9a8",
+    "facts2": "8211a28bc952c9a8",
+    "all": "f6aafa76647ea6bd"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
+  },
+  {
+   "row": "media#7",
+   "screen": "talk_mom.hub",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.",
+   "why": "an everyday person picture, no view asked; age, kitchen, her clothes; tags short and still",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
+    "facts": "a8dd4b5a3c3490e0",
+    "facts2": "d48da7894fcd432a",
+    "all": "1dcde7b21c6733b2"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 29
   },
   {
    "row": "media#8",
@@ -11101,6 +11505,19 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 25
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "teen waking up in bed morning / middle aged woman on couch watching tv",
+   "why": "every P07 spot asks one subject in a common act or pose the sites tag; no two-person gesture",
+   "cause": null,
+   "note": false,
+   "screen_hash": "f117ca44b06e7107",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": true,
+   "pass": 28
   },
   {
    "row": "opening#1",
@@ -11748,8 +12165,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 9,
+ "answered": 9,
  "pass_items": [],
  "unowed": []
 }

@@ -1,13 +1,13 @@
 {
  "piece": "P59",
- "pass": 17,
+ "pass": 18,
  "screens": {
   "talk_tom.hub": {
-   "text": "e27ea7c722ff2d69",
+   "text": "33b56e784e9b0e3c",
    "traits": "d99594b509571563",
    "facts": "6cd06ed52e88cc6b",
    "facts2": "0e83f566cd32e479",
-   "all": "2984b87be5d177ec"
+   "all": "20f9bf01650327f7"
   },
   "talk_tom.talk": {
    "text": "f3721a92901bedd7",
@@ -17,11 +17,11 @@
    "all": "5bef4a1012371b0b"
   },
   "talk_chris.hub": {
-   "text": "8b3288047a397ac0",
+   "text": "344825cc8c2eb20b",
    "traits": "1d58a0fd6061427e",
    "facts": "d284aaa801d53071",
    "facts2": "4adaa3a74ad10be9",
-   "all": "405ba5cce292fc52"
+   "all": "53acbb531e93bf23"
   },
   "talk_chris.talk": {
    "text": "5eec687d89588126",
@@ -31,11 +31,11 @@
    "all": "ce0845dfcb342a34"
   },
   "talk_sam.hub": {
-   "text": "94ad064133e4989d",
+   "text": "14b070477986358c",
    "traits": "6f7af508d18adad9",
    "facts": "f25860cd564a5d94",
    "facts2": "7938226e82caf950",
-   "all": "a64d3c47a5c75aa7"
+   "all": "481e60a49cd0b3fc"
   },
   "talk_sam.talk": {
    "text": "79941b1b988cab94",
@@ -44,7 +44,7 @@
    "facts2": "fcb5f7d30e2f2bbe",
    "all": "9d23d3aef597aa67"
   },
-  "*": "1e982967ddabea54"
+  "*": "e8cec30ecf1b61c7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -110,6 +110,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -202,20 +205,20 @@
    "row": "B10",
    "screen": "talk_chris.hub",
    "verdict": "PASS",
-   "line": "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you.",
-   "why": "requires_npc npc_chris; his rows put him at near_cafe weekdays 07-15, weekends 10-20, on shift; true at the first and last minute and on a second visit",
+   "line": "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you. He looks anyway.",
+   "why": "true at first and last minute and on a second visit: requires_npc npc_chris; his rows put him at near_cafe weekdays 07-15, weekends 10-20; picture 'barista working espresso machine glancing over' matches the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b3288047a397ac0",
+    "text": "344825cc8c2eb20b",
     "traits": "1d58a0fd6061427e",
     "facts": "d284aaa801d53071",
     "facts2": "4adaa3a74ad10be9",
-    "all": "405ba5cce292fc52"
+    "all": "53acbb531e93bf23"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "B10",
@@ -241,19 +244,19 @@
    "screen": "talk_sam.hub",
    "verdict": "PASS",
    "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
-   "why": "read at first and last minute and on a second visit: talk_sam stays in the living room; Sam's rows unchanged, near_zoe_apartment 12-02 every day (who_is_where); trigger 12-00 (Sat split at 21 into two groups); requires_npc",
+   "why": "true at first and last minute and on a second visit: requires_npc npc_sam; his rows put him at near_zoe_apartment 12-02 every day, trigger 12-00; picture 'guy barefoot on sofa acoustic guitar' matches the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "94ad064133e4989d",
+    "text": "14b070477986358c",
     "traits": "6f7af508d18adad9",
     "facts": "f25860cd564a5d94",
     "facts2": "7938226e82caf950",
-    "all": "a64d3c47a5c75aa7"
+    "all": "481e60a49cd0b3fc"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 17
+   "pass": 18
   },
   {
    "row": "B10",
@@ -271,8 +274,27 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "B10",
+   "screen": "talk_tom.hub",
+   "verdict": "PASS",
+   "line": "Tom's behind the counter with a cloth over his shoulder. He nods you over like you're on the clock.",
+   "why": "true at first and last minute and on a second visit: requires_npc npc_tom; Tom's rows put him at near_cafe Mon-Sat 10-21; picture 'cafe manager behind counter cloth on shoulder' matches the line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33b56e784e9b0e3c",
+    "traits": "d99594b509571563",
+    "facts": "6cd06ed52e88cc6b",
+    "facts2": "0e83f566cd32e479",
+    "all": "20f9bf01650327f7"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "B10",
@@ -515,20 +537,20 @@
    "row": "B8",
    "screen": "talk_chris.hub",
    "verdict": "PASS",
-   "line": "A man of 24 with his sleeves pushed up working an espresso machine behind a small caf\u00e9 counter",
-   "why": "age 24 matches npc_chris; no garment of hers named; no number",
+   "line": "A man of 24 ... Alone. (Chris 24)",
+   "why": "ages match the npcs; no garment of hers named; no number",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b3288047a397ac0",
+    "text": "344825cc8c2eb20b",
     "traits": "1d58a0fd6061427e",
     "facts": "d284aaa801d53071",
     "facts2": "4adaa3a74ad10be9",
-    "all": "405ba5cce292fc52"
+    "all": "53acbb531e93bf23"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "B8",
@@ -553,20 +575,20 @@
    "row": "B8",
    "screen": "talk_sam.hub",
    "verdict": "PASS",
-   "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
-   "why": "no garment of hers named; every day and hour agrees with the rows (who_is_where) and the card; Done is 10 minutes as the card says",
+   "line": "A man of 22 ... (Sam 22)",
+   "why": "ages match the npcs; no garment of hers named; no number",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "94ad064133e4989d",
+    "text": "14b070477986358c",
     "traits": "6f7af508d18adad9",
     "facts": "f25860cd564a5d94",
     "facts2": "7938226e82caf950",
-    "all": "a64d3c47a5c75aa7"
+    "all": "481e60a49cd0b3fc"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 17
+   "pass": 18
   },
   {
    "row": "B8",
@@ -584,8 +606,27 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "B8",
+   "screen": "talk_tom.hub",
+   "verdict": "PASS",
+   "line": "A man of 31 ... Alone. (Tom 31)",
+   "why": "ages match the npcs; no garment of hers named; no number",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33b56e784e9b0e3c",
+    "traits": "d99594b509571563",
+    "facts": "6cd06ed52e88cc6b",
+    "facts2": "0e83f566cd32e479",
+    "all": "20f9bf01650327f7"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "B8",
@@ -1612,6 +1653,45 @@
    "pass": 16
   },
   {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in talk_tom, talk_chris, talk_sam)",
+   "why": "faces only; the caf\u00e9's and Zoe's flat's place pictures belong to P05",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e8cec30ecf1b61c7",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 18
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "cafe owner leaning on counter nodding \u00b7 barista at coffee machine glancing over shoulder \u00b7 college guy lounging with guitar apartment",
+   "why": "every search line is 8 words or fewer, no digit, no 'woman of', no caption camera direction, no 'no ___', no name; roles in place of ages",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e8cec30ecf1b61c7",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 18
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "guy barefoot on sofa acoustic guitar",
+   "why": "one subject each, a common pose; no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e8cec30ecf1b61c7",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 18
+  },
+  {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
@@ -1737,20 +1817,20 @@
    "row": "C460",
    "screen": "talk_chris.hub",
    "verdict": "PASS",
-   "line": "Chris is at the machine, sleeves pushed up",
-   "why": "every claim holds on every visit by the rows (Tom Mon-Sat 10-21, Chris 07-15/10-20, Sam 12-02) and the met flags ('Rookie', 'Off the clock' after the hire and the first shift)",
+   "line": "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you. He looks anyway.",
+   "why": "requires_npc npc_chris; his rows put him at near_cafe weekdays 07-15, weekends 10-20; picture 'barista working espresso machine glancing over' matches the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b3288047a397ac0",
+    "text": "344825cc8c2eb20b",
     "traits": "1d58a0fd6061427e",
     "facts": "d284aaa801d53071",
     "facts2": "4adaa3a74ad10be9",
-    "all": "405ba5cce292fc52"
+    "all": "53acbb531e93bf23"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C460",
@@ -1776,19 +1856,19 @@
    "screen": "talk_sam.hub",
    "verdict": "PASS",
    "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
-   "why": "talk_sam stays in the living room; Sam's rows unchanged, near_zoe_apartment 12-02 every day (who_is_where); trigger 12-00 (Sat split at 21 into two groups); requires_npc",
+   "why": "requires_npc npc_sam; his rows put him at near_zoe_apartment 12-02 every day, trigger 12-00; picture 'guy barefoot on sofa acoustic guitar' matches the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "94ad064133e4989d",
+    "text": "14b070477986358c",
     "traits": "6f7af508d18adad9",
     "facts": "f25860cd564a5d94",
     "facts2": "7938226e82caf950",
-    "all": "a64d3c47a5c75aa7"
+    "all": "481e60a49cd0b3fc"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 17
+   "pass": 18
   },
   {
    "row": "C460",
@@ -1806,8 +1886,27 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C460",
+   "screen": "talk_tom.hub",
+   "verdict": "PASS",
+   "line": "Tom's behind the counter with a cloth over his shoulder. He nods you over like you're on the clock.",
+   "why": "requires_npc npc_tom; Tom's rows put him at near_cafe Mon-Sat 10-21; picture 'cafe manager behind counter cloth on shoulder' matches the line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33b56e784e9b0e3c",
+    "traits": "d99594b509571563",
+    "facts": "6cd06ed52e88cc6b",
+    "facts2": "0e83f566cd32e479",
+    "all": "20f9bf01650327f7"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C460",
@@ -1845,20 +1944,20 @@
    "row": "C461",
    "screen": "talk_chris.hub",
    "verdict": "PASS",
-   "line": "Chris is at the machine, sleeves pushed up",
-   "why": "texture and the person's own talk; Tom's 'that's where the tips are' is a Sly manager's pitch, Sam's 'Which is always' his joke",
+   "line": "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you. He looks anyway.",
+   "why": "texture and the person's own manner; nothing can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b3288047a397ac0",
+    "text": "344825cc8c2eb20b",
     "traits": "1d58a0fd6061427e",
     "facts": "d284aaa801d53071",
     "facts2": "4adaa3a74ad10be9",
-    "all": "405ba5cce292fc52"
+    "all": "53acbb531e93bf23"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C461",
@@ -1884,19 +1983,19 @@
    "screen": "talk_sam.hub",
    "verdict": "PASS",
    "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
-   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "why": "texture and the person's own manner; nothing can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "94ad064133e4989d",
+    "text": "14b070477986358c",
     "traits": "6f7af508d18adad9",
     "facts": "f25860cd564a5d94",
     "facts2": "7938226e82caf950",
-    "all": "a64d3c47a5c75aa7"
+    "all": "481e60a49cd0b3fc"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 17
+   "pass": 18
   },
   {
    "row": "C461",
@@ -1914,8 +2013,27 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C461",
+   "screen": "talk_tom.hub",
+   "verdict": "PASS",
+   "line": "Tom's behind the counter with a cloth over his shoulder. He nods you over like you're on the clock.",
+   "why": "texture and the person's own manner; nothing can clash",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33b56e784e9b0e3c",
+    "traits": "d99594b509571563",
+    "facts": "6cd06ed52e88cc6b",
+    "facts2": "0e83f566cd32e479",
+    "all": "20f9bf01650327f7"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "C461",
@@ -2225,7 +2343,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2257,7 +2375,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2289,7 +2407,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2321,7 +2439,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2353,7 +2471,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2391,7 +2509,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2442,7 +2560,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2474,7 +2592,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2506,7 +2624,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2538,7 +2656,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2570,7 +2688,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2602,7 +2720,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2634,7 +2752,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2666,7 +2784,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2717,7 +2835,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2768,7 +2886,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2800,7 +2918,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2832,7 +2950,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2870,7 +2988,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -2922,20 +3040,20 @@
    "row": "L106",
    "screen": "talk_chris.hub",
    "verdict": "PASS",
-   "line": "Chris is at the machine, sleeves pushed up",
-   "why": "nobody is said to be there whom their rows don't put there; Zoe and Tom are named only as absent or as a question",
+   "line": "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you. He looks anyway.",
+   "why": "only the screen's own person is placed there, and their rows put them there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8b3288047a397ac0",
+    "text": "344825cc8c2eb20b",
     "traits": "1d58a0fd6061427e",
     "facts": "d284aaa801d53071",
     "facts2": "4adaa3a74ad10be9",
-    "all": "405ba5cce292fc52"
+    "all": "53acbb531e93bf23"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "L106",
@@ -2961,19 +3079,19 @@
    "screen": "talk_sam.hub",
    "verdict": "PASS",
    "line": "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you.",
-   "why": "only the screen's own person is placed there, and their rows put them there: talk_sam stays in the living room",
+   "why": "only the screen's own person is placed there, and their rows put them there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "94ad064133e4989d",
+    "text": "14b070477986358c",
     "traits": "6f7af508d18adad9",
     "facts": "f25860cd564a5d94",
     "facts2": "7938226e82caf950",
-    "all": "a64d3c47a5c75aa7"
+    "all": "481e60a49cd0b3fc"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 17
+   "pass": 18
   },
   {
    "row": "L106",
@@ -2991,8 +3109,27 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 17
+  },
+  {
+   "row": "L106",
+   "screen": "talk_tom.hub",
+   "verdict": "PASS",
+   "line": "Tom's behind the counter with a cloth over his shoulder. He nods you over like you're on the clock.",
+   "why": "only the screen's own person is placed there, and their rows put them there",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "33b56e784e9b0e3c",
+    "traits": "d99594b509571563",
+    "facts": "6cd06ed52e88cc6b",
+    "facts2": "0e83f566cd32e479",
+    "all": "20f9bf01650327f7"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 18
   },
   {
    "row": "L106",
@@ -3170,7 +3307,7 @@
     "all": "9d23d3aef597aa67"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 17
   },
   {
@@ -3208,8 +3345,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 30,
- "answered": 30,
+ "asked": 18,
+ "answered": 18,
  "pass_items": [],
  "unowed": []
 }

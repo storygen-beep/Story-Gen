@@ -1,6 +1,6 @@
 {
  "piece": "P04",
- "pass": 28,
+ "pass": 32,
  "screens": {
   "travel_bus_to_campus.ride": {
    "text": "b315e370a219f4ed",
@@ -10,18 +10,18 @@
    "all": "145cb6ccd6c225c9"
   },
   "travel_bus_to_campus.packed_no": {
-   "text": "48d198fb47badb0f",
+   "text": "2637df13797924ed",
    "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
-   "all": "304d2d4842f4069e"
+   "all": "9f0a890df337aa4c"
   },
   "travel_bus_to_campus.packed_quiet": {
-   "text": "cc0a5b49f8bf5689",
+   "text": "27f566a549186ebd",
    "traits": "44136fa355b3678a",
    "facts": "bda6226f38a41bb5",
    "facts2": "bda6226f38a41bb5",
-   "all": "83f8558b2df58807"
+   "all": "28f995dbc52767d2"
   },
   "travel_walk_to_campus.ride": {
    "text": "9db6c85f17af2668",
@@ -44,7 +44,7 @@
    "facts2": "3cf0347032935327",
    "all": "44aedf3d6ea918ee"
   },
-  "*": "585c4e0d237d7b58"
+  "*": "ce7da5aece491be0"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -169,17 +169,21 @@
   "C1274": "ca72df83c67acc75",
   "C1278": "a511d81564cef526",
   "C1277": "2b934524a49c49e9",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
   "C2201": "1137a7018841fcb3",
@@ -319,38 +323,38 @@
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
    "line": "He shifts half an inch and no further. [spot] You step off in town with your legs shaking.",
-   "why": "only an unnamed stranger is claimed; the screen is reached only from the weekday 07:00-10:00 packed choice; the split paragraph adds no new claim",
+   "why": "reached only by the weekday 07:00-10:00 choice from ride; the stranger is unnamed; no past, no first time; true on a second visit; the new description (her glare, his view) matches 'Back off. I mean it.' on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "B10",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You say nothing, and he breathes against your neck.",
-   "why": "reached only from the weekday 07:00-10:00 choice (same condition as the packed group); the stranger is unnamed; the added picture claims only what the screen says",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "'morning' holds at 07:00 and 09:59 (the only minutes the choice into this screen opens); stranger unnamed; nothing true only once",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "B10",
@@ -562,39 +566,39 @@
    "row": "B8",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. [spot] You step off in town with your legs shaking.",
-   "why": "no number shown; no garment named in the prose or the picture description",
+   "line": "His view from close behind her on a packed city bus: a woman of 18 pressed in by the crowd, glaring back over her shoulder. No man in frame.",
+   "why": "no garment of hers in prose, description or search words; age 18 agrees with PLAN; $2 fare and 20 minutes agree with PLAN 8c",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "B8",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
    "line": "You say nothing, and he breathes against your neck.",
-   "why": "no garment in the prose or the picture description; no number shown",
+   "why": "no garment named; 20 minutes agrees with PLAN line 176",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "B8",
@@ -1442,8 +1446,60 @@
    "note": false,
    "screen_hash": "585c4e0d237d7b58",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 28
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "campus_lecture_hall 'university lecture hall interior tiered seats' ... campus_theatre 'empty black stage theatre interior'",
+   "why": "all six place pictures are the room itself; no person word in any line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c433638da69cf68",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": true,
+   "pass": 30
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "'packed bus teen looks back annoyed gif' / 'college cafeteria interior long tables'",
+   "why": "every other line on P04's two spots and six places is 7 words or fewer, tags, gif on the moving bus spots; no number, 'woman of', camera direction, 'no ___' or name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c433638da69cf68",
+   "row_hash": "21548e787d7f48ee",
+   "carried": true,
+   "pass": 30
+  },
+  {
+   "row": "C2208",
+   "screen": "campus_bathroom",
+   "verdict": "PASS",
+   "line": "college restroom interior stalls long mirror / public restroom sinks long mirror / campus bathroom interior stalls",
+   "why": "three tag lines, 4-6 words each, the place and one or two details; 'three' is gone, no age, number, camera direction, 'no ___', name or story word",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "21548e787d7f48ee",
+   "carried": true,
+   "pass": 31
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "annoyed girl crowded bus candid gif / bus frottage pressed against ass gif",
+   "why": "packed_no asks one subject; packed_quiet's two people are the act itself (frottage, a filed tag); no garment in any search line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c433638da69cf68",
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 30
   },
   {
    "row": "C239",
@@ -1806,39 +1862,39 @@
    "row": "C460",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "He shifts half an inch and no further. [spot] You step off in town with your legs shaking.",
-   "why": "the picture (her glaring back on the packed bus) is true at the moment it sits: after his half inch, before she steps off",
+   "line": "His view from close behind her on a packed city bus: a woman of 18 pressed in by the crowd, glaring back over her shoulder. No man in frame.",
+   "why": "every claim holds on every playthrough reaching the screen: packed bus only on the weekday rush choice, her glare follows her 'Back off', nothing claims a past",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "beb5a109bde77305",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C460",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You say nothing, and he breathes against your neck.",
-   "why": "true on every visit: the choice that leads here carries the packed-bus clock condition",
+   "line": "Good girl. You've made my whole morning.",
+   "why": "true on every visit: the choice into this screen carries the weekday 07:00-10:00 condition",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "C460",
@@ -1933,39 +1989,39 @@
    "row": "C461",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "\"Relax, sweetheart. It's a bus.\"",
-   "why": "texture and her reaction only; nothing that can clash",
+   "line": "Relax, sweetheart. It's a bus.",
+   "why": "texture and the stranger's line can't clash; nothing contradicts clothes, time or who is where",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "153b0804e686abae",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C461",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "You say nothing, and he breathes against your neck.",
-   "why": "texture and her reaction only; nothing that can clash",
+   "line": "You step off in town with your face burning, and you can still feel where he was.",
+   "why": "her reaction on her body; can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "C461",
@@ -3390,39 +3446,39 @@
    "row": "C921",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "off-peak branch 10:00-07:00",
-   "why": "wrapping window handled by setup.isCurrentTimeSlot (v2.py:4793-4813)",
+   "line": "time_of_day 07:00-10:00 on the choice into this screen",
+   "why": "note row: no window on this screen wraps midnight; the wrapping off-peak window sits on ride and is handled by setup.isCurrentTimeSlot",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "19da817e808ac3d6",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C921",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "off-peak group time_of_day 10:00-07:00",
-   "why": "the wrapping window is handled by setup.isCurrentTimeSlot (v2.py:4793-4813); no row here wraps wrongly",
+   "line": "off-peak group time_of_day 10:00-07:00 (on ride)",
+   "why": "note row; same as packed_no",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "C921",
@@ -3691,39 +3747,39 @@
    "row": "C927",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "\"Get off in town\" time_progression_minutes = 20",
-   "why": "the exit states its time",
+   "line": "Get off in town: time_progression_minutes = 20",
+   "why": "note row: the exit states its minutes; the choice in is 0",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "1e009d83817fb566",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C927",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "\"Get off in town\" time_progression_minutes = 20",
-   "why": "the exit states its time; 0-minute choices into this screen are set, not left out",
+   "line": "Get off in town: time_progression_minutes = 20",
+   "why": "note row; the exit states its minutes; the 0-minute choice in is set, not left out",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "C927",
@@ -4066,39 +4122,39 @@
    "row": "C931",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "time_of_day 07:00-10:00 on the choice into this screen",
-   "why": "re-read each render, end exclusive (v2.py:5323-5325)",
+   "line": "time_of_day 07:00-10:00 on 'Tell him to back off'",
+   "why": "note row: end exclusive and re-read; at 10:00 the off-peak text and exit take over, so this screen never follows the half-empty line",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "1b8984f52b99537e",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C931",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "time_of_day 07:00-10:00 on the choice",
-   "why": "re-read on each render, end exclusive (v2.py:5323-5325); 10:00 falls to the off-peak branch",
+   "line": "time_of_day 07:00-10:00 on the choice into this screen",
+   "why": "note row; same",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "C931",
@@ -4297,39 +4353,39 @@
    "row": "L106",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "speaker \"unknown\"",
-   "why": "no named person is claimed",
+   "line": "Relax, sweetheart. It's a bus.",
+   "why": "no named person is claimed; sheet: nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "759e6667d7fc3183",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "L106",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "\"Relax, sweetheart. It's a bus.\" (speaker unknown)",
-   "why": "only an unnamed stranger is claimed",
+   "line": "Good girl. You've made my whole morning. (speaker unknown)",
+   "why": "no named person claimed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "L106",
@@ -4515,39 +4571,39 @@
    "row": "L167",
    "screen": "travel_bus_to_campus.packed_no",
    "verdict": "PASS",
-   "line": "one bus row, travel_bus_to_campus",
-   "why": "weekday and hour are conditions inside one row, not a row per day kind",
+   "line": "one row, travel_bus_to_campus; weekday and hour are groups inside it",
+   "why": "no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "48d198fb47badb0f",
+    "text": "2637df13797924ed",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "304d2d4842f4069e"
+    "all": "9f0a890df337aa4c"
    },
    "row_hash": "adf7bb3f8b632ac3",
-   "carried": true,
-   "pass": 27
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "L167",
    "screen": "travel_bus_to_campus.packed_quiet",
    "verdict": "PASS",
-   "line": "one bus row; weekday and time are conditions inside it",
-   "why": "no row per kind of day",
+   "line": "one row, travel_bus_to_campus",
+   "why": "no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cc0a5b49f8bf5689",
+    "text": "27f566a549186ebd",
     "traits": "44136fa355b3678a",
     "facts": "bda6226f38a41bb5",
     "facts2": "bda6226f38a41bb5",
-    "all": "83f8558b2df58807"
+    "all": "28f995dbc52767d2"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 26
+   "pass": 29
   },
   {
    "row": "L167",
@@ -5005,79 +5061,79 @@
    "row": "media#2",
    "screen": "campus_bathroom",
    "verdict": "PASS",
-   "line": "washing her hands at a long college bathroom mirror, no phone",
-   "why": "one tier-0 file with her in it; open weekdays 08-18; claims no one, never says empty or alone",
+   "line": "college restroom interior stalls long mirror / public restroom sinks long mirror",
+   "why": "one file, tier 0, the place itself searched by the room and one or two details, nobody in it; shows only while open (the number in its third line is judged at C2208)",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 17
+   "pass": 30
   },
   {
    "row": "media#2",
    "screen": "campus_cafeteria",
    "verdict": "PASS",
-   "line": "with a tray in a college cafeteria / eating lunch at a long cafeteria table",
-   "why": "one tier-0 file with her in it; hours Mon-Fri 08-16 match Rosa's row; the words never say empty or alone",
+   "line": "college cafeteria interior long tables / university dining hall lunch counter",
+   "why": "one file, tier 0, the place itself searched by the room and one or two details, nobody in it; shows only while open",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 17
+   "pass": 30
   },
   {
    "row": "media#2",
    "screen": "campus_lecture_hall",
    "verdict": "PASS",
-   "line": "sitting in a tiered college lecture hall with a notebook",
-   "why": "one tier-0 file with her in it; claims no one, never says empty or alone; true with or without a lecture on",
+   "line": "university lecture hall interior tiered seats / empty lecture theatre rows lectern screen",
+   "why": "one file, tier 0, the place itself searched by the room and one or two details, nobody in it; shows only while open",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 17
+   "pass": 30
   },
   {
    "row": "media#2",
    "screen": "campus_library",
    "verdict": "PASS",
-   "line": "at a long library table with books / studying in a quiet college library",
-   "why": "one tier-0 file with her in it; 'quiet' is not empty; claims no one; Holt's desk row does not contradict it",
+   "line": "university library interior long tables / quiet college library reading room",
+   "why": "one file, tier 0, the place itself searched by the room and one or two details, nobody in it; shows only while open",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 17
+   "pass": 30
   },
   {
    "row": "media#2",
    "screen": "campus_offices",
    "verdict": "PASS",
-   "line": "in a college corridor of office doors / waiting outside a professor's office",
-   "why": "one tier-0 file with her in it; nobody's row is the corridor; claims no one, never says empty or alone",
+   "line": "university corridor office doors name plates / quiet faculty office hallway",
+   "why": "one file, tier 0, the place itself searched by the room and one or two details, nobody in it; shows only while open",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 17
+   "pass": 30
   },
   {
    "row": "media#2",
    "screen": "campus_theatre",
    "verdict": "PASS",
-   "line": "standing at the edge of a black stage under the lights, the seats dark in front of her",
-   "why": "one tier-0 file with her in it; open weekdays 09-21; no one is always in; the words claim no one",
+   "line": "black box theatre stage folding seats / small college theatre stage lights rig",
+   "why": "one file, tier 0, the place itself searched by the room and one or two details, nobody in it; shows only while open",
    "cause": null,
    "note": false,
    "screen_hash": null,
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 17
+   "pass": 30
   },
   {
    "row": "media#3",
@@ -5133,16 +5189,54 @@
   },
   {
    "row": "media#7",
-   "screen": "*",
+   "screen": "campus_bathroom",
    "verdict": "PASS",
-   "line": "\"woman of 18 in a college corridor of office doors\"",
-   "why": "age, place, plain phrases; clothes left out because they change by visit (C1238); the packed paths change nothing it reads",
+   "line": "college restroom interior stalls long mirror / public restroom sinks long mirror / campus bathroom interior stalls",
+   "why": "a place picture has no description field (rule 2); its search words are short tags under 8 words with no number",
    "cause": null,
    "note": false,
-   "screen_hash": "d3e09853ea2f6bae",
-   "row_hash": "eff6dc1369755c34",
+   "screen_hash": null,
+   "row_hash": "35ceae067dce34a1",
    "carried": true,
-   "pass": 3
+   "pass": 31
+  },
+  {
+   "row": "media#7",
+   "screen": "travel_bus_to_campus.packed_no",
+   "verdict": "PASS",
+   "line": "His view from close behind her on a packed city bus: a woman of 18 pressed in by the crowd, glaring back over her shoulder. No man in frame.",
+   "why": "the description now names the view (his, from close behind) and keeps the man out of frame (rule 5, C1281), gives her age and the bus; it names no outfit, which is the only true choice on a ride she takes in any clothes; search words are tags with gif, no camera direction",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "2637df13797924ed",
+    "traits": "44136fa355b3678a",
+    "facts": "bda6226f38a41bb5",
+    "facts2": "bda6226f38a41bb5",
+    "all": "9f0a890df337aa4c"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 32
+  },
+  {
+   "row": "media#7",
+   "screen": "travel_bus_to_campus.packed_quiet",
+   "verdict": "PASS",
+   "line": "On a packed city bus: a woman of 18 standing pressed in, a man behind her so close his hips are against her ass, his breath on her neck.",
+   "why": "a touch (t4), not a look or a walk-in, so rule 7 no longer asks a view; age and the bus are named, clothes vary by visit; search words are tags of 5-8 words with gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "27f566a549186ebd",
+    "traits": "44136fa355b3678a",
+    "facts": "bda6226f38a41bb5",
+    "facts2": "bda6226f38a41bb5",
+    "all": "28f995dbc52767d2"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": true,
+   "pass": 31
   },
   {
    "row": "media#8",
@@ -5156,6 +5250,19 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 26
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "crowded bus girl glaring over shoulder gif",
+   "why": "each spot asks a picture that is filed somewhere: one woman glaring on a crowded bus; bus frottage",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c433638da69cf68",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": true,
+   "pass": 30
   },
   {
    "row": "places#1",
@@ -5699,8 +5806,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

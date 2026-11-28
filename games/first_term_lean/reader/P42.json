@@ -1,13 +1,13 @@
 {
  "piece": "P42",
- "pass": 25,
+ "pass": 27,
  "screens": {
   "talk_mom.hub": {
-   "text": "0f4660e14b94ab43",
+   "text": "b5b0227a7a171efc",
    "traits": "4b9cc244e3119951",
    "facts": "a8dd4b5a3c3490e0",
    "facts2": "d48da7894fcd432a",
-   "all": "4c25ee55de599eb7"
+   "all": "1dcde7b21c6733b2"
   },
   "talk_mom.talk": {
    "text": "feb79fad5e3d8649",
@@ -24,11 +24,11 @@
    "all": "5593e1137ca9a97b"
   },
   "mom_living_room.hub": {
-   "text": "fa2c2d66908e634d",
+   "text": "3d2183ba76e908d0",
    "traits": "4b9cc244e3119951",
    "facts": "7b52a3219c796bed",
    "facts2": "d35574a6bc629447",
-   "all": "ea352dd9afd21c11"
+   "all": "a7c84a3ffc2eae7f"
   },
   "mom_living_room.talk": {
    "text": "eb78fbf9c5206259",
@@ -37,7 +37,7 @@
    "facts2": "04bf141c5cb5340b",
    "all": "13a427d6071bc370"
   },
-  "*": "cc046523f34ec607"
+  "*": "5dbf1814ff5b7170"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -106,17 +106,21 @@
   "C1274": "ca72df83c67acc75",
   "C1278": "a511d81564cef526",
   "C1277": "2b934524a49c49e9",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C618": "cf04982ff36d5fee",
   "C619": "9abaf79b00480069",
   "C622": "3a5a94bef3bdb5d2",
@@ -285,18 +289,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
-   "why": "The night rows moved Mom to her bedroom only from 23:00; she is on the living-room couch 19:00-23:00 every day, the canvas needs her (requires_npc). Mark is named only behind his presence: weekdays 16:30-23:00, Sun 12:00-23:00, Sat 10:00-19:00, so Saturday 19:00-23:00 is the Mark-absent version. No past claimed.",
+   "why": "who_is_where: Mom in the Living Room 19-23 every day (requires_npc); Mark's chair line behind is_present; 'mature woman sofa evening tv light' is true, she is only there 19-23",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "B10",
@@ -339,18 +344,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "Mom is in the Kitchen weekdays 07-08 and 17-19, weekends 08-12 and 17-19; the night rows don't touch these hours. Mark is named only behind presence (weekdays 07:00-07:30, weekends 08-10, Sun 10-12, always with Mom). The greyed 'not again today' is true after Eat with her, and after three meals elsewhere she has eaten today, so 'again' holds.",
+   "why": "who_is_where: Mom in the Kitchen weekdays 07-08, 17-19, weekends 08-12, 17-19 (requires_npc); Mark named only behind npc_at_location is_present; search words 'middle aged woman kitchen counter coffee mug' claim no time or person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "B10",
@@ -832,18 +838,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's eyes drop to the skirt. Her skirt.",
-   "why": "No number printed; her borrowed skirt, top and heels are each named only behind a clothing_item equipped condition; Mom's cardigan in the picture is Mom's.",
+   "why": "no number printed; the borrowed skirt, top and heels are each named only behind a clothing_item equipped condition; no garment of hers in the search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "B8",
@@ -886,18 +893,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's eyes drop to the skirt. Her skirt.",
-   "why": "No number printed; her borrowed skirt, top and heels are each named only behind a clothing_item equipped condition; Mom's cardigan in the picture is Mom's.",
+   "why": "no number printed; the borrowed skirt, top and heels are each named only behind a clothing_item equipped condition; no garment of hers in the search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "B8",
@@ -1984,8 +1992,47 @@
    "note": false,
    "screen_hash": "cc046523f34ec607",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 25
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in Builds)",
+   "why": "P42 builds two canvases, no [[locations]] row; both spots are pictures of Mom",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5dbf1814ff5b7170",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": true,
+   "pass": 26
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"middle aged woman kitchen counter coffee mug\" \u00b7 \"mature woman sofa evening tv light\"",
+   "why": "four lines of 6-7 words, role and place and one or two details; no age number, camera direction, 'no ___', name or story word",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5dbf1814ff5b7170",
+   "row_hash": "21548e787d7f48ee",
+   "carried": true,
+   "pass": 26
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"middle aged woman on couch watching tv\"",
+   "why": "one subject, common poses (at a counter with a mug, on a sofa watching TV); no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5dbf1814ff5b7170",
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "C422",
@@ -2359,18 +2406,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
-   "why": "The night rows moved Mom to her bedroom only from 23:00; she is on the living-room couch 19:00-23:00 every day, the canvas needs her (requires_npc). Mark is named only behind his presence: weekdays 16:30-23:00, Sun 12:00-23:00, Sat 10:00-19:00, so Saturday 19:00-23:00 is the Mark-absent version. No past claimed.",
+   "why": "who_is_where: Mom in the Living Room 19-23 every day (requires_npc); Mark's chair line behind is_present; 'mature woman sofa evening tv light' is true, she is only there 19-23",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C460",
@@ -2413,18 +2461,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "Mom is in the Kitchen weekdays 07-08 and 17-19, weekends 08-12 and 17-19; the night rows don't touch these hours. Mark is named only behind presence (weekdays 07:00-07:30, weekends 08-10, Sun 10-12, always with Mom). The greyed 'not again today' is true after Eat with her, and after three meals elsewhere she has eaten today, so 'again' holds.",
+   "why": "who_is_where: Mom in the Kitchen weekdays 07-08, 17-19, weekends 08-12, 17-19 (requires_npc); Mark named only behind npc_at_location is_present; search words 'middle aged woman kitchen counter coffee mug' claim no time or person",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C460",
@@ -2462,18 +2511,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
-   "why": "Texture that can't clash; Mom's soft face and Mark's chair fit their plan entries.",
+   "why": "texture that can't clash; Mom's soft face and Mark's chair fit their plan entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C461",
@@ -2516,18 +2566,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "Texture that can't clash; Mom's soft face and Mark's chair fit their plan entries.",
+   "why": "texture that can't clash; Mom's soft face and Mark's chair fit their plan entries",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C461",
@@ -4967,18 +5018,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom: 23:00-01:00 in bed, 01:00-07:00 asleep, every day",
-   "why": "Note row. Her new night rows wrap past midnight on all seven days, so the wrap reads the same on either side of it; both have an end time.",
+   "why": "note row; her night rows wrap past midnight on every day and have end times; this canvas writes no window",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C921",
@@ -5021,18 +5073,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom: 23:00-01:00 in bed, 01:00-07:00 asleep, every day",
-   "why": "Note row. Her new night rows wrap past midnight on all seven days, so the wrap reads the same on either side of it; both have an end time.",
+   "why": "note row; her night rows wrap past midnight on every day and have end times; this canvas writes no window",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C921",
@@ -5201,19 +5254,20 @@
    "row": "C927",
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
-   "line": "Talk (0) \u00b7 Eat with her (0) \u00b7 Leave (0)",
-   "why": "Note row. Every exit states its minutes; the menu hops are 0 on purpose, the activity's minutes sit on Done.",
+   "line": "Talk / Leave: time_progression_minutes = 0",
+   "why": "note row; every exit states its time, none falls to the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C927",
@@ -5255,19 +5309,20 @@
    "row": "C927",
    "screen": "talk_mom.hub",
    "verdict": "PASS",
-   "line": "Talk (0) \u00b7 Eat with her (0) \u00b7 Leave (0)",
-   "why": "Note row. Every exit states its minutes; the menu hops are 0 on purpose, the activity's minutes sit on Done.",
+   "line": "Talk / Leave: time_progression_minutes = 0",
+   "why": "note row; every exit states its time, none falls to the 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C927",
@@ -5503,19 +5558,20 @@
    "row": "C931",
    "screen": "mom_living_room.hub",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "Note row. No time_of_day on this canvas.",
+   "line": "(no time_of_day on this screen)",
+   "why": "note row; the hub reads no time_of_day",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C931",
@@ -5556,20 +5612,21 @@
   {
    "row": "C931",
    "screen": "talk_mom.hub",
-   "verdict": "PASS",
-   "line": "Eat with her: time_of_day 00:00-12:00 / 12:00-23:59",
-   "why": "Note row. The eat screen's two groups are end exclusive; 23:59 falls in neither, but Mom is never in the Kitchen after 19:00, so no visit lands there.",
+   "verdict": "N/A",
+   "line": "(no time_of_day on this screen)",
+   "why": "note row; the hub reads no time_of_day",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "C931",
@@ -5750,18 +5807,19 @@
    "screen": "mom_living_room.hub",
    "verdict": "PASS",
    "line": "Mom's on the couch with her feet under her, the TV on low. She moves over to make room.",
-   "why": "Mom present by requires_npc; Mark named only inside an npc_at_location group, both versions written.",
+   "why": "only Mom (requires_npc) and Mark (is_present group) are named, both where their rows put them",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "L106",
@@ -5804,18 +5862,19 @@
    "screen": "talk_mom.hub",
    "verdict": "PASS",
    "line": "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him.",
-   "why": "Mom present by requires_npc; Mark named only inside an npc_at_location group, both versions written.",
+   "why": "only Mom (requires_npc) and Mark (is_present group) are named, both where their rows put them",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "L106",
@@ -6134,19 +6193,20 @@
    "row": "L167",
    "screen": "mom_living_room.hub",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "The menu has no hours; it opens wherever her rows put her.",
+   "line": "Talk \u2014 you've already talked today.",
+   "why": "the only greyed row is gated by a flag, not hours; no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "fa2c2d66908e634d",
+    "text": "3d2183ba76e908d0",
+    "traits": "4b9cc244e3119951",
     "facts": "7b52a3219c796bed",
     "facts2": "d35574a6bc629447",
-    "all": "ea352dd9afd21c11"
+    "all": "a7c84a3ffc2eae7f"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "L167",
@@ -6188,19 +6248,20 @@
    "row": "L167",
    "screen": "talk_mom.hub",
    "verdict": "N/A",
-   "line": "\u2014",
-   "why": "The menu has no hours; it opens wherever her rows put her.",
+   "line": "Talk \u2014 you've already talked today.",
+   "why": "the only greyed row is gated by a flag, not hours; no row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0f4660e14b94ab43",
+    "text": "b5b0227a7a171efc",
+    "traits": "4b9cc244e3119951",
     "facts": "a8dd4b5a3c3490e0",
     "facts2": "d48da7894fcd432a",
-    "all": "4c25ee55de599eb7"
+    "all": "1dcde7b21c6733b2"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 7
+   "pass": 26
   },
   {
    "row": "L167",
@@ -6701,14 +6762,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "N/A",
-   "line": "Builds: talk_mom, mom_living_room",
-   "why": "canvases only; their spots are a person's menu picture (C596), not a place picture",
+   "line": "(no place picture in Builds)",
+   "why": "rule 2 is about a place's picture; P42 builds none",
    "cause": null,
    "note": false,
-   "screen_hash": "fa8a0f5220e51a33",
-   "row_hash": "69a8103be1e1032a",
+   "screen_hash": "5dbf1814ff5b7170",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 19
+   "pass": 26
   },
   {
    "row": "media#3",
@@ -6766,14 +6827,14 @@
    "row": "media#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.",
-   "why": "Age, the room, what she wears, two plain search phrases on each spot.",
+   "line": "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up. / A woman of 41 in a cardigan on a living room couch...",
+   "why": "both are everyday person pictures, not a look or a walk-in, so rule 7 asks no view; each names age, place and her clothes; search words are short still tags",
    "cause": null,
    "note": false,
-   "screen_hash": "ad3f6be4b295a67a",
-   "row_hash": "eff6dc1369755c34",
-   "carried": true,
-   "pass": 5
+   "screen_hash": "5dbf1814ff5b7170",
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 27
   },
   {
    "row": "media#8",
@@ -6787,6 +6848,19 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 24
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.",
+   "why": "both pictures exist: one subject in a common, filed pose; no choreographed gesture",
+   "cause": null,
+   "note": false,
+   "screen_hash": "5dbf1814ff5b7170",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": true,
+   "pass": 26
   },
   {
    "row": "people#1",

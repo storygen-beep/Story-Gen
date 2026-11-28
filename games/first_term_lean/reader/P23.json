@@ -1,13 +1,13 @@
 {
  "piece": "P23",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "gym_meet_marco.meet": {
-   "text": "e94048ae6551a6c3",
+   "text": "82840865faeed6f5",
    "traits": "e4365d01d4eb14be",
    "facts": "23eb50d0d96dba03",
    "facts2": "b2f1ee65de80c8ee",
-   "all": "060facc282a036da"
+   "all": "ee4e5c3a7dbb16af"
   },
   "gym_meet_marco.after": {
    "text": "1dc0c41a6d91f102",
@@ -16,7 +16,7 @@
    "facts2": "dd789fc2dc0ff6bf",
    "all": "e3bad999ee0118bd"
   },
-  "*": "f8a9528396e0c4a1"
+  "*": "7dc6ccf6a80a45db"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -98,6 +98,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -206,19 +209,20 @@
    "row": "B10",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
-   "line": "Haven't seen you in here. Good. I'm Marco.",
-   "why": "One-time, gated on Marco present (who_is_where: weekdays 06-10 and 17-21, Sat 08-14); 'Haven't seen you' holds on her first visit while he's there; he names himself in his own first line.",
-   "cause": "",
+   "line": "He looks up when you come in and keeps looking: your legs, your ass, then your face",
+   "why": "first and last minute and a second visit: one-time, Marco present by trigger (gym weekdays 06-10, 17-21, Sat 08-14); 'Haven't seen you' true on the first visit; the new search words claim nothing the screen doesn't",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e94048ae6551a6c3",
+    "text": "82840865faeed6f5",
+    "traits": "e4365d01d4eb14be",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "060facc282a036da"
+    "all": "ee4e5c3a7dbb16af"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B11",
@@ -382,19 +386,20 @@
    "row": "B8",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
-   "line": "your legs, your ass, then your face",
-   "why": "No garment of hers named (the card: the meeting fires whatever she wears); 'late twenties' agrees with 29; picture's vest and whistle agree with the prose.",
-   "cause": "",
+   "line": "personal trainer whistle beside weight bench",
+   "why": "no garment of hers named; the whistle agrees with the prose; late twenties agrees with 29",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e94048ae6551a6c3",
+    "text": "82840865faeed6f5",
+    "traits": "e4365d01d4eb14be",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "060facc282a036da"
+    "all": "ee4e5c3a7dbb16af"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B9",
@@ -1162,8 +1167,47 @@
    "note": false,
    "screen_hash": "f8a9528396e0c4a1",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7dc6ccf6a80a45db",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "personal trainer whistle beside weight bench",
+   "why": "6 words each; role, whistle, bench",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7dc6ccf6a80a45db",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "personal trainer whistle beside weight bench",
+   "why": "one subject in a weights room; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7dc6ccf6a80a45db",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C286",
@@ -1436,19 +1480,20 @@
    "row": "C460",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
-   "line": "A man in his late twenties with a whistle he never uses is spotting someone on the bench.",
-   "why": "Age (29), place and activity hold at every minute the trigger opens; a regular on the bench is crowd texture (PLAN \u00a75: the regulars).",
-   "cause": "",
+   "line": "He looks up when you come in and keeps looking: your legs, your ass, then your face",
+   "why": "every claim true on every playthrough that reaches it: one-time, Marco present by trigger (gym weekdays 06-10, 17-21, Sat 08-14); 'Haven't seen you' true on the first visit; the search words describe what the prose shows",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e94048ae6551a6c3",
+    "text": "82840865faeed6f5",
+    "traits": "e4365d01d4eb14be",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "060facc282a036da"
+    "all": "ee4e5c3a7dbb16af"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C461",
@@ -1485,19 +1530,20 @@
    "row": "C461",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
-   "line": "You've got the build for it, champ.",
-   "why": "Fits his entry (trainer, 29); 'champ' is his own term of address.",
-   "cause": "",
+   "line": "He looks up when you come in and keeps looking: your legs, your ass, then your face",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e94048ae6551a6c3",
+    "text": "82840865faeed6f5",
+    "traits": "e4365d01d4eb14be",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "060facc282a036da"
+    "all": "ee4e5c3a7dbb16af"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C519",
@@ -2268,19 +2314,20 @@
    "row": "L106",
    "screen": "gym_meet_marco.meet",
    "verdict": "PASS",
-   "line": "is spotting someone on the bench",
-   "why": "Canvas condition is npc_at_location npc_marco is_present at hood_gym; no other named person is claimed there.",
-   "cause": "",
+   "line": "He looks up when you come in and keeps looking: your legs, your ass, then your face",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Marco present by trigger (gym weekdays 06-10, 17-21, Sat 08-14); 'Haven't seen you' true on the first visit",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e94048ae6551a6c3",
+    "text": "82840865faeed6f5",
+    "traits": "e4365d01d4eb14be",
     "facts": "23eb50d0d96dba03",
     "facts2": "b2f1ee65de80c8ee",
-    "all": "060facc282a036da"
+    "all": "ee4e5c3a7dbb16af"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "L119",
@@ -2427,8 +2474,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

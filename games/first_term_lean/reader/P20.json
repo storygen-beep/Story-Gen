@@ -1,22 +1,22 @@
 {
  "piece": "P20",
- "pass": 19,
+ "pass": 21,
  "screens": {
   "quad_meet_zoe.coffee": {
-   "text": "cacb601aa799b9fd",
+   "text": "9a3b923187c89f8c",
    "traits": "6b1e34b018661933",
-   "facts": "9ff1bda7763e1f11",
-   "facts2": "262e056b4f130afa",
-   "all": "1f43585d818f9aa2"
+   "facts": "be6d9efa5c95ad2c",
+   "facts2": "a35ad35224f51ec7",
+   "all": "5e91aaa3ed86c8bf"
   },
   "quad_meet_zoe.talk": {
    "text": "f7db38821f67277f",
    "traits": "6b1e34b018661933",
-   "facts": "d33e5881ea5bb2d3",
-   "facts2": "215f39220593dca1",
-   "all": "41349a2f24f868e2"
+   "facts": "df9466345e90305c",
+   "facts2": "050fbd9199a97abd",
+   "all": "ba93fd6a177220fd"
   },
-  "*": "501111601ee5bb96"
+  "*": "e0c352711dba1dd7"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -92,6 +92,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -164,37 +167,39 @@
    "row": "B10",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"A girl falls into step beside you on the path\"",
-   "why": "fires only with Zoe on the quad (her rows Mon/Wed/Fri 1-3, Tue/Thu 2-3); true on every visit",
+   "line": "a coffee in each hand, a crop top that shows off her stomach",
+   "why": "first and last minute and a second visit: one-time, Zoe is_present on the quad (Mon/Wed/Fri 13-15, Tue/Thu 14-15); 'You're new' is a first meeting; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B10",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Come find me. Saturday. Mine. Nine o'clock.",
-   "why": "zoe_party is built: Saturday 21:00 to Sunday 01:00, needs met_zoe (set on this Done); Zoe's rows Sat 18-24, Sun 00-01 at near_zoe_apartment; her tip says the same",
+   "line": "We'll see. I live two streets that way, the green door. Come find me. Saturday. Mine. Nine o'clock.",
+   "why": "one-time; the party she names is built (PLAN: Saturdays 9pm to midnight, P75; Zoe at near_zoe_apartment Sat 19-24), so 'Saturday ... Nine o'clock' is true on every day it can show; 'halfway across the quad' keeps her on the quad, where Done lands and her rows keep her; each of the three answers fits its own group",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "B11",
@@ -335,37 +340,39 @@
    "row": "B8",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"a crop top that shows off her stomach\" (Zoe's)",
-   "why": "the only garment is Zoe's; 19 in the picture matches her card",
+   "line": "blonde college girl two coffees campus",
+   "why": "the crop top is Zoe's; no garment of hers named in prose or search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B8",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Parties every Saturday, 9pm to 1am.",
-   "why": "nine o'clock agrees with zoe_party's trigger and the tip; no garment of hers named",
+   "line": "We'll see. I live two streets that way, the green door. Come find me. Saturday. Mine. Nine o'clock.",
+   "why": "Saturday at nine agrees with PLAN's party rows; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "B9",
@@ -436,19 +443,20 @@
    "row": "C1158",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"a crop top that shows off her stomach\"",
-   "why": "no garment of Ella's named",
+   "line": "a coffee in each hand, a crop top that shows off her stomach",
+   "why": "the crop top is Zoe's; no garment of hers named in prose or search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C1173",
@@ -480,19 +488,20 @@
    "row": "C1177",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "her view on the path",
-   "why": "no exposure of hers in play",
+   "line": "A girl falls into step beside you on the path without asking: sunglasses pushed up into a mess of blonde hair, a coffee in each hand, a crop top that shows off her stomach.",
+   "why": "a note row: no exposure of hers on the screen; Zoe's crop top on the quad is her own show-off manner (PLAN: Show-off)",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "d79e8413a7968a01"
    },
    "row_hash": "ef9bbbe96651efc7",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C1184",
@@ -589,19 +598,20 @@
    "row": "C1206",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"You look like you need this more than I do, babe.\"",
-   "why": "names no garment Ella may not be wearing",
+   "line": "a coffee in each hand, a crop top that shows off her stomach",
+   "why": "the crop top is Zoe's; no garment of hers named in prose or search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C1220",
@@ -1126,8 +1136,47 @@
    "note": false,
    "screen_hash": "501111601ee5bb96",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e0c352711dba1dd7",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 21
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "blonde college girl two coffees campus",
+   "why": "6 words each; 'two' is a count of what she holds, not an age or a digit; no name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e0c352711dba1dd7",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 21
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "blonde college girl two coffees campus",
+   "why": "one subject walking with coffees, a common candid; Zoe's sunglasses, no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e0c352711dba1dd7",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C422",
@@ -1211,37 +1260,39 @@
    "row": "C460",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"I'm Zoe. You're new.\"",
-   "why": "true on every reach: first term, Zoe present",
+   "line": "a coffee in each hand, a crop top that shows off her stomach",
+   "why": "every claim true on every playthrough that reaches it: one-time, Zoe is_present on the quad (Mon/Wed/Fri 13-15, Tue/Thu 14-15); 'You're new' is a first meeting; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C460",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Come find me. Saturday. Mine. Nine o'clock.",
-   "why": "the promise is built and reachable (zoe_place_known set here, apartment open 12:00-02:00); 'two streets that way, the green door' matches the apartment",
+   "line": "We'll see. I live two streets that way, the green door. Come find me. Saturday. Mine. Nine o'clock.",
+   "why": "the promise is built (the party canvases at near_zoe_*), the place is opened by zoe_place_known on Done",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C461",
@@ -1260,37 +1311,39 @@
    "row": "C461",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"sunglasses pushed up into a mess of blonde hair\"",
-   "why": "texture that can't clash",
+   "line": "a coffee in each hand, a crop top that shows off her stomach",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C461",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "I live two streets that way, the green door.",
-   "why": "dialogue fits her entry",
+   "line": "Everyone here's so boring. You look like you're about to stop being boring.",
+   "why": "dialogue fits Zoe's entry; the green door is texture that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C519",
@@ -1683,19 +1736,20 @@
    "row": "C889",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "the only label is \"Done\": no clock time, no duration; the 10 minutes are in the costs",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C892",
@@ -1714,19 +1768,20 @@
    "row": "C892",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no hour printed in the act; 'Nine o'clock' is the party's time, said by Zoe, not the clock now",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C897",
@@ -1745,19 +1800,20 @@
    "row": "C897",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no room hop; the 10 minutes are the talk's",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C900",
@@ -1776,19 +1832,20 @@
    "row": "C900",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "the beat never says what time it is now; 'Nine o'clock' is the hour of a built event",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C902",
@@ -1807,19 +1864,20 @@
    "row": "C902",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "at the window's last minute (14:59) the line still holds",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C903",
@@ -1838,19 +1896,20 @@
    "row": "C903",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "a one-time canvas; 'Saturday' names a built weekly event, true from any weekday",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C906",
@@ -1869,37 +1928,39 @@
    "row": "C906",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no 'till X'",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C910",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "\"Done\" says no time, no energy, no money",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C913",
@@ -1918,19 +1979,20 @@
    "row": "C913",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "a meeting button gated on Zoe present, not on the clock; nothing with hours is shut here",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C914",
@@ -1949,19 +2011,20 @@
    "row": "C914",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no hours shown; presence, not the clock, gates it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C916",
@@ -1980,19 +2043,20 @@
    "row": "C916",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "nothing shut by the clock on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C920",
@@ -2011,19 +2075,20 @@
    "row": "C920",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "Done targets the same place (campus_quad), no hop cost",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C924",
@@ -2042,19 +2107,20 @@
    "row": "C924",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C926",
@@ -2073,19 +2139,20 @@
    "row": "C926",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "the clock only adds 10 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C927",
@@ -2104,19 +2171,20 @@
    "row": "C927",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 10",
-   "why": "exit time set",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "the exit carries its own 10 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C928",
@@ -2135,37 +2203,39 @@
    "row": "C928",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no current clock printed into prose",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C929",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no time or energy in the label",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C930",
@@ -2184,19 +2254,20 @@
    "row": "C930",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "Done (10 min) back to the quad; no time in the beat",
-   "why": "no clock time, weekday or duration in prose or label; a one-time meeting gated on her presence, not hours; exit spends 10 min",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "not windowed work",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c70a3f6e0f86e3e4",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "9cd930131c35ea88"
+    "text": "f7db38821f67277f",
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 3
+   "pass": 20
   },
   {
    "row": "C931",
@@ -2215,19 +2286,20 @@
    "row": "C931",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "trigger: npc_at_location only",
-   "why": "no time_of_day on this screen",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no time_of_day on the trigger",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C953",
@@ -2264,37 +2336,39 @@
    "row": "L106",
    "screen": "quad_meet_zoe.coffee",
    "verdict": "PASS",
-   "line": "\"A girl falls into step beside you\"",
-   "why": "only Zoe named, and the trigger needs her present",
+   "line": "a coffee in each hand, a crop top that shows off her stomach",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Zoe is_present on the quad (Mon/Wed/Fri 13-15, Tue/Thu 14-15); 'You're new' is a first meeting",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cacb601aa799b9fd",
-    "facts": "9ffbbc8ba008e154",
-    "facts2": "262e056b4f130afa",
-    "all": "6e049aeeb336f9ab"
+    "text": "9a3b923187c89f8c",
+    "traits": "6b1e34b018661933",
+    "facts": "be6d9efa5c95ad2c",
+    "facts2": "a35ad35224f51ec7",
+    "all": "5e91aaa3ed86c8bf"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L106",
    "screen": "quad_meet_zoe.talk",
    "verdict": "PASS",
-   "line": "She's halfway across the quad",
-   "why": "only Zoe named; trigger needs her on the quad",
+   "line": "She's halfway across the quad before you've said yes",
+   "why": "only Zoe named, gated is_present, still on the quad by her rows",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "L119",
@@ -2364,20 +2438,21 @@
   {
    "row": "L167",
    "screen": "quad_meet_zoe.talk",
-   "verdict": "N/A",
-   "line": "is_repeatable = false",
-   "why": "a one-time meeting, not a row with hours",
+   "verdict": "PASS",
+   "line": "Done (10 min, to campus_quad)",
+   "why": "no activity row; one trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f7db38821f67277f",
-    "facts": "782b2f9b937f0abe",
-    "facts2": "215f39220593dca1",
-    "all": "081bed1d70385580"
+    "traits": "6b1e34b018661933",
+    "facts": "df9466345e90305c",
+    "facts2": "050fbd9199a97abd",
+    "all": "ba93fd6a177220fd"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "L168",
@@ -2421,8 +2496,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

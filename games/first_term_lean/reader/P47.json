@@ -1,13 +1,13 @@
 {
  "piece": "P47",
- "pass": 18,
+ "pass": 20,
  "screens": {
   "dean_first.door": {
-   "text": "3aedd6e655f7639e",
+   "text": "23518b5d444f8c8b",
    "traits": "c6984adcd9df71b0",
    "facts": "632e8e7c3012fe0b",
    "facts2": "d324d118e7c22152",
-   "all": "a46354d832fdb9c8"
+   "all": "1ff875e61676ea8e"
   },
   "dean_first.rules": {
    "text": "ff03086d8c90677e",
@@ -30,7 +30,7 @@
    "facts2": "ec5462d91cdb6930",
    "all": "9eebaf236fc8544a"
   },
-  "*": "d2affd42d39d125e"
+  "*": "9e24c4c792a35078"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -103,6 +103,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C520": "34947f7e290656f0",
@@ -176,20 +179,20 @@
    "row": "B10",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "The dean's office: a big desk, a window, and him behind it, writing.",
-   "why": "Mon-Fri 08:00-16:34, dean in 08-17 (who_is_where); the screen no longer sets met_dean and no line on it reads it.",
+   "line": "When he does look up, he takes his time: your face, then down your body, then back up",
+   "why": "first and last minute and a second visit: dean present by trigger weekdays 08:00-16:35 inside his 08-17 office row, met_dean false; the two worn_exposure lines cover every outfit; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B10",
@@ -382,20 +385,20 @@
    "row": "B8",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "Is that what you're wearing to class, child?",
-   "why": "No number, no garment; exposure groups cover every outfit.",
+   "line": "silver haired man behind desk looking up",
+   "why": "no garment of hers named; search words name his hair, desk and look only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B8",
@@ -523,20 +526,20 @@
    "row": "C1158",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "Is that what you're wearing to class, child?",
-   "why": "Names no garment.",
+   "line": "When he does look up, he takes his time: your face, then down your body, then back up",
+   "why": "no garment of hers named; search words name his hair, desk and look only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C1173",
@@ -659,20 +662,20 @@
    "row": "C1206",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "Is that what you're wearing to class, child?",
-   "why": "Names no garment.",
+   "line": "When he does look up, he takes his time: your face, then down your body, then back up",
+   "why": "no garment of hers named; search words name his hair, desk and look only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C1220",
@@ -1181,8 +1184,47 @@
    "note": false,
    "screen_hash": "d2affd42d39d125e",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "9e24c4c792a35078",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "grey haired businessman at desk portrait",
+   "why": "6-7 words; no digit or camera direction ('looking up' is his act)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "9e24c4c792a35078",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "grey haired businessman at desk portrait",
+   "why": "one subject at a desk, a common portrait; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "9e24c4c792a35078",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C327",
@@ -1279,20 +1321,20 @@
    "row": "C460",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "He doesn't look up, and he doesn't ask you to sit, so you stand.",
-   "why": "True on every reachable minute; no flag-backed claim.",
+   "line": "When he does look up, he takes his time: your face, then down your body, then back up",
+   "why": "every claim true on every playthrough that reaches it: dean present by trigger weekdays 08:00-16:35 inside his 08-17 office row, met_dean false; the two worn_exposure lines cover every outfit; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C460",
@@ -1368,20 +1410,20 @@
    "row": "C461",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "like he's reading a form he means to sign.",
-   "why": "Fits his entry.",
+   "line": "When he does look up, he takes his time: your face, then down your body, then back up",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C461",
@@ -2494,20 +2536,20 @@
    "row": "L106",
    "screen": "dean_first.door",
    "verdict": "PASS",
-   "line": "him behind it, writing",
-   "why": "Trigger needs npc_dean present in campus_office_dean.",
+   "line": "When he does look up, he takes his time: your face, then down your body, then back up",
+   "why": "only the screen's own person is claimed there, and their rows put them there: dean present by trigger weekdays 08:00-16:35 inside his 08-17 office row, met_dean false; the two worn_exposure lines cover every outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3aedd6e655f7639e",
+    "text": "23518b5d444f8c8b",
     "traits": "c6984adcd9df71b0",
     "facts": "632e8e7c3012fe0b",
     "facts2": "d324d118e7c22152",
-    "all": "a46354d832fdb9c8"
+    "all": "1ff875e61676ea8e"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "L106",
@@ -2743,8 +2785,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

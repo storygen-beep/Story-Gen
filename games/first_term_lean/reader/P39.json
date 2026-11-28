@@ -1,13 +1,13 @@
 {
  "piece": "P39",
- "pass": 29,
+ "pass": 32,
  "screens": {
   "walk_park_couple.moment": {
-   "text": "9f8c3c7fe47596ff",
+   "text": "07e0e346e0dba8bd",
    "traits": "44136fa355b3678a",
    "facts": "2ce65de01af70a7d",
    "facts2": "2ce65de01af70a7d",
-   "all": "e9cf488728b26e5b"
+   "all": "915d85dac243f845"
   },
   "walk_park_couple.watch": {
    "text": "1b92d5e7c07171fa",
@@ -31,11 +31,11 @@
    "all": "4324df60f95b6c2e"
   },
   "walk_vance_ledger.hello": {
-   "text": "d6ca8fb9c03b1bcd",
+   "text": "335b10924d183ca7",
    "traits": "d9172dabbd56b049",
    "facts": "b30926bba2e48d89",
    "facts2": "c1b7d3bced5f1fa6",
-   "all": "49a58593407c7c2b"
+   "all": "e71e7076c0994787"
   },
   "walk_vance_ledger.past": {
    "text": "5891b7656bc80228",
@@ -66,11 +66,11 @@
    "all": "19effe31b7c3eac6"
   },
   "walk_marco_squat.moment": {
-   "text": "a91109516e1c78c2",
+   "text": "87b6d4c836054bb6",
    "traits": "e4365d01d4eb14be",
    "facts": "8965fc400ca80c26",
    "facts2": "fc909c0a076152b4",
-   "all": "c3b5dd3f6e035897"
+   "all": "0941e5ba00f6dfbd"
   },
   "walk_marco_squat.watch": {
    "text": "b8170a0eb7937980",
@@ -108,11 +108,11 @@
    "all": "61918301fd8d0aa4"
   },
   "walk_curtain.moment": {
-   "text": "14b6453c7e2b9e8f",
+   "text": "b58ca5334f202c46",
    "traits": "44136fa355b3678a",
    "facts": "bc7bb076a1931a10",
    "facts2": "bc7bb076a1931a10",
-   "all": "a8e5b43e286cc341"
+   "all": "6c1fb6cc6925cf68"
   },
   "walk_curtain.shut": {
    "text": "c2d1578594fb889b",
@@ -128,7 +128,7 @@
    "facts2": "bc7bb076a1931a10",
    "all": "12bea5ff7cad747f"
   },
-  "*": "d22a9799a5db49be"
+  "*": "184b4b7e61c4f95f"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -219,6 +219,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -352,19 +355,20 @@
    "row": "B10",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "every line true at the first and last minute and on a second visit; named people gated present by their rows",
+   "line": "The curtain rips back. A man, a stranger with a bag of shirts, and you with the skirt halfway up your thighs and your underwear right there in front of him.",
+   "why": "substitution on the shop's try-on, gated on Nina present (10-19 Mon-Sat); the man is an unnamed stranger; each underwear line sits behind its clothing_slot group; the picture's new words ('girl caught half dressed changing room skirt') name only the shop skirt the try-on puts on her, so true on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "B10",
@@ -465,20 +469,20 @@
    "row": "B10",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
-   "why": "fires only weekdays 17:00-21:00 with Marco present (trigger); picture names Marco's age 29, as npcs says",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed. She doesn't move them.",
+   "why": "behind met_marco, weekdays 17-21, Marco gated present (who_is_where: hood_gym 17-21 weekdays); the search line now says 'touching hips', which matches the hands on her hips",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a91109516e1c78c2",
+    "text": "87b6d4c836054bb6",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "c3b5dd3f6e035897"
+    "all": "0941e5ba00f6dfbd"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 28
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "B10",
@@ -579,20 +583,20 @@
    "row": "B10",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; read on just arriving in the park: what she comes across through the bushes; nothing says she went looking; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "strangers only; park open 06:00-21:00 and the window 19:00-20:55 ends inside it; what she comes across on arrival; true at first and last minute and on a later evening",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "B10",
@@ -617,20 +621,20 @@
    "row": "B10",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "\"Evening, little lady. Vance. I own your house.\"",
-   "why": "Vance is placed by npc_at_location hood_next_door; the trigger (weekdays 17-20, Saturday) meets his rows (Sat 09-12, 17-20), so Morning/Evening groups are true; the face sits inside the met_vance false group",
+   "line": "Morning, little lady. Vance. I own your house. / Evening, little lady. Vance. I own your house.",
+   "why": "trigger is weekdays 17-20 or Saturday with Vance present (Sat 09-12, 17-20), so Morning/Evening groups are true; the face 'older man porch chair holding beer' fits him on his porch",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "B10",
@@ -843,19 +847,20 @@
    "row": "B8",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "no number; no garment of hers named, or the one named is backed",
+   "line": "The curtain rips back. A man, a stranger with a bag of shirts, and you with the skirt halfway up your thighs and your underwear right there in front of him.",
+   "why": "no number; the skirt is backed by the try-on act, the underwear by a clothing_slot group each way; the search words dropped 'panties' and name only the skirt",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "B8",
@@ -956,20 +961,20 @@
    "row": "B8",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
-   "why": "no garment of hers named; none in the picture",
+   "line": "a muscular trainer of 29 behind a woman in her twenties",
+   "why": "age agrees with Marco's 29; the leggings in the search words are the stranger's, no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a91109516e1c78c2",
+    "text": "87b6d4c836054bb6",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "c3b5dd3f6e035897"
+    "all": "0941e5ba00f6dfbd"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 28
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "B8",
@@ -1070,20 +1075,20 @@
    "row": "B8",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "no number; garments named are the stranger couple's",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "B8",
@@ -1109,19 +1114,19 @@
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
    "line": "A man of 54 in a porch chair with a beer",
-   "why": "no garment on her named; Vance's age 54 agrees with PLAN.md:62",
+   "why": "no garment of hers named; Vance's age 54 matches npc_vance",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "B8",
@@ -1269,19 +1274,20 @@
    "row": "C1158",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "garments named are the strangers'/Nina's, or backed by a slot group or the try-on act",
+   "line": "The curtain rips back. A man, a stranger with a bag of shirts, and you with the skirt halfway up your thighs and your underwear right there in front of him.",
+   "why": "the skirt is the one the try-on beat puts on her; underwear named only behind clothing_slot equipped / unequipped; search words name only the skirt",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "C1158",
@@ -1306,20 +1312,20 @@
    "row": "C1158",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "the skirt and jeans are the couple's, not hers",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "C1158",
@@ -1461,19 +1467,20 @@
    "row": "C1206",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "no garment of hers named that she may not wear (underwear grouped on its slot)",
+   "line": "girl caught half dressed changing room skirt",
+   "why": "no garment she may not be wearing: the skirt is the shop's, the underwear lines are gated each way",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "C1206",
@@ -1498,20 +1505,20 @@
    "row": "C1206",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "garments named are the couple's / Nina's own (skirt, jeans, the shop's dress), never hers",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "no garment of hers named",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "C1206",
@@ -2898,20 +2905,39 @@
    "row": "C2196",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
-   "why": "she comes across it at the door, in whatever she wears: \"Your own thighs go tight by the door.\"",
+   "line": "Your own thighs go tight by the door.",
+   "why": "fires on arrival and keeps her at the door: no workout, pass or gym clothes assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a91109516e1c78c2",
+    "text": "87b6d4c836054bb6",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "c3b5dd3f6e035897"
+    "all": "0941e5ba00f6dfbd"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 32
+  },
+  {
+   "row": "C2196",
+   "screen": "walk_park_couple.moment",
+   "verdict": "PASS",
+   "line": "Through the bushes behind the pond:",
+   "why": "fires on arrival in the park; what she comes across, nothing she must be doing",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "07e0e346e0dba8bd",
+    "traits": "44136fa355b3678a",
+    "facts": "2ce65de01af70a7d",
+    "facts2": "2ce65de01af70a7d",
+    "all": "915d85dac243f845"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 28
+   "pass": 30
   },
   {
    "row": "C2196",
@@ -3128,8 +3154,47 @@
    "note": false,
    "screen_hash": "d22a9799a5db49be",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 29
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in walk_park_couple, walk_vance_ledger, walk_danny_deal, walk_marco_squat, walk_nina_dress, walk_curtain)",
+   "why": "these canvases carry scene spots only; their places' pictures belong to P03",
+   "cause": null,
+   "note": false,
+   "screen_hash": "578b2e206c0cc444",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": true,
+   "pass": 31
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "outdoor sex park grass voyeur gif \u00b7 trainer hands on hips squat leggings gif \u00b7 older man porch chair holding beer \u00b7 changing room caught skirt half on",
+   "why": "every search line is 8 words or fewer, no digit, no 'woman of', no caption camera direction, no 'no ___', no name; 'gif' on the moving park, squat and (still-format t4) curtain spots where something moves; 'teen' read as a site tag, not an age",
+   "cause": null,
+   "note": false,
+   "screen_hash": "578b2e206c0cc444",
+   "row_hash": "4247ea8697822bed",
+   "carried": true,
+   "pass": 31
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "couple fucking in park grass amateur gif \u00b7 gym trainer groping squat rack leggings gif \u00b7 girl caught half dressed changing room skirt",
+   "why": "each asks a common filed act or pose; two people only where the act is the picture (park sex, trainer's hands on a woman at the rack); garments named are another woman's (park skirt, squat leggings) or the try-on skirt, none unbacked on Ella",
+   "cause": null,
+   "note": false,
+   "screen_hash": "578b2e206c0cc444",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": true,
+   "pass": 31
   },
   {
    "row": "C286",
@@ -3503,19 +3568,20 @@
    "row": "C460",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "every claim checked against PLAN, who_is_where and the trigger; true on every reachable visit",
+   "line": "The curtain rips back. A man, a stranger with a bag of shirts, and you with the skirt halfway up your thighs and your underwear right there in front of him.",
+   "why": "every claim holds on every visit (Nina present, stranger unnamed, underwear gated); search-word change adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "C460",
@@ -3616,20 +3682,20 @@
    "row": "C460",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
-   "why": "true on every visit the trigger allows",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed. She doesn't move them.",
+   "why": "true at first and last minute and on a repeat; the stranger needs no flag",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a91109516e1c78c2",
+    "text": "87b6d4c836054bb6",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "c3b5dd3f6e035897"
+    "all": "0941e5ba00f6dfbd"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 28
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C460",
@@ -3730,20 +3796,20 @@
    "row": "C460",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; read on just arriving in the park: what she comes across through the bushes; nothing says she went looking; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "strangers only; park open 06:00-21:00 and the window 19:00-20:55 ends inside it; what she comes across on arrival; true at first and last minute and on a later evening",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "C460",
@@ -3768,20 +3834,20 @@
    "row": "C460",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "A man of 54 in a porch chair with a beer, looking straight at the camera.",
-   "why": "the face fits the screen (he is sitting on his porch); the beer is texture that cannot clash",
+   "line": "older man on front porch with beer staring",
+   "why": "the face matches the screen (he is on his porch, looking her over); beer is texture that cannot clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "C460",
@@ -3857,19 +3923,20 @@
    "row": "C461",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "texture and in-character dialogue only",
+   "line": "Oh, Christ. Sorry. Sorry.",
+   "why": "texture and a stranger's fitting line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "C461",
@@ -3970,20 +4037,20 @@
    "row": "C461",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
-   "why": "texture and her reaction only",
+   "line": "Lower. Lower. That's it. Feel that? Good.",
+   "why": "Marco takes charge, fits his cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a91109516e1c78c2",
+    "text": "87b6d4c836054bb6",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "c3b5dd3f6e035897"
+    "all": "0941e5ba00f6dfbd"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 28
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "C461",
@@ -4084,20 +4151,20 @@
    "row": "C461",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "texture and her reaction on her body",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "C461",
@@ -4122,20 +4189,20 @@
    "row": "C461",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "\"Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks.\"",
-   "why": "fits his cast entry (PLAN.md:141, Takes charge)",
+   "line": "Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks.",
+   "why": "fits his cast entry; nothing can clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "C461",
@@ -5052,15 +5119,15 @@
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "C927",
@@ -5328,19 +5395,19 @@
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
    "line": "time_of_day 00:00-12:00 / 12:00-00:00",
-   "why": "re-read each render, end exclusive (v2.py:5323-5325)",
+   "why": "re-read every render, end exclusive, the two groups tile the day",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "C931",
@@ -5459,19 +5526,20 @@
    "row": "L106",
    "screen": "walk_curtain.moment",
    "verdict": "PASS",
-   "line": "you with the skirt halfway up your thighs and your underwear right there / nothing under it",
-   "why": "everyone named is gated present by their rows (who_is_where), or a stranger",
+   "line": "The curtain rips back. A man, a stranger with a bag of shirts, and you with the skirt halfway up your thighs and your underwear right there in front of him.",
+   "why": "only Nina's shop and an unnamed stranger; Nina's rows put her at hood_clothes whenever the trigger can fire",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "14b6453c7e2b9e8f",
+    "text": "b58ca5334f202c46",
+    "traits": "44136fa355b3678a",
     "facts": "bc7bb076a1931a10",
     "facts2": "bc7bb076a1931a10",
-    "all": "a8e5b43e286cc341"
+    "all": "6c1fb6cc6925cf68"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 31
   },
   {
    "row": "L106",
@@ -5572,20 +5640,20 @@
    "row": "L106",
    "screen": "walk_marco_squat.moment",
    "verdict": "PASS",
-   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed.",
-   "why": "Marco is there: the trigger checks npc_at_location hood_gym, and his rows put him there 17-21 weekdays",
+   "line": "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed. She doesn't move them.",
+   "why": "names only Marco, whom his rows put there, and an unnamed stranger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a91109516e1c78c2",
+    "text": "87b6d4c836054bb6",
     "traits": "e4365d01d4eb14be",
     "facts": "8965fc400ca80c26",
     "facts2": "fc909c0a076152b4",
-    "all": "c3b5dd3f6e035897"
+    "all": "0941e5ba00f6dfbd"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 28
+   "carried": false,
+   "pass": 32
   },
   {
    "row": "L106",
@@ -5686,20 +5754,20 @@
    "row": "L106",
    "screen": "walk_park_couple.moment",
    "verdict": "PASS",
-   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and",
-   "why": "strangers only; park open 06:00-21:00, window 19:00-20:55 ends before the gates lock; read on just arriving in the park: what she comes across through the bushes; nothing says she went looking; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot.",
+   "why": "strangers only; park open 06:00-21:00 and the window 19:00-20:55 ends inside it; what she comes across on arrival; true at first and last minute and on a later evening",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9f8c3c7fe47596ff",
+    "text": "07e0e346e0dba8bd",
     "traits": "44136fa355b3678a",
     "facts": "2ce65de01af70a7d",
     "facts2": "2ce65de01af70a7d",
-    "all": "e9cf488728b26e5b"
+    "all": "915d85dac243f845"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 9
+   "pass": 30
   },
   {
    "row": "L106",
@@ -5725,19 +5793,19 @@
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
    "line": "Vance on his porch",
-   "why": "only Vance is named, and his rows put him at hood_next_door at every minute the trigger allows",
+   "why": "only Vance is named; npc_at_location hood_next_door gates the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "L106",
@@ -6062,20 +6130,20 @@
    "row": "L167",
    "screen": "walk_vance_ledger.hello",
    "verdict": "PASS",
-   "line": "one trigger with an OR group (weekdays 17-20, or Saturday)",
-   "why": "one row, a group, not a row per day kind",
+   "line": "((weekday 0-4 AND 17:00-20:00) OR weekday 5)",
+   "why": "one trigger with an OR group, not a row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d6ca8fb9c03b1bcd",
+    "text": "335b10924d183ca7",
     "traits": "d9172dabbd56b049",
     "facts": "b30926bba2e48d89",
     "facts2": "c1b7d3bced5f1fa6",
-    "all": "49a58593407c7c2b"
+    "all": "e71e7076c0994787"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 29
+   "pass": 31
   },
   {
    "row": "L167",
@@ -6246,8 +6314,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

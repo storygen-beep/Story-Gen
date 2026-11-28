@@ -1,13 +1,13 @@
 {
  "piece": "P72",
- "pass": 7,
+ "pass": 9,
  "screens": {
   "notice_street_leggings.moment": {
-   "text": "cad1eeab389d5f8a",
+   "text": "ee04abc5aa77deb7",
    "traits": "44136fa355b3678a",
    "facts": "00cb2cc4ff8fcec1",
    "facts2": "00cb2cc4ff8fcec1",
-   "all": "e82b16a89d95351d"
+   "all": "53bc250fd0229f3c"
   },
   "notice_street_leggings.walk": {
    "text": "b0c9f506b50cead2",
@@ -24,11 +24,11 @@
    "all": "12ed902d46394ce6"
   },
   "notice_street_momtop.moment": {
-   "text": "39e4b7be9899c70e",
+   "text": "2055b6ba16b7ffe4",
    "traits": "95f1c22815f415ed",
    "facts": "d35abec75d0d124b",
    "facts2": "5e14f2e4ea467fe1",
-   "all": "f7fa233ca5c67fe6"
+   "all": "36905999bf58e4a7"
   },
   "notice_street_momtop.walk": {
    "text": "6227c8b262d45589",
@@ -45,11 +45,11 @@
    "all": "41fcfcaa90ca7608"
   },
   "notice_street_skirt.moment": {
-   "text": "4ea005daa7a666dc",
+   "text": "96b038b988259834",
    "traits": "95f1c22815f415ed",
    "facts": "8db7a48d206eb695",
    "facts2": "db49f1d5383874b2",
-   "all": "d2df2ef1d6dd4f86"
+   "all": "4176a53f086fb1b0"
   },
   "notice_street_skirt.walk": {
    "text": "d04c865f857a70a3",
@@ -66,11 +66,11 @@
    "all": "7ab415d07ad34c4d"
   },
   "notice_park_leggings.moment": {
-   "text": "a39650c1d7ece579",
+   "text": "0ed724c28dee8cb8",
    "traits": "44136fa355b3678a",
    "facts": "e9716046fc0fd73a",
    "facts2": "e9716046fc0fd73a",
-   "all": "43b992923d3bb584"
+   "all": "9fcf4411514d8499"
   },
   "notice_park_leggings.walk": {
    "text": "4069eb1c1ef51e2a",
@@ -87,11 +87,11 @@
    "all": "7e2c12f2aaf3cf03"
   },
   "notice_gym_leggings.moment": {
-   "text": "b1d2f4d9f5ae10b8",
+   "text": "f2e53211ecd1f8b4",
    "traits": "44136fa355b3678a",
    "facts": "5343e0385cfac615",
    "facts2": "5343e0385cfac615",
-   "all": "1b7c9ca9e3fc3a06"
+   "all": "573d2fd1d6441af6"
   },
   "notice_gym_leggings.walk": {
    "text": "03e110e20007dfb0",
@@ -107,7 +107,7 @@
    "facts2": "5343e0385cfac615",
    "all": "d5450dc0939b5a57"
   },
-  "*": "50445540aefda5d3"
+  "*": "1c84459db8ac93e1"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -159,6 +159,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -292,19 +295,19 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "strangers only, true at every minute of the trigger's hours; nothing past-tense",
+   "why": "true at the window's first and last minute and on every repeat: 06:00-22:00 = the gym's hours, fires on entry from hood_street; unnamed regulars (Marco, there in part, is not named); no past, no first time, no clock",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B10",
@@ -330,19 +333,19 @@
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "strangers only, true at every minute of the trigger's hours; nothing past-tense",
+   "why": "true at the window's first and last minute and on every repeat: 06:00-21:00 = the park's hours; an unnamed jogger; no past, no first time, no clock",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B10",
@@ -386,20 +389,20 @@
    "row": "B10",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "strangers only, true at every minute of the trigger's hours; nothing past-tense",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "true at the window's first and last minute and on every repeat: 07:00-21:00 on hood_street, the street's day variant; unnamed strangers at the bus stop; no past, no first time, no clock",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B10",
@@ -443,20 +446,20 @@
    "row": "B10",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "strangers only, true at every minute of the trigger's hours; nothing past-tense",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "true at the window's first and last minute and on every repeat: 07:00-21:00 on hood_street; an unnamed neighbour; no past, no first time, no clock",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B10",
@@ -500,20 +503,20 @@
    "row": "B10",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "strangers only, true at every minute of the trigger's hours; nothing past-tense",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "true at the window's first and last minute and on every repeat: 07:00-21:00 on hood_street; an unnamed driver; no past, no first time, no clock",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B10",
@@ -903,19 +906,19 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "why": "no number; the garment named is backed: leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B8",
@@ -941,19 +944,19 @@
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "why": "no number; the garment named is backed: leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B8",
@@ -997,20 +1000,20 @@
    "row": "B8",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "no number; the garment named is backed: leggings equipped (and mom_lowcut_top unequipped) on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B8",
@@ -1054,20 +1057,20 @@
    "row": "B8",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "the garment in prose and picture is backed by the trigger: mom_lowcut_top equipped",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "no number; the garment named is backed: mom_lowcut_top equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B8",
@@ -1111,20 +1114,20 @@
    "row": "B8",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "the garment in prose and picture is backed by the trigger: mom_short_skirt equipped and legwear slot unequipped",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "no number; the garment named is backed: mom_short_skirt equipped and legwear slot unequipped on the trigger, so 'bare legs' holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "B8",
@@ -1189,95 +1192,95 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "why": "the garment named is behind a clothing condition: leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1158",
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "why": "the garment named is behind a clothing condition: leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1158",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "the garment named is behind a clothing condition: leggings equipped (and mom_lowcut_top unequipped) on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1158",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "the garment in prose and picture is backed by the trigger: mom_lowcut_top equipped",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "the garment named is behind a clothing condition: mom_lowcut_top equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1158",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "the garment in prose and picture is backed by the trigger: mom_short_skirt equipped and legwear slot unequipped",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "the garment named is behind a clothing condition: mom_short_skirt equipped and legwear slot unequipped on the trigger, so 'bare legs' holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1173",
@@ -1388,95 +1391,95 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "why": "she is wearing what the prose names on every fire: leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1206",
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "why": "she is wearing what the prose names on every fire: leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1206",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "the garment in prose and picture is backed by the trigger: leggings equipped",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "she is wearing what the prose names on every fire: leggings equipped (and mom_lowcut_top unequipped) on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1206",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "the garment in prose and picture is backed by the trigger: mom_lowcut_top equipped",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "she is wearing what the prose names on every fire: mom_lowcut_top equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1206",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "the garment in prose and picture is backed by the trigger: mom_short_skirt equipped and legwear slot unequipped",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "she is wearing what the prose names on every fire: mom_short_skirt equipped and legwear slot unequipped on the trigger, so 'bare legs' holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C1220",
@@ -2349,95 +2352,95 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "fires on arrival; she is walking in, in the garment the trigger checks",
+   "why": "kind (c), on arrival: the words need her only walking in / walking past, which is what arrival is; no act assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C2196",
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "fires on arrival; she is walking in, in the garment the trigger checks",
+   "why": "kind (c), on arrival: the words need her only walking in / walking past, which is what arrival is; no act assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C2196",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "fires on arrival; she is walking in, in the garment the trigger checks",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "kind (c), on arrival: the words need her only walking in / walking past, which is what arrival is; no act assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C2196",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "fires on arrival; she is walking in, in the garment the trigger checks",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "kind (c), on arrival: the words need her only walking in / walking past, which is what arrival is; no act assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C2196",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "fires on arrival; she is walking in, in the garment the trigger checks",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "kind (c), on arrival: the words need her only walking in / walking past, which is what arrival is; no act assumed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C2197",
@@ -2559,8 +2562,47 @@
    "note": false,
    "screen_hash": "50445540aefda5d3",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 7
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c84459db8ac93e1",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "tight leggings ass walking from behind gif",
+   "why": "five spots, every line 8 words or fewer, the look and its garment plus 'candid' and gif; no digit, no camera direction phrase the rule names ('from behind' here is the filing tag for a walking-ass clip, not 'seen from behind a desk'), no name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c84459db8ac93e1",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 9
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "low cut top cleavage walking candid gif",
+   "why": "each is one subject walking (no man in the search words); every garment named is backed by the screen's trigger: leggings equipped (street, park, gym), mom_lowcut_top equipped ('low cut top cleavage'), mom_short_skirt equipped with bare legwear ('short skirt legs')",
+   "cause": null,
+   "note": false,
+   "screen_hash": "1c84459db8ac93e1",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 9
   },
   {
    "row": "C302",
@@ -2854,19 +2896,19 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "every claim matches the trigger and the picture says only what the screen does",
+   "why": "every claim checked: 06:00-22:00 = the gym's hours, fires on entry from hood_street; unnamed regulars (Marco, there in part, is not named); leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C460",
@@ -2892,19 +2934,19 @@
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "every claim matches the trigger and the picture says only what the screen does",
+   "why": "every claim checked: 06:00-21:00 = the park's hours; an unnamed jogger; leggings equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C460",
@@ -2948,20 +2990,20 @@
    "row": "C460",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "every claim matches the trigger and the picture says only what the screen does",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "every claim checked: 07:00-21:00 on hood_street, the street's day variant; unnamed strangers at the bus stop; leggings equipped (and mom_lowcut_top unequipped) on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C460",
@@ -3005,20 +3047,20 @@
    "row": "C460",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "every claim matches the trigger and the picture says only what the screen does",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "every claim checked: 07:00-21:00 on hood_street; an unnamed neighbour; mom_lowcut_top equipped on the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C460",
@@ -3062,20 +3104,20 @@
    "row": "C460",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "every claim matches the trigger and the picture says only what the screen does",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "every claim checked: 07:00-21:00 on hood_street; an unnamed driver; mom_short_skirt equipped and legwear slot unequipped on the trigger, so 'bare legs' holds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C460",
@@ -3133,19 +3175,19 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "texture and a stranger's own term of address",
+   "why": "the stranger's line and her face going hot are texture and her reaction; nothing clashes with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C461",
@@ -3171,19 +3213,19 @@
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "texture and a stranger's own term of address",
+   "why": "the stranger's line and her face going hot are texture and her reaction; nothing clashes with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C461",
@@ -3227,20 +3269,20 @@
    "row": "C461",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "texture and a stranger's own term of address",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "the stranger's line and her face going hot are texture and her reaction; nothing clashes with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C461",
@@ -3284,20 +3326,20 @@
    "row": "C461",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "texture and a stranger's own term of address",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "the stranger's line and her face going hot are texture and her reaction; nothing clashes with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C461",
@@ -3341,20 +3383,20 @@
    "row": "C461",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "texture and a stranger's own term of address",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "the stranger's line and her face going hot are texture and her reaction; nothing clashes with the plan",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "C461",
@@ -3846,19 +3888,19 @@
    "screen": "notice_gym_leggings.moment",
    "verdict": "PASS",
    "line": "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass.",
-   "why": "no named person; unnamed strangers only (Marco's part rows at the gym aren't named)",
+   "why": "only unnamed strangers; no named person is put anywhere",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b1d2f4d9f5ae10b8",
+    "text": "f2e53211ecd1f8b4",
     "traits": "44136fa355b3678a",
     "facts": "5343e0385cfac615",
     "facts2": "5343e0385cfac615",
-    "all": "1b7c9ca9e3fc3a06"
+    "all": "573d2fd1d6441af6"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "L106",
@@ -3884,19 +3926,19 @@
    "screen": "notice_park_leggings.moment",
    "verdict": "PASS",
    "line": "A jogger coming the other way looks at your leggings, then your face, then your leggings.",
-   "why": "no named person; unnamed strangers only (Marco's part rows at the gym aren't named)",
+   "why": "only unnamed strangers; no named person is put anywhere",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a39650c1d7ece579",
+    "text": "0ed724c28dee8cb8",
     "traits": "44136fa355b3678a",
     "facts": "e9716046fc0fd73a",
     "facts2": "e9716046fc0fd73a",
-    "all": "43b992923d3bb584"
+    "all": "9fcf4411514d8499"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "L106",
@@ -3940,20 +3982,20 @@
    "row": "L106",
    "screen": "notice_street_leggings.moment",
    "verdict": "PASS",
-   "line": "One of them whistles, low, his eyes on your ass in the leggings.",
-   "why": "no named person; unnamed strangers only (Marco's part rows at the gym aren't named)",
+   "line": "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings.",
+   "why": "only unnamed strangers; no named person is put anywhere",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cad1eeab389d5f8a",
+    "text": "ee04abc5aa77deb7",
     "traits": "44136fa355b3678a",
     "facts": "00cb2cc4ff8fcec1",
     "facts2": "00cb2cc4ff8fcec1",
-    "all": "e82b16a89d95351d"
+    "all": "53bc250fd0229f3c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "L106",
@@ -3997,20 +4039,20 @@
    "row": "L106",
    "screen": "notice_street_momtop.moment",
    "verdict": "PASS",
-   "line": "His eyes drop to your chest in Mom's top and stay there.",
-   "why": "no named person; unnamed strangers only (Marco's part rows at the gym aren't named)",
+   "line": "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there.",
+   "why": "only unnamed strangers; no named person is put anywhere",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "39e4b7be9899c70e",
+    "text": "2055b6ba16b7ffe4",
     "traits": "95f1c22815f415ed",
     "facts": "d35abec75d0d124b",
     "facts2": "5e14f2e4ea467fe1",
-    "all": "f7fa233ca5c67fe6"
+    "all": "36905999bf58e4a7"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "L106",
@@ -4054,20 +4096,20 @@
    "row": "L106",
    "screen": "notice_street_skirt.moment",
    "verdict": "PASS",
-   "line": "his eyes go down your bare legs under Mom's skirt and back up.",
-   "why": "no named person; unnamed strangers only (Marco's part rows at the gym aren't named)",
+   "line": "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up.",
+   "why": "only unnamed strangers; no named person is put anywhere",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4ea005daa7a666dc",
+    "text": "96b038b988259834",
     "traits": "95f1c22815f415ed",
     "facts": "8db7a48d206eb695",
     "facts2": "db49f1d5383874b2",
-    "all": "d2df2ef1d6dd4f86"
+    "all": "4176a53f086fb1b0"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 6
+   "pass": 8
   },
   {
    "row": "L106",
@@ -4195,8 +4237,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

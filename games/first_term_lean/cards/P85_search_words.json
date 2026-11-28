@@ -1,0 +1,1246 @@
+{
+ "place:home_kitchen": {
+  "queries": [
+   "family home kitchen interior daylight",
+   "small kitchen table fridge coffee pot",
+   "suburban house kitchen interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:home_living_room": {
+  "queries": [
+   "family living room interior couch tv armchair",
+   "suburban house living room sofa television",
+   "cosy living room big armchair"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:home_bathroom": {
+  "queries": [
+   "small family bathroom interior shower",
+   "small house bathroom shower sink interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:home_her_room": {
+  "queries": [
+   "small bedroom interior single bed",
+   "small single bedroom interior daylight",
+   "narrow single bed small room"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:home_ryans_room": {
+  "queries": [
+   "messy bedroom interior clothes on floor",
+   "untidy bedroom curtains closed dim",
+   "messy student bedroom interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:home_master_bedroom": {
+  "queries": [
+   "master bedroom interior double bed",
+   "master bedroom big bed wardrobe",
+   "tidy master bedroom interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:hood_next_door": {
+  "queries": [
+   "suburban house front porch one chair",
+   "small front porch chair house exterior",
+   "neighbour house porch suburban street"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:hood_shop": {
+  "queries": [
+   "corner shop interior counter shelves",
+   "small convenience store interior till",
+   "corner shop cigarettes behind counter"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:hood_park": {
+  "queries": [
+   "town park pond benches path",
+   "small park running path pond",
+   "park bench by pond daylight"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:hood_clothes": {
+  "queries": [
+   "small clothes shop interior rails",
+   "boutique clothing store interior fitting room",
+   "small boutique clothes rails mirror"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:hood_gym": {
+  "queries": [
+   "small gym interior weights mirrors",
+   "local gym interior treadmills weights",
+   "gym weight room mirrored walls"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_lecture_hall": {
+  "queries": [
+   "university lecture hall interior tiered seats",
+   "empty lecture theatre rows lectern screen",
+   "college lecture hall interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_bathroom": {
+  "queries": [
+   "college restroom interior stalls long mirror",
+   "public restroom sinks long mirror",
+   "campus bathroom interior stalls"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_library": {
+  "queries": [
+   "university library interior long tables",
+   "quiet college library reading room",
+   "library front desk interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_cafeteria": {
+  "queries": [
+   "college cafeteria interior long tables",
+   "university dining hall lunch counter",
+   "empty school cafeteria trays tables"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_offices": {
+  "queries": [
+   "university corridor office doors name plates",
+   "quiet faculty office hallway",
+   "college office corridor doors"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_office_dean": {
+  "queries": [
+   "dean office interior big desk window",
+   "university executive office large desk",
+   "dean office desk chairs window"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_office_hale": {
+  "queries": [
+   "professor office interior desk shelves files",
+   "small university faculty office desk chair",
+   "academic office bookshelves files desk"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_office_pratt": {
+  "queries": [
+   "office whiteboards full of equations",
+   "math professor office whiteboard walls",
+   "small office whiteboards interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_office_walsh": {
+  "queries": [
+   "cluttered professor office stacked books",
+   "english professor office books kettle windowsill",
+   "small academic office full of books"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:campus_theatre": {
+  "queries": [
+   "black box theatre stage folding seats",
+   "small college theatre stage lights rig",
+   "empty black stage theatre interior"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:near_cafe": {
+  "queries": [
+   "small cafe interior long counter espresso machine",
+   "coffee shop counter tip jar",
+   "cosy cafe interior daylight"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:near_zoe_apartment": {
+  "queries": [
+   "messy student apartment living room sofa",
+   "cluttered apartment sofa clothes on chairs",
+   "small student flat living room"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:near_zoe_kitchen": {
+  "queries": [
+   "messy student kitchen mugs in sink",
+   "small cluttered apartment kitchen interior",
+   "student flat kitchen table fridge"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:near_zoe_room": {
+  "queries": [
+   "messy bedroom unmade double bed",
+   "student bedroom full length mirror clothes rail",
+   "cluttered bedroom interior unmade bed"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "place:near_zoe_bathroom": {
+  "queries": [
+   "small apartment bathroom bath shower curtain",
+   "shared flat bathroom interior bathtub",
+   "small bathroom bath curtain half open"
+  ],
+  "kept": false,
+  "why": "place picture: the room itself, nobody in it",
+  "garment_backed_by": "none named"
+ },
+ "spot:body/opening_wake_t3": {
+  "queries": [
+   "teen waking up in bed morning",
+   "girl pyjama top ridden up bed",
+   "sleepy teen bed sheets kicked off"
+  ],
+  "kept": false,
+  "why": "were 9-word captions; tags now, still (nothing moves)",
+  "garment_backed_by": "opening.wake is before any wardrobe equip; the pyjama top is the screen's fixed prose"
+ },
+ "spot:body/opening_shower_t4": {
+  "queries": [
+   "teen shower nude wet gif",
+   "girl showering naked eyes closed amateur gif",
+   "naked teen shower head back gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/hall_towel_t3": {
+  "queries": [
+   "teen in towel bathroom door steam gif",
+   "girl wrapped in towel after shower gif",
+   "wet teen small towel hallway amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "opening is before any wardrobe equip (first equips are opening.room's exit choices); the towel is the screen's fixed prose, not a worn item"
+ },
+ "spot:body/hall_knot_past_t4": {
+  "queries": [
+   "towel drop teen tits gif",
+   "towel falls off girl topless gif",
+   "accidental towel drop wet hair gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "opening is before any wardrobe equip (first equips are opening.room's exit choices); the towel is the screen's fixed prose, not a worn item"
+ },
+ "spot:body/hall_knot_spoke_t4": {
+  "queries": [
+   "towel slips to waist topless teen gif",
+   "topless teen towel around waist gif",
+   "towel drop topless hallway amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "opening is before any wardrobe equip (first equips are opening.room's exit choices); the towel is the screen's fixed prose, not a worn item"
+ },
+ "spot:body/hall_knot_fix_t4": {
+  "queries": [
+   "teen opening towel flash gif",
+   "girl retying towel flashing tits gif",
+   "towel flash wet hair teen amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "opening is before any wardrobe equip (first equips are opening.room's exit choices); the towel is the screen's fixed prose, not a worn item"
+ },
+ "spot:body/opening_dressing_t4": {
+  "queries": [
+   "teen getting dressed after shower nude gif",
+   "naked girl getting dressed bedroom gif",
+   "teen dressing towel on floor amateur gif"
+  ],
+  "kept": false,
+  "why": "dropped 'jeans': the jeans equip is on the exit choice after the picture, and the sundress choice contradicts it",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/mom_kitchen_t0": {
+  "queries": [
+   "middle aged woman kitchen counter coffee mug",
+   "mature woman candid home kitchen mug"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/mom_living_t0": {
+  "queries": [
+   "middle aged woman on couch watching tv",
+   "mature woman sofa evening tv light"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/tom_counter_t0": {
+  "queries": [
+   "cafe owner behind counter rag",
+   "cafe manager wiping counter looking up"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/chris_meet_t0": {
+  "queries": [
+   "young barista behind espresso machine",
+   "barista at coffee machine candid"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/mark_kitchen_t0": {
+  "queries": [
+   "middle aged man kitchen table coffee mug",
+   "man at breakfast table with coffee"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/mark_chair_t0": {
+  "queries": [
+   "middle aged man armchair watching tv",
+   "middle aged man in recliner living room tv"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/ryan_room_t0": {
+  "queries": [
+   "young man gaming on bed controller headphones",
+   "guy gaming on bed curtains shut"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/ryan_room_weekend_t0": {
+  "queries": [
+   "young man gaming on unmade bed",
+   "guy gaming messy bedroom controller headphones"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/ryan_kitchen_t0": {
+  "queries": [
+   "young man eating from frying pan kitchen",
+   "guy eating standing at kitchen counter"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/ryan_couch_t0": {
+  "queries": [
+   "young man sprawled on couch watching tv",
+   "guy lying on sofa living room tv"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:sex/tv_after_dark_t5": {
+  "queries": [
+   "blowjob porn on tv screen dark room gif",
+   "watching porn tv blowjob hair pulling gif",
+   "tv screen showing blowjob kneeling gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/park_run_t3": {
+  "queries": [
+   "teen jogging leggings sports bra bouncing gif",
+   "girl running park leggings bouncing tits gif",
+   "jogging teen tight leggings candid gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "body_run trigger: leggings + sports_top + sneakers equipped (sports_top filed as 'sports bra')"
+ },
+ "spot:look/body_workout_t3": {
+  "queries": [
+   "teen leggings bending over gym ass gif",
+   "kettlebell leggings ass gym mirror gif",
+   "girl working out tight leggings ass gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "body_workout trigger: leggings + sports_top equipped"
+ },
+ "spot:body/campus_mirror_t3": {
+  "queries": [
+   "young woman restroom mirror lip gloss",
+   "college girl applying lip gloss bathroom mirror",
+   "woman putting on lipstick public restroom mirror"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/nina_till_t0": {
+  "queries": [
+   "boutique owner behind shop counter",
+   "young woman shop owner at till"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:body/fitting_room_t3": {
+  "queries": [
+   "fitting room mirror short skirt ass",
+   "girl changing room mirror skirt rear",
+   "teen trying on skirt fitting room"
+  ],
+  "kept": false,
+  "why": "first line was an 11-word caption; tags now",
+  "garment_backed_by": "shop_try_on.try prose: she tries a shop skirt on (an item off the rail, not her wardrobe)"
+ },
+ "spot:people/hale_lectern_t0": {
+  "queries": [
+   "male professor at lectern lecture hall coffee",
+   "lecturer at lectern looking up at students"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/walsh_front_t0": {
+  "queries": [
+   "older female professor reading glasses lecture hall",
+   "older woman teacher front of lecture hall"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/cross_stage_t0": {
+  "queries": [
+   "drama teacher sitting edge of stage",
+   "man sitting on edge of black stage"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/holt_desk_t0": {
+  "queries": [
+   "librarian reading glasses chain behind desk",
+   "librarian behind library counter looking up"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/rosa_counter_t0": {
+  "queries": [
+   "cafeteria lunch lady behind counter",
+   "school canteen server holding bread roll"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/zoe_quad_t0": {
+  "queries": [
+   "blonde college girl two coffees campus",
+   "college girl sunglasses on head walking campus"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/frank_till_t0": {
+  "queries": [
+   "heavy shopkeeper behind counter newspaper",
+   "corner shop owner at the till"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/danny_counter_t0": {
+  "queries": [
+   "young shop clerk leaning on counter phone",
+   "night shift shop clerk at till smirking"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/marco_gym_t0": {
+  "queries": [
+   "personal trainer whistle beside weight bench",
+   "gym trainer standing in weights room"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/vance_porch_t0": {
+  "queries": [
+   "older man sitting on front porch mug",
+   "older man on porch chair watching street"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/jake_quad_t0": {
+  "queries": [
+   "college guy hoodie jogging looking back grinning gif",
+   "young man jogging campus looking over shoulder gif",
+   "guy running back to friends campus smile gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/brooke_mirror_t0": {
+  "queries": [
+   "blonde college girl smirking bathroom mirror",
+   "girl doing makeup restroom mirror smirk"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes · one subject, Brooke (reader P26, 2026-11-28, C2209)",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/sam_door_t0": {
+  "queries": [
+   "guy answering apartment door with guitar",
+   "barefoot young man leaning on door frame"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/zoe_party_t0": {
+  "queries": [
+   "girl sitting on sofa arm house party bottle",
+   "girl waving bottle crowded apartment party"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/zoe_party_t0": {
+  "queries": [
+   "packed house party small apartment speaker",
+   "crowded student party living room"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/brooke_party_t0": {
+  "queries": [
+   "blonde college girl leaning on kitchen counter party",
+   "college girl at party kitchen plastic cup"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/kayla_party_t0": {
+  "queries": [
+   "college girl laughing at house party cup",
+   "girl laughing party kitchen plastic cup"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/tess_party_t0": {
+  "queries": [
+   "girl at party kitchen counter cup",
+   "young woman alone at party plastic cup",
+   "girl standing by kitchen counter house party"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:sex/parents_door_t5": {
+  "queries": [
+   "missionary fuck hand over mouth voyeur door gif",
+   "mature couple missionary sex bed voyeur gif",
+   "hand over her mouth missionary fuck amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:body/ryan_phone_t5": {
+  "queries": [
+   "guy jerking off bed phone voyeur gif",
+   "solo male handjob watching phone amateur gif",
+   "caught jerking off door crack gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none · 'cum' cut: the screen shows him stroking (reader, C1238)",
+  "garment_backed_by": "none named"
+ },
+ "spot:body/ryan_shower_t4": {
+  "queries": [
+   "caught in shower naked surprised teen",
+   "girl caught naked glass shower soapy tits",
+   "walked in on her in the shower naked"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/dean_first_t3": {
+  "queries": [
+   "silver haired man behind desk looking up",
+   "older executive office desk reading",
+   "grey haired businessman at desk portrait"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/ryan_charger_back_t3": {
+  "queries": [
+   "teen answering bedroom door night gif",
+   "pov staring at clothed teen boobs gif",
+   "girl opening door at night amateur gif"
+  ],
+  "kept": false,
+  "why": "dropped 'braless tank top': ryan_charger_back has no clothing condition",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/ryan_knock_again_t3": {
+  "queries": [
+   "girl answering bedroom door night pov gif",
+   "teen at bedroom door night gif",
+   "clothed boobs doorway pov amateur gif"
+  ],
+  "kept": false,
+  "why": "dropped 'braless tshirt/nipples': no clothing condition on the screen",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/ryan_knock_stays_t3": {
+  "queries": [
+   "pov staring at clothed teen boobs gif",
+   "teen in doorway slow pov gif",
+   "girl at bedroom door night amateur gif"
+  ],
+  "kept": false,
+  "why": "dropped 'braless tank top': no clothing condition on the screen",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/zoe_give_him_t4": {
+  "queries": [
+   "teen ass looking back over shoulder gif",
+   "girl turned around ass campus gif",
+   "college girl ass from behind amateur gif"
+  ],
+  "kept": false,
+  "why": "the friend's hands turning her was a choreographed two-person gesture; one subject, a filed act · second reader pass: the picture comes before her answer, so a neutral pose",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/vance_gutter_t3": {
+  "queries": [
+   "teen legs walking pov gif",
+   "girl walking up porch steps legs gif",
+   "candid teen legs walking amateur gif"
+  ],
+  "kept": false,
+  "why": "dropped 'short shorts': vance_gutter has no clothing condition",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/vance_envelope_t4": {
+  "queries": [
+   "older man holding girl wrist gif",
+   "hand stroking wrist close up gif",
+   "man holding woman hand close up gif"
+  ],
+  "kept": false,
+  "why": "a 9-word line; the envelope gesture has no picture, nearest filed one is a held wrist",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/hale_called_in_t3": {
+  "queries": [
+   "teen standing in office doorway pov gif",
+   "pov staring at clothed college girl boobs gif",
+   "girl in professor office doorway gif"
+  ],
+  "kept": false,
+  "why": "dropped 'cleavage': hale_called_in has no clothing condition, so a low-cut top is not backed",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/marco_hips_t4": {
+  "queries": [
+   "gym trainer hands on her hips gif",
+   "trainer groping hips gym amateur gif",
+   "personal trainer touching girl hips mirror gif"
+  ],
+  "kept": false,
+  "why": "dropped 'leggings': marco_hips has no clothing condition",
+  "garment_backed_by": "none named"
+ },
+ "spot:sex/park_couple_t5": {
+  "queries": [
+   "outdoor sex park grass voyeur gif",
+   "couple fucking in park grass amateur gif",
+   "public sex park bushes skirt up gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "her skirt: another woman, fixed scene prose"
+ },
+ "spot:people/vance_hello_t0": {
+  "queries": [
+   "older man porch chair holding beer",
+   "older man on front porch with beer staring"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/marco_squat_t4": {
+  "queries": [
+   "gym trainer groping squat rack leggings gif",
+   "trainer hands on hips squat leggings gif",
+   "squat rack trainer touching hips gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none · 'ass' to 'hips': his hands are on her hips (reader, C1238)",
+  "garment_backed_by": "leggings: another woman, fixed scene prose"
+ },
+ "spot:body/curtain_flash_t4": {
+  "queries": [
+   "caught changing fitting room curtain open teen",
+   "girl caught half dressed changing room skirt",
+   "changing room caught skirt half on"
+  ],
+  "kept": false,
+  "why": "dropped 'panties': the image sits outside the underwear equipped/unequipped groups, so half the visits have none",
+  "garment_backed_by": "skirt: walk_curtain.moment prose in both groups (a shop skirt halfway up her thighs)"
+ },
+ "spot:sex/stacks_couple_t5": {
+  "queries": [
+   "library fuck against shelves voyeur gif",
+   "public library sex skirt up amateur gif",
+   "students fucking library stacks gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "skirt: another woman, fixed scene prose"
+ },
+ "spot:look/cross_brooke_t3": {
+  "queries": [
+   "man hand on woman waist stage rehearsal gif",
+   "hand on her waist theatre stage blonde gif",
+   "older man touching blonde waist stage gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:people/cross_seats_t3": {
+  "queries": [
+   "young woman alone on lit theatre stage",
+   "actress on stage spotlight empty theater seats",
+   "girl on stage looking out from dark auditorium"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:sex/zoe_sam_sofa_t5": {
+  "queries": [
+   "cowgirl riding fuck sofa voyeur gif",
+   "topless cowgirl riding fuck couch amateur gif",
+   "girl riding fucking couch grabbing tits gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:sex/chris_store_t5": {
+  "queries": [
+   "guy fingering girl against shelves skirt up gif",
+   "storeroom guy fingering girl amateur gif",
+   "fingering standing knees shaking amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "skirt: another woman, fixed scene prose"
+ },
+ "spot:sex/party_bathroom_t5": {
+  "queries": [
+   "pussy licking sex edge of bathtub gif",
+   "guy licking pussy sex bathroom party gif",
+   "pussy eating sex bathtub voyeur amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/bus_packed_no_t3": {
+  "queries": [
+   "packed bus teen looks back annoyed gif",
+   "crowded bus girl glaring over shoulder gif",
+   "annoyed girl crowded bus candid gif"
+  ],
+  "kept": false,
+  "why": "9-word captions with two people; one subject now",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/bus_packed_quiet_t4": {
+  "queries": [
+   "crowded bus groping from behind gif",
+   "bus frottage pressed against ass gif",
+   "man pressed behind girl crowded bus amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:body/sleep_t3": {
+  "queries": [
+   "teen sleeping in bed night",
+   "girl lying in bed dark sheet",
+   "young woman asleep under sheet night"
+  ],
+  "kept": false,
+  "why": "dropped pyjama shorts/thin top: loop_sleep has no clothing condition",
+  "garment_backed_by": "none named"
+ },
+ "spot:body/daily_shower_t4": {
+  "queries": [
+   "teen shower naked water running gif",
+   "amateur girl showering nude head back gif",
+   "naked shower wet body teen gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/hale_t0": {
+  "queries": [
+   "professor at office desk open file",
+   "man at desk small university office looking up"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/pratt_t0": {
+  "queries": [
+   "professor writing equations on whiteboard office",
+   "statistics professor at whiteboard full of numbers"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/walsh_t0": {
+  "queries": [
+   "older woman professor desk piled with books",
+   "english professor office books smiling"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/dean_t0": {
+  "queries": [
+   "older man writing at large desk window",
+   "university dean behind big desk office"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/cross_t0": {
+  "queries": [
+   "drama teacher front row theatre feet on stage",
+   "man watching rehearsal from front row"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/holt_t0": {
+  "queries": [
+   "librarian glasses behind library front desk",
+   "librarian behind counter paperback looking up"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/nadia_cafeteria_t0": {
+  "queries": [
+   "college student cafeteria table tray notes",
+   "student lunch table notes looking up"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/nadia_library_t0": {
+  "queries": [
+   "college girl library desk highlighters books",
+   "student studying in library looking up"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/rosa_t0": {
+  "queries": [
+   "lunch lady behind counter ladle smiling",
+   "cafeteria cook pointing ladle counter"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/zoe_quad_t0": {
+  "queries": [
+   "college girl lying on grass sunglasses campus",
+   "college girl sunbathing on the quad"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/zoe_cafeteria_t0": {
+  "queries": [
+   "college girl cafeteria eating fries grinning",
+   "college girl at lunch table laughing"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/zoe_flat_t0": {
+  "queries": [
+   "girl on couch feet up phone apartment",
+   "college girl on her couch evening waving"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/jake_cafeteria_t0": {
+  "queries": [
+   "college guy cafeteria table window smiling",
+   "young man campus dining hall table"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/jake_quad_t0": {
+  "queries": [
+   "college guy sitting on campus steps grin",
+   "young man campus stairs looking up smiling"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/brooke_t0": {
+  "queries": [
+   "college girl applying lipstick bathroom mirror",
+   "girl putting on lipstick mirror reflection"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/vance_t0": {
+  "queries": [
+   "older man sitting on porch with beer",
+   "older man front porch chair suburban street"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/frank_t0": {
+  "queries": [
+   "shopkeeper behind till folded newspaper",
+   "convenience store owner behind counter older man"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/danny_t0": {
+  "queries": [
+   "young guy leaning on shop counter grinning",
+   "convenience store clerk behind till phone"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes · 'evening' cut: Danny is at the till from 15:00 weekdays and 07:00 Sunday (reader P58, 2026-11-28)",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/marco_t0": {
+  "queries": [
+   "muscular personal trainer gym squat rack towel",
+   "personal trainer standing by rack in gym"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/nina_t0": {
+  "queries": [
+   "boutique owner behind till smiling",
+   "clothes shop owner behind counter young woman"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/tom_t0": {
+  "queries": [
+   "cafe manager behind counter cloth on shoulder",
+   "cafe owner leaning on counter nodding"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/chris_t0": {
+  "queries": [
+   "barista working espresso machine glancing over",
+   "barista at coffee machine glancing over shoulder"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/sam_t0": {
+  "queries": [
+   "guy barefoot on sofa acoustic guitar",
+   "college guy lounging with guitar apartment"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/kayla_mirror_t0": {
+  "queries": [
+   "college girl bathroom mirror makeup bag smirk",
+   "girl at bathroom mirror smirking"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/kayla_cafeteria_t0": {
+  "queries": [
+   "college girl cafeteria table salad",
+   "college girl at lunch table looking over"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/tess_mirror_t0": {
+  "queries": [
+   "young woman doing makeup bathroom mirror brush",
+   "girl applying makeup brush mirror reflection"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:everyday/tess_cafeteria_t0": {
+  "queries": [
+   "young woman cafeteria table makeup brush",
+   "college girl sitting cafeteria looking down"
+  ],
+  "kept": false,
+  "why": "ages and camera directions out; role word in place of the NPC's clothes",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/notice_street_leggings_t3": {
+  "queries": [
+   "candid teen leggings ass walking street gif",
+   "tight leggings ass walking from behind gif",
+   "girl leggings walking candid ass amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "trigger: leggings equipped, mom_lowcut_top unequipped"
+ },
+ "spot:look/notice_street_momtop_t3": {
+  "queries": [
+   "candid cleavage walking street teen gif",
+   "low cut top cleavage walking candid gif",
+   "girl walking cleavage bouncing candid gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "trigger: mom_lowcut_top equipped"
+ },
+ "spot:look/notice_street_skirt_t3": {
+  "queries": [
+   "candid short skirt legs walking teen gif",
+   "girl tugging short skirt down walking gif",
+   "mini skirt candid legs sidewalk gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "trigger: mom_short_skirt equipped, legwear slot unequipped"
+ },
+ "spot:look/notice_park_leggings_t3": {
+  "queries": [
+   "candid leggings ass park walking gif",
+   "teen tight leggings park path from behind gif",
+   "girl walking leggings ass candid park gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "trigger: leggings equipped"
+ },
+ "spot:look/notice_gym_leggings_t3": {
+  "queries": [
+   "gym leggings ass walking candid gif",
+   "teen tight leggings gym from behind gif",
+   "girl leggings ass gym mirrors candid gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "trigger: leggings equipped"
+ },
+ "spot:touch/party_mingle_t4": {
+  "queries": [
+   "groped at party hand on waist gif",
+   "house party crowd hand on girl waist gif",
+   "teen squeezing through party crowd groped gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/party_dance_t3": {
+  "queries": [
+   "teen dancing sweaty house party gif",
+   "girl dancing packed party crowd gif",
+   "teen dancing party amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/party_drink_guy_t4": {
+  "queries": [
+   "guy too close girl at party cup gif",
+   "man leaning in at house party chest gif",
+   "party flirt standing too close teen gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:look/party_zoe_sam_t3": {
+  "queries": [
+   "guy kissing girl neck at party gif",
+   "neck kissing house party sofa amateur gif",
+   "teen neck kissed party gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ },
+ "spot:touch/party_speaker_guy_t4": {
+  "queries": [
+   "grinding ass on guy at party gif",
+   "teen twerking grinding house party gif",
+   "grinding dance floor hands on hips amateur gif"
+  ],
+  "kept": true,
+  "why": "already tags, act word, gif where it moves; garments backed or none",
+  "garment_backed_by": "none named"
+ }
+}

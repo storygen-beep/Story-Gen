@@ -1,13 +1,13 @@
 {
  "piece": "P37",
- "pass": 22,
+ "pass": 23,
  "screens": {
   "zoe_party.party": {
-   "text": "3ef4c0684048a540",
+   "text": "31915bd3c7ba132c",
    "traits": "6b1e34b018661933",
    "facts": "6116301392be4053",
    "facts2": "2242d176693385da",
-   "all": "e390becca79578f9"
+   "all": "1f9aedb909e28ebb"
   },
   "zoe_party.talk": {
    "text": "f8df0b071a9b2122",
@@ -17,11 +17,11 @@
    "all": "aa26c8d1d2da18ea"
   },
   "zoe_party.dare": {
-   "text": "6a44ad99ca8a8e9b",
+   "text": "632588343e2fdf20",
    "traits": "6b1e34b018661933",
    "facts": "6116301392be4053",
    "facts2": "2242d176693385da",
-   "all": "15e88ad7ca45eb5e"
+   "all": "1a4e1ac4f5ffe881"
   },
   "zoe_party.look": {
    "text": "33dd7dfee4aa6963",
@@ -37,7 +37,7 @@
    "facts2": "2242d176693385da",
    "all": "30d9415bfa80e05a"
   },
-  "*": "95654974b191c3d3"
+  "*": "110725cc0ae34123"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -106,6 +106,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -202,19 +205,19 @@
    "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "He's tall, and he's been looking at you since you came in.",
-   "why": "Zoe present; the guy is an unnamed stranger in the living room where the speaker is (the place's description); once a night on zoe_dare_done",
+   "why": "Zoe present (requires_npc, her rows Sat 19-24 near_zoe_apartment, trigger Sat 21-00); the guy is an unnamed stranger; once a night on zoe_dare_done; picture 'packed house party small apartment speaker' is the room",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a44ad99ca8a8e9b",
+    "text": "632588343e2fdf20",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "15e88ad7ca45eb5e"
+    "all": "1a4e1ac4f5ffe881"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "B10",
@@ -232,7 +235,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -251,7 +254,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -259,19 +262,19 @@
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "shows Sat 21:00-23:59; Zoe's P83 rows put her at near_zoe_apartment Sat 19-24; requires_npc npc_zoe; names nobody else",
+   "why": "shows Sat 21:00-23:59; Zoe's rows put her at near_zoe_apartment; picture 'girl sitting on sofa arm house party bottle' matches the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3ef4c0684048a540",
+    "text": "31915bd3c7ba132c",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "e390becca79578f9"
+    "all": "1f9aedb909e28ebb"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "B10",
@@ -289,7 +292,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -432,20 +435,20 @@
    "row": "B8",
    "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "pool_dir = \"people/zoe_party_t0\", pool = 1; she is 18",
-   "why": "matches the card's media spot; no garment",
+   "line": "Her view into a packed student party in a small apartment (she is 18, out of frame)",
+   "why": "no number against PLAN; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a44ad99ca8a8e9b",
+    "text": "632588343e2fdf20",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "15e88ad7ca45eb5e"
+    "all": "1a4e1ac4f5ffe881"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "B8",
@@ -463,7 +466,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -482,7 +485,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -490,19 +493,19 @@
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "A woman of 19 perched on a sofa arm",
-   "why": "no garment; 19 matches npc_zoe age and PLAN.md:59",
+   "why": "19 matches npc_zoe; no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3ef4c0684048a540",
+    "text": "31915bd3c7ba132c",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "e390becca79578f9"
+    "all": "1f9aedb909e28ebb"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "B8",
@@ -520,7 +523,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1448,6 +1451,45 @@
    "pass": 21
   },
   {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in zoe_party)",
+   "why": "scene spots only",
+   "cause": null,
+   "note": false,
+   "screen_hash": "110725cc0ae34123",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 23
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "girl sitting on sofa arm house party bottle \u00b7 girl waving bottle crowded apartment party \u00b7 packed house party small apartment speaker \u00b7 crowded student party living room",
+   "why": "every search line is 8 words or fewer, no digit, no 'woman of', no caption camera direction, no 'no ___', no name; nothing moves on a face, so no gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": "110725cc0ae34123",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 23
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "crowded student party living room",
+   "why": "pictures that exist: a girl on a sofa arm with a bottle, a packed party room; no garment named",
+   "cause": null,
+   "note": false,
+   "screen_hash": "110725cc0ae34123",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 23
+  },
+  {
    "row": "C422",
    "screen": "*",
    "verdict": "PASS",
@@ -1530,19 +1572,19 @@
    "screen": "zoe_party.dare",
    "verdict": "PASS",
    "line": "He's tall, and he's been looking at you since you came in.",
-   "why": "every claim true on every playthrough that reaches it: Zoe present; the guy is an unnamed stranger in the living room where the speaker is (the place's description); once a night on zoe_dare_done",
+   "why": "every claim true on every playthrough that reaches it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a44ad99ca8a8e9b",
+    "text": "632588343e2fdf20",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "15e88ad7ca45eb5e"
+    "all": "1a4e1ac4f5ffe881"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "C460",
@@ -1560,7 +1602,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1579,7 +1621,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1587,19 +1629,19 @@
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "every claim true on every playthrough that reaches it: shows Sat 21:00-23:59; Zoe's P83 rows put her at near_zoe_apartment Sat 19-24; requires_npc npc_zoe; names nobody else",
+   "why": "every claim true on every playthrough that reaches it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3ef4c0684048a540",
+    "text": "31915bd3c7ba132c",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "e390becca79578f9"
+    "all": "1f9aedb909e28ebb"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "C460",
@@ -1617,7 +1659,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1637,20 +1679,20 @@
    "row": "C461",
    "screen": "zoe_party.dare",
    "verdict": "PASS",
-   "line": "He's tall, and he's been looking at you since you came in.",
-   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
+   "line": "Okay, babe. Dare. Go dance with the guy by the speaker.",
+   "why": "Zoe's lines fit her entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a44ad99ca8a8e9b",
+    "text": "632588343e2fdf20",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "15e88ad7ca45eb5e"
+    "all": "1a4e1ac4f5ffe881"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "C461",
@@ -1668,7 +1710,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1687,7 +1729,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1695,19 +1737,19 @@
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "texture, her answer aloud, Zoe's lines fit her entry (show-off, 'babe', no strings)",
+   "why": "texture; can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3ef4c0684048a540",
+    "text": "31915bd3c7ba132c",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "e390becca79578f9"
+    "all": "1f9aedb909e28ebb"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "C461",
@@ -1725,7 +1767,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1843,19 +1885,19 @@
    "screen": "zoe_party.dare",
    "verdict": "FAIL",
    "line": "Look at him / Not tonight.",
-   "why": "note row: two answers to Zoe's dare, not three to five",
+   "why": "note row: two answers to Zoe's dare, not three to five; text unchanged since last pass",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "6a44ad99ca8a8e9b",
+    "text": "632588343e2fdf20",
     "traits": "6b1e34b018661933",
-    "facts": "b153518a6fd2602e",
-    "facts2": "adf208a6ad231fd4",
-    "all": "cf8e07000ca37c7e"
+    "facts": "6116301392be4053",
+    "facts2": "2242d176693385da",
+    "all": "1a4e1ac4f5ffe881"
    },
    "row_hash": "be0ad7093b24bc46",
-   "carried": true,
-   "pass": 18
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C639",
@@ -2080,7 +2122,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2099,7 +2141,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2118,7 +2160,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2150,7 +2192,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2169,7 +2211,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2188,7 +2230,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2220,7 +2262,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2239,7 +2281,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2258,7 +2300,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2290,7 +2332,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2309,7 +2351,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2328,7 +2370,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2360,7 +2402,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2379,7 +2421,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2398,7 +2440,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2417,7 +2459,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2436,7 +2478,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2455,7 +2497,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2487,7 +2529,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2506,7 +2548,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2525,7 +2567,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2557,7 +2599,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2576,7 +2618,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2595,7 +2637,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2627,7 +2669,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2646,7 +2688,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2665,7 +2707,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2697,7 +2739,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2716,7 +2758,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2735,7 +2777,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2767,7 +2809,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2786,7 +2828,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2805,7 +2847,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2837,7 +2879,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2856,7 +2898,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2875,7 +2917,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2907,7 +2949,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2926,7 +2968,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2945,7 +2987,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2977,7 +3019,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2996,7 +3038,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3015,7 +3057,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3047,7 +3089,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3066,7 +3108,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3085,7 +3127,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3117,7 +3159,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3136,7 +3178,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3155,7 +3197,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3187,7 +3229,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3206,7 +3248,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3225,7 +3267,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3257,7 +3299,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3276,7 +3318,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3295,7 +3337,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3327,7 +3369,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3346,7 +3388,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3365,7 +3407,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3403,15 +3445,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6a44ad99ca8a8e9b",
+    "text": "632588343e2fdf20",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "15e88ad7ca45eb5e"
+    "all": "1a4e1ac4f5ffe881"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "L106",
@@ -3429,7 +3471,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3448,7 +3490,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3456,19 +3498,19 @@
    "screen": "zoe_party.party",
    "verdict": "PASS",
    "line": "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag.",
-   "why": "names only Zoe, whom her rows put there, and unnamed strangers",
+   "why": "names only Zoe",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3ef4c0684048a540",
+    "text": "31915bd3c7ba132c",
     "traits": "6b1e34b018661933",
     "facts": "6116301392be4053",
     "facts2": "2242d176693385da",
-    "all": "e390becca79578f9"
+    "all": "1f9aedb909e28ebb"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 22
+   "pass": 23
   },
   {
    "row": "L106",
@@ -3486,7 +3528,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3607,7 +3649,7 @@
     "all": "30d9415bfa80e05a"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3626,7 +3668,7 @@
     "all": "99a53c181b8e7707"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3645,7 +3687,7 @@
     "all": "aa26c8d1d2da18ea"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3664,8 +3706,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 85,
- "answered": 85,
+ "asked": 14,
+ "answered": 14,
  "pass_items": [],
  "unowed": []
 }

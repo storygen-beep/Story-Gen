@@ -1,13 +1,13 @@
 {
  "piece": "P58",
- "pass": 13,
+ "pass": 15,
  "screens": {
   "talk_vance.hub": {
-   "text": "0d740dd50c9788fe",
+   "text": "8a7bca0048156d0b",
    "traits": "d9172dabbd56b049",
    "facts": "42672b531151f541",
    "facts2": "a78f8cbce78be9ac",
-   "all": "02c3cf9b746560e7"
+   "all": "084c426163d7dd9b"
   },
   "talk_vance.talk": {
    "text": "3caed77741619920",
@@ -17,11 +17,11 @@
    "all": "442a9ac05e8ae507"
   },
   "talk_frank.hub": {
-   "text": "95eb713783ea2a92",
+   "text": "46e5cd5446413e77",
    "traits": "a99d4cd683160f4b",
    "facts": "9618f7abe3b3dd38",
    "facts2": "98a3639844c46dcf",
-   "all": "526d43594256f180"
+   "all": "31d42619095b87ae"
   },
   "talk_frank.talk": {
    "text": "c7a05696fce9700d",
@@ -31,11 +31,11 @@
    "all": "9ba33606dbf1649e"
   },
   "talk_danny.hub": {
-   "text": "cdcc919a40d53469",
+   "text": "cf760e535e073b7e",
    "traits": "6789af7af3d0366b",
    "facts": "45863b9308945d05",
    "facts2": "c2c29f63bb99ca7c",
-   "all": "6f70807a5a912b97"
+   "all": "5892d5fc97129e60"
   },
   "talk_danny.talk": {
    "text": "3e3c7c1ccc5b620e",
@@ -45,11 +45,11 @@
    "all": "3e4396aac395e590"
   },
   "talk_marco.hub": {
-   "text": "4c8982eca566ffc3",
+   "text": "c457d653e76a97e4",
    "traits": "e4365d01d4eb14be",
    "facts": "e072dddb70ff63cd",
    "facts2": "9b9cc4ea0bf4e8ec",
-   "all": "08d1059bdec4355d"
+   "all": "6916531b55f0d2b5"
   },
   "talk_marco.talk": {
    "text": "3ccec607e58cd433",
@@ -59,11 +59,11 @@
    "all": "091f7eafd849ad35"
   },
   "talk_nina.hub": {
-   "text": "d3bf900eae08590c",
+   "text": "bf7537c48c56185e",
    "traits": "01d024bf2eee28fd",
    "facts": "49471a7e17beabd3",
    "facts2": "2a945f3741d052e2",
-   "all": "46d4673863b6bce2"
+   "all": "211b0068930e09e5"
   },
   "talk_nina.talk": {
    "text": "3664dd56d342fcb6",
@@ -72,7 +72,7 @@
    "facts2": "e6d5feaeacfe9d77",
    "all": "28072aa936caeb7b"
   },
-  "*": "7e688f5974da5295"
+  "*": "853f8098ef3b49f1"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -138,6 +138,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -217,20 +220,20 @@
    "row": "B10",
    "screen": "talk_danny.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "young guy leaning on shop counter grinning / convenience store clerk behind till phone",
+   "why": "'evening' is gone; the picture asks only the till and the phone, true at 15:00 weekdays and 07:00 Sunday as at night",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cdcc919a40d53469",
+    "text": "cf760e535e073b7e",
     "traits": "6789af7af3d0366b",
     "facts": "45863b9308945d05",
     "facts2": "c2c29f63bb99ca7c",
-    "all": "6f70807a5a912b97"
+    "all": "5892d5fc97129e60"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "B10",
@@ -255,20 +258,20 @@
    "row": "B10",
    "screen": "talk_frank.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Frank's behind the till with the paper open, and he folds it the second you come in.",
+   "why": "who_is_where: Frank at hood_shop Mon-Sat 07-15, requires_npc; the till and paper are texture; search words name no time or garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "95eb713783ea2a92",
+    "text": "46e5cd5446413e77",
     "traits": "a99d4cd683160f4b",
     "facts": "9618f7abe3b3dd38",
     "facts2": "98a3639844c46dcf",
-    "all": "526d43594256f180"
+    "all": "31d42619095b87ae"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "B10",
@@ -293,20 +296,20 @@
    "row": "B10",
    "screen": "talk_marco.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor.",
+   "why": "who_is_where: Marco at hood_gym weekdays 06-10, 17-21, Sat 08-14, requires_npc; 'between clients' is texture; search words name no time or garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4c8982eca566ffc3",
+    "text": "c457d653e76a97e4",
     "traits": "e4365d01d4eb14be",
     "facts": "e072dddb70ff63cd",
     "facts2": "9b9cc4ea0bf4e8ec",
-    "all": "08d1059bdec4355d"
+    "all": "6916531b55f0d2b5"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "B10",
@@ -331,20 +334,20 @@
    "row": "B10",
    "screen": "talk_nina.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "true on first and last minute and second visit",
+   "line": "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you.",
+   "why": "trigger 10:00-18:45 plus requires_npc; who_is_where: Nina at hood_clothes Mon-Sat 10-19; her dress is her own; search words add nothing false",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3bf900eae08590c",
+    "text": "bf7537c48c56185e",
     "traits": "01d024bf2eee28fd",
     "facts": "49471a7e17beabd3",
     "facts2": "2a945f3741d052e2",
-    "all": "46d4673863b6bce2"
+    "all": "211b0068930e09e5"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "B10",
@@ -369,20 +372,20 @@
    "row": "B10",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
-   "why": "his face shows at hood_next_door only while he's there (requires_npc); opening his menu from the house is her coming up the path, on a first and a later visit; Leave returns to his house",
+   "line": "Mr. Vance is in his chair on the porch, watching the street.",
+   "why": "who_is_where: Vance at hood_next_door weekdays 17-20, weekends 09-12 and 17-20; requires_npc shows the menu only then; porch and chair are texture; search words 'older man sitting on porch with beer' add nothing false",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0d740dd50c9788fe",
+    "text": "8a7bca0048156d0b",
     "traits": "d9172dabbd56b049",
     "facts": "42672b531151f541",
     "facts2": "a78f8cbce78be9ac",
-    "all": "02c3cf9b746560e7"
+    "all": "084c426163d7dd9b"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 14
   },
   {
    "row": "B10",
@@ -524,20 +527,20 @@
    "row": "B8",
    "screen": "talk_danny.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "A man of 23 leaning on a corner-shop till, phone face-down",
+   "why": "age agrees with Danny's 23; no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cdcc919a40d53469",
+    "text": "cf760e535e073b7e",
     "traits": "6789af7af3d0366b",
     "facts": "45863b9308945d05",
     "facts2": "c2c29f63bb99ca7c",
-    "all": "6f70807a5a912b97"
+    "all": "5892d5fc97129e60"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "B8",
@@ -562,20 +565,20 @@
    "row": "B8",
    "screen": "talk_frank.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Frank's behind the till with the paper open, and he folds it the second you come in.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "95eb713783ea2a92",
+    "text": "46e5cd5446413e77",
     "traits": "a99d4cd683160f4b",
     "facts": "9618f7abe3b3dd38",
     "facts2": "98a3639844c46dcf",
-    "all": "526d43594256f180"
+    "all": "31d42619095b87ae"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "B8",
@@ -600,20 +603,20 @@
    "row": "B8",
    "screen": "talk_marco.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4c8982eca566ffc3",
+    "text": "c457d653e76a97e4",
     "traits": "e4365d01d4eb14be",
     "facts": "e072dddb70ff63cd",
     "facts2": "9b9cc4ea0bf4e8ec",
-    "all": "08d1059bdec4355d"
+    "all": "6916531b55f0d2b5"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "B8",
@@ -638,20 +641,20 @@
    "row": "B8",
    "screen": "talk_nina.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3bf900eae08590c",
+    "text": "bf7537c48c56185e",
     "traits": "01d024bf2eee28fd",
     "facts": "49471a7e17beabd3",
     "facts2": "2a945f3741d052e2",
-    "all": "46d4673863b6bce2"
+    "all": "211b0068930e09e5"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "B8",
@@ -676,20 +679,20 @@
    "row": "B8",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
-   "why": "no garment of hers; the picture's shirt is his",
+   "line": "Mr. Vance is in his chair on the porch, watching the street.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0d740dd50c9788fe",
+    "text": "8a7bca0048156d0b",
     "traits": "d9172dabbd56b049",
     "facts": "42672b531151f541",
     "facts2": "a78f8cbce78be9ac",
-    "all": "02c3cf9b746560e7"
+    "all": "084c426163d7dd9b"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 14
   },
   {
    "row": "B8",
@@ -1694,8 +1697,47 @@
    "note": false,
    "screen_hash": "7e688f5974da5295",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 13
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in Builds)",
+   "why": "P58 builds five talk canvases and no [[locations]] row; its five spots are person pictures, not place pictures",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3810e7ceebf03fa0",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"shopkeeper behind till folded newspaper\" \u00b7 \"older man front porch chair suburban street\"",
+   "why": "all ten lines are tags of 5-7 words: role, place, one or two details; no age number, 'woman of', camera direction, 'no ___', name or story word",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3810e7ceebf03fa0",
+   "row_hash": "4247ea8697822bed",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"personal trainer standing by rack in gym\"",
+   "why": "each spot is one subject in a common pose (behind a till, on a porch, by a rack); no garment of hers in any search line",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3810e7ceebf03fa0",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": true,
+   "pass": 14
   },
   {
    "row": "C422",
@@ -1766,20 +1808,20 @@
    "row": "C460",
    "screen": "talk_danny.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Danny's leaning on the till with his phone, and he puts it face-down when he sees you.",
+   "why": "no claim the clock or his rows can contradict",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cdcc919a40d53469",
+    "text": "cf760e535e073b7e",
     "traits": "6789af7af3d0366b",
     "facts": "45863b9308945d05",
     "facts2": "c2c29f63bb99ca7c",
-    "all": "6f70807a5a912b97"
+    "all": "5892d5fc97129e60"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 15
   },
   {
    "row": "C460",
@@ -1804,20 +1846,20 @@
    "row": "C460",
    "screen": "talk_frank.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Frank's behind the till with the paper open, and he folds it the second you come in.",
+   "why": "who_is_where: Frank at hood_shop Mon-Sat 07-15, requires_npc; the till and paper are texture; search words name no time or garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "95eb713783ea2a92",
+    "text": "46e5cd5446413e77",
     "traits": "a99d4cd683160f4b",
     "facts": "9618f7abe3b3dd38",
     "facts2": "98a3639844c46dcf",
-    "all": "526d43594256f180"
+    "all": "31d42619095b87ae"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "C460",
@@ -1842,20 +1884,20 @@
    "row": "C460",
    "screen": "talk_marco.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor.",
+   "why": "who_is_where: Marco at hood_gym weekdays 06-10, 17-21, Sat 08-14, requires_npc; 'between clients' is texture; search words name no time or garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4c8982eca566ffc3",
+    "text": "c457d653e76a97e4",
     "traits": "e4365d01d4eb14be",
     "facts": "e072dddb70ff63cd",
     "facts2": "9b9cc4ea0bf4e8ec",
-    "all": "08d1059bdec4355d"
+    "all": "6916531b55f0d2b5"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "C460",
@@ -1880,20 +1922,20 @@
    "row": "C460",
    "screen": "talk_nina.hub",
    "verdict": "PASS",
-   "line": "",
-   "why": "no such line on this screen",
+   "line": "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you.",
+   "why": "trigger 10:00-18:45 plus requires_npc; who_is_where: Nina at hood_clothes Mon-Sat 10-19; her dress is her own; search words add nothing false",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "d3bf900eae08590c",
+    "text": "bf7537c48c56185e",
     "traits": "01d024bf2eee28fd",
     "facts": "49471a7e17beabd3",
     "facts2": "2a945f3741d052e2",
-    "all": "46d4673863b6bce2"
+    "all": "211b0068930e09e5"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 1
+   "pass": 14
   },
   {
    "row": "C460",
@@ -1918,20 +1960,20 @@
    "row": "C460",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
-   "why": "true at his house while he's in",
+   "line": "Mr. Vance is in his chair on the porch, watching the street.",
+   "why": "who_is_where: Vance at hood_next_door weekdays 17-20, weekends 09-12 and 17-20; requires_npc shows the menu only then; porch and chair are texture; search words 'older man sitting on porch with beer' add nothing false",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0d740dd50c9788fe",
+    "text": "8a7bca0048156d0b",
     "traits": "d9172dabbd56b049",
     "facts": "42672b531151f541",
     "facts2": "a78f8cbce78be9ac",
-    "all": "02c3cf9b746560e7"
+    "all": "084c426163d7dd9b"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 14
   },
   {
    "row": "C460",
@@ -1967,6 +2009,25 @@
   },
   {
    "row": "C461",
+   "screen": "talk_danny.hub",
+   "verdict": "PASS",
+   "line": "young guy leaning on shop counter grinning / convenience store clerk behind till phone",
+   "why": "texture that can't clash now that the time word is cut",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cf760e535e073b7e",
+    "traits": "6789af7af3d0366b",
+    "facts": "45863b9308945d05",
+    "facts2": "c2c29f63bb99ca7c",
+    "all": "5892d5fc97129e60"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "C461",
    "screen": "talk_danny.talk",
    "verdict": "PASS",
    "line": "Gorgeous. Look at you. ... Every night till eleven, gorgeous.",
@@ -1983,6 +2044,25 @@
    "row_hash": "310706ee076318f2",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C461",
+   "screen": "talk_frank.hub",
+   "verdict": "PASS",
+   "line": "Frank's behind the till with the paper open, and he folds it the second you come in.",
+   "why": "texture that can't clash and a look that fits the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "46e5cd5446413e77",
+    "traits": "a99d4cd683160f4b",
+    "facts": "9618f7abe3b3dd38",
+    "facts2": "98a3639844c46dcf",
+    "all": "31d42619095b87ae"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 14
   },
   {
    "row": "C461",
@@ -2005,6 +2085,25 @@
   },
   {
    "row": "C461",
+   "screen": "talk_marco.hub",
+   "verdict": "PASS",
+   "line": "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor.",
+   "why": "texture that can't clash and a look that fits the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c457d653e76a97e4",
+    "traits": "e4365d01d4eb14be",
+    "facts": "e072dddb70ff63cd",
+    "facts2": "9b9cc4ea0bf4e8ec",
+    "all": "6916531b55f0d2b5"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "C461",
    "screen": "talk_marco.talk",
    "verdict": "PASS",
    "line": "Champ. You training, or just looking? ... Mornings are dead, six to ten.",
@@ -2021,6 +2120,25 @@
    "row_hash": "310706ee076318f2",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C461",
+   "screen": "talk_nina.hub",
+   "verdict": "PASS",
+   "line": "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you.",
+   "why": "texture that can't clash and a look that fits the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bf7537c48c56185e",
+    "traits": "01d024bf2eee28fd",
+    "facts": "49471a7e17beabd3",
+    "facts2": "2a945f3741d052e2",
+    "all": "211b0068930e09e5"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 14
   },
   {
    "row": "C461",
@@ -2045,20 +2163,20 @@
    "row": "C461",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
-   "why": "texture",
+   "line": "Mr. Vance is in his chair on the porch, watching the street.",
+   "why": "texture that can't clash and a look that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0d740dd50c9788fe",
+    "text": "8a7bca0048156d0b",
     "traits": "d9172dabbd56b049",
     "facts": "42672b531151f541",
     "facts2": "a78f8cbce78be9ac",
-    "all": "02c3cf9b746560e7"
+    "all": "084c426163d7dd9b"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 14
   },
   {
    "row": "C461",
@@ -3158,6 +3276,25 @@
   },
   {
    "row": "L106",
+   "screen": "talk_danny.hub",
+   "verdict": "PASS",
+   "line": "Danny's leaning on the till with his phone, and he puts it face-down when he sees you.",
+   "why": "requires_npc; who_is_where puts him at hood_shop Mon-Sat 15-23, Sun 07-23",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "cf760e535e073b7e",
+    "traits": "6789af7af3d0366b",
+    "facts": "45863b9308945d05",
+    "facts2": "c2c29f63bb99ca7c",
+    "all": "5892d5fc97129e60"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 15
+  },
+  {
+   "row": "L106",
    "screen": "talk_danny.talk",
    "verdict": "PASS",
    "line": "Then I'm here now.",
@@ -3174,6 +3311,25 @@
    "row_hash": "13a714429d15f3b2",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "talk_frank.hub",
+   "verdict": "PASS",
+   "line": "Frank's behind the till with the paper open, and he folds it the second you come in.",
+   "why": "only the menu's own person is named, and requires_npc plus who_is_where put them there",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "46e5cd5446413e77",
+    "traits": "a99d4cd683160f4b",
+    "facts": "9618f7abe3b3dd38",
+    "facts2": "98a3639844c46dcf",
+    "all": "31d42619095b87ae"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 14
   },
   {
    "row": "L106",
@@ -3196,6 +3352,25 @@
   },
   {
    "row": "L106",
+   "screen": "talk_marco.hub",
+   "verdict": "PASS",
+   "line": "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor.",
+   "why": "only the menu's own person is named, and requires_npc plus who_is_where put them there",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "c457d653e76a97e4",
+    "traits": "e4365d01d4eb14be",
+    "facts": "e072dddb70ff63cd",
+    "facts2": "9b9cc4ea0bf4e8ec",
+    "all": "6916531b55f0d2b5"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 14
+  },
+  {
+   "row": "L106",
    "screen": "talk_marco.talk",
    "verdict": "PASS",
    "line": "Mornings are dead, six to ten.",
@@ -3212,6 +3387,25 @@
    "row_hash": "13a714429d15f3b2",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "L106",
+   "screen": "talk_nina.hub",
+   "verdict": "PASS",
+   "line": "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you.",
+   "why": "only the menu's own person is named, and requires_npc plus who_is_where put them there",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "bf7537c48c56185e",
+    "traits": "01d024bf2eee28fd",
+    "facts": "49471a7e17beabd3",
+    "facts2": "2a945f3741d052e2",
+    "all": "211b0068930e09e5"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 14
   },
   {
    "row": "L106",
@@ -3236,20 +3430,20 @@
    "row": "L106",
    "screen": "talk_vance.hub",
    "verdict": "PASS",
-   "line": "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path.",
-   "why": "requires_npc npc_vance at hood_next_door",
+   "line": "Mr. Vance is in his chair on the porch, watching the street.",
+   "why": "only the menu's own person is named, and requires_npc plus who_is_where put them there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0d740dd50c9788fe",
+    "text": "8a7bca0048156d0b",
     "traits": "d9172dabbd56b049",
     "facts": "42672b531151f541",
     "facts2": "a78f8cbce78be9ac",
-    "all": "02c3cf9b746560e7"
+    "all": "084c426163d7dd9b"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 14
   },
   {
    "row": "L106",
@@ -3459,8 +3653,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 5,
+ "answered": 5,
  "pass_items": [],
  "unowed": []
 }

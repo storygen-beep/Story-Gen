@@ -1,6 +1,6 @@
 {
  "piece": "P49",
- "pass": 22,
+ "pass": 26,
  "screens": {
   "ryan_charger.moment": {
    "text": "313906c8298f2b26",
@@ -24,11 +24,11 @@
    "all": "8d9d6c3c179d577d"
   },
   "ryan_charger_back.moment": {
-   "text": "67f0a5f52181a319",
+   "text": "b1f13dd1b747ef93",
    "traits": "74c4f68e6476ecee",
    "facts": "57bb58c5eba91d80",
    "facts2": "63e40120178d9641",
-   "all": "ce1929afe66eb47f"
+   "all": "120e9ce06ec1019f"
   },
   "ryan_charger_back.take": {
    "text": "5d13cd1dfbb8b123",
@@ -82,51 +82,51 @@
   "zoe_witness.moment": {
    "text": "f651eb67e838de7f",
    "traits": "6b1e34b018661933",
-   "facts": "872f36fb991cf7d7",
-   "facts2": "1d19261cdc6cf85d",
-   "all": "17acf3639374b6c4"
+   "facts": "35975d04a19e5423",
+   "facts2": "b5a53b3c1eb70464",
+   "all": "3c2f4ab0169d3722"
   },
   "zoe_witness.go": {
    "text": "a381f4b3c986bc40",
    "traits": "6b1e34b018661933",
-   "facts": "a3cc7b4ffeff9c5c",
-   "facts2": "2f64407ac0a709fe",
-   "all": "b521cf383803f746"
+   "facts": "3db82c97b335cd5c",
+   "facts2": "f68acba7d879bc65",
+   "all": "33785c15c10c9f27"
   },
   "zoe_witness.busy": {
    "text": "dfdd838040d7b106",
    "traits": "6b1e34b018661933",
-   "facts": "80be1fbe2eaabe99",
-   "facts2": "d94ef8bcaf458ae9",
-   "all": "6a6fc0b81dc05e12"
+   "facts": "a8d5b4234faab96b",
+   "facts2": "aa3bfda830d6b33a",
+   "all": "6ead1a24f6b7b626"
   },
   "zoe_give_him.moment": {
-   "text": "38785647e7812e6c",
+   "text": "750c351fa2c4f7cb",
    "traits": "0b1fa80c9d60647d",
-   "facts": "41e92ad76009f2bf",
-   "facts2": "130dd93dfc7a1cca",
-   "all": "7cd6af22ff9096cf"
+   "facts": "1101580304d83f6d",
+   "facts2": "85df09000504c3f7",
+   "all": "4c9ae46811f56120"
   },
   "zoe_give_him.let": {
    "text": "8b9959afe1af0603",
    "traits": "6b1e34b018661933",
-   "facts": "ca90215ee8b1192a",
-   "facts2": "3d976cb4abe6fb91",
-   "all": "e618fd7399931ba1"
+   "facts": "6440aaff1bac7a45",
+   "facts2": "5c770eeea21183fd",
+   "all": "73a7dbd747829962"
   },
   "zoe_give_him.stop": {
    "text": "e14ec4e6e5f44ee7",
    "traits": "6b1e34b018661933",
-   "facts": "4dfba33715001ede",
-   "facts2": "317aff3f6de89433",
-   "all": "46aedc9ee817a56c"
+   "facts": "c0cbdefb6ce25ad0",
+   "facts2": "72a8cec48fa40a39",
+   "all": "e6891d64277efe2b"
   },
   "vance_gutter.moment": {
-   "text": "a4a4a3a82864b462",
+   "text": "183bd814e57c42f4",
    "traits": "40c19ab6c95d7a0e",
    "facts": "2a2b552e1074f620",
    "facts2": "f8e83b3951428fe1",
-   "all": "ccf250e3fa860c49"
+   "all": "66d979cabafb3d01"
   },
   "vance_gutter.tell": {
    "text": "7e9b1adbe0b27175",
@@ -143,11 +143,11 @@
    "all": "44d6be44bb3b659c"
   },
   "vance_envelope.moment": {
-   "text": "b9664c1c74622be0",
+   "text": "96a72b7ca735e88c",
    "traits": "40c19ab6c95d7a0e",
    "facts": "2a2b552e1074f620",
    "facts2": "f8e83b3951428fe1",
-   "all": "2cc8a2700e88a866"
+   "all": "4bd4f7e53fb4ae2c"
   },
   "vance_envelope.take": {
    "text": "1d5dfd90237c85a4",
@@ -164,11 +164,11 @@
    "all": "032c0303d46900cd"
   },
   "hale_called_in.moment": {
-   "text": "0c6963f571ba385d",
+   "text": "3e5a652ada8f30aa",
    "traits": "825724317465730d",
    "facts": "6ea67dc58c8d9698",
    "facts2": "ed9eba5ccb976fe4",
-   "all": "a5596f5e12b35e56"
+   "all": "12431a9495237392"
   },
   "hale_called_in.yes": {
    "text": "838b33f9e7511aca",
@@ -185,11 +185,11 @@
    "all": "11f18506cdfd9b90"
   },
   "marco_hips.moment": {
-   "text": "b5927efcb8ec8179",
+   "text": "2f1ee6bd8b634f12",
    "traits": "e4365d01d4eb14be",
    "facts": "f9e936b5d2f7fa16",
    "facts2": "e2ce2f969cea33c2",
-   "all": "42f61fe25f478963"
+   "all": "2be66fe3ffa5530d"
   },
   "marco_hips.let": {
    "text": "eeaf671d49d92788",
@@ -240,7 +240,7 @@
    "facts2": "5c2a5075c1a7cd39",
    "all": "02498b18ad0f6fab"
   },
-  "*": "2c57e5189298e5d0"
+  "*": "2c53c74e65b01437"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -318,6 +318,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C2181": "74c68b4029782b5f",
@@ -429,7 +432,7 @@
    "note": false,
    "screen_hash": "2c57e5189298e5d0",
    "row_hash": "5276068df1ca6fa9",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -455,20 +458,20 @@
    "row": "B10",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
-   "why": "every person named is placed by the trigger (requires_npc / npc_at_location); second-showing lines sit behind the seen flag; nothing claims a past no flag records",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there. / search: pov staring at clothed college girl boobs gif",
+   "why": "true at the first and last minute of the trigger window and on a repeat (who_is_where agrees); 'cleavage' is gone; the words ask her clothed, true in any outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "B10",
@@ -531,20 +534,20 @@
    "row": "B10",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
-   "why": "every person named is placed by the trigger (requires_npc / npc_at_location); second-showing lines sit behind the seen flag; nothing claims a past no flag records",
+   "line": "His hands land on your hips and turn them, and stay. / search: gym trainer hands on her hips gif",
+   "why": "true at the first and last minute of the trigger window and on a repeat (who_is_where agrees); the description's leggings and sports top are backed by body_workout, the act it rides on (all three equipped)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b5927efcb8ec8179",
+    "text": "2f1ee6bd8b634f12",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "42f61fe25f478963"
+    "all": "2be66fe3ffa5530d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "B10",
@@ -805,27 +808,27 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "B10",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "Freeze -> look3 needs ryan_looked is_true; Freeze -> look2 needs ryan_back_seen is_true + ryan_looked is_false",
-   "why": "exactly one Freeze per state; choices are separate <<if>>s, hidden not greyed (built Canvas_ryan_charger_back_Node_moment); 'this time he doesn't pretend' reads against his pre-yes knocks on every after-yes visit",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest / search: pov staring at clothed teen boobs gif",
+   "why": "true at the first and last minute of the trigger window and on a repeat (who_is_where agrees); 'braless tank top' and 'tshirt' are gone from all three pools; the words ask her clothed, true in any outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "67f0a5f52181a319",
+    "text": "b1f13dd1b747ef93",
     "traits": "74c4f68e6476ecee",
     "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "ce1929afe66eb47f"
+    "all": "120e9ce06ec1019f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
-   "pass": 22
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "B10",
@@ -869,20 +872,20 @@
    "row": "B10",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
-   "why": "\"another envelope\" only behind vance_envelope; \"the same envelope\" only after a no, when he pocketed it",
+   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go. His thumb strokes the inside of your wrist.",
+   "why": "all three versions say the same act the new picture shows (his hand on her wrist); Vance gated present, who_is_where hood_next_door 17-20 and weekend 09-12, matching the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b9664c1c74622be0",
+    "text": "96a72b7ca735e88c",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "2cc8a2700e88a866"
+    "all": "4bd4f7e53fb4ae2c"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 21
+   "pass": 25
   },
   {
    "row": "B10",
@@ -926,20 +929,20 @@
    "row": "B10",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "\"Mr. Vance leans over his porch rail again\"",
-   "why": "Vance by requires_npc; 'again' and 'Mark still hasn't touched it' sit behind vance_asked",
+   "line": "His eyes stay on your legs the whole time you answer. / search: teen legs walking pov gif",
+   "why": "true at the first and last minute of the trigger window and on a repeat (who_is_where agrees); 'short shorts' is gone; legs walking is true in jeans or anything",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a4a4a3a82864b462",
+    "text": "183bd814e57c42f4",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "ccf250e3fa860c49"
+    "all": "66d979cabafb3d01"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 21
+   "pass": 24
   },
   {
    "row": "B10",
@@ -965,111 +968,114 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "true on first, last minute and repeat; repeats return per the OR rests",
+   "why": "true at the first and last minute of the trigger window and on a repeat: the person is placed by the trigger (who_is_where matches), second-showing lines sit behind their seen flags",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "B10",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "He's looking again. You know how this goes.",
-   "why": "six exclusive, exhaustive groups (met_jake x dared/turned); \"again\" and \"You know how this goes\" only after zoe_turned_her; Jake placed by npc_at_location",
+   "line": "His view from the steps of a college quad: a woman of 18 turned round, her ass to the camera, looking back over her shoulder. No man in frame.",
+   "why": "trigger gates Zoe (requires_npc) and Jake present at campus_quad, weekdays 14:00-15:00; who_is_where has Zoe on the quad 14-15 every weekday and Jake 14-16; the picture is a neutral pose, true before either answer and on every return visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38785647e7812e6c",
+    "text": "750c351fa2c4f7cb",
     "traits": "0b1fa80c9d60647d",
-    "facts": "41e92ad76009f2bf",
-    "facts2": "130dd93dfc7a1cca",
-    "all": "7cd6af22ff9096cf"
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "4c9ae46811f56120"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 21
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "true on first, last minute and repeat; repeats return per the OR rests",
+   "why": "true at the first and last minute of the trigger window and on a repeat: the person is placed by the trigger (who_is_where matches), second-showing lines sit behind their seen flags",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "B10",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "\"Boring. There's always another one, and I'll find you for it.\"",
-   "why": "true: the step returns after 3 days",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "true at the first and last minute of the trigger window and on a repeat: the person is placed by the trigger (who_is_where matches), second-showing lines sit behind their seen flags",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B10",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
    "line": "She reads it out loud, all three lines, and hits send without blinking.",
-   "why": "true on its one showing",
+   "why": "true at the first and last minute of the trigger window and on a repeat: the person is placed by the trigger (who_is_where matches), second-showing lines sit behind their seen flags",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B10",
    "screen": "zoe_witness.moment",
    "verdict": "PASS",
-   "line": "Zoe hooks your arm before you've seen her coming / again: \"Another one. Walk with me.\"",
-   "why": "Zoe on campus_quad Mon/Wed/Fri 13-15, Tue/Thu 14-15, matching the trigger; second showing behind zoe_asked",
+   "line": "Zoe hooks your arm before you've seen her coming, phone in her other hand",
+   "why": "true at the first and last minute of the trigger window and on a repeat: the person is placed by the trigger (who_is_where matches), second-showing lines sit behind their seen flags",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f651eb67e838de7f",
-    "facts": "55b08b7a92e09b4a",
-    "facts2": "1d19261cdc6cf85d",
-    "all": "a2080fb3cbcaac95"
+    "traits": "6b1e34b018661933",
+    "facts": "35975d04a19e5423",
+    "facts2": "b5a53b3c1eb70464",
+    "all": "3c2f4ab0169d3722"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B11",
@@ -1119,7 +1125,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "1e252efd0904a971",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1193,7 +1199,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "fd109745c67b71d7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1298,7 +1304,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "aaf6518b64dcce55",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1311,7 +1317,7 @@
    "note": false,
    "screen_hash": "2c57e5189298e5d0",
    "row_hash": "4d9f2ebbce9a39cc",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -1673,7 +1679,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "4d1fce1c4523b5d4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2287,7 +2293,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "ced37cb0de6e7202",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2590,7 +2596,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "efcbd1ac6a95e2f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2641,7 +2647,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "0e32092e9fe64f2c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2692,7 +2698,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "cef53154cc971fef",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -2731,20 +2737,20 @@
    "row": "B8",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
-   "why": "no number, and no garment named in prose or picture",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there. / search: pov staring at clothed college girl boobs gif",
+   "why": "no number disagrees with the card or PLAN; 'cleavage' is gone; the words ask her clothed, true in any outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "B8",
@@ -2807,20 +2813,20 @@
    "row": "B8",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
-   "why": "the picture's leggings and sports top are guaranteed: body_workout's conditions equip both (7_final_game.toml body_workout trigger), and marco_hips only substitutes inside it",
+   "line": "His hands land on your hips and turn them, and stay. / search: gym trainer hands on her hips gif",
+   "why": "no number disagrees with the card or PLAN; the description's leggings and sports top are backed by body_workout, the act it rides on (all three equipped)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b5927efcb8ec8179",
+    "text": "2f1ee6bd8b634f12",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "42f61fe25f478963"
+    "all": "2be66fe3ffa5530d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "B8",
@@ -3081,27 +3087,27 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "B8",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there.",
-   "why": "no garment named; trigger's 7-day OR on ryan_looked and 3-day OR on ryan_back_seen match P49 and P78 cards",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest / search: pov staring at clothed teen boobs gif",
+   "why": "no number disagrees with the card or PLAN; 'braless tank top' and 'tshirt' are gone from all three pools; the words ask her clothed, true in any outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "67f0a5f52181a319",
+    "text": "b1f13dd1b747ef93",
     "traits": "74c4f68e6476ecee",
     "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "ce1929afe66eb47f"
+    "all": "120e9ce06ec1019f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
-   "pass": 22
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "B8",
@@ -3145,20 +3151,20 @@
    "row": "B8",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
-   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
+   "line": "Close at the bottom of a porch's steps: an older man's hand holding a young woman's wrist (she is 18). Only their hands in frame.",
+   "why": "age agrees; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b9664c1c74622be0",
+    "text": "96a72b7ca735e88c",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "2cc8a2700e88a866"
+    "all": "4bd4f7e53fb4ae2c"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 21
+   "pass": 25
   },
   {
    "row": "B8",
@@ -3202,20 +3208,20 @@
    "row": "B8",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "framed at her legs as his eyes stay on them",
-   "why": "no number; no garment named",
+   "line": "His eyes stay on your legs the whole time you answer. / search: teen legs walking pov gif",
+   "why": "no number disagrees with the card or PLAN; 'short shorts' is gone; legs walking is true in jeans or anything",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a4a4a3a82864b462",
+    "text": "183bd814e57c42f4",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "ccf250e3fa860c49"
+    "all": "66d979cabafb3d01"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 21
+   "pass": 24
   },
   {
    "row": "B8",
@@ -3241,111 +3247,114 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
+   "why": "no number disagrees with the card or PLAN; no garment of hers named or asked for",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "B8",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "He's looking again. You know how this goes.",
-   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
+   "line": "His view from the steps of a college quad: a woman of 18 turned round, her ass to the camera, looking back over her shoulder. No man in frame.",
+   "why": "age 18 agrees; no garment named in prose, description or search words",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38785647e7812e6c",
+    "text": "750c351fa2c4f7cb",
     "traits": "0b1fa80c9d60647d",
-    "facts": "41e92ad76009f2bf",
-    "facts2": "130dd93dfc7a1cca",
-    "all": "7cd6af22ff9096cf"
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "4c9ae46811f56120"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 21
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "no garment of hers named; 7-day and 3-day rests match cards P49 and P78",
+   "why": "no number disagrees with the card or PLAN; no garment of hers named or asked for",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "B8",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "\"Boring. There's always another one, and I'll find you for it.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no number disagrees with the card or PLAN; no garment of hers named or asked for",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B8",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
    "line": "She reads it out loud, all three lines, and hits send without blinking.",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "why": "no number disagrees with the card or PLAN; no garment of hers named or asked for",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B8",
    "screen": "zoe_witness.moment",
    "verdict": "PASS",
-   "line": "Zoe hooks your arm before you've seen her coming / again: \"Another one. Walk with me.\"",
-   "why": "no number or her garment named; chance 0.65 and the 3-day rest match the card and NOTES (2026-11-26)",
+   "line": "Zoe hooks your arm before you've seen her coming, phone in her other hand",
+   "why": "no number disagrees with the card or PLAN; no garment of hers named or asked for",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f651eb67e838de7f",
-    "facts": "55b08b7a92e09b4a",
-    "facts2": "1d19261cdc6cf85d",
-    "all": "a2080fb3cbcaac95"
+    "traits": "6b1e34b018661933",
+    "facts": "35975d04a19e5423",
+    "facts2": "b5a53b3c1eb70464",
+    "all": "3c2f4ab0169d3722"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B9",
@@ -3357,7 +3366,7 @@
    "note": false,
    "screen_hash": "2c57e5189298e5d0",
    "row_hash": "3b1fcdf549bcc558",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3408,7 +3417,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "657248766e62061f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3459,7 +3468,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "541a03815a8d19c4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3523,7 +3532,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "71c57d9a2f8fdca7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3574,7 +3583,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "db808998ed69c649",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3638,7 +3647,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "2afadc6bbe1996bd",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3689,7 +3698,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "48eae9ceae06ae00",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3740,7 +3749,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "65e6616cd17c7eb3",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3791,7 +3800,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "18d85534582def9d",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3842,7 +3851,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "3835fed23cc316c7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -3932,7 +3941,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "fde578d75b0d3620",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4139,7 +4148,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "5b031a6b82899cfd",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4190,7 +4199,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "c26c2fb5c1443dab",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4241,7 +4250,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "9a1ab783f9ab6731",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4292,7 +4301,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "b76a6583ae88c60f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4343,7 +4352,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "59e008f8733a29e2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4394,7 +4403,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "823e315ef0b56f94",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4445,7 +4454,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "8c9dc844365f81a5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4496,7 +4505,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "ef34ee4a51e65d00",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4547,7 +4556,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "4b77685af58632a5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4598,7 +4607,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "34826508394ba8c0",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4649,7 +4658,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "68a94621cd19c13c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4700,7 +4709,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "cf8af3e56f435107",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4751,7 +4760,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "aca442d29c1c8146",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4802,7 +4811,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "ccd7a74d85c7d7fe",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4853,7 +4862,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "f47fc5030774db86",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4904,7 +4913,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "6ac94d11992c72ec",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -4955,7 +4964,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "e4d4d230d2bd3815",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -5006,7 +5015,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "6b5fb464471de4c7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -5057,7 +5066,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "a08ace799dcefe85",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -5329,7 +5338,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "b8cdd5b1ce3f89ea",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -5517,19 +5526,19 @@
    "screen": "hale_called_in.moment",
    "verdict": "FAIL",
    "line": "\"Young lady. In here a minute.\" / \"Front row, next class. I like to see who's listening.\"",
-   "why": "note row: still two spoken lines on a repeatable; the picture added changes nothing",
+   "why": "note row: still two spoken lines on a repeatable; only the search words changed",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C151",
@@ -5782,7 +5791,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "d5758757a709b1af",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6271,7 +6280,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "47b9477e3ec8a790",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6554,7 +6563,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "20748838895e4545",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -6934,7 +6943,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "0c03931191c53a34",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7234,38 +7243,38 @@
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
    "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
-   "why": "she arrives at his office door; the look and the call-in fit her just walking in",
+   "why": "fits what she is doing when it fires: an arrival line on arrival; only search words changed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C2196",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
-   "why": "rides on the workout as a substitution, mid-set, in the act's clothes",
+   "line": "His hands land on your hips and turn them, and stay.",
+   "why": "fits what she is doing when it fires: an arrival line on arrival, or riding on Work out as a substitution, mid-set, in the act's clothes; only search words changed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b5927efcb8ec8179",
+    "text": "2f1ee6bd8b634f12",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "42f61fe25f478963"
+    "all": "2be66fe3ffa5530d"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C2196",
@@ -7290,77 +7299,96 @@
    "row": "C2196",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late.",
-   "why": "fires in her room at night; a knock needs no act of hers",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest",
+   "why": "fits what she is doing when it fires: an arrival line on arrival; only search words changed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "67f0a5f52181a319",
+    "text": "b1f13dd1b747ef93",
     "traits": "74c4f68e6476ecee",
     "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "ce1929afe66eb47f"
+    "all": "120e9ce06ec1019f"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
-   "pass": 22
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "C2196",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
-   "why": "she has just walked up from the street (entry_only_from); he is at his steps",
+   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go. His thumb strokes the inside of your wrist.",
+   "why": "fires on arrival from hood_street; he's waiting at his steps, she has just walked up",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b9664c1c74622be0",
+    "text": "96a72b7ca735e88c",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "2cc8a2700e88a866"
+    "all": "4bd4f7e53fb4ae2c"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 21
+   "pass": 25
   },
   {
    "row": "C2196",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "\"as you come up the path\"",
-   "why": "entry_only_from hood_street: arrival words for an arrival",
+   "line": "His eyes stay on your legs the whole time you answer.",
+   "why": "fits what she is doing when it fires: an arrival line on arrival; only search words changed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a4a4a3a82864b462",
+    "text": "183bd814e57c42f4",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "ccf250e3fa860c49"
+    "all": "66d979cabafb3d01"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 21
+   "pass": 24
   },
   {
    "row": "C2196",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "He's looking again. You know how this goes.",
-   "why": "walking the quad; Zoe falls into step",
+   "line": "Zoe falls into step beside you and nods at the steps",
+   "why": "an arrival line on arrival at the quad; nothing needs her mid-act",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38785647e7812e6c",
+    "text": "750c351fa2c4f7cb",
     "traits": "0b1fa80c9d60647d",
-    "facts": "41e92ad76009f2bf",
-    "facts2": "130dd93dfc7a1cca",
-    "all": "7cd6af22ff9096cf"
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "4c9ae46811f56120"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 26
+  },
+  {
+   "row": "C2196",
+   "screen": "zoe_witness.moment",
+   "verdict": "PASS",
+   "line": "Zoe hooks your arm before you've seen her coming, phone in her other hand",
+   "why": "fits what she is doing when it fires: an arrival line on arrival, or riding on its act",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f651eb67e838de7f",
+    "traits": "6b1e34b018661933",
+    "facts": "35975d04a19e5423",
+    "facts2": "b5a53b3c1eb70464",
+    "all": "3c2f4ab0169d3722"
    },
    "row_hash": "a8ae0700d13a7f9b",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C2197",
@@ -7391,7 +7419,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "cafbb0a598dbfa97",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7505,7 +7533,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "73dfe095a72154a3",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7626,7 +7654,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "7fddf5e17dbdaaf9",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7658,7 +7686,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "6e90fed7eae62131",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7690,7 +7718,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "365a29fd77f6b765",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -7754,8 +7782,85 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: ryan_charger ... nadia_tip",
+   "why": "P49 builds no place picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cea4485b4975c17d",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "'pov staring at clothed teen boobs gif' / 'man holding woman hand close up gif'",
+   "why": "every line on P49's eight spots is 7 words or fewer, tags, gif on each; no digit, 'woman of', 'his view' or 'seen from', 'no ___' or name; 'pov' and 'close up' read as the filed tags, not caption directions",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cea4485b4975c17d",
+   "row_hash": "4247ea8697822bed",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "gym trainer hands on her hips gif / teen answering bedroom door night gif",
+   "why": "the other six spots ask one subject (or hands on her, the act itself) in a common act or pose, and name no garment her clothes don't back",
+   "cause": null,
+   "note": false,
+   "screen_hash": "cea4485b4975c17d",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2209",
+   "screen": "vance_envelope.moment",
+   "verdict": "PASS",
+   "line": "Close at the bottom of a porch's steps: an older man's hand holding a young woman's wrist (she is 18). Only their hands in frame.",
+   "why": "the envelope and the stroking choreography are gone: a hand holding a wrist, close up, is a filed picture, and the touch is the act, so two people's hands are allowed; no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "96a72b7ca735e88c",
+    "traits": "40c19ab6c95d7a0e",
+    "facts": "2a2b552e1074f620",
+    "facts2": "f8e83b3951428fe1",
+    "all": "4bd4f7e53fb4ae2c"
+   },
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": true,
+   "pass": 25
+  },
+  {
+   "row": "C2209",
+   "screen": "zoe_give_him.moment",
+   "verdict": "PASS",
+   "line": "His view from the steps of a college quad: a woman of 18 turning round to show her ass to the camera, laughing. No man in frame.",
+   "why": "one subject doing a common, tagged act (showing her ass); description and search now ask the same picture; no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "f94e38e22bbb9044",
+    "traits": "0b1fa80c9d60647d",
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "c3e958846459667e"
+   },
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": true,
+   "pass": 25
   },
   {
    "row": "C286",
@@ -8152,7 +8257,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "7e128897077ecee6",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -8514,7 +8619,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "59b8d8d24f0c7c38",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -8817,7 +8922,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "5f664198d19facd8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -9179,7 +9284,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "b01ad555668aba2d",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -9392,7 +9497,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "50dbf74577a813c7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -9418,20 +9523,20 @@
    "row": "C460",
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
-   "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
-   "why": "every claim checks against the trigger, the sheet and the card; the new picture says only what the screen says",
+   "line": "He's got a class list in front of him. His eyes go to your chest and stay there. / search: pov staring at clothed college girl boobs gif",
+   "why": "every claim true on every playthrough that reaches the screen; 'cleavage' is gone; the words ask her clothed, true in any outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C460",
@@ -9494,20 +9599,20 @@
    "row": "C460",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
-   "why": "every claim checks against the trigger, the sheet and the card; the new picture says only what the screen says",
+   "line": "His hands land on your hips and turn them, and stay. / search: gym trainer hands on her hips gif",
+   "why": "every claim true on every playthrough that reaches the screen; the description's leggings and sports top are backed by body_workout, the act it rides on (all three equipped)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b5927efcb8ec8179",
+    "text": "2f1ee6bd8b634f12",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "42f61fe25f478963"
+    "all": "2be66fe3ffa5530d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C460",
@@ -9768,27 +9873,27 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "C460",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "Freeze -> look3 needs ryan_looked is_true; Freeze -> look2 needs ryan_back_seen is_true + ryan_looked is_false",
-   "why": "one Freeze per state, each to the screen whose words fit that knock; text of the three groups unchanged and still exclusive",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest / search: pov staring at clothed teen boobs gif",
+   "why": "every claim true on every playthrough that reaches the screen; 'braless tank top' and 'tshirt' are gone from all three pools; the words ask her clothed, true in any outfit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "67f0a5f52181a319",
+    "text": "b1f13dd1b747ef93",
     "traits": "74c4f68e6476ecee",
     "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "ce1929afe66eb47f"
+    "all": "120e9ce06ec1019f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
-   "pass": 22
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "C460",
@@ -9832,20 +9937,20 @@
    "row": "C460",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
-   "why": "every claim true on every reachable visit, including the 7-day repeat",
+   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go. His thumb strokes the inside of your wrist.",
+   "why": "true on every playthrough that reaches it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b9664c1c74622be0",
+    "text": "96a72b7ca735e88c",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "2cc8a2700e88a866"
+    "all": "4bd4f7e53fb4ae2c"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 21
+   "pass": 25
   },
   {
    "row": "C460",
@@ -9889,20 +9994,20 @@
    "row": "C460",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "\"His eyes stay on your legs the whole time you answer.\" <<look/vance_gutter_t3>>",
-   "why": "the picture of her legs walking up the path is what he sees on every visit",
+   "line": "His eyes stay on your legs the whole time you answer. / search: teen legs walking pov gif",
+   "why": "every claim true on every playthrough that reaches the screen; 'short shorts' is gone; legs walking is true in jeans or anything",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a4a4a3a82864b462",
+    "text": "183bd814e57c42f4",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "ccf250e3fa860c49"
+    "all": "66d979cabafb3d01"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 21
+   "pass": 24
   },
   {
    "row": "C460",
@@ -9928,111 +10033,114 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "every claim true on every reachable visit, including the 7-day repeat",
+   "why": "every claim true on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C460",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "He's looking again. You know how this goes.",
-   "why": "every claim true on every reachable visit, including the 7-day repeat",
+   "line": "His view from the steps of a college quad: a woman of 18 turned round, her ass to the camera, looking back over her shoulder. No man in frame.",
+   "why": "the description no longer has her turning herself or laughing; 'turned round, looking back over her shoulder' follows 'She takes you by the hips and turns you' and holds on both 'Laugh it off' and 'Zoe, stop.'",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38785647e7812e6c",
+    "text": "750c351fa2c4f7cb",
     "traits": "0b1fa80c9d60647d",
-    "facts": "41e92ad76009f2bf",
-    "facts2": "130dd93dfc7a1cca",
-    "all": "7cd6af22ff9096cf"
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "4c9ae46811f56120"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 21
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "every claim true on every reachable visit, including the 7-day repeat",
+   "why": "every claim true on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C460",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "\"Boring. There's always another one, and I'll find you for it.\"",
-   "why": "true: the step returns after 3 days",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "every claim true on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C460",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
    "line": "She reads it out loud, all three lines, and hits send without blinking.",
-   "why": "true on its one showing",
+   "why": "every claim true on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C460",
    "screen": "zoe_witness.moment",
    "verdict": "PASS",
-   "line": "Zoe hooks your arm before you've seen her coming / again: \"Another one. Walk with me.\"",
-   "why": "Zoe on campus_quad Mon/Wed/Fri 13-15, Tue/Thu 14-15, matching the trigger; second showing behind zoe_asked",
+   "line": "Zoe hooks your arm before you've seen her coming, phone in her other hand",
+   "why": "every claim true on every playthrough that reaches the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f651eb67e838de7f",
-    "facts": "55b08b7a92e09b4a",
-    "facts2": "1d19261cdc6cf85d",
-    "all": "a2080fb3cbcaac95"
+    "traits": "6b1e34b018661933",
+    "facts": "35975d04a19e5423",
+    "facts2": "b5a53b3c1eb70464",
+    "all": "3c2f4ab0169d3722"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C461",
@@ -10071,19 +10179,19 @@
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
    "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
-   "why": "texture and dialogue fit the cast entries",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C461",
@@ -10146,20 +10254,20 @@
    "row": "C461",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
-   "why": "texture and dialogue fit the cast entries",
+   "line": "His hands land on your hips and turn them, and stay.",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b5927efcb8ec8179",
+    "text": "2f1ee6bd8b634f12",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "42f61fe25f478963"
+    "all": "2be66fe3ffa5530d"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "C461",
@@ -10420,27 +10528,27 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "C461",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "Hey. Couldn't sleep. Again. You don't mind me looking, do you?",
-   "why": "fits his cast entry after her yes",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "67f0a5f52181a319",
+    "text": "b1f13dd1b747ef93",
     "traits": "74c4f68e6476ecee",
     "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "ce1929afe66eb47f"
+    "all": "120e9ce06ec1019f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
-   "pass": 22
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "C461",
@@ -10484,20 +10592,20 @@
    "row": "C461",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
-   "why": "texture and lines fit the cast entries",
+   "line": "Short again. Give this to Mark.",
+   "why": "texture and dialogue that fit Vance's entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b9664c1c74622be0",
+    "text": "96a72b7ca735e88c",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "2cc8a2700e88a866"
+    "all": "4bd4f7e53fb4ae2c"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 21
+   "pass": 25
   },
   {
    "row": "C461",
@@ -10541,20 +10649,20 @@
    "row": "C461",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "\"The gutter, little lady.\"",
-   "why": "fits Vance's cast entry and term of address",
+   "line": "His eyes stay on your legs the whole time you answer.",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a4a4a3a82864b462",
+    "text": "183bd814e57c42f4",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "ccf250e3fa860c49"
+    "all": "66d979cabafb3d01"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 21
+   "pass": 24
   },
   {
    "row": "C461",
@@ -10580,111 +10688,114 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "texture and lines fit the cast entries",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C461",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "He's looking again. You know how this goes.",
-   "why": "texture and lines fit the cast entries",
+   "line": "Hold still. Let him see.",
+   "why": "Zoe's line fits her plan entry; texture can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38785647e7812e6c",
+    "text": "750c351fa2c4f7cb",
     "traits": "0b1fa80c9d60647d",
-    "facts": "41e92ad76009f2bf",
-    "facts2": "130dd93dfc7a1cca",
-    "all": "7cd6af22ff9096cf"
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "4c9ae46811f56120"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 21
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "texture and lines fit the cast entries",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C461",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "\"Boring. There's always another one, and I'll find you for it.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C461",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
    "line": "She reads it out loud, all three lines, and hits send without blinking.",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C461",
    "screen": "zoe_witness.moment",
    "verdict": "PASS",
-   "line": "Zoe hooks your arm before you've seen her coming / again: \"Another one. Walk with me.\"",
-   "why": "texture that cannot clash, and dialogue that fits each person's plan entry",
+   "line": "Zoe hooks your arm before you've seen her coming, phone in her other hand",
+   "why": "texture that can't clash and dialogue that fits the cast entry",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f651eb67e838de7f",
-    "facts": "55b08b7a92e09b4a",
-    "facts2": "1d19261cdc6cf85d",
-    "all": "a2080fb3cbcaac95"
+    "traits": "6b1e34b018661933",
+    "facts": "35975d04a19e5423",
+    "facts2": "b5a53b3c1eb70464",
+    "all": "3c2f4ab0169d3722"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C519",
@@ -10734,7 +10845,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "e78502f7aa28746d",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10798,7 +10909,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "370371a278b9f182",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10849,7 +10960,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "e5f7e6cf2d01613d",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10926,7 +11037,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "76250e48ada2b843",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -10977,7 +11088,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "dc9a1fd9dbf3fb87",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11028,7 +11139,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "8e507f7b235acc25",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11079,7 +11190,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "5a85503d3ef5a0fb",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11130,7 +11241,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "146e6806c6c566e3",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11207,7 +11318,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "f5e1d79f3251dbab",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11284,7 +11395,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "e158aaf055cb61d6",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11335,7 +11446,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "40e85f1ae92f1e71",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11386,7 +11497,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "f6b6f78a8f2e5ed7",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11437,7 +11548,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "ff9aa31c11e5d50f",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11488,7 +11599,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "563e3d25c3219dd0",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11539,7 +11650,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "599aac6293908bc4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11590,7 +11701,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "4141d9e5e24362c3",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11641,7 +11752,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "b56360a1040688cf",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11718,7 +11829,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "bad76e5963432385",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11769,7 +11880,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "34139e6a6914e171",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11820,7 +11931,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "5358489178bff0a4",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -11910,8 +12021,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "the label is \"Done\": no clock time, no duration; spend equals the exit's 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "the label is \"Done\": no clock time, no duration; spend equals the exit's 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "the label is \"Done\": no clock time, no duration; spend equals the exit's 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C889",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "the label is \"Done\": no clock time, no duration; spend equals the exit's 5 minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C892",
@@ -11961,8 +12148,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "the hours sit on the trigger, not in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "the hours sit on the trigger, not in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "the hours sit on the trigger, not in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C892",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "the hours sit on the trigger, not in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C897",
@@ -12012,8 +12275,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_give_him.let",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on these screens",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_give_him.stop",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on these screens",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_witness.busy",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on these screens",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C897",
+   "screen": "zoe_witness.go",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel on these screens",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C900",
@@ -12063,8 +12402,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C900",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C902",
@@ -12114,8 +12529,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "read at 14:59 + 5 minutes: nothing on the screen goes false when the person's row ends",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "read at 14:59 + 5 minutes: nothing on the screen goes false when the person's row ends",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "read at 14:59 + 5 minutes: nothing on the screen goes false when the person's row ends",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C902",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "read at 14:59 + 5 minutes: nothing on the screen goes false when the person's row ends",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C903",
@@ -12165,8 +12656,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C903",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C906",
@@ -12216,8 +12783,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "no \"till\" on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no \"till\" on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no \"till\" on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C906",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "no \"till\" on any label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C910",
@@ -12267,8 +12910,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "\"Done\" names no time, energy or money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "\"Done\" names no time, energy or money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "\"Done\" names no time, energy or money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C910",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "\"Done\" names no time, energy or money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C913",
@@ -12318,8 +13037,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_give_him.let",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_give_him.stop",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_witness.busy",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C913",
+   "screen": "zoe_witness.go",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row with hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C914",
@@ -12369,8 +13164,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_give_him.let",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_give_him.stop",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_witness.busy",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C914",
+   "screen": "zoe_witness.go",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "an event, not a row",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C916",
@@ -12420,8 +13291,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "an event that happens to her, hidden when shut (random trigger)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "an event that happens to her, hidden when shut (random trigger)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "an event that happens to her, hidden when shut (random trigger)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C916",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "an event that happens to her, hidden when shut (random trigger)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C920",
@@ -12471,8 +13418,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "no hop cost; the 5 minutes are the scene's own spend, back to the same place",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no hop cost; the 5 minutes are the scene's own spend, back to the same place",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no hop cost; the 5 minutes are the scene's own spend, back to the same place",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C920",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "no hop cost; the 5 minutes are the scene's own spend, back to the same place",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C924",
@@ -12522,8 +13545,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_give_him.let",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_give_him.stop",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_witness.busy",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C924",
+   "screen": "zoe_witness.go",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no travel",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C926",
@@ -12573,8 +13672,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "the clock moves by minutes only (time_progression_minutes 5)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "the clock moves by minutes only (time_progression_minutes 5)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "the clock moves by minutes only (time_progression_minutes 5)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C926",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "the clock moves by minutes only (time_progression_minutes 5)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C927",
@@ -12868,7 +14043,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -12971,74 +14146,76 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "exits cost 5 minutes; in-canvas choices at 0",
+   "why": "every exit carries its own time (5); first-screen choices an explicit 0",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C927",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "exits cost 5 minutes; in-canvas choices at 0",
+   "why": "every exit carries its own time (5); first-screen choices an explicit 0",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C927",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "every exit carries its own time (5); first-screen choices an explicit 0",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C927",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 5",
-   "why": "every exit carries its own time; first-screen choices are an explicit 0 (v2.py:17877), answer exits 5",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "every exit carries its own time (5); first-screen choices an explicit 0",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C928",
@@ -13088,8 +14265,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "no clock printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no clock printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no clock printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C928",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "no clock printed in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C929",
@@ -13139,8 +14392,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_give_him.let",
+   "verdict": "PASS",
+   "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_give_him.stop",
+   "verdict": "PASS",
+   "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_witness.busy",
+   "verdict": "PASS",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C929",
+   "screen": "zoe_witness.go",
+   "verdict": "PASS",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C930",
@@ -13190,8 +14519,84 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_give_him.let",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "8b9959afe1af0603",
+    "traits": "6b1e34b018661933",
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_give_him.stop",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "e14ec4e6e5f44ee7",
+    "traits": "6b1e34b018661933",
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_witness.busy",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "dfdd838040d7b106",
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C930",
+   "screen": "zoe_witness.go",
+   "verdict": "N/A",
+   "line": "\u2014",
+   "why": "no windowed work",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a381f4b3c986bc40",
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 23
   },
   {
    "row": "C931",
@@ -13485,7 +14890,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -13588,74 +14993,76 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "time_of_day end exclusive inside the person's rows",
+   "why": "time_of_day windows on the trigger, end exclusive, inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C931",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "time_of_day end exclusive inside the person's rows",
+   "why": "time_of_day windows on the trigger, end exclusive, inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "C931",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "time_of_day windows on the trigger, end exclusive, inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C931",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
-   "line": "time_of_day windows on the trigger",
-   "why": "end exclusive (v2.py:4803-4823); 23:00-24:00 reads 1380-1439; no window wraps",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "time_of_day windows on the trigger, end exclusive, inside the person's rows",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C953",
@@ -13705,7 +15112,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "826bf82fe26afd13",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -13758,19 +15165,19 @@
    "screen": "hale_called_in.moment",
    "verdict": "PASS",
    "line": "He's got a class list in front of him. His eyes go to your chest and stay there.",
-   "why": "only the trigger's person (and Jake, by npc_at_location campus_quad) is named; the rest are an unnamed friend or nobody",
+   "why": "only the trigger's person (and Jake, behind npc_at_location) is named present; who_is_where agrees (Ryan home_ryans_room 23-24 on the trigger's weekdays; Hale campus_office_hale Mon/Wed 14-17)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "0c6963f571ba385d",
+    "text": "3e5a652ada8f30aa",
     "traits": "825724317465730d",
     "facts": "6ea67dc58c8d9698",
     "facts2": "ed9eba5ccb976fe4",
-    "all": "a5596f5e12b35e56"
+    "all": "12431a9495237392"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "L106",
@@ -13833,20 +15240,20 @@
    "row": "L106",
    "screen": "marco_hips.moment",
    "verdict": "PASS",
-   "line": "His hands land on your hips and turn them, and stay. [image: in leggings and a sports top]",
-   "why": "only the trigger's person (and Jake, by npc_at_location campus_quad) is named; the rest are an unnamed friend or nobody",
+   "line": "His hands land on your hips and turn them, and stay.",
+   "why": "only the trigger's person (and Jake, behind npc_at_location) is named present; who_is_where agrees (Ryan home_ryans_room 23-24 on the trigger's weekdays; Hale campus_office_hale Mon/Wed 14-17)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b5927efcb8ec8179",
+    "text": "2f1ee6bd8b634f12",
     "traits": "e4365d01d4eb14be",
     "facts": "f9e936b5d2f7fa16",
     "facts2": "e2ce2f969cea33c2",
-    "all": "42f61fe25f478963"
+    "all": "2be66fe3ffa5530d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 20
+   "pass": 24
   },
   {
    "row": "L106",
@@ -14107,27 +15514,27 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
    "row": "L106",
    "screen": "ryan_charger_back.moment",
    "verdict": "PASS",
-   "line": "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there.",
-   "why": "same rows and gate; only the choices changed",
+   "line": "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest",
+   "why": "only the trigger's person (and Jake, behind npc_at_location) is named present; who_is_where agrees (Ryan home_ryans_room 23-24 on the trigger's weekdays; Hale campus_office_hale Mon/Wed 14-17)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "67f0a5f52181a319",
+    "text": "b1f13dd1b747ef93",
     "traits": "74c4f68e6476ecee",
     "facts": "57bb58c5eba91d80",
     "facts2": "63e40120178d9641",
-    "all": "ce1929afe66eb47f"
+    "all": "120e9ce06ec1019f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
-   "pass": 22
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "L106",
@@ -14171,20 +15578,20 @@
    "row": "L106",
    "screen": "vance_envelope.moment",
    "verdict": "PASS",
-   "line": "Vance is at the bottom of his steps with another envelope. ... His thumb strokes the inside of your wrist.",
-   "why": "Vance at hood_next_door 17-20 daily and 09-12 Sat/Sun via requires_npc (v2.py:6072-6084), matching the trigger's two windows",
+   "line": "Vance is at the bottom of his steps with an envelope held out. When you reach for it, he doesn't let go. His thumb strokes the inside of your wrist.",
+   "why": "names only Vance, gated present",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b9664c1c74622be0",
+    "text": "96a72b7ca735e88c",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "2cc8a2700e88a866"
+    "all": "4bd4f7e53fb4ae2c"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 21
+   "pass": 25
   },
   {
    "row": "L106",
@@ -14228,20 +15635,20 @@
    "row": "L106",
    "screen": "vance_gutter.moment",
    "verdict": "PASS",
-   "line": "\"Tell Mark the gutter's hanging off again.\"",
-   "why": "Mark named, not claimed present",
+   "line": "His eyes stay on your legs the whole time you answer.",
+   "why": "only the trigger's person (and Jake, behind npc_at_location) is named present; who_is_where agrees (Ryan home_ryans_room 23-24 on the trigger's weekdays; Hale campus_office_hale Mon/Wed 14-17)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a4a4a3a82864b462",
+    "text": "183bd814e57c42f4",
     "traits": "40c19ab6c95d7a0e",
     "facts": "2a2b552e1074f620",
     "facts2": "f8e83b3951428fe1",
-    "all": "ccf250e3fa860c49"
+    "all": "66d979cabafb3d01"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 21
+   "pass": 24
   },
   {
    "row": "L106",
@@ -14267,111 +15674,114 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "Zoe on campus_quad 14-15 weekdays via requires_npc (read on random, v2.py:6072-6084); Jake 14-16 by npc_at_location",
+   "why": "only the trigger's person (and Jake, by npc_at_location) is named as present; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "L106",
    "screen": "zoe_give_him.moment",
    "verdict": "PASS",
-   "line": "He's looking again. You know how this goes.",
-   "why": "Zoe on campus_quad 14-15 weekdays via requires_npc (read on random, v2.py:6072-6084); Jake 14-16 by npc_at_location",
+   "line": "where Jake is watching you over his friend's shoulder",
+   "why": "Jake gated is_present at campus_quad; his friend is unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "38785647e7812e6c",
+    "text": "750c351fa2c4f7cb",
     "traits": "0b1fa80c9d60647d",
-    "facts": "41e92ad76009f2bf",
-    "facts2": "130dd93dfc7a1cca",
-    "all": "7cd6af22ff9096cf"
+    "facts": "1101580304d83f6d",
+    "facts2": "85df09000504c3f7",
+    "all": "4c9ae46811f56120"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 21
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "Zoe on campus_quad 14-15 weekdays via requires_npc (read on random, v2.py:6072-6084); Jake 14-16 by npc_at_location",
+   "why": "only the trigger's person (and Jake, by npc_at_location) is named as present; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "L106",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "\"Boring. There's always another one, and I'll find you for it.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (true: the step returns after 3 days)",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "only the trigger's person (and Jake, by npc_at_location) is named as present; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "L106",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
    "line": "She reads it out loud, all three lines, and hits send without blinking.",
-   "why": "who_is_where puts the person here at every minute of the trigger (true on its one showing)",
+   "why": "only the trigger's person (and Jake, by npc_at_location) is named as present; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "L106",
    "screen": "zoe_witness.moment",
    "verdict": "PASS",
-   "line": "Zoe hooks your arm before you've seen her coming / again: \"Another one. Walk with me.\"",
-   "why": "who_is_where puts the person here at every minute of the trigger (Zoe on campus_quad Mon/Wed/Fri 13-15, Tue/Thu 14-15, matching the trigger; second showing behind zoe_asked)",
+   "line": "Zoe hooks your arm before you've seen her coming, phone in her other hand",
+   "why": "only the trigger's person (and Jake, by npc_at_location) is named as present; who_is_where agrees",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "f651eb67e838de7f",
-    "facts": "55b08b7a92e09b4a",
-    "facts2": "1d19261cdc6cf85d",
-    "all": "a2080fb3cbcaac95"
+    "traits": "6b1e34b018661933",
+    "facts": "35975d04a19e5423",
+    "facts2": "b5a53b3c1eb70464",
+    "all": "3c2f4ab0169d3722"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "L116",
@@ -14499,7 +15909,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "c12d10588197fbaf",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -14794,7 +16204,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -14897,74 +16307,76 @@
    "screen": "zoe_give_him.let",
    "verdict": "PASS",
    "line": "You laugh, and you don't pull away. Behind you somebody whistles.",
-   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
+   "why": "one canvas, hours in one group condition, not one row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "8b9959afe1af0603",
     "traits": "6b1e34b018661933",
-    "facts": "ca90215ee8b1192a",
-    "facts2": "3d976cb4abe6fb91",
-    "all": "e618fd7399931ba1"
+    "facts": "6440aaff1bac7a45",
+    "facts2": "5c770eeea21183fd",
+    "all": "73a7dbd747829962"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "L167",
    "screen": "zoe_give_him.stop",
    "verdict": "PASS",
    "line": "Fine. Prude. He'd have loved it. You'd have loved it.",
-   "why": "one row per scene; Vance's weekend hours are a group condition, not a second row",
+   "why": "one canvas, hours in one group condition, not one row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "e14ec4e6e5f44ee7",
     "traits": "6b1e34b018661933",
-    "facts": "4dfba33715001ede",
-    "facts2": "317aff3f6de89433",
-    "all": "46aedc9ee817a56c"
+    "facts": "c0cbdefb6ce25ad0",
+    "facts2": "72a8cec48fa40a39",
+    "all": "e6891d64277efe2b"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 21
+   "pass": 23
   },
   {
    "row": "L167",
    "screen": "zoe_witness.busy",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "Boring. There's always another one, and I'll find you for it.",
+   "why": "one canvas, hours in one group condition, not one row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "dfdd838040d7b106",
-    "facts": "9cc108de644f960a",
-    "facts2": "d94ef8bcaf458ae9",
-    "all": "bb73969dcb04466d"
+    "traits": "6b1e34b018661933",
+    "facts": "a8d5b4234faab96b",
+    "facts2": "aa3bfda830d6b33a",
+    "all": "6ead1a24f6b7b626"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "L167",
    "screen": "zoe_witness.go",
    "verdict": "PASS",
-   "line": "trigger condition: one OR group of weekday x time_of_day",
-   "why": "different hours on different days are one canvas with a group, not one per day kind",
+   "line": "She reads it out loud, all three lines, and hits send without blinking.",
+   "why": "one canvas, hours in one group condition, not one row per day kind",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "a381f4b3c986bc40",
-    "facts": "5bc014717ddb04d9",
-    "facts2": "2f64407ac0a709fe",
-    "all": "dbfc3b56a1c7e201"
+    "traits": "6b1e34b018661933",
+    "facts": "3db82c97b335cd5c",
+    "facts2": "f68acba7d879bc65",
+    "all": "33785c15c10c9f27"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "L170",
@@ -15014,7 +16426,7 @@
     "all": "f2d94c76349cc49b"
    },
    "row_hash": "c3599cd09637a240",
-   "carried": false,
+   "carried": true,
    "pass": 22
   },
   {
@@ -15136,8 +16548,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 110,
- "answered": 110,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

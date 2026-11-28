@@ -1,6 +1,6 @@
 {
  "piece": "P15",
- "pass": 22,
+ "pass": 23,
  "screens": {
   "psych_first.seat": {
    "text": "27a88e4f60f1efff",
@@ -10,11 +10,11 @@
    "all": "6269ae07af232e9a"
   },
   "psych_first.lecture": {
-   "text": "a64e3086993e7aac",
+   "text": "b419961a4456bacc",
    "traits": "838782b7308b47e0",
    "facts": "7d245779a427421e",
    "facts2": "ec08c20306b7a51e",
-   "all": "ca28668471962e90"
+   "all": "051d5b9892b0e566"
   },
   "stats_first.class": {
    "text": "e266def6233d6a3d",
@@ -30,7 +30,7 @@
    "facts2": "ca6730df4b95ef43",
    "all": "078715a819e95838"
   },
-  "*": "031dcb9d72b879f3"
+  "*": "378e8a8df226d286"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -112,6 +112,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -189,20 +192,20 @@
    "row": "B10",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
+   "line": "A man in his late thirties is already at the lectern, no notes, his coffee beside him.",
+   "why": "first and last minute and a second visit: one-time, Hale and Nadia npc_at_location on the trigger, Mon/Wed 09:00-09:29 inside Hale's 09-11 hall row; Nadia's variant lines sit behind their flags; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "B10",
@@ -422,20 +425,20 @@
    "row": "B8",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "'late thirties' agrees with Hale, 39; legs and thighs named, no garment",
+   "line": "male professor at lectern lecture hall coffee",
+   "why": "legs and thighs named, no garment; the search words name only his lectern and coffee; late thirties agrees with 39",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "B8",
@@ -1408,8 +1411,47 @@
    "note": false,
    "screen_hash": "031dcb9d72b879f3",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "378e8a8df226d286",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 23
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "male professor at lectern lecture hall coffee",
+   "why": "7 words each, role word in place of the age; the old 'at the camera' is out",
+   "cause": null,
+   "note": false,
+   "screen_hash": "378e8a8df226d286",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 23
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "male professor at lectern lecture hall coffee",
+   "why": "one subject at a lectern, a common photo; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "378e8a8df226d286",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C286",
@@ -1730,20 +1772,20 @@
    "row": "C460",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Every claim true on every reachable visit: Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
+   "line": "A man in his late thirties is already at the lectern, no notes, his coffee beside him.",
+   "why": "every claim true on every playthrough that reaches it: one-time, Hale and Nadia npc_at_location on the trigger, Mon/Wed 09:00-09:29 inside Hale's 09-11 hall row; Nadia's variant lines sit behind their flags; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C460",
@@ -1818,20 +1860,20 @@
    "row": "C461",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
+   "line": "A man in his late thirties is already at the lectern, no notes, his coffee beside him.",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C461",
@@ -3052,20 +3094,20 @@
    "row": "C927",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "Done",
-   "why": "The exit states its own minutes (120, or 60 for study); no 3-minute default",
+   "line": "Done / Leave",
+   "why": "every exit states its own minutes; no 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C927",
@@ -3243,20 +3285,20 @@
    "row": "C931",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "time_of_day is end exclusive (last start 09:29 or 11:29), inside the teacher's row",
+   "line": "time_of_day window",
+   "why": "the trigger or button window is end exclusive and sits inside the person's row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C931",
@@ -3366,20 +3408,20 @@
    "row": "L106",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "Hale and Nadia are both trigger npc_at_location items (hall Mon/Wed 09-11), start 09:00-09:29; Brooke is in the 'half full' hall unnamed; no office is named",
+   "line": "A man in his late thirties is already at the lectern, no notes, his coffee beside him.",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Hale and Nadia npc_at_location on the trigger, Mon/Wed 09:00-09:29 inside Hale's 09-11 hall row; Nadia's variant lines sit behind their flags",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "L106",
@@ -3526,20 +3568,20 @@
    "row": "L167",
    "screen": "psych_first.lecture",
    "verdict": "PASS",
-   "line": "A man in his late thirties is already at the lectern ... At the end, the girl catches you on the way out.",
-   "why": "One one-time trigger covers both days with the same hours",
+   "line": "time_of_day window",
+   "why": "one row or button per activity, the same hours on each day it shows; no per-day-kind duplicates",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "a64e3086993e7aac",
+    "text": "b419961a4456bacc",
     "traits": "838782b7308b47e0",
     "facts": "7d245779a427421e",
     "facts2": "ec08c20306b7a51e",
-    "all": "ca28668471962e90"
+    "all": "051d5b9892b0e566"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 10
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "L167",
@@ -3620,8 +3662,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 11,
+ "answered": 11,
  "pass_items": [],
  "unowed": []
 }

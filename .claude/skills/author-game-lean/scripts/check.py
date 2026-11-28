@@ -453,8 +453,68 @@ def _text(blocks):
     return " ".join(out)
 
 
+# C2208: search words are the tags a picture is filed under. A caption sentence ("woman of 18 brushing her teeth at a
+# small bathroom sink") is how only stock sites caption, so Google sends it there. first_term_lean's find-media-v3 run
+# (2026-11-28): 74 slots searched the TOML's sentences as written; 49% of scene results and 82% of tier-0 results were
+# Getty, Dreamstime, iStock, Alamy and Shutterstock. Google can't search for an absence, so "no phone" adds "phone".
+SEARCH_WORDS_MAX = 8
+SEARCH_BAD = (
+    (re.compile(r"\d"), "an age or a number (the description carries her age, C1278)"),
+    (re.compile(r"\b(?:woman|man|girl|guy) of\b", re.I), "\"woman of\" / \"man of\" (a caption, not a tag)"),
+    (re.compile(r"\b(?:seen from|view from|her view|his view|from behind (?:a|the|his|her)|looking at the camera|"
+                r"at the camera|out of frame|in frame|close up on)\b", re.I),
+     "a camera direction (the description carries the view, C1281)"),
+    (re.compile(r"\b(?:no|not|without|never|nobody)\b", re.I), "a \"no ___\" (Google adds the word, it can't leave it out)"),
+)
+# C2207: a place's picture is the place. A person word in its search sends it to stock models (first_term_lean:
+# 26 place shelves, 65% stock; LO, typed in main-lean 2026-11-28: "locations should be location photo not person").
+PLACE_PERSON = re.compile(r"\b(?:woman|women|man|men|girl|girls|guy|guys|boy|teen|teenager|she|her|he|him|person|"
+                          r"people|lady|couple)\b", re.I)
+
+
+def _media_props(blocks):
+    for b in blocks or []:
+        if not isinstance(b, dict):
+            continue
+        if b.get("type") in ("image", "video") and isinstance(b.get("props"), dict):
+            yield b["props"]
+        yield from _media_props(b.get("blocks"))
+
+
+def search_word_problems(game):
+    """C2207 and C2208, read from the build: every spot's and every place picture's search words."""
+    rows = []
+
+    def judge(where, q, place):
+        words = q.split()
+        if len(words) > SEARCH_WORDS_MAX:
+            rows.append(f"{where}: search words \"{q}\" are {len(words)} words, a caption; write {SEARCH_WORDS_MAX} or fewer "
+                        f"tags (craft/media.md rule 7, C2208)")
+        for rx, why in SEARCH_BAD:
+            if rx.search(q):
+                rows.append(f"{where}: search words \"{q}\" carry {why} (craft/media.md rule 7, C2208)")
+        if place and PLACE_PERSON.search(q):
+            rows.append(f"{where}: a place's search words \"{q}\" name a person; a place picture is the place, nobody in "
+                        f"it (craft/media.md rule 2, C2207)")
+
+    for loc in game.get("locations") or []:
+        if isinstance(loc, dict):
+            for q in loc.get("image_search_queries") or []:
+                judge(f"place `{loc.get('id')}`", str(q), True)
+    for c in game.get("canvases") or []:
+        if not isinstance(c, dict):
+            continue
+        for n in c.get("nodes") or []:
+            for props in _media_props((n or {}).get("blocks")):
+                where = f"`{c.get('id')}.{(n or {}).get('id')}` ({props.get('pool_dir') or props.get('file') or 'a spot'})"
+                for q in props.get("search_queries") or []:
+                    judge(where, str(q), False)
+    return rows
+
+
 def check_media(game_dir, game):
-    """C2204: a scene a card's Does: marks `something sexual shows` has a picture or clip spot somewhere in it (at
+    """C2207 and C2208: every search word reads as tags, and a place's names no person (search_word_problems).
+    C2204: a scene a card's Does: marks `something sexual shows` has a picture or clip spot somewhere in it (at
     its payoff, craft/media.md rule 1), unless the card writes `No spot: <canvas> — <why>`. Read from the build, so a
     spot the card claims but the TOML lacks is still red. first_term_lean, 2026-11-27: 19 sexual scenes had none,
     each card citing C1265 for a look, a door, or nothing (LO: "the group 2, gifs", "go ahead")."""
@@ -482,6 +542,7 @@ def check_media(game_dir, game):
             if not any(_has_media(n.get("blocks")) for n in c.get("nodes") or []):
                 red.append(f"{path.stem}: `{cid}` shows something sexual and has no picture or clip spot; add one at "
                            f"its payoff (craft/media.md rule 8, C2204), or write `No spot: {cid} — <why>` on the card")
+    red += search_word_problems(game)
     return (RED, red) if red else (GREEN, [])
 
 

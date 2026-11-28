@@ -1,13 +1,13 @@
 {
  "piece": "P38",
- "pass": 22,
+ "pass": 26,
  "screens": {
   "walk_parents.moment": {
-   "text": "7f828ca106b8bccf",
+   "text": "515387d52ae11563",
    "traits": "4b9cc244e3119951",
    "facts": "4ae0ea463b0299c5",
    "facts2": "a70226de81ca7f87",
-   "all": "1baa72359f71d3ca"
+   "all": "b36ce4293b330722"
   },
   "walk_parents.watch": {
    "text": "e03514a08a342533",
@@ -24,11 +24,11 @@
    "all": "6be38c302b01af17"
   },
   "walk_ryan_phone.moment": {
-   "text": "bc2dfd613888c1cc",
+   "text": "6b68f421b3a58c46",
    "traits": "74c4f68e6476ecee",
    "facts": "3fcc8bcb262e57a0",
    "facts2": "829298a706f02a41",
-   "all": "c03d982b34509559"
+   "all": "31a32a5756fa8378"
   },
   "walk_ryan_phone.watch": {
    "text": "9c54792da90cec47",
@@ -108,11 +108,11 @@
    "all": "3b6e17b7a3d69879"
   },
   "walk_ryan_shower.moment": {
-   "text": "8c491e1c62636721",
+   "text": "d234de4c46f6436d",
    "traits": "74c4f68e6476ecee",
    "facts": "58b96a0b985de8b8",
    "facts2": "79c2db2883b9c464",
-   "all": "b16f6f6374868814"
+   "all": "895982a1e0d4005d"
   },
   "walk_ryan_shower.cover": {
    "text": "f888399d0a1e24cb",
@@ -128,7 +128,7 @@
    "facts2": "64f3c4db79ffd75c",
    "all": "c065010ed9d5b4d2"
   },
-  "*": "280d5d74f01a6718"
+  "*": "b517cf20062722af"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -216,6 +216,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -455,20 +458,20 @@
    "row": "B10",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
-   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; read on just arriving in the hall: the door gap is what she finds there, nothing assumes she chose to look; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard the headboard taps the wall. Your face burns.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day (their rows); trigger gates both present, Mon-Fri; she has just walked into the hall; true at 23:00 and 00:59 and on a later night; only the image's search words changed",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7f828ca106b8bccf",
+    "text": "515387d52ae11563",
     "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "1baa72359f71d3ca"
+    "all": "b36ce4293b330722"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 8
+   "pass": 23
   },
   {
    "row": "B10",
@@ -569,20 +572,20 @@
    "row": "B10",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
-   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; read on just arriving in the hall: his open door is what she finds, nothing assumes she went to look; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen.",
+   "why": "trigger: weekdays 23:00-01:00 with Ryan is_present in home_ryans_room; who_is_where puts him there 23-24 and 00-01 weekdays (asleep from 01); search words no longer claim a cum shot, so the picture matches the screen on Watch and Back away alike",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bc2dfd613888c1cc",
+    "text": "6b68f421b3a58c46",
     "traits": "74c4f68e6476ecee",
-    "facts": "24c4b946d90ccbb4",
+    "facts": "3fcc8bcb262e57a0",
     "facts2": "829298a706f02a41",
-    "all": "a012f1eb60a521c0"
+    "all": "31a32a5756fa8378"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B10",
@@ -643,19 +646,20 @@
    "row": "B10",
    "screen": "walk_ryan_shower.moment",
    "verdict": "PASS",
-   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
-   "why": "Mon-Fri 07:45-08:30, Ryan back in his room after his 07:25-07:45 shower row; towel and razor are his own business (L97)",
-   "cause": "",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes.",
+   "why": "Mon-Fri 07:45-08:30, Ryan's rows put him in his room from 07:45 after his 07:25-07:45 shower; trigger gates him there; she is in the shower she started, so naked is backed by the act; towel and razor are his texture",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c491e1c62636721",
-    "facts": "3a6c1ddc24ec0f10",
+    "text": "d234de4c46f6436d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "58b96a0b985de8b8",
     "facts2": "79c2db2883b9c464",
-    "all": "32095613619b5457"
+    "all": "895982a1e0d4005d"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B11",
@@ -1142,20 +1146,20 @@
    "row": "B8",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard the headboard taps the wall. Your face burns.",
+   "why": "no number; the only garment named is Laura's nightie, not hers",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7f828ca106b8bccf",
+    "text": "515387d52ae11563",
     "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "1baa72359f71d3ca"
+    "all": "b36ce4293b330722"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 8
+   "pass": 23
   },
   {
    "row": "B8",
@@ -1256,20 +1260,20 @@
    "row": "B8",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
-   "why": "no number disagrees with PLAN (rent Sunday, Friday, number nine); the only garments named are the other people's, not hers",
-   "cause": "",
+   "line": "Seen through a door gap from a dark hall: a man of 22 on a bed in phone light, shorts down, stroking, eyes on his phone.",
+   "why": "Ryan 22 agrees with PLAN 56; 'shorts down' agrees with 'shorts round his thighs'; no garment of hers named",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bc2dfd613888c1cc",
+    "text": "6b68f421b3a58c46",
     "traits": "74c4f68e6476ecee",
-    "facts": "24c4b946d90ccbb4",
+    "facts": "3fcc8bcb262e57a0",
     "facts2": "829298a706f02a41",
-    "all": "a012f1eb60a521c0"
+    "all": "31a32a5756fa8378"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "B8",
@@ -1330,19 +1334,20 @@
    "row": "B8",
    "screen": "walk_ryan_shower.moment",
    "verdict": "PASS",
-   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
-   "why": "no number disagrees with PLAN (rent Sunday, Mark's Friday); the only garments named are theirs (nightie, shorts, towel) or her naked in the shower she started",
-   "cause": "",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes.",
+   "why": "no number; her naked in the shower is backed by the Shower act; the towel is Ryan's",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c491e1c62636721",
-    "facts": "3a6c1ddc24ec0f10",
+    "text": "d234de4c46f6436d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "58b96a0b985de8b8",
     "facts2": "79c2db2883b9c464",
-    "all": "32095613619b5457"
+    "all": "895982a1e0d4005d"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "B9",
@@ -2274,37 +2279,38 @@
    "screen": "walk_parents.moment",
    "verdict": "FAIL",
    "line": "\"Mark. The kids.\" / \"Then be quiet, Laura. Be quiet for me.\"",
-   "why": "note row: two spoken lines on a repeatable (\"Mark. The kids.\" and \"Then be quiet, Laura. Be quiet for me.\"), text unchanged from last pass",
+   "why": "note row: two spoken lines (Laura, then Mark) on a repeatable; C151 asks one; text unchanged, only the image's search words moved",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "7f828ca106b8bccf",
+    "text": "515387d52ae11563",
     "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "1baa72359f71d3ca"
+    "all": "b36ce4293b330722"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 8
+   "pass": 23
   },
   {
    "row": "C151",
    "screen": "walk_ryan_shower.moment",
    "verdict": "FAIL",
    "line": "\"Shit. Sorry. Sorry.\" / \"I'll come back. I'll come back later. Sorry.\"",
-   "why": "note row: two spoken lines from Ryan (\"Shit. Sorry. Sorry.\" and \"I'll come back. I'll come back later. Sorry.\") on a repeatable",
+   "why": "note row: two spoken lines from Ryan on a repeatable; C151 asks one; text unchanged, only the image's search words moved",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "8c491e1c62636721",
-    "facts": "3a6c1ddc24ec0f10",
+    "text": "d234de4c46f6436d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "58b96a0b985de8b8",
     "facts2": "79c2db2883b9c464",
-    "all": "32095613619b5457"
+    "all": "895982a1e0d4005d"
    },
    "row_hash": "d5758757a709b1af",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C164",
@@ -3008,6 +3014,44 @@
    "pass": 10
   },
   {
+   "row": "C2196",
+   "screen": "walk_parents.moment",
+   "verdict": "PASS",
+   "line": "Their door hasn't caught. Through the gap:",
+   "why": "fires on arrival in the hall, and its words need only that she has just walked in; wears 'any', no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "515387d52ae11563",
+    "traits": "4b9cc244e3119951",
+    "facts": "4ae0ea463b0299c5",
+    "facts2": "a70226de81ca7f87",
+    "all": "b36ce4293b330722"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": true,
+   "pass": 23
+  },
+  {
+   "row": "C2196",
+   "screen": "walk_ryan_phone.moment",
+   "verdict": "PASS",
+   "line": "Ryan's door is open a hand's width.",
+   "why": "fires as she passes the hall at night; the words need nothing of her but walking past his door",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6b68f421b3a58c46",
+    "traits": "74c4f68e6476ecee",
+    "facts": "3fcc8bcb262e57a0",
+    "facts2": "829298a706f02a41",
+    "all": "31a32a5756fa8378"
+   },
+   "row_hash": "a8ae0700d13a7f9b",
+   "carried": false,
+   "pass": 26
+  },
+  {
    "row": "C2197",
    "screen": "*",
    "verdict": "PASS",
@@ -3184,8 +3228,47 @@
    "note": false,
    "screen_hash": "280d5d74f01a6718",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3389c53580433fd4",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "hand over her mouth missionary fuck amateur gif",
+   "why": "three spots (parents_door, ryan_phone, ryan_shower), every line 8 words or fewer, act words, gif on the two moving clips; no digit, no camera direction, no name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3389c53580433fd4",
+   "row_hash": "4247ea8697822bed",
+   "carried": true,
+   "pass": 24
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "caught jerking off cum door crack gif",
+   "why": "parents_door is two people where the act is the picture; ryan_phone and ryan_shower are one subject in a common act; no garment of hers named (ryan_shower's 'naked' is backed by the shower itself). Note, not this row: ryan_phone's search words ask for 'cum' while the screen shows him stroking, not coming (C1238 territory, not asked here)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3389c53580433fd4",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": true,
+   "pass": 24
   },
   {
    "row": "C286",
@@ -3745,20 +3828,20 @@
    "row": "C460",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
-   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; read on just arriving in the hall: the door gap is what she finds there, nothing assumes she chose to look; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard the headboard taps the wall. Your face burns.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day (their rows); trigger gates both present, Mon-Fri; she has just walked into the hall; true at 23:00 and 00:59 and on a later night; only the image's search words changed",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7f828ca106b8bccf",
+    "text": "515387d52ae11563",
     "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "1baa72359f71d3ca"
+    "all": "b36ce4293b330722"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 8
+   "pass": 23
   },
   {
    "row": "C460",
@@ -3859,20 +3942,20 @@
    "row": "C460",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
-   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; read on just arriving in the hall: his open door is what she finds, nothing assumes she went to look; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "guy jerking off bed phone voyeur gif",
+   "why": "the last pass's 'cum' is gone; every search line and the description show only stroking, true on every playthrough before Watch or Back away",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bc2dfd613888c1cc",
+    "text": "6b68f421b3a58c46",
     "traits": "74c4f68e6476ecee",
-    "facts": "24c4b946d90ccbb4",
+    "facts": "3fcc8bcb262e57a0",
     "facts2": "829298a706f02a41",
-    "all": "a012f1eb60a521c0"
+    "all": "31a32a5756fa8378"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C460",
@@ -3933,19 +4016,20 @@
    "row": "C460",
    "screen": "walk_ryan_shower.moment",
    "verdict": "PASS",
-   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
-   "why": "Mon-Fri 07:45-08:30, Ryan back in his room after his 07:25-07:45 shower row; towel and razor are his own business (L97)",
-   "cause": "",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes.",
+   "why": "Mon-Fri 07:45-08:30, Ryan's rows put him in his room from 07:45 after his 07:25-07:45 shower; trigger gates him there; she is in the shower she started, so naked is backed by the act; towel and razor are his texture",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c491e1c62636721",
-    "facts": "3a6c1ddc24ec0f10",
+    "text": "d234de4c46f6436d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "58b96a0b985de8b8",
     "facts2": "79c2db2883b9c464",
-    "all": "32095613619b5457"
+    "all": "895982a1e0d4005d"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C461",
@@ -4097,20 +4181,20 @@
    "row": "C461",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard the headboard taps the wall. Your face burns.",
+   "why": "texture and her reaction on her body; Mark's and Laura's lines fit their entries",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7f828ca106b8bccf",
+    "text": "515387d52ae11563",
     "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "1baa72359f71d3ca"
+    "all": "b36ce4293b330722"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 8
+   "pass": 23
   },
   {
    "row": "C461",
@@ -4211,20 +4295,20 @@
    "row": "C461",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
-   "why": "texture and her reaction only; nothing that can clash with rows, clock or flags",
-   "cause": "",
+   "line": "Fuck. Yeah. Like that. Don't stop, don't stop.",
+   "why": "his line fits porn on his phone, nothing about her (NOTES 78)",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bc2dfd613888c1cc",
+    "text": "6b68f421b3a58c46",
     "traits": "74c4f68e6476ecee",
-    "facts": "24c4b946d90ccbb4",
+    "facts": "3fcc8bcb262e57a0",
     "facts2": "829298a706f02a41",
-    "all": "a012f1eb60a521c0"
+    "all": "31a32a5756fa8378"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "C461",
@@ -4285,19 +4369,20 @@
    "row": "C461",
    "screen": "walk_ryan_shower.moment",
    "verdict": "PASS",
-   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
-   "why": "texture, her reaction, and dialogue in each person's manner (Mom 'baby', Mark curt, Ryan joking/swearing)",
-   "cause": "",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes.",
+   "why": "the glass shower is texture no source contradicts (the bathroom: 'One shower', toml:1466); Ryan shy and backing out fits him",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c491e1c62636721",
-    "facts": "3a6c1ddc24ec0f10",
+    "text": "d234de4c46f6436d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "58b96a0b985de8b8",
     "facts2": "79c2db2883b9c464",
-    "all": "32095613619b5457"
+    "all": "895982a1e0d4005d"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "C519",
@@ -5919,20 +6004,20 @@
    "row": "L106",
    "screen": "walk_parents.moment",
    "verdict": "PASS",
-   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard t",
-   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day by their rows; trigger gates npc_at_location on both, Mon-Fri; read on just arriving in the hall: the door gap is what she finds there, nothing assumes she chose to look; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard the headboard taps the wall. Your face burns.",
+   "why": "Laura and Mark 'in bed' at home_master_bedroom 23:00-01:00 every day (their rows); trigger gates both present, Mon-Fri; she has just walked into the hall; true at 23:00 and 00:59 and on a later night; only the image's search words changed",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "7f828ca106b8bccf",
+    "text": "515387d52ae11563",
     "traits": "4b9cc244e3119951",
     "facts": "4ae0ea463b0299c5",
     "facts2": "a70226de81ca7f87",
-    "all": "1baa72359f71d3ca"
+    "all": "b36ce4293b330722"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 8
+   "pass": 23
   },
   {
    "row": "L106",
@@ -6033,20 +6118,20 @@
    "row": "L106",
    "screen": "walk_ryan_phone.moment",
    "verdict": "PASS",
-   "line": "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot. / ",
-   "why": "Ryan 'on his phone' at home_ryans_room weekdays 23:00-01:00 (asleep from 01:00); trigger gates npc_at_location; read on just arriving in the hall: his open door is what she finds, nothing assumes she went to look; true at first and last minute of the window and on a second visit",
-   "cause": "",
+   "line": "Ryan's door is open a hand's width.",
+   "why": "trigger gates Ryan present at home_ryans_room; who_is_where agrees for the whole 23:00-01:00 window",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bc2dfd613888c1cc",
+    "text": "6b68f421b3a58c46",
     "traits": "74c4f68e6476ecee",
-    "facts": "24c4b946d90ccbb4",
+    "facts": "3fcc8bcb262e57a0",
     "facts2": "829298a706f02a41",
-    "all": "a012f1eb60a521c0"
+    "all": "31a32a5756fa8378"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 26
   },
   {
    "row": "L106",
@@ -6107,19 +6192,20 @@
    "row": "L106",
    "screen": "walk_ryan_shower.moment",
    "verdict": "PASS",
-   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes. [image body/ryan_shower_t4, pool 4]",
-   "why": "Mon-Fri 07:45-08:30, Ryan back in his room after his 07:25-07:45 shower row; towel and razor are his own business (L97)",
-   "cause": "",
+   "line": "Then he sees you through the wet glass, all of you, soap running down your tits, and freezes.",
+   "why": "Mon-Fri 07:45-08:30, Ryan's rows put him in his room from 07:45 after his 07:25-07:45 shower; trigger gates him there; she is in the shower she started, so naked is backed by the act; towel and razor are his texture",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "8c491e1c62636721",
-    "facts": "3a6c1ddc24ec0f10",
+    "text": "d234de4c46f6436d",
+    "traits": "74c4f68e6476ecee",
+    "facts": "58b96a0b985de8b8",
     "facts2": "79c2db2883b9c464",
-    "all": "32095613619b5457"
+    "all": "895982a1e0d4005d"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 23
   },
   {
    "row": "L119",
@@ -6567,8 +6653,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

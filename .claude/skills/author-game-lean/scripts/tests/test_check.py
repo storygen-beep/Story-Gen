@@ -374,3 +374,45 @@ def test_a_look_the_card_forgot_to_label_is_still_red(tmp_path):
     assert check.check_media(tmp_path, game)[0] == check.RED
     game["canvases"][0]["nodes"][0]["blocks"][0]["content"] = "He nods at the gutter and goes back inside."
     assert check.check_media(tmp_path, game)[0] == check.GREEN
+
+
+def _search_game(scene_q, place_q):
+    return {"locations": [{"id": "home_kitchen", "image_search_queries": place_q}],
+            "canvases": [{"id": "walk_x", "nodes": [{"id": "moment", "blocks": [
+                {"type": "group", "props": {}, "blocks": [
+                    {"type": "image", "props": {"pool_dir": "look/x_t3", "pool": 1, "search_queries": scene_q}}]}]}]}]}
+
+
+def test_search_words_written_as_tags_are_green():
+    """C2207, C2208: the old first_term's place lines and a v3-style act line pass."""
+    g = _search_game(["towel drop wet hair gif", "pov guy at party grinding gif"],
+                     ["home kitchen interior daylight", "master bedroom interior double bed"])
+    assert check.search_word_problems(g) == []
+
+
+@pytest.mark.parametrize("q,why", [
+    ("woman of 18 eating toast at a small family kitchen counter", "words, a caption"),
+    ("man 46 armchair living room", "an age or a number"),
+    ("woman of young brushing teeth", "\"woman of\""),
+    ("seen from behind a desk dean office", "a camera direction"),
+    ("girl at sink looking at the camera", "a camera direction"),
+    ("girl campus restroom sinks no phone", "a \"no ___\""),
+])
+def test_search_words_written_as_captions_are_red(q, why):
+    """C2208, first_term_lean's find-media-v3 run (2026-11-28): caption sentences went to stock sites."""
+    rows = check.search_word_problems(_search_game([q], ["home kitchen interior daylight"]))
+    assert any(why in r for r in rows), rows
+
+
+def test_a_place_picture_names_no_person():
+    """C2207 (LO, typed in main-lean 2026-11-28: "locations should be location photo not person")."""
+    rows = check.search_word_problems(_search_game(["towel drop wet hair gif"], ["girl kitchen counter coffee mug"]))
+    assert any("name a person" in r for r in rows)
+    # a scene picture may have her in it
+    assert check.search_word_problems(_search_game(["girl kitchen counter coffee mug"], ["home kitchen interior"])) == []
+
+
+def test_bad_search_words_turn_the_media_check_red(tmp_path):
+    (tmp_path / "cards").mkdir()
+    game = _search_game(["girl campus restroom sinks no phone"], ["home kitchen interior"])
+    assert check.check_media(tmp_path, game)[0] == check.RED

@@ -1,6 +1,6 @@
 {
  "piece": "P16",
- "pass": 19,
+ "pass": 20,
  "screens": {
   "english_first.sheet": {
    "text": "7468e6ce2c180231",
@@ -10,11 +10,11 @@
    "all": "2a5ecc436b17d8d8"
   },
   "english_first.class": {
-   "text": "785ff5c8924349a1",
+   "text": "1dc6d3b552da2bbd",
    "traits": "4fd4e58137018fb8",
    "facts": "87a81182100865cc",
    "facts2": "e76c3ab40113286b",
-   "all": "3bf8554ff7efadee"
+   "all": "6dd8561198c433c9"
   },
   "english_first.after": {
    "text": "8f12677d6fe5def7",
@@ -23,7 +23,7 @@
    "facts2": "1a36f54122ea3e4e",
    "all": "63ada33a06338105"
   },
-  "*": "4bc01cffe8943a48"
+  "*": "7ae0c395a4098370"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -96,6 +96,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -188,19 +191,19 @@
    "screen": "english_first.class",
    "verdict": "PASS",
    "line": "For the rest of the class she takes essays apart line by line",
-   "why": "Walsh in the hall 09-11 at every start minute; 'Two girls behind you' unnamed classmates",
+   "why": "first and last minute and a second visit: one-time, Walsh present by trigger Tue/Thu 09:00-09:29 inside her 09-11 hall row; 'two girls behind you' are unnamed; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "785ff5c8924349a1",
+    "text": "1dc6d3b552da2bbd",
     "traits": "4fd4e58137018fb8",
     "facts": "87a81182100865cc",
     "facts2": "e76c3ab40113286b",
-    "all": "3bf8554ff7efadee"
+    "all": "6dd8561198c433c9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B10",
@@ -415,20 +418,20 @@
    "row": "B8",
    "screen": "english_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class she takes essays apart line by line",
-   "why": "'late forties' fits 48; no garment of hers named",
+   "line": "older female professor reading glasses lecture hall",
+   "why": "no garment of hers named; late forties agrees with 48",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "785ff5c8924349a1",
+    "text": "1dc6d3b552da2bbd",
     "traits": "4fd4e58137018fb8",
     "facts": "87a81182100865cc",
     "facts2": "e76c3ab40113286b",
-    "all": "3bf8554ff7efadee"
+    "all": "6dd8561198c433c9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "B8",
@@ -1207,8 +1210,47 @@
    "note": false,
    "screen_hash": "4bc01cffe8943a48",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7ae0c395a4098370",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "older female professor reading glasses lecture hall",
+   "why": "7 and 6 words; role, glasses, place",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7ae0c395a4098370",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 20
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "older female professor reading glasses lecture hall",
+   "why": "one subject at the front of a hall; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "7ae0c395a4098370",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C422",
@@ -1312,19 +1354,19 @@
    "screen": "english_first.class",
    "verdict": "PASS",
    "line": "For the rest of the class she takes essays apart line by line",
-   "why": "Every claim true on every reachable visit: Walsh in the hall 09-11 at every start minute; 'Two girls behind you' unnamed classmates",
+   "why": "every claim true on every playthrough that reaches it: one-time, Walsh present by trigger Tue/Thu 09:00-09:29 inside her 09-11 hall row; 'two girls behind you' are unnamed; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "785ff5c8924349a1",
+    "text": "1dc6d3b552da2bbd",
     "traits": "4fd4e58137018fb8",
     "facts": "87a81182100865cc",
     "facts2": "e76c3ab40113286b",
-    "all": "3bf8554ff7efadee"
+    "all": "6dd8561198c433c9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C460",
@@ -1382,19 +1424,19 @@
    "screen": "english_first.class",
    "verdict": "PASS",
    "line": "For the rest of the class she takes essays apart line by line",
-   "why": "Texture that cannot clash and dialogue that fits the cast entry (Hale \"young lady\", Pratt \"Miss @player\", Walsh \"dear\").",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "785ff5c8924349a1",
+    "text": "1dc6d3b552da2bbd",
     "traits": "4fd4e58137018fb8",
     "facts": "87a81182100865cc",
     "facts2": "e76c3ab40113286b",
-    "all": "3bf8554ff7efadee"
+    "all": "6dd8561198c433c9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "C461",
@@ -2223,19 +2265,19 @@
    "screen": "english_first.class",
    "verdict": "PASS",
    "line": "For the rest of the class she takes essays apart line by line",
-   "why": "Walsh in the hall 09-11 at every start minute; 'Two girls behind you' unnamed classmates",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Walsh present by trigger Tue/Thu 09:00-09:29 inside her 09-11 hall row; 'two girls behind you' are unnamed",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "785ff5c8924349a1",
+    "text": "1dc6d3b552da2bbd",
     "traits": "4fd4e58137018fb8",
     "facts": "87a81182100865cc",
     "facts2": "e76c3ab40113286b",
-    "all": "3bf8554ff7efadee"
+    "all": "6dd8561198c433c9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 8
+   "carried": false,
+   "pass": 20
   },
   {
    "row": "L106",
@@ -2389,8 +2431,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

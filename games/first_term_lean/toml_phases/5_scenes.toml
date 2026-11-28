@@ -17,7 +17,7 @@ blocks = [
   { type = "paragraph", content = "Your saves live in this browser. Use Saves, then Save to Disk…, to keep one." },
   { type = "paragraph", content = "Monday morning. Today you start college." },
   { type = "paragraph", content = "You kick off the sheet. Your pyjama top has ridden up in the night, and the cold air on your stomach makes your nipples go tight under it." },
-  { type = "image", props = { description = "A woman of 18 in a single bed in her small bedroom, the sheet kicked off, a thin pyjama top ridden up over her stomach, morning light. Alone.", search_queries = ["woman 18 single bed sheet kicked off pyjama top ridden up morning", "girl waking up in a narrow bed, morning light"], pool_dir = "body/opening_wake_t3", pool = 1 } },
+  { type = "image", props = { description = "A woman of 18 in a single bed in her small bedroom, the sheet kicked off, a thin pyjama top ridden up over her stomach, morning light. Alone.", search_queries = ["teen waking up in bed morning", "girl pyjama top ridden up bed", "sleepy teen bed sheets kicked off"], pool_dir = "body/opening_wake_t3", pool = 1 } },
   { type = "paragraph", content = "You're eighteen, in the single bed you had at twelve, and you've never had money that wasn't your mom's. Four people, one bathroom. The only thing in this house that's yours is the old key in your bedroom door." },
   { type = "paragraph", content = "College. Finally, something that's yours." },
 ]
@@ -153,7 +153,7 @@ name = "Screen 4b: the bathroom"
 blocks = [
   { type = "paragraph", content = "Upstairs, you get the bathroom a second before Ryan, your step-brother, opens his door. The bolt hasn't held in years, and the water takes forever to run hot." },
   { type = "paragraph", content = "You strip and step in before it's warm. It hits your nipples cold, and they go hard. Then the heat comes. You stand under it with your eyes shut and let it run down your neck, over your tits, down your stomach and between your thighs. Your shoulders drop for the first time all morning." },
-  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.", search_queries = ["woman 18 shower water running down body gif", "girl in a small bathroom shower eyes closed gif"], pool_dir = "body/opening_shower_t4", pool = 1 } },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, eyes shut, head tipped back. No one else in frame.", search_queries = ["teen shower nude wet gif", "girl showering naked eyes closed amateur gif", "naked teen shower head back gif"], pool_dir = "body/opening_shower_t4", pool = 1 } },
   { type = "paragraph", content = "Then a fist bangs on the door." },
   { type = "dialog", content = "@player.nickname. Some of us need that too.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "dialog", content = "Come on, I'm dying out here.", props = { speaker = "npc", npcId = "npc_ryan" } },
@@ -176,7 +176,7 @@ name = "Screen 5: the hall"
 blocks = [
   { type = "paragraph", content = "Steam rolls out into the hall. Ryan's on the wall opposite, shirtless, a towel over his shoulder. He's broader than you remember." },
   { type = "paragraph", content = "His eyes drop to where the towel ends on your wet thighs. One second." },
-  { type = "image", props = { description = "Seen from across a narrow upstairs hall: a woman of 18 in a small white towel in a bathroom doorway, steam rolling out around her, legs wet. No man in frame.", search_queries = ["woman 18 small towel steamy bathroom doorway gif", "steam rolling out bathroom door towel gif"], pool_dir = "look/hall_towel_t3", pool = 1 } },
+  { type = "image", props = { description = "Seen from across a narrow upstairs hall: a woman of 18 in a small white towel in a bathroom doorway, steam rolling out around her, legs wet. No man in frame.", search_queries = ["teen in towel bathroom door steam gif", "girl wrapped in towel after shower gif", "wet teen small towel hallway amateur gif"], pool_dir = "look/hall_towel_t3", pool = 1 } },
   { type = "paragraph", content = "Then he catches it. He stares at the ceiling, and his ears go red." },
   { type = "dialog", content = "Shit. Sorry. First day, huh?", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He jerks his chin at the bathroom." },
@@ -215,7 +215,7 @@ id = "room_past"
 name = "Screen 6: the hall, the knot (squeezed past)"
 blocks = [
   { type = "paragraph", content = "Ryan flattens himself against the wall so nothing touches. Halfway past him, the knot gives. The towel drops off your tits, and for one second you're bare in the hall before you catch it against you." },
-  { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, a small white towel dropping off her bare chest as she catches it, wet hair. No man in frame.", search_queries = ["woman 18 towel drops off chest hallway gif", "girl catching falling towel wet hair gif"], pool_dir = "body/hall_knot_past_t4", pool = 1 } },
+  { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, a small white towel dropping off her bare chest as she catches it, wet hair. No man in frame.", search_queries = ["towel drop teen tits gif", "towel falls off girl topless gif", "accidental towel drop wet hair gif"], pool_dir = "body/hall_knot_past_t4", pool = 1 } },
   { type = "paragraph", content = "Ryan's eyes are on the ceiling, and they stay there." },
   { type = "dialog", content = "Sorry. I didn't— Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He says it to the ceiling." },
@@ -237,7 +237,7 @@ name = "Screen 6: the hall, the knot (spoke)"
 blocks = [
   { type = "dialog", content = "Thanks. Go get dressed.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He turns to face the bathroom door and waits for you to move. The knot gives. The towel slides to your waist, and you stand bare in the hall, your nipples tight in the cold, before you yank it up." },
-  { type = "image", props = { description = "A woman of 18 alone in a narrow upstairs hall, a small white towel slid to her waist, bare from the waist up, wet hair.", search_queries = ["woman 18 towel slips to waist hallway gif", "girl towel falls in hall wet hair gif"], pool_dir = "body/hall_knot_spoke_t4", pool = 1 } },
+  { type = "image", props = { description = "A woman of 18 alone in a narrow upstairs hall, a small white towel slid to her waist, bare from the waist up, wet hair.", search_queries = ["towel slips to waist topless teen gif", "topless teen towel around waist gif", "towel drop topless hallway amateur gif"], pool_dir = "body/hall_knot_spoke_t4", pool = 1 } },
   { type = "paragraph", content = "His eyes never leave the door." },
   { type = "paragraph", content = "You run for your room. The bathroom bolt hasn't held in years, and everyone in this house knows it." },
 ]
@@ -256,7 +256,7 @@ id = "room_waited"
 name = "Screen 6: the hall, the knot (fixed it)"
 blocks = [
   { type = "paragraph", content = "Ryan's eyes go straight to the light switch. You stand there and tie it again. To pull it tight you have to open it first, and for a second the towel hangs open on your tits." },
-  { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, opening a small white towel to re-tie it at her chest, wet hair. No man in frame.", search_queries = ["woman 18 retying towel at chest gif", "girl opening towel to retie it hallway gif"], pool_dir = "body/hall_knot_fix_t4", pool = 1 } },
+  { type = "image", props = { description = "A woman of 18 in a narrow upstairs hall, opening a small white towel to re-tie it at her chest, wet hair. No man in frame.", search_queries = ["teen opening towel flash gif", "girl retying towel flashing tits gif", "towel flash wet hair teen amateur gif"], pool_dir = "body/hall_knot_fix_t4", pool = 1 } },
   { type = "paragraph", content = "He doesn't look once." },
   { type = "paragraph", content = "He says it to the switch:" },
   { type = "dialog", content = "Take your time.", props = { speaker = "npc", npcId = "npc_ryan" } },
@@ -278,7 +278,7 @@ id = "room"
 name = "Screen 7: your room, dressing"
 blocks = [
   { type = "paragraph", content = "Back in your room, you shut the door and let the towel drop. The air's cold on your wet skin, and your nipples go tight. You pull a plain bra and panties from the drawer, then your jeans, a T-shirt and sneakers. Your usual." },
-  { type = "image", props = { description = "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.", search_queries = ["woman 18 bedroom towel on floor stepping into jeans gif", "girl getting dressed after shower wet hair bedroom gif"], pool_dir = "body/opening_dressing_t4", pool = 1 } },
+  { type = "image", props = { description = "A woman of 18 in a small bedroom, a towel on the floor, stepping into jeans, wet hair. Alone.", search_queries = ["teen getting dressed after shower nude gif", "naked girl getting dressed bedroom gif", "teen dressing towel on floor amateur gif"], pool_dir = "body/opening_dressing_t4", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -461,7 +461,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_kitchen", operator = "is_present" }] } }, blocks = [
     { type = "paragraph", content = "Mom's in the kitchen. Mark's at the table. She looks up at you, then at him." },
   ] },
-  { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.", search_queries = ["woman 41 cardigan kitchen counter mug", "mother in a cardigan in a small kitchen"], pool_dir = "everyday/mom_kitchen_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 41 in a cardigan over a blouse, at a kitchen counter with a mug, looking up.", search_queries = ["middle aged woman kitchen counter coffee mug", "mature woman candid home kitchen mug"], pool_dir = "everyday/mom_kitchen_t0", pool = 1 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
     { type = "paragraph", content = "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing." },
   ] },
@@ -605,7 +605,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_mark", location_id = "home_living_room", operator = "is_present" }] } }, blocks = [
     { type = "paragraph", content = "Mom's on the couch. Mark's in his chair, the remote on his knee. She smiles at you and doesn't move over." },
   ] },
-  { type = "image", props = { description = "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.", search_queries = ["woman 41 cardigan on couch watching TV", "mother on a sofa at night with the TV on"], pool_dir = "everyday/mom_living_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 41 in a cardigan on a living room couch, her feet under her, TV light on her face.", search_queries = ["middle aged woman on couch watching tv", "mature woman sofa evening tv light"], pool_dir = "everyday/mom_living_t0", pool = 1 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_item", item_id = "mom_short_skirt", operator = "equipped" }] } }, blocks = [
     { type = "paragraph", content = "Mom's eyes drop to the skirt. Her skirt. Her mouth goes tight, and she says nothing." },
   ] },
@@ -839,7 +839,7 @@ name = "The counter"
 blocks = [
   { type = "paragraph", content = "A man in his thirties is behind the counter, sleeves rolled up, wiping a spot that's already clean. The Help Wanted sign is taped to the window behind him." },
   { type = "paragraph", content = "The guy behind the counter looks up. \"You here about the sign, or the coffee?\"" },
-  { type = "image", props = { description = "A man of 31 behind a small café counter, sleeves rolled up, a rag in his hand, looking up.", search_queries = ["man 31 behind cafe counter sleeves rolled up rag", "cafe manager wiping counter looking up"], pool_dir = "people/tom_counter_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 31 behind a small café counter, sleeves rolled up, a rag in his hand, looking up.", search_queries = ["cafe owner behind counter rag", "cafe manager wiping counter looking up"], pool_dir = "people/tom_counter_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -942,7 +942,7 @@ blocks = [
   { type = "paragraph", content = "A guy in his twenties is at the machine, a pencil behind his ear. He looks you over like he's pricing you." },
   { type = "dialog", content = "So you're the new girl. Tom says you're mine to train.", props = { speaker = "npc", npcId = "npc_chris" } },
   { type = "paragraph", content = "He shows you the grinder, the milk jugs, the till. Reaching past you for a jug, his arm drags across your chest. He doesn't say sorry. He watches you notice." },
-  { type = "image", props = { description = "A man of 24 with his sleeves pushed up behind a café espresso machine, looking at the camera.", search_queries = ["man 24 barista sleeves pushed up behind espresso machine looking at camera", "young barista at coffee machine looking at camera"], pool_dir = "people/chris_meet_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 24 with his sleeves pushed up behind a café espresso machine, looking at the camera.", search_queries = ["young barista behind espresso machine", "barista at coffee machine candid"], pool_dir = "people/chris_meet_t0", pool = 1 } },
   { type = "paragraph", content = "Your face burns. You step out from his reach." },
   { type = "dialog", content = "I've got it.", props = { speaker = "player" } },
   { type = "dialog", content = "Sure you do.", props = { speaker = "npc", npcId = "npc_chris" } },
@@ -1354,7 +1354,7 @@ id = "hub"
 name = "Mark"
 blocks = [
   { type = "paragraph", content = "Mark's at the table with his coffee. He looks at you over the rim." },
-  { type = "image", props = { description = "A man of 46 at a kitchen table with a coffee mug, looking up over it.", search_queries = ["man 46 kitchen table coffee mug looking up", "stepfather at breakfast table with coffee"], pool_dir = "people/mark_kitchen_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 46 at a kitchen table with a coffee mug, looking up over it.", search_queries = ["middle aged man kitchen table coffee mug", "man at breakfast table with coffee"], pool_dir = "people/mark_kitchen_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -1998,7 +1998,7 @@ id = "hub"
 name = "Mark"
 blocks = [
   { type = "paragraph", content = "Mark's in his chair, the remote on his knee. The chair's his; everyone knows it." },
-  { type = "image", props = { description = "A man of 46 in an armchair in a living room, remote on his knee, TV light on him.", search_queries = ["man 46 armchair living room remote tv light", "middle aged man in recliner in living room watching tv"], pool_dir = "people/mark_chair_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 46 in an armchair in a living room, remote on his knee, TV light on him.", search_queries = ["middle aged man armchair watching tv", "middle aged man in recliner living room tv"], pool_dir = "people/mark_chair_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2058,7 +2058,7 @@ id = "hub"
 name = "Ryan"
 blocks = [
   { type = "paragraph", content = "Ryan's on his bed with a controller, headphones round his neck." },
-  { type = "image", props = { description = "A man of 22 on an unmade bed with a game controller, headphones round his neck, curtains shut.", search_queries = ["man 22 bed game controller headphones bedroom", "young man gaming on bed curtains shut"], pool_dir = "people/ryan_room_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 22 on an unmade bed with a game controller, headphones round his neck, curtains shut.", search_queries = ["young man gaming on bed controller headphones", "guy gaming on bed curtains shut"], pool_dir = "people/ryan_room_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2123,7 +2123,7 @@ id = "hub"
 name = "Ryan"
 blocks = [
   { type = "paragraph", content = "Ryan's on his bed with a controller, headphones round his neck." },
-  { type = "image", props = { description = "A man of 22 on an unmade bed with a game controller, headphones round his neck, a weekend's mess of clothes on the floor.", search_queries = ["man 22 unmade bed game controller messy bedroom", "young man gaming on bed headphones clothes on floor"], pool_dir = "people/ryan_room_weekend_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 22 on an unmade bed with a game controller, headphones round his neck, a weekend's mess of clothes on the floor.", search_queries = ["young man gaming on unmade bed", "guy gaming messy bedroom controller headphones"], pool_dir = "people/ryan_room_weekend_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2186,7 +2186,7 @@ id = "hub"
 name = "Ryan"
 blocks = [
   { type = "paragraph", content = "Ryan's eating standing up at the counter, straight out of the pan." },
-  { type = "image", props = { description = "A man of 22 eating out of a frying pan at a kitchen counter.", search_queries = ["young man eating from frying pan kitchen counter", "man 22 standing eating at counter"], pool_dir = "people/ryan_kitchen_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 22 eating out of a frying pan at a kitchen counter.", search_queries = ["young man eating from frying pan kitchen", "guy eating standing at kitchen counter"], pool_dir = "people/ryan_kitchen_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2249,7 +2249,7 @@ id = "hub"
 name = "Ryan"
 blocks = [
   { type = "paragraph", content = "Ryan's sprawled on the couch with the TV on." },
-  { type = "image", props = { description = "A man of 22 sprawled on a couch in a living room with the TV on.", search_queries = ["young man sprawled on couch living room watching tv", "man 22 lying on sofa in living room tv"], pool_dir = "people/ryan_couch_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 22 sprawled on a couch in a living room with the TV on.", search_queries = ["young man sprawled on couch watching tv", "guy lying on sofa living room tv"], pool_dir = "people/ryan_couch_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2544,7 +2544,7 @@ id = "after_dark"
 name = "Channel 5 — After Dark"
 blocks = [
   { type = "paragraph", content = "You turn the sound right down and find Channel 5." },
-  { type = "image", props = { description = "Her view from a dark couch: a TV screen showing a woman in her twenties on her knees with a man in his thirties, his cock in her mouth, his hand in her hair. The room lit only by the screen. Nobody looking at the camera.", search_queries = ["tv screen porn blowjob dark living room gif", "woman watching porn on tv dark room pov gif"], pool_dir = "sex/tv_after_dark_t5", pool = 4 } },
+  { type = "image", props = { description = "Her view from a dark couch: a TV screen showing a woman in her twenties on her knees with a man in his thirties, his cock in her mouth, his hand in her hair. The room lit only by the screen. Nobody looking at the camera.", search_queries = ["blowjob porn on tv screen dark room gif", "watching porn tv blowjob hair pulling gif", "tv screen showing blowjob kneeling gif"], pool_dir = "sex/tv_after_dark_t5", pool = 4 } },
   { type = "paragraph", content = "On the screen a woman is on her knees on a hotel carpet. A man has his fist in her hair. His cock slides in and out of her mouth, slow, all the way, until she gags and he holds her there." },
   { type = "paragraph", content = "Your breath goes short. Heat pools low in your belly and spreads between your legs." },
   { type = "paragraph", content = "She looks up at him with her mouth full and her mascara running. He tells her she's a good girl." },
@@ -2677,7 +2677,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ran_once", operator = "is_true" }] } }, blocks = [
     { type = "paragraph", content = "Two laps of the loop, your breath loud in your ears. Sweat soaks the back of your sports top, and your ass aches in the leggings by the second lap. You keep your eyes on the path, your legs burning." },
   ] },
-  { type = "image", props = { description = "Seen from the path: a woman of 18 running toward the camera in leggings and a sports top on a park loop by a pond. No man in frame.", search_queries = ["woman 18 jogging leggings sports bra park path gif", "girl running toward camera park pond gif"], pool_dir = "look/park_run_t3", pool = 2 } },
+  { type = "image", props = { description = "Seen from the path: a woman of 18 running toward the camera in leggings and a sports top on a park loop by a pond. No man in frame.", search_queries = ["teen jogging leggings sports bra bouncing gif", "girl running park leggings bouncing tits gif", "jogging teen tight leggings candid gif"], pool_dir = "look/park_run_t3", pool = 2 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2715,7 +2715,7 @@ id = "lift"
 name = "Work out"
 blocks = [
   { type = "paragraph", content = "You show your pass at the desk and find a bench by the mirrors. You bend for the kettlebell, and in the mirror the leggings pull tight across your ass. Your thighs burn by the tenth rep. You finish the set, breathing hard, your arms still shaking when you rack it." },
-  { type = "image", props = { description = "Her view in a small gym's mirror: a woman of 18 in leggings and a sports top bending for a kettlebell, the leggings pulled tight across her ass. No man in frame.", search_queries = ["woman 18 bending for kettlebell leggings gym mirror gif", "girl kettlebell workout leggings mirror view gif"], pool_dir = "look/body_workout_t3", pool = 2 } },
+  { type = "image", props = { description = "Her view in a small gym's mirror: a woman of 18 in leggings and a sports top bending for a kettlebell, the leggings pulled tight across her ass. No man in frame.", search_queries = ["teen leggings bending over gym ass gif", "kettlebell leggings ass gym mirror gif", "girl working out tight leggings ass gif"], pool_dir = "look/body_workout_t3", pool = 2 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -2934,7 +2934,7 @@ id = "fix"
 name = "Fix your hair and make-up"
 blocks = [
   { type = "paragraph", content = "You lean into the long mirror and fix your face: a little mascara, lip gloss, your hair pulled back and let down again. The girl in the mirror looks older, and ready for whoever looks at her next." },
-  { type = "image", props = { description = "A woman of 18 at a long campus restroom mirror putting on lip gloss, no phone.", search_queries = ["woman 18 restroom mirror lip gloss no phone", "girl fixing makeup at college bathroom mirror"], pool_dir = "body/campus_mirror_t3", pool = 2 } },
+  { type = "image", props = { description = "A woman of 18 at a long campus restroom mirror putting on lip gloss, no phone.", search_queries = ["young woman restroom mirror lip gloss", "college girl applying lip gloss bathroom mirror", "woman putting on lipstick public restroom mirror"], pool_dir = "body/campus_mirror_t3", pool = 2 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -3090,7 +3090,7 @@ id = "meet"
 name = "Nina"
 blocks = [
   { type = "paragraph", content = "A woman in her twenties is behind the till in a black dress two sizes too confident for a shop this small. She looks you up and down, slowly, and doesn't hide it." },
-  { type = "image", props = { description = "A woman of 26 in a tight black dress behind a boutique till, looking at the camera.", search_queries = ["woman 26 tight black dress behind boutique counter", "shop owner woman at till looking at camera"], pool_dir = "people/nina_till_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 26 in a tight black dress behind a boutique till, looking at the camera.", search_queries = ["boutique owner behind shop counter", "young woman shop owner at till"], pool_dir = "people/nina_till_t0", pool = 1 } },
   { type = "dialog", content = "Hi, sweetie. I'm Nina. It's my shop. The good stuff's at the back, and it isn't for everyone.", props = { speaker = "npc", npcId = "npc_nina" } },
   { type = "paragraph", content = "She smiles like she already knows which rail you'll end up at." },
   { type = "dialog", content = "Just looking.", props = { speaker = "player" } },
@@ -3130,7 +3130,7 @@ id = "try"
 name = "The fitting room"
 blocks = [
   { type = "paragraph", content = "You take an armful into the fitting room and pull the curtain. In the mirror you try them one by one: a skirt that stops high on your thighs, a top cut lower than anything you own. You turn and look at your ass in the skirt longer than you mean to." },
-  { type = "image", props = { description = "A woman of 18 in a fitting-room mirror in a short skirt, looking over her shoulder at her own ass. Alone. No phone, not a selfie.", search_queries = ["woman 18 fitting room mirror short skirt looking over shoulder no phone", "girl trying on skirt changing room mirror back view"], pool_dir = "body/fitting_room_t3", pool = 2 } },
+  { type = "image", props = { description = "A woman of 18 in a fitting-room mirror in a short skirt, looking over her shoulder at her own ass. Alone. No phone, not a selfie.", search_queries = ["fitting room mirror short skirt ass", "girl changing room mirror skirt rear", "teen trying on skirt fitting room"], pool_dir = "body/fitting_room_t3", pool = 2 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_nina", location_id = "hood_clothes", operator = "is_present" }] } }, blocks = [
     { type = "dialog", content = "Let me see. Come on, I won't tell.", props = { speaker = "npc", npcId = "npc_nina" } },
     { type = "dialog", content = "Not a chance.", props = { speaker = "player" } },
@@ -3209,7 +3209,7 @@ blocks = [
   ] },
   { type = "paragraph", content = "A man in his late thirties is already at the lectern, no notes, his coffee beside him. He looks over the rows until he finds you, and keeps looking. You cross your legs, and his eyes go there, then back to your face, unhurried. Heat climbs your neck, and you press your thighs together under the desk." },
   { type = "dialog", content = "Dr. Hale. Intro to Psychology. Most of you will pass. Some of you will surprise me. Won't you, young lady?", props = { speaker = "npc", npcId = "npc_hale" } },
-  { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a man of 39 at a lecture-hall lectern with a coffee, no notes, looking across the rows at the camera.", search_queries = ["professor 39 lectern lecture hall looking at camera coffee", "male lecturer looking up at students lecture hall"], pool_dir = "people/hale_lectern_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a man of 39 at a lecture-hall lectern with a coffee, no notes, looking across the rows at the camera.", search_queries = ["male professor at lectern lecture hall coffee", "lecturer at lectern looking up at students"], pool_dir = "people/hale_lectern_t0", pool = 1 } },
   { type = "paragraph", content = "For the rest of the lecture his eyes keep coming back to you. At the end, the girl catches you on the way out." },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "nadia_asked", operator = "is_true" }] } }, blocks = [
     { type = "dialog", content = "Last spring it was me.", props = { speaker = "npc", npcId = "npc_nadia" } },
@@ -3358,7 +3358,7 @@ blocks = [
     { type = "paragraph", content = "She waits. You don't fill it. She smiles, just a little, and moves on." },
   ] },
   { type = "paragraph", content = "For the rest of the class she takes essays apart line by line, reading the worst sentences out loud while their owners go red. You write until your wrist hurts." },
-  { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a woman of 48 with reading glasses pushed up into grey-streaked hair, at the front of a lecture hall holding an essay, looking at the camera.", search_queries = ["female professor 48 reading glasses lecture hall holding paper looking at camera", "older woman teacher front of lecture hall"], pool_dir = "people/walsh_front_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from her seat (she is 18, out of frame): a woman of 48 with reading glasses pushed up into grey-streaked hair, at the front of a lecture hall holding an essay, looking at the camera.", search_queries = ["older female professor reading glasses lecture hall", "older woman teacher front of lecture hall"], pool_dir = "people/walsh_front_t0", pool = 1 } },
   { type = "paragraph", content = "At the end she taps your desk on her way past." },
   { type = "dialog", content = "Stay a minute, dear.", props = { speaker = "npc", npcId = "npc_walsh" } },
 ]
@@ -3468,7 +3468,7 @@ blocks = [
     { type = "dialog", content = "Good. That's how loud I want everything.", props = { speaker = "npc", npcId = "npc_cross" } },
   ] },
   { type = "paragraph", content = "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. Every time it's your turn, his eyes stay on you after you've finished, down your body and back up. Your nipples go hard, and you fold your arms over your chest before anyone sees." },
-  { type = "image", props = { description = "Her view from the stage (she is 18, out of frame): a man of 38 in a black shirt sitting on the edge of a black-box stage, watching the camera.", search_queries = ["man 38 black shirt sitting edge of stage black box theatre looking at camera", "drama teacher theatre stage watching"], pool_dir = "people/cross_stage_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from the stage (she is 18, out of frame): a man of 38 in a black shirt sitting on the edge of a black-box stage, watching the camera.", search_queries = ["drama teacher sitting edge of stage", "man sitting on edge of black stage"], pool_dir = "people/cross_stage_t0", pool = 1 } },
   { type = "dialog", content = "New face. You've got a voice. Let's find out what else you've got.", props = { speaker = "npc", npcId = "npc_cross" } },
   { type = "dialog", content = "Is that a compliment?", props = { speaker = "player" } },
   { type = "dialog", content = "It's homework.", props = { speaker = "npc", npcId = "npc_cross" } },
@@ -3623,17 +3623,57 @@ is_repeatable = true
 max_triggers_per_day = 2
 conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [0, 1, 2, 3, 4] }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_absent" }] }
 
-# P40 — Cross comes in early for his 2pm rehearsal and watches her from the dark seats (PLAN §10c; ENI for LO, option c).
-[[canvases.trigger.substitutions]]
-target_canvas_id = "walk_cross_seats"
-chance = 0.25
-conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "13:00", end_time = "14:00" }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_absent" }] }
-
 [[canvases.nodes]]
 id = "practise"
 name = "Practise on the empty stage"
 blocks = [
   { type = "paragraph", content = "The seats are empty. You stand under the work light and say whatever comes into your head to the dark, louder than you'd ever dare with anyone there." },
+]
+
+[canvases.nodes.exit_block]
+type = "choices"
+
+[[canvases.nodes.exit_block.choices]]
+text = "Done"
+targetType = "location"
+locationId = "campus_theatre"
+time_progression_minutes = 30
+
+# P84 — Tue/Thu/Fri 13–14 Mr. Cross is in the dark seats (his row), so practise then is its own button, once a day,
+#    off stage_practise's two a day (so morning practice never costs her his hour), once a day; once she has met him
+#    that go plays walk_cross_seats; before, it is practising with a stranger out in the seats.
+[[canvases]]
+id = "stage_practise_cross"
+name = "Practise on the stage"
+
+[canvases.trigger]
+location = "campus_theatre"
+trigger_mode = "manual"
+is_repeatable = true
+max_triggers_per_day = 1
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "13:00", end_time = "14:00" }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_present" }] }
+
+# P40 — Cross comes in early for his 2pm rehearsal and watches her from the dark seats (PLAN §10c; ENI for LO, option c).
+# P84 — chance 1.0: at this hour he is always there (LO 2026-11-28: "2").
+[[canvases.trigger.substitutions]]
+target_canvas_id = "walk_cross_seats"
+chance = 1.0
+conditions = { version = "1.0", logic = "AND", items = [{ type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "13:00", end_time = "14:00" }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_present" }, { type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "cross_seats_today", operator = "is_false" }] }
+
+[[canvases.nodes]]
+id = "practise"
+name = "Practise on the stage"
+blocks = [
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }] } }, blocks = [
+    { type = "paragraph", content = "You say your lines to the dark. Mr. Cross is out there in the seats. Your face goes hot, your nipples tight." },
+    { type = "dialog", content = "Not bad, starlet. You're not there yet.", props = { speaker = "npc", npcId = "npc_cross" } },
+    { type = "paragraph", content = "At two he'll be up on that stage." },
+  ] },
+  { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_false" }] } }, blocks = [
+    { type = "paragraph", content = "You say your lines to the dark. A man in the seats is listening. Your face goes hot, your nipples tight." },
+    { type = "dialog", content = "Not bad. Not there yet, though.", props = { speaker = "unknown" } },
+    { type = "paragraph", content = "Drama's Tuesday and Thursday at eleven." },
+  ] },
 ]
 
 [canvases.nodes.exit_block]
@@ -3779,7 +3819,7 @@ name = "Ms. Holt"
 blocks = [
   { type = "paragraph", content = "A woman of about thirty sits behind the desk, cardigan buttoned to the throat, reading glasses on a chain. She reads your student card for longer than a card needs, then looks you up and down. Your ears go warm." },
   { type = "dialog", content = "Quiet floor's upstairs, hon. No food, no phones, no noise.", props = { speaker = "npc", npcId = "npc_holt" } },
-  { type = "image", props = { description = "Her view across the desk (she is 18, out of frame): a woman of 31 in a buttoned cardigan with reading glasses on a chain, behind a library desk, looking at the camera over her reading glasses.", search_queries = ["librarian woman 31 cardigan reading glasses chain behind library desk looking at camera", "woman behind library counter looking up from book"], pool_dir = "people/holt_desk_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view across the desk (she is 18, out of frame): a woman of 31 in a buttoned cardigan with reading glasses on a chain, behind a library desk, looking at the camera over her reading glasses.", search_queries = ["librarian reading glasses chain behind desk", "librarian behind library counter looking up"], pool_dir = "people/holt_desk_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -3854,7 +3894,7 @@ name = "Rosa"
 blocks = [
   { type = "paragraph", content = "A woman in her forties runs the counter, hairnet on, forearms like a baker's. She looks you over, the way a mother checks a coat. Your stomach growls loud enough for her to hear it." },
   { type = "dialog", content = "Listen to that. You're too skinny for this place, mija. Here, take a roll.", props = { speaker = "npc", npcId = "npc_rosa" } },
-  { type = "image", props = { description = "Her view across the lunch counter (she is 18, out of frame): a woman of 45 in a hairnet behind a cafeteria counter holding a bread roll, looking at the camera.", search_queries = ["cafeteria lunch lady 45 hairnet behind counter looking at camera", "school canteen server woman holding bread roll"], pool_dir = "people/rosa_counter_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view across the lunch counter (she is 18, out of frame): a woman of 45 in a hairnet behind a cafeteria counter holding a bread roll, looking at the camera.", search_queries = ["cafeteria lunch lady behind counter", "school canteen server holding bread roll"], pool_dir = "people/rosa_counter_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -3929,7 +3969,7 @@ blocks = [
   { type = "paragraph", content = "A girl falls into step beside you on the path without asking: sunglasses pushed up into a mess of blonde hair, a coffee in each hand, a crop top that shows off her stomach." },
   { type = "dialog", content = "You look like you need this more than I do, babe. I'm Zoe. You're new.", props = { speaker = "npc", npcId = "npc_zoe" } },
   { type = "paragraph", content = "She holds one cup out and waits." },
-  { type = "image", props = { description = "Her view on the path (she is 18, out of frame): a woman of 19 with sunglasses pushed up into messy blonde hair and a crop top, walking beside the camera on a campus path with two coffees, grinning.", search_queries = ["blonde woman 19 sunglasses on head crop top walking on campus path two coffees smiling at camera", "college girl on the quad holding two coffee cups"], pool_dir = "people/zoe_quad_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view on the path (she is 18, out of frame): a woman of 19 with sunglasses pushed up into messy blonde hair and a crop top, walking beside the camera on a campus path with two coffees, grinning.", search_queries = ["blonde college girl two coffees campus", "college girl sunglasses on head walking campus"], pool_dir = "people/zoe_quad_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4046,7 +4086,7 @@ blocks = [
     { type = "paragraph", content = "He goes back to his paper, but he doesn't turn the page." },
   ] },
   { type = "paragraph", content = "Whatever you buy in here, Mark's going to hear about it. Your face goes warm before you've picked anything up." },
-  { type = "image", props = { description = "Her view across the counter (she is 18, out of frame): a heavy man of 52 behind a corner-shop till with a newspaper spread out, looking at the camera over it.", search_queries = ["heavy man 52 behind convenience store counter newspaper looking at camera", "corner shop owner at the till"], pool_dir = "people/frank_till_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view across the counter (she is 18, out of frame): a heavy man of 52 behind a corner-shop till with a newspaper spread out, looking at the camera over it.", search_queries = ["heavy shopkeeper behind counter newspaper", "corner shop owner at the till"], pool_dir = "people/frank_till_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4078,7 +4118,7 @@ name = "Danny"
 blocks = [
   { type = "paragraph", content = "A guy in his early twenties with the shop's name badge leans behind the counter with his phone, hood up. His eyes do the walking instead of him, slow, all the way down and back up. You feel it on your skin." },
   { type = "dialog", content = "Hey, gorgeous. Laura's kid, right? You grew up.", props = { speaker = "npc", npcId = "npc_danny" } },
-  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 23 in a hoodie with a name badge behind a shop counter, phone in hand, looking at the camera with a slow smile.", search_queries = ["young man 23 hoodie leaning on convenience store counter phone looking at camera", "night shift shop clerk at the till smirking"], pool_dir = "people/danny_counter_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 23 in a hoodie with a name badge behind a shop counter, phone in hand, looking at the camera with a slow smile.", search_queries = ["young shop clerk leaning on counter phone", "night shift shop clerk at till smirking"], pool_dir = "people/danny_counter_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4152,7 +4192,7 @@ name = "Marco"
 blocks = [
   { type = "paragraph", content = "A man in his late twenties with a whistle he never uses is spotting someone on the bench. He looks up when you come in and keeps looking: your legs, your ass, then your face, like he's measuring you for a programme. Heat climbs up your neck." },
   { type = "dialog", content = "Haven't seen you in here. Good. I'm Marco. I train people. You've got the build for it, champ.", props = { speaker = "npc", npcId = "npc_marco" } },
-  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 29 in a gym vest with a whistle round his neck, beside a weight bench, looking the camera over.", search_queries = ["personal trainer man 29 gym vest whistle beside weight bench looking at camera", "gym trainer looking at camera across the weights room"], pool_dir = "people/marco_gym_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from the door (she is 18, out of frame): a man of 29 in a gym vest with a whistle round his neck, beside a weight bench, looking the camera over.", search_queries = ["personal trainer whistle beside weight bench", "gym trainer standing in weights room"], pool_dir = "people/marco_gym_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4228,7 +4268,7 @@ name = "The man on the porch"
 blocks = [
   { type = "paragraph", content = "The man next door is in the one chair on his porch, a mug on the rail, like every Sunday. Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles." },
   { type = "dialog", content = "Well. Look who stopped being a kid. Come here a minute, little lady.", props = { speaker = "npc", npcId = "npc_vance" } },
-  { type = "image", props = { description = "Her view from the pavement (she is 18, out of frame): a man of 54 in a chair on a small front porch, a mug on the rail, watching the camera.", search_queries = ["man 54 sitting on front porch chair mug watching camera suburban street", "older man on porch looking at the street"], pool_dir = "people/vance_porch_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view from the pavement (she is 18, out of frame): a man of 54 in a chair on a small front porch, a mug on the rail, watching the camera.", search_queries = ["older man sitting on front porch mug", "older man on porch chair watching street"], pool_dir = "people/vance_porch_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4352,7 +4392,7 @@ blocks = [
   { type = "paragraph", content = "He's three steps away before he turns and calls back over his shoulder." },
   { type = "dialog", content = "And I'm asking again. Fair warning.", props = { speaker = "npc", npcId = "npc_jake" } },
   { type = "paragraph", content = "He jogs back to his friends, and they shove him like he's won something. You feel them all looking at you for the rest of the way across the quad." },
-  { type = "image", props = { description = "Her view across the quad (she is 18, out of frame): a man of 20 in a college hoodie with the sleeves pushed up, jogging back toward a group of friends by some steps and looking over his shoulder at the camera with a grin.", search_queries = ["college guy 20 hoodie jogging back looking over shoulder grinning campus gif", "young man jogging back to friends on campus lawn looking back gif"], pool_dir = "people/jake_quad_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view across the quad (she is 18, out of frame): a man of 20 in a college hoodie with the sleeves pushed up, jogging back toward a group of friends by some steps and looking over his shoulder at the camera with a grin.", search_queries = ["college guy hoodie jogging looking back grinning gif", "young man jogging campus looking over shoulder gif", "guy running back to friends campus smile gif"], pool_dir = "people/jake_quad_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4384,7 +4424,7 @@ name = "Brooke"
 blocks = [
   { type = "paragraph", content = "Three girls own the long mirror. A blonde in a fitted blazer leans in while a redhead does her lashes; a third holds the make-up bag open like a nurse holding instruments. They all stop when they see you, and the blonde finds you in the mirror and looks you over, slow, from your feet up. Your face goes hot before she's said a word." },
   { type = "dialog", content = "Oh, look. Kayla, Tess, it's the new girl everybody's whispering about. Nice outfit, princess. Did you get dressed in the dark?", props = { speaker = "npc", npcId = "npc_brooke" } },
-  { type = "image", props = { description = "Her view in the long mirror (she is 18, out of frame): three women of 20 to 21 at a bathroom mirror, the blonde one in front in a fitted blazer looking at the camera in the reflection with a smirk, a redhead doing her lashes, the third holding a make-up bag. No phone, not a selfie.", search_queries = ["three young women at bathroom mirror doing makeup blonde smirking at camera reflection", "college girls at restroom mirror one looking back"], pool_dir = "people/brooke_mirror_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view in the long mirror (she is 18, out of frame): a blonde woman of 21 in a fitted blazer at a bathroom mirror, looking at the camera in the reflection with a smirk. No phone, not a selfie.", search_queries = ["blonde college girl smirking bathroom mirror", "girl doing makeup restroom mirror smirk"], pool_dir = "people/brooke_mirror_t0", pool = 1 } },
   { type = "paragraph", content = "Kayla laughs. Tess doesn't, but she doesn't stop her either." },
 ]
 
@@ -4461,7 +4501,7 @@ name = "Sam"
 blocks = [
   { type = "paragraph", content = "You knock on the green door. It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap and a T-shirt he's clearly slept in. He leans on the frame and takes you in, slow, top to bottom, and his eyes stop on your chest long enough that your nipples tighten. You cross your arms. He grins like that's an answer." },
   { type = "dialog", content = "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.", props = { speaker = "npc", npcId = "npc_sam" } },
-  { type = "image", props = { description = "Her view at the green door of Zoe's apartment (she is 18, out of frame): a barefoot man of 22 in a slept-in T-shirt with a guitar hanging off him by the strap, leaning on a door frame and looking the camera over.", search_queries = ["barefoot man 22 slept in t-shirt guitar strap leaning on apartment door frame looking at camera", "guy answering apartment door with guitar"], pool_dir = "people/sam_door_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view at the green door of Zoe's apartment (she is 18, out of frame): a barefoot man of 22 in a slept-in T-shirt with a guitar hanging off him by the strap, leaning on a door frame and looking the camera over.", search_queries = ["guy answering apartment door with guitar", "barefoot young man leaning on door frame"], pool_dir = "people/sam_door_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4636,7 +4676,7 @@ id = "party"
 name = "Zoe"
 blocks = [
   { type = "paragraph", content = "Zoe's on the sofa arm with a bottle in her hand, and she waves it at you like a flag." },
-  { type = "image", props = { description = "A woman of 19 perched on a sofa arm at a packed apartment party, a bottle in her hand, waving it. Not a selfie.", search_queries = ["woman 19 sitting on sofa arm at house party holding bottle", "girl waving a bottle at a crowded apartment party"], pool_dir = "everyday/zoe_party_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 19 perched on a sofa arm at a packed apartment party, a bottle in her hand, waving it. Not a selfie.", search_queries = ["girl sitting on sofa arm house party bottle", "girl waving bottle crowded apartment party"], pool_dir = "everyday/zoe_party_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4692,7 +4732,7 @@ blocks = [
   { type = "paragraph", content = "Her arm's round your neck, her breath sweet with whatever she's drinking." },
   { type = "dialog", content = "Okay, babe. Dare. Go dance with the guy by the speaker.", props = { speaker = "npc", npcId = "npc_zoe" } },
   { type = "paragraph", content = "He's tall, and he's been looking at you since you came in." },
-  { type = "image", props = { description = "Her view into a packed student party in a small apartment (she is 18, out of frame): a tall man by the speaker looking at the camera through the crowd.", search_queries = ["packed house party small apartment guy by speaker looking at camera", "crowded student party living room man watching"], pool_dir = "people/zoe_party_t0", pool = 1 } },
+  { type = "image", props = { description = "Her view into a packed student party in a small apartment (she is 18, out of frame): a tall man by the speaker looking at the camera through the crowd.", search_queries = ["packed house party small apartment speaker", "crowded student party living room"], pool_dir = "people/zoe_party_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4767,7 +4807,7 @@ id = "hub"
 name = "Brooke"
 blocks = [
   { type = "paragraph", content = "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it." },
-  { type = "image", props = { description = "A blonde woman of 21 leaning on a kitchen counter at a house party with a plastic cup, watching the room. Alone in frame.", search_queries = ["blonde woman 21 leaning on kitchen counter at house party cup", "college girl at party kitchen counter watching"], pool_dir = "everyday/brooke_party_t0", pool = 1 } },
+  { type = "image", props = { description = "A blonde woman of 21 leaning on a kitchen counter at a house party with a plastic cup, watching the room. Alone in frame.", search_queries = ["blonde college girl leaning on kitchen counter party", "college girl at party kitchen plastic cup"], pool_dir = "everyday/brooke_party_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4828,7 +4868,7 @@ id = "hub"
 name = "Kayla"
 blocks = [
   { type = "paragraph", content = "Kayla's at Brooke's elbow, laughing a beat after Brooke does." },
-  { type = "image", props = { description = "A woman of 20 at a house party kitchen, laughing, a cup in her hand. Alone in frame.", search_queries = ["woman 20 laughing at house party kitchen with cup", "college girl laughing at a party"], pool_dir = "everyday/kayla_party_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 20 at a house party kitchen, laughing, a cup in her hand. Alone in frame.", search_queries = ["college girl laughing at house party cup", "girl laughing party kitchen plastic cup"], pool_dir = "everyday/kayla_party_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4889,7 +4929,7 @@ id = "hub"
 name = "Tess"
 blocks = [
   { type = "paragraph", content = "Tess is at the end of the counter, turning a plastic cup round and round in her hands." },
-  { type = "image", props = { description = "A shy woman of 21 at the end of a kitchen counter at a party, turning a plastic cup in her hands. Alone in frame.", search_queries = ["shy woman 21 at party kitchen counter holding cup", "quiet girl at a house party with a drink"], pool_dir = "everyday/tess_party_t0", pool = 1 } },
+  { type = "image", props = { description = "A shy woman of 21 at the end of a kitchen counter at a party, turning a plastic cup in her hands. Alone in frame.", search_queries = ["girl at party kitchen counter cup", "young woman alone at party plastic cup", "girl standing by kitchen counter house party"], pool_dir = "everyday/tess_party_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -4953,7 +4993,7 @@ blocks = [
   { type = "paragraph", content = "Their door hasn't caught. Through the gap: Mom on her back, nightie round her waist, Mark between her legs, his hand over her mouth, slamming into her so hard the headboard taps the wall. Your face burns." },
   { type = "dialog", content = "Mark. The kids.", props = { speaker = "npc", npcId = "npc_laura" } },
   { type = "dialog", content = "Then be quiet, Laura. Be quiet for me.", props = { speaker = "npc", npcId = "npc_mark" } },
-  { type = "image", props = { description = "Seen through a door gap from a dark hall: a woman of 41 on her back in a lamp-lit bed, a man of 46 between her legs, his hand over her mouth. Nobody looking at the camera.", search_queries = ["couple sex missionary seen through door gap lamp light gif", "voyeur doorway couple bed gif"], pool_dir = "sex/parents_door_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen through a door gap from a dark hall: a woman of 41 on her back in a lamp-lit bed, a man of 46 between her legs, his hand over her mouth. Nobody looking at the camera.", search_queries = ["missionary fuck hand over mouth voyeur door gif", "mature couple missionary sex bed voyeur gif", "hand over her mouth missionary fuck amateur gif"], pool_dir = "sex/parents_door_t5", pool = 4 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -5033,7 +5073,7 @@ name = "His door's open a crack"
 blocks = [
   { type = "paragraph", content = "Ryan's door is open a hand's width. He's on his bed in his phone's light, shorts round his thighs, stroking his cock, eyes on the screen. Your face goes hot." },
   { type = "dialog", content = "Fuck. Yeah. Like that. Don't stop, don't stop.", props = { speaker = "npc", npcId = "npc_ryan" } },
-  { type = "image", props = { description = "Seen through a door gap from a dark hall: a man of 22 on a bed in phone light, shorts down, stroking, eyes on his phone. Nobody looking at the camera.", search_queries = ["man masturbating bed phone light seen through door gap gif"], pool_dir = "body/ryan_phone_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen through a door gap from a dark hall: a man of 22 on a bed in phone light, shorts down, stroking, eyes on his phone. Nobody looking at the camera.", search_queries = ["guy jerking off bed phone voyeur gif", "solo male handjob watching phone amateur gif", "caught jerking off door crack gif"], pool_dir = "body/ryan_phone_t5", pool = 4 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -5329,7 +5369,7 @@ id = "moment"
 name = "Shower"
 blocks = [
   { type = "paragraph", content = "The door bangs open. Ryan, in a towel, reaching for the razor on the sink. Then he sees you through the wet glass, all of you, soap running down your tits, and freezes." },
-  { type = "image", props = { description = "His view from the bathroom door: a young woman of 18 in a glass shower, wet, soap running down her breasts, caught and frozen. Looking at the camera.", search_queries = ["woman caught in glass shower wet soap looking at door", "girl surprised in shower glass door walked in on"], pool_dir = "body/ryan_shower_t4", pool = 4 } },
+  { type = "image", props = { description = "His view from the bathroom door: a young woman of 18 in a glass shower, wet, soap running down her breasts, caught and frozen. Looking at the camera.", search_queries = ["caught in shower naked surprised teen", "girl caught naked glass shower soapy tits", "walked in on her in the shower naked"], pool_dir = "body/ryan_shower_t4", pool = 4 } },
   { type = "dialog", content = "Shit. Sorry. Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
   { type = "paragraph", content = "He backs out with his eyes shut, too late." },
   { type = "dialog", content = "I'll come back. I'll come back later. Sorry.", props = { speaker = "npc", npcId = "npc_ryan" } },
@@ -5626,7 +5666,7 @@ name = "The dean's door"
 blocks = [
   { type = "paragraph", content = "The dean's office: a big desk, a window, and him behind it, writing. He doesn't look up, and he doesn't ask you to sit, so you stand." },
   { type = "paragraph", content = "When he does look up, he takes his time: your face, then down your body, then back up, slowly, like he's reading a form he means to sign." },
-  { type = "image", props = { description = "Her view across a dean's desk (she is 18, out of frame): a silver-haired man of 58 in a suit, looking up at the camera over his reading.", search_queries = ["older man dean behind desk looking up at camera", "silver haired college dean office desk looking at student"], pool_dir = "people/dean_first_t3", pool = 1 } },
+  { type = "image", props = { description = "Her view across a dean's desk (she is 18, out of frame): a silver-haired man of 58 in a suit, looking up at the camera over his reading.", search_queries = ["silver haired man behind desk looking up", "older executive office desk reading", "grey haired businessman at desk portrait"], pool_dir = "people/dean_first_t3", pool = 1 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "worn_exposure", operator = "gte", value = 1 }] } }, blocks = [
     { type = "dialog", content = "Is that what you're wearing to class, child?", props = { speaker = "npc", npcId = "npc_dean" } },
   ] },
@@ -5845,18 +5885,18 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_false" }, { type = "flag", subject = "player", flag_key = "ryan_looked", operator = "is_false" }] } }, blocks = [
     { type = "paragraph", content = "A knock, late. Ryan waits until you open, your charger held out. His eyes go to your chest, stay a second too long, then snap to the floor. His ears go pink." },
     { type = "dialog", content = "Thanks. For the, uh. Charger. You're a lifesaver. Seriously. Mine's useless.", props = { speaker = "npc", npcId = "npc_ryan" } },
-    { type = "image", props = { description = "His view at a bedroom door at night in a family house: a woman of 18 holding the door half open, the frame dropping to her chest and snapping away, the hall light on her. No man in frame.", search_queries = ["pov eyes drop to girl's chest at bedroom door at night then look away gif", "woman 18 holding door open at night camera glances down at chest gif"], pool_dir = "look/ryan_charger_back_t3", pool = 2 } },
+    { type = "image", props = { description = "His view at a bedroom door at night in a family house: a woman of 18 holding the door half open, the frame dropping to her chest and snapping away, the hall light on her. No man in frame.", search_queries = ["teen answering bedroom door night gif", "pov staring at clothed teen boobs gif", "girl opening door at night amateur gif"], pool_dir = "look/ryan_charger_back_t3", pool = 2 } },
   ] },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_back_seen", operator = "is_true" }, { type = "flag", subject = "player", flag_key = "ryan_looked", operator = "is_false" }] } }, blocks = [
     { type = "paragraph", content = "A knock, late. Ryan waits until you open, nothing in his hands this time. His eyes go to your chest and snap to the floor. His ears go pink." },
     { type = "dialog", content = "Just. Saying night. That's all. I couldn't sleep.", props = { speaker = "npc", npcId = "npc_ryan" } },
-    { type = "image", props = { description = "His view at a bedroom door at night in a family house: a woman of 18 holding the door half open, the frame dropping to her chest and snapping away, the hall light on her. No man in frame.", search_queries = ["pov eyes drop to girl's chest at bedroom door at night then look away gif", "woman 18 holding door open at night camera glances down at chest gif"], pool_dir = "look/ryan_knock_again_t3", pool = 2 } },
+    { type = "image", props = { description = "His view at a bedroom door at night in a family house: a woman of 18 holding the door half open, the frame dropping to her chest and snapping away, the hall light on her. No man in frame.", search_queries = ["girl answering bedroom door night pov gif", "teen at bedroom door night gif", "clothed boobs doorway pov amateur gif"], pool_dir = "look/ryan_knock_again_t3", pool = 2 } },
   ] },
   # P78 — after her freeze, he knows (C2202, C460).
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "ryan_looked", operator = "is_true" }] } }, blocks = [
     { type = "paragraph", content = "A knock, late. Ryan, in your doorway again, and this time he doesn't pretend it's about anything. His eyes go to your chest and stay there." },
     { type = "dialog", content = "Hey. Couldn't sleep. Again. You don't mind me looking, do you?", props = { speaker = "npc", npcId = "npc_ryan" } },
-    { type = "image", props = { description = "His view at a bedroom door at night in a family house: a woman of 18 holding the door open, the frame settling on her chest and staying there, moving slowly over her, the hall light on her. No man in frame.", search_queries = ["pov eyes linger on girl's chest at bedroom door at night gif", "woman 18 at bedroom door at night camera stays on her chest gif"], pool_dir = "look/ryan_knock_stays_t3", pool = 2 } },
+    { type = "image", props = { description = "His view at a bedroom door at night in a family house: a woman of 18 holding the door open, the frame settling on her chest and staying there, moving slowly over her, the hall light on her. No man in frame.", search_queries = ["pov staring at clothed teen boobs gif", "teen in doorway slow pov gif", "girl at bedroom door night amateur gif"], pool_dir = "look/ryan_knock_stays_t3", pool = 2 } },
   ] },
 ]
 
@@ -6178,7 +6218,7 @@ blocks = [
     { type = "dialog", content = "He's looking again. You know how this goes.", props = { speaker = "npc", npcId = "npc_zoe" } },
   ] },
   { type = "paragraph", content = "She takes you by the hips and turns you, slow, so he gets your ass." },
-  { type = "image", props = { description = "His view from the steps of a college quad: a woman of 18 turned slowly by her friend's hands on her hips so her ass faces the camera. No man in frame.", search_queries = ["girl turning friend by hips to show her ass college campus gif", "woman 18 turned around by friend hands on hips rear view gif"], pool_dir = "touch/zoe_give_him_t4", pool = 4 } },
+  { type = "image", props = { description = "His view from the steps of a college quad: a woman of 18 turned round, her ass to the camera, looking back over her shoulder. No man in frame.", search_queries = ["teen ass looking back over shoulder gif", "girl turned around ass campus gif", "college girl ass from behind amateur gif"], pool_dir = "touch/zoe_give_him_t4", pool = 4 } },
   { type = "dialog", content = "Hold still. Let him see.", props = { speaker = "npc", npcId = "npc_zoe" } },
 ]
 
@@ -6262,7 +6302,7 @@ blocks = [
     { type = "dialog", content = "The gutter, little lady. Mark still hasn't touched it. You tell him.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
   { type = "paragraph", content = "His eyes stay on your legs the whole time you answer." },
-  { type = "image", props = { description = "His view from a porch rail over a front path: a woman of 18 walking up to the steps, framed at her legs as his eyes stay on them. No man in frame.", search_queries = ["pov man on porch watching young woman's legs as she walks up the path gif", "woman 18 legs walking up front path seen from porch gif"], pool_dir = "look/vance_gutter_t3", pool = 2 } },
+  { type = "image", props = { description = "His view from a porch rail over a front path: a woman of 18 walking up to the steps, framed at her legs as his eyes stay on them. No man in frame.", search_queries = ["teen legs walking pov gif", "girl walking up porch steps legs gif", "candid teen legs walking amateur gif"], pool_dir = "look/vance_gutter_t3", pool = 2 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -6350,7 +6390,7 @@ blocks = [
     { type = "paragraph", content = "Vance is at the bottom of his steps with another envelope. When you reach for it, he doesn't let go. His thumb strokes the inside of your wrist." },
     { type = "dialog", content = "Another one for Mark. He knows what it's for.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
-  { type = "image", props = { description = "Close at the bottom of a porch's steps: a woman's wrist (she is 18) held by an older man's hand, his thumb slowly stroking the inside of it, an envelope between their fingers. Only their hands in frame.", search_queries = ["man thumb stroking inside of woman's wrist close up gif", "older man stroking young woman wrist holding envelope gif"], pool_dir = "touch/vance_envelope_t4", pool = 4 } },
+  { type = "image", props = { description = "Close at the bottom of a porch's steps: an older man's hand holding a young woman's wrist (she is 18). Only their hands in frame.", search_queries = ["older man holding girl wrist gif", "hand stroking wrist close up gif", "man holding woman hand close up gif"], pool_dir = "touch/vance_envelope_t4", pool = 4 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -6425,7 +6465,7 @@ blocks = [
   { type = "paragraph", content = "Dr. Hale looks up from his desk before you're through his door." },
   { type = "dialog", content = "Young lady. In here a minute.", props = { speaker = "npc", npcId = "npc_hale" } },
   { type = "paragraph", content = "He's got a class list in front of him. His eyes go to your chest and stay there." },
-  { type = "image", props = { description = "His view from behind a desk in a psychology office: a woman of 18 standing in his doorway, framed from the chest up as his eyes settle there. No man in frame.", search_queries = ["woman 18 standing in office doorway framed chest up gif", "professor view of student standing in doorway gif"], pool_dir = "look/hale_called_in_t3", pool = 2 } },
+  { type = "image", props = { description = "His view from behind a desk in a psychology office: a woman of 18 standing in his doorway, framed from the chest up as his eyes settle there. No man in frame.", search_queries = ["teen standing in office doorway pov gif", "pov staring at clothed college girl boobs gif", "girl in professor office doorway gif"], pool_dir = "look/hale_called_in_t3", pool = 2 } },
   { type = "dialog", content = "Front row, next class. I like to see who's listening.", props = { speaker = "npc", npcId = "npc_hale" } },
 ]
 
@@ -6507,7 +6547,7 @@ blocks = [
     { type = "dialog", content = "Hips. Show me you remember.", props = { speaker = "npc", npcId = "npc_marco" } },
   ] },
   { type = "paragraph", content = "His hands land on your hips and turn them, and stay." },
-  { type = "image", props = { description = "At a gym bench by the mirrors: a woman of 18 in leggings and a sports top, a trainer's big hands on her hips turning them, staying. Only his hands in frame.", search_queries = ["trainer hands on woman's hips correcting stance gym leggings gif", "personal trainer hands on hips woman 18 gym mirror gif"], pool_dir = "touch/marco_hips_t4", pool = 4 } },
+  { type = "image", props = { description = "At a gym bench by the mirrors: a woman of 18 in leggings and a sports top, a trainer's big hands on her hips turning them, staying. Only his hands in frame.", search_queries = ["gym trainer hands on her hips gif", "trainer groping hips gym amateur gif", "personal trainer touching girl hips mirror gif"], pool_dir = "touch/marco_hips_t4", pool = 4 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -6718,7 +6758,7 @@ id = "moment"
 name = "Behind the pond"
 blocks = [
   { type = "paragraph", content = "Through the bushes behind the pond: a man and a woman on the grass, her skirt up, her tits out, his jeans round his knees, his cock thrusting into her, slow and deep. Your face goes hot." },
-  { type = "image", props = { description = "Seen through bushes at dusk: a woman in her twenties and a man in his thirties having sex on the grass behind a pond, her skirt pushed up. Nobody looking at the camera.", search_queries = ["couple having sex on grass park dusk seen through bushes gif", "outdoor couple sex behind pond voyeur gif"], pool_dir = "sex/park_couple_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen through bushes at dusk: a woman in her twenties and a man in his thirties having sex on the grass behind a pond, her skirt pushed up. Nobody looking at the camera.", search_queries = ["outdoor sex park grass voyeur gif", "couple fucking in park grass amateur gif", "public sex park bushes skirt up gif"], pool_dir = "sex/park_couple_t5", pool = 4 } },
   { type = "dialog", content = "Don't stop. Don't you dare stop. Harder.", props = { speaker = "unknown" } },
   { type = "dialog", content = "Shh. Someone'll hear. Shh.", props = { speaker = "unknown" } },
 ]
@@ -6850,7 +6890,7 @@ blocks = [
       { type = "dialog", content = "Evening, little lady. Vance. I own your house.", props = { speaker = "npc", npcId = "npc_vance" } },
     ] },
     { type = "paragraph", content = "He looks you over, slow, from your feet up, and doesn't hide it." },
-    { type = "image", props = { description = "A man of 54 in a porch chair with a beer, looking straight at the camera.", search_queries = ["man 54 sitting in porch chair with beer looking at camera", "older man on front porch chair holding beer staring"], pool_dir = "people/vance_hello_t0", pool = 1 } },
+    { type = "image", props = { description = "A man of 54 in a porch chair with a beer, looking straight at the camera.", search_queries = ["older man porch chair holding beer", "older man on front porch with beer staring"], pool_dir = "people/vance_hello_t0", pool = 1 } },
     { type = "paragraph", content = "Your skin prickles. You keep your arms at your sides." },
     { type = "dialog", content = "Your stepdad pays me Sundays. When he doesn't, I'm the one who knocks. Tell him I said hello.", props = { speaker = "npc", npcId = "npc_vance" } },
   ] },
@@ -6975,7 +7015,7 @@ id = "moment"
 name = "At the squat rack"
 blocks = [
   { type = "paragraph", content = "Marco's behind a woman at the squat rack, his hands on her hips, \"fixing\" her form long after it's fixed. She doesn't move them." },
-  { type = "image", props = { description = "Seen from a gym doorway: a muscular trainer of 29 behind a woman in her twenties at a squat rack, his hands on her hips long after her form is fixed. Nobody looking at the camera.", search_queries = ["trainer hands on woman's hips squat rack gym gif", "personal trainer behind woman squatting hands on hips gif"], pool_dir = "touch/marco_squat_t4", pool = 4 } },
+  { type = "image", props = { description = "Seen from a gym doorway: a muscular trainer of 29 behind a woman in her twenties at a squat rack, his hands on her hips long after her form is fixed. Nobody looking at the camera.", search_queries = ["gym trainer groping squat rack leggings gif", "trainer hands on hips squat leggings gif", "squat rack trainer touching hips gif"], pool_dir = "touch/marco_squat_t4", pool = 4 } },
   { type = "dialog", content = "Lower. Lower. That's it. Feel that? Good.", props = { speaker = "npc", npcId = "npc_marco" } },
   { type = "paragraph", content = "Your own thighs go tight by the door. He sees that too." },
 ]
@@ -7121,7 +7161,7 @@ blocks = [
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "clothing_slot", slot = "underwear", operator = "unequipped" }] } }, blocks = [
     { type = "paragraph", content = "The curtain rips back. A man, a stranger with a bag of shirts, and you with the skirt halfway up your thighs and nothing under it." },
   ] },
-  { type = "image", props = { description = "His view through a yanked-back fitting-room curtain: a young woman of 18 caught half into a skirt, pulled up to her thighs, frozen and looking at the camera.", search_queries = ["girl caught changing fitting room curtain pulled open", "woman half dressed fitting room surprised looking at camera"], pool_dir = "body/curtain_flash_t4", pool = 4 } },
+  { type = "image", props = { description = "His view through a yanked-back fitting-room curtain: a young woman of 18 caught half into a skirt, pulled up to her thighs, frozen and looking at the camera.", search_queries = ["caught changing fitting room curtain open teen", "girl caught half dressed changing room skirt", "changing room caught skirt half on"], pool_dir = "body/curtain_flash_t4", pool = 4 } },
   { type = "dialog", content = "Oh, Christ. Sorry. Sorry.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "He drops the curtain at once, too late." },
   { type = "dialog", content = "I didn't see anything. I swear.", props = { speaker = "unknown" } },
@@ -7197,7 +7237,7 @@ id = "moment"
 name = "The back stacks"
 blocks = [
   { type = "paragraph", content = "Through a gap in the books in the back stacks: a couple against the shelves, her skirt in his fist, her tits out of her top, her leg round his hip as his cock fucks into her. Your face goes hot." },
-  { type = "image", props = { description = "Seen through a gap in library books: two students in their twenties having sex against the shelves, her skirt bunched up. Nobody looking at the camera.", search_queries = ["couple sex against library shelves seen through gap in books gif", "library stacks couple voyeur gif"], pool_dir = "sex/stacks_couple_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen through a gap in library books: two students in their twenties having sex against the shelves, her skirt bunched up. Nobody looking at the camera.", search_queries = ["library fuck against shelves voyeur gif", "public library sex skirt up amateur gif", "students fucking library stacks gif"], pool_dir = "sex/stacks_couple_t5", pool = 4 } },
   { type = "dialog", content = "Quiet. Someone'll come.", props = { speaker = "unknown" } },
   { type = "dialog", content = "Let them. Let them watch. Harder. Fuck.", props = { speaker = "unknown" } },
 ]
@@ -7442,7 +7482,7 @@ time_progression_minutes = 0
 id = "beside"
 name = "At the mirror"
 blocks = [
-  { type = "paragraph", content = "You fix your hair a foot from them. Nobody says anything to you. It's louder than if they had. Brooke's eyes find you in the mirror on the way out. She's remembering your face." },
+  { type = "paragraph", content = "You fix your hair a foot from them. Nobody says anything to you. It's louder than if they had. Brooke's eyes find you in the mirror. She's remembering your face." },
 ]
 
 [canvases.nodes.exit_block]
@@ -7489,7 +7529,7 @@ id = "moment"
 name = "A rehearsal"
 blocks = [
   { type = "paragraph", content = "Cross is running a scene with Brooke on the empty stage, his hand on her waist to place her, staying." },
-  { type = "image", props = { description = "Seen from dark theatre seats: on an empty black stage a man of 38 places a blonde woman of 21 with his hand on her waist, and leaves it there. Nobody looking at the camera.", search_queries = ["man hand on woman's waist on empty theatre stage rehearsal gif", "drama teacher placing actress hand on waist stage gif"], pool_dir = "look/cross_brooke_t3", pool = 2 } },
+  { type = "image", props = { description = "Seen from dark theatre seats: on an empty black stage a man of 38 places a blonde woman of 21 with his hand on her waist, and leaves it there. Nobody looking at the camera.", search_queries = ["man hand on woman waist stage rehearsal gif", "hand on her waist theatre stage blonde gif", "older man touching blonde waist stage gif"], pool_dir = "look/cross_brooke_t3", pool = 2 } },
   { type = "dialog", content = "Again. Slower. Like you mean it.", props = { speaker = "npc", npcId = "npc_cross" } },
   { type = "dialog", content = "I always mean it.", props = { speaker = "npc", npcId = "npc_brooke" } },
   { type = "paragraph", content = "You can feel where his hand would sit on your own waist." },
@@ -7545,7 +7585,7 @@ time_progression_minutes = 5
 
 [[canvases]]
 id = "walk_cross_seats"
-name = "Practise on the empty stage"
+name = "Mr. Cross in the dark seats"
 
 [canvases.trigger]
 location = "campus_theatre"
@@ -7553,14 +7593,14 @@ trigger_mode = "manual"
 is_repeatable = true
 max_triggers_per_day = 1
 substitution_only = true
-conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }, { type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "13:00", end_time = "14:00" }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_absent" }] }
+conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_cross", operator = "is_true" }, { type = "weekday", weekdays = [1, 3, 4] }, { type = "time_of_day", start_time = "13:00", end_time = "14:00" }, { type = "npc_at_location", npc_id = "npc_cross", location_id = "campus_theatre", operator = "is_present" }] }
 
 [[canvases.nodes]]
 id = "moment"
 name = "Practise on the empty stage"
 blocks = [
-  { type = "paragraph", content = "One pair of hands claps, once, from the dark seats. You've been saying your lines to nobody. You're not. Your face goes hot down your neck, your nipples tight." },
-  { type = "image", props = { description = "His view from the dark back seats of a theatre: a young woman of 18 alone on a lit stage, caught mid-line, looking out toward the camera.", search_queries = ["girl alone on lit theatre stage looking into dark seats", "young woman on stage spotlight looking at audience"], pool_dir = "people/cross_seats_t3", pool = 2 } },
+  { type = "paragraph", content = "One pair of hands claps, once, from the dark seats. You'd forgotten he was out there. Your face goes hot down your neck, your nipples tight." },
+  { type = "image", props = { description = "His view from the dark back seats of a theatre: a young woman of 18 alone on a lit stage, caught mid-line, looking out toward the camera.", search_queries = ["young woman alone on lit theatre stage", "actress on stage spotlight empty theater seats", "girl on stage looking out from dark auditorium"], pool_dir = "people/cross_seats_t3", pool = 2 } },
   { type = "dialog", content = "Again. Louder. You stopped meaning it halfway.", props = { speaker = "npc", npcId = "npc_cross" } },
   { type = "paragraph", content = "He's early for his two o'clock, and you've no idea how long he's been watching." },
 ]
@@ -7597,7 +7637,7 @@ text = "Done"
 targetType = "location"
 locationId = "campus_theatre"
 time_progression_minutes = 5
-flagEffects = [{ flag = "cross_saw_practise", op = "set" }]
+flagEffects = [{ flag = "cross_saw_practise", op = "set" }, { flag = "cross_seats_today", op = "set" }]
 
 [[canvases.nodes]]
 id = "off"
@@ -7615,7 +7655,7 @@ text = "Done"
 targetType = "location"
 locationId = "campus_theatre"
 time_progression_minutes = 5
-flagEffects = [{ flag = "cross_saw_practise", op = "set" }]
+flagEffects = [{ flag = "cross_saw_practise", op = "set" }, { flag = "cross_seats_today", op = "set" }]
 
 # ── P41 · walk-ins, near campus (PLAN §10d, LO "yes" 2026-11-21; windows a and b ENI for LO 2026-11-24); each known
 #    person's walk-in waits behind their meeting (walk-ins.md rule 10). ──
@@ -7638,7 +7678,7 @@ id = "moment"
 name = "Through the hall door"
 blocks = [
   { type = "paragraph", content = "Through the half-open hall door: Zoe on top of Sam on the sofa, her top off, his hands full of her tits, her wet cunt grinding down on his cock. Your nipples go hard." },
-  { type = "image", props = { description = "Seen through a half-open door: a woman of 19 riding a man of 22 on a sofa, topless, his hands on her breasts. Nobody looking at the camera.", search_queries = ["girl riding guy on sofa seen through doorway gif", "couple sex couch voyeur door gif"], pool_dir = "sex/zoe_sam_sofa_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen through a half-open door: a woman of 19 riding a man of 22 on a sofa, topless, his hands on her breasts. Nobody looking at the camera.", search_queries = ["cowgirl riding fuck sofa voyeur gif", "topless cowgirl riding fuck couch amateur gif", "girl riding fucking couch grabbing tits gif"], pool_dir = "sex/zoe_sam_sofa_t5", pool = 4 } },
   { type = "dialog", content = "Don't you dare come yet. Don't you dare. Not yet.", props = { speaker = "npc", npcId = "npc_zoe" } },
   { type = "dialog", content = "Then stop doing that. Fuck.", props = { speaker = "npc", npcId = "npc_sam" } },
 ]
@@ -7958,7 +7998,7 @@ id = "watch"
 name = "The storeroom door"
 blocks = [
   { type = "paragraph", content = "He fingers her faster, two deep in her cunt, until her knees buckle and she cums on his hand, her tits heaving." },
-  { type = "image", props = { description = "Seen through a café storeroom door left open a crack: a man in his twenties fingering a woman in her twenties against shelves of coffee stock, her skirt up round her waist, her top falling open, her knees buckling. Nobody looking at the camera.", search_queries = ["man fingering woman against storeroom shelves skirt up seen through door crack gif", "couple storeroom shelves fingering voyeur door ajar gif"], pool_dir = "sex/chris_store_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen through a café storeroom door left open a crack: a man in his twenties fingering a woman in her twenties against shelves of coffee stock, her skirt up round her waist, her top falling open, her knees buckling. Nobody looking at the camera.", search_queries = ["guy fingering girl against shelves skirt up gif", "storeroom guy fingering girl amateur gif", "fingering standing knees shaking amateur gif"], pool_dir = "sex/chris_store_t5", pool = 4 } },
   { type = "dialog", content = "That's it. Come for me.", props = { speaker = "npc", npcId = "npc_chris" } },
   { type = "dialog", content = "Oh God. Oh God, Chris.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "Your nipples are hard. You're back out front before they come out." },
@@ -8016,7 +8056,7 @@ id = "moment"
 name = "Find the bathroom"
 blocks = [
   { type = "paragraph", content = "You need the bathroom, and you push through the crowd to it. Its door isn't locked. A couple is on the edge of the bath, her dress round her waist, her tits out, his face buried in her cunt, licking. Your face burns." },
-  { type = "image", props = { description = "Seen from a bathroom doorway: a man in his twenties going down on a woman in her twenties on the edge of a bathtub at a party, her dress pushed up. Nobody looking at the camera.", search_queries = ["guy eating out girl edge of bathtub party gif", "oral sex bathroom party walked in gif"], pool_dir = "sex/party_bathroom_t5", pool = 4 } },
+  { type = "image", props = { description = "Seen from a bathroom doorway: a man in his twenties going down on a woman in her twenties on the edge of a bathtub at a party, her dress pushed up. Nobody looking at the camera.", search_queries = ["pussy licking sex edge of bathtub gif", "guy licking pussy sex bathroom party gif", "pussy eating sex bathtub voyeur amateur gif"], pool_dir = "sex/party_bathroom_t5", pool = 4 } },
   { type = "dialog", content = "Don't stop. Someone's going to — don't stop. Please. Please.", props = { speaker = "unknown" } },
 ]
 
@@ -8136,7 +8176,7 @@ blocks = [
   { type = "dialog", content = "Back off. I mean it.", props = { speaker = "player" } },
   { type = "dialog", content = "Relax, sweetheart. It's a bus.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "He shifts half an inch and no further." },
-  { type = "image", props = { description = "On a packed city bus: a woman of 18 standing pressed in by the crowd, turning to glare over her shoulder at the man close behind her. Nobody looking at the camera.", search_queries = ["woman glaring over shoulder at man behind her on packed bus gif", "girl pressed on crowded bus turning to look back gif"], pool_dir = "look/bus_packed_no_t3", pool = 2 } },
+  { type = "image", props = { description = "His view from close behind her on a packed city bus: a woman of 18 pressed in by the crowd, glaring back over her shoulder. No man in frame.", search_queries = ["packed bus teen looks back annoyed gif", "crowded bus girl glaring over shoulder gif", "annoyed girl crowded bus candid gif"], pool_dir = "look/bus_packed_no_t3", pool = 2 } },
   { type = "paragraph", content = "You step off in town with your legs shaking." },
 ]
 
@@ -8154,7 +8194,7 @@ id = "packed_quiet"
 name = "Bus to town"
 blocks = [
   { type = "paragraph", content = "You say nothing, and he breathes against your neck." },
-  { type = "image", props = { description = "On a packed city bus: a woman of 18 standing pressed in, a man behind her so close his hips are against her ass, his breath on her neck. Nobody looking at the camera.", search_queries = ["man pressed behind woman on crowded bus gif", "packed bus man standing too close behind girl gif"], pool_dir = "touch/bus_packed_quiet_t4", pool = 4 } },
+  { type = "image", props = { description = "On a packed city bus: a woman of 18 standing pressed in, a man behind her so close his hips are against her ass, his breath on her neck. Nobody looking at the camera.", search_queries = ["crowded bus groping from behind gif", "bus frottage pressed against ass gif", "man pressed behind girl crowded bus amateur gif"], pool_dir = "touch/bus_packed_quiet_t4", pool = 4 } },
   { type = "dialog", content = "Good girl. You've made my whole morning.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "You step off in town with your face burning, and you can still feel where he was." },
 ]
@@ -8267,7 +8307,7 @@ id = "do"
 name = "Sleep"
 blocks = [
   { type = "paragraph", content = "You pull on your pyjamas: the thin top and the little shorts. The sheet is cool on your bare legs, and your nipples tighten against the thin top." },
-  { type = "image", props = { description = "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.", search_queries = ["woman 18 single bed thin sheet pyjama shorts night", "girl lying in bed in a thin top and shorts, lights off"], pool_dir = "body/sleep_t3", pool = 2 } },
+  { type = "image", props = { description = "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.", search_queries = ["teen sleeping in bed night", "girl lying in bed dark sheet", "young woman asleep under sheet night"], pool_dir = "body/sleep_t3", pool = 2 } },
   { type = "paragraph", content = "You're gone before you've finished thinking about tomorrow." },
 ]
 
@@ -8363,7 +8403,7 @@ id = "do"
 name = "Shower"
 blocks = [
   { type = "paragraph", content = "The water takes forever to run hot. You step in anyway. It hits your nipples cold, and they go hard. Then it warms, and runs down your belly and between your legs, and you tip your head back and let it." },
-  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.", search_queries = ["woman 18 shower water running down body gif", "girl in a small home shower head tipped back gif"], pool_dir = "body/daily_shower_t4", pool = 4 } },
+  { type = "image", props = { description = "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.", search_queries = ["teen shower naked water running gif", "amateur girl showering nude head back gif", "naked shower wet body teen gif"], pool_dir = "body/daily_shower_t4", pool = 4 } },
   { type = "paragraph", content = "You towel off. Out there, the rent isn't paying itself." },
 ]
 
@@ -8398,7 +8438,7 @@ id = "hub"
 name = "Dr. Hale"
 blocks = [
   { type = "paragraph", content = "Dr. Hale's at his desk with a file open. He looks at you over the top of it." },
-  { type = "image", props = { description = "A man of 39 in a shirt and tie at an office desk with an open file, looking up over it. Alone.", search_queries = ["professor 39 office desk open file looking up", "man in a tie at a desk in a small university office"], pool_dir = "everyday/hale_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 39 in a shirt and tie at an office desk with an open file, looking up over it. Alone.", search_queries = ["professor at office desk open file", "man at desk small university office looking up"], pool_dir = "everyday/hale_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8458,7 +8498,7 @@ id = "hub"
 name = "Mr. Pratt"
 blocks = [
   { type = "paragraph", content = "Mr. Pratt is at the whiteboard with a marker, and he doesn't stop writing." },
-  { type = "image", props = { description = "A man of 44 in a sweater writing equations on a crowded whiteboard in a small office. Alone.", search_queries = ["man 44 sweater writing on whiteboard office", "statistics professor at a whiteboard full of numbers"], pool_dir = "everyday/pratt_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 44 in a sweater writing equations on a crowded whiteboard in a small office. Alone.", search_queries = ["professor writing equations on whiteboard office", "statistics professor at whiteboard full of numbers"], pool_dir = "everyday/pratt_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8519,7 +8559,7 @@ id = "hub"
 name = "Prof. Walsh"
 blocks = [
   { type = "paragraph", content = "Professor Walsh looks up from a stack of essays and smiles. The kettle on the sill is on." },
-  { type = "image", props = { description = "A woman of 48 in a cardigan at her desk in a small English professor's office, books and essays piled round her, smiling up. Alone.", search_queries = ["woman 48 cardigan desk piled with books smiling", "english professor office books kettle on windowsill"], pool_dir = "everyday/walsh_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 48 in a cardigan at her desk in a small English professor's office, books and essays piled round her, smiling up. Alone.", search_queries = ["older woman professor desk piled with books", "english professor office books smiling"], pool_dir = "everyday/walsh_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8579,7 +8619,7 @@ id = "hub"
 name = "Dean Sterling"
 blocks = [
   { type = "paragraph", content = "Dean Sterling is behind his desk, writing. He lets you stand there a while." },
-  { type = "image", props = { description = "A man of 58 in a dark suit writing at a large desk in a university dean's office, a window behind him, not looking up. Alone.", search_queries = ["man 58 dark suit writing at large desk window", "university dean behind big desk office"], pool_dir = "everyday/dean_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 58 in a dark suit writing at a large desk in a university dean's office, a window behind him, not looking up. Alone.", search_queries = ["older man writing at large desk window", "university dean behind big desk office"], pool_dir = "everyday/dean_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8640,7 +8680,7 @@ id = "hub"
 name = "Mr. Cross"
 blocks = [
   { type = "paragraph", content = "Mr. Cross is in the front row with his feet up on the stage, watching a scene die." },
-  { type = "image", props = { description = "A man of 38 in a black t-shirt sitting in the front row of a small theatre, feet up on the stage. Alone.", search_queries = ["man 38 black t-shirt front row theatre feet on stage", "drama teacher watching rehearsal from front row"], pool_dir = "everyday/cross_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 38 in a black t-shirt sitting in the front row of a small theatre, feet up on the stage. Alone.", search_queries = ["drama teacher front row theatre feet on stage", "man watching rehearsal from front row"], pool_dir = "everyday/cross_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8701,7 +8741,7 @@ id = "hub"
 name = "Ms. Holt"
 blocks = [
   { type = "paragraph", content = "Ms. Holt's at the desk, a paperback face-down by her elbow." },
-  { type = "image", props = { description = "A woman of 31 with glasses behind a library front desk, a paperback face-down by her elbow. Alone.", search_queries = ["woman 31 glasses library front desk paperback", "librarian behind the counter looking up"], pool_dir = "everyday/holt_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 31 with glasses behind a library front desk, a paperback face-down by her elbow. Alone.", search_queries = ["librarian glasses behind library front desk", "librarian behind counter paperback looking up"], pool_dir = "everyday/holt_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8761,7 +8801,7 @@ id = "hub"
 name = "Nadia"
 blocks = [
   { type = "paragraph", content = "Nadia's at a table with a tray she isn't eating from, her notes spread beside it." },
-  { type = "image", props = { description = "A woman of 20 at a cafeteria table with a tray and notes spread out, looking up. Alone.", search_queries = ["woman 20 cafeteria table tray notes", "college student lunch table with notes"], pool_dir = "everyday/nadia_cafeteria_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 20 at a cafeteria table with a tray and notes spread out, looking up. Alone.", search_queries = ["college student cafeteria table tray notes", "student lunch table notes looking up"], pool_dir = "everyday/nadia_cafeteria_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8821,7 +8861,7 @@ id = "hub"
 name = "Nadia"
 blocks = [
   { type = "paragraph", content = "Nadia's at a desk on the quiet floor, surrounded by highlighters." },
-  { type = "image", props = { description = "A woman of 20 at a library desk surrounded by highlighters and open books, looking up. Alone.", search_queries = ["woman 20 library desk highlighters open books", "college student studying in library looking up"], pool_dir = "everyday/nadia_library_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 20 at a library desk surrounded by highlighters and open books, looking up. Alone.", search_queries = ["college girl library desk highlighters books", "student studying in library looking up"], pool_dir = "everyday/nadia_library_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8881,7 +8921,7 @@ id = "hub"
 name = "Rosa"
 blocks = [
   { type = "paragraph", content = "Rosa's behind the counter, ladle in hand. She sees you and points it at you." },
-  { type = "image", props = { description = "A woman of 45 in an apron behind a cafeteria counter, pointing a ladle and smiling. Alone.", search_queries = ["woman 45 apron cafeteria counter ladle smiling", "lunch lady behind counter pointing ladle"], pool_dir = "everyday/rosa_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 45 in an apron behind a cafeteria counter, pointing a ladle and smiling. Alone.", search_queries = ["lunch lady behind counter ladle smiling", "cafeteria cook pointing ladle counter"], pool_dir = "everyday/rosa_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -8941,7 +8981,7 @@ id = "hub"
 name = "Zoe"
 blocks = [
   { type = "paragraph", content = "Zoe's stretched out on the grass in sunglasses, her skirt rucked up, and she doesn't fix it." },
-  { type = "image", props = { description = "A woman of 19 lying on the grass of a college quad in sunglasses and a short skirt. Alone.", search_queries = ["woman 19 lying on grass sunglasses short skirt campus", "college girl sunbathing on the quad"], pool_dir = "everyday/zoe_quad_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 19 lying on the grass of a college quad in sunglasses and a short skirt. Alone.", search_queries = ["college girl lying on grass sunglasses campus", "college girl sunbathing on the quad"], pool_dir = "everyday/zoe_quad_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9001,7 +9041,7 @@ id = "hub"
 name = "Zoe"
 blocks = [
   { type = "paragraph", content = "Zoe's at a table, stealing fries off a tray that isn't hers." },
-  { type = "image", props = { description = "A woman of 19 at a cafeteria table stealing fries off a tray, grinning. Alone.", search_queries = ["woman 19 cafeteria table eating fries grinning", "college girl at lunch table laughing"], pool_dir = "everyday/zoe_cafeteria_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 19 at a cafeteria table stealing fries off a tray, grinning. Alone.", search_queries = ["college girl cafeteria eating fries grinning", "college girl at lunch table laughing"], pool_dir = "everyday/zoe_cafeteria_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9061,7 +9101,7 @@ id = "hub"
 name = "Zoe"
 blocks = [
   { type = "paragraph", content = "Zoe's on her couch with her feet up and her phone in her hand. She waves you in without looking up." },
-  { type = "image", props = { description = "A woman of 19 on a couch in a small apartment, feet up, phone in hand, waving. Alone.", search_queries = ["woman 19 couch apartment feet up phone", "college girl on her couch at home evening"], pool_dir = "everyday/zoe_flat_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 19 on a couch in a small apartment, feet up, phone in hand, waving. Alone.", search_queries = ["girl on couch feet up phone apartment", "college girl on her couch evening waving"], pool_dir = "everyday/zoe_flat_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9121,7 +9161,7 @@ id = "hub"
 name = "Jake"
 blocks = [
   { type = "paragraph", content = "Jake's at the table by the window with his friends. He sees you and sits up straighter." },
-  { type = "image", props = { description = "A man of 20 in a hoodie at a cafeteria table by a window, sitting up and smiling nervously. Alone.", search_queries = ["man 20 hoodie cafeteria table window nervous smile", "college guy at lunch table looking up"], pool_dir = "everyday/jake_cafeteria_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 20 in a hoodie at a cafeteria table by a window, sitting up and smiling nervously. Alone.", search_queries = ["college guy cafeteria table window smiling", "young man campus dining hall table"], pool_dir = "everyday/jake_cafeteria_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9182,7 +9222,7 @@ id = "hub"
 name = "Jake"
 blocks = [
   { type = "paragraph", content = "Jake's on the steps with his friends. One of them elbows him as you come over." },
-  { type = "image", props = { description = "A man of 20 in a hoodie sitting on campus steps, looking up with a nervous grin. Alone.", search_queries = ["man 20 hoodie sitting on campus steps nervous grin", "college guy on the steps outside"], pool_dir = "everyday/jake_quad_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 20 in a hoodie sitting on campus steps, looking up with a nervous grin. Alone.", search_queries = ["college guy sitting on campus steps grin", "young man campus stairs looking up smiling"], pool_dir = "everyday/jake_quad_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9243,7 +9283,7 @@ id = "hub"
 name = "Brooke"
 blocks = [
   { type = "paragraph", content = "Brooke's at the mirror doing her lips. She watches you come in, in the glass." },
-  { type = "image", props = { description = "A woman of 21 at a bathroom mirror putting on lipstick, watching in the glass. Alone. No phone, not a selfie.", search_queries = ["woman 21 bathroom mirror lipstick", "college girl applying lipstick in mirror"], pool_dir = "everyday/brooke_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 21 at a bathroom mirror putting on lipstick, watching in the glass. Alone. No phone, not a selfie.", search_queries = ["college girl applying lipstick bathroom mirror", "girl putting on lipstick mirror reflection"], pool_dir = "everyday/brooke_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9306,7 +9346,7 @@ id = "hub"
 name = "Mr. Vance"
 blocks = [
   { type = "paragraph", content = "Mr. Vance is in his chair on the porch, watching the street. He watches you come up the path." },
-  { type = "image", props = { description = "A man of 54 in a short-sleeved shirt sitting on a house porch with a beer, watching the street. Alone.", search_queries = ["man 54 sitting on porch with beer watching street", "older man on front porch chair suburban street"], pool_dir = "everyday/vance_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 54 in a short-sleeved shirt sitting on a house porch with a beer, watching the street. Alone.", search_queries = ["older man sitting on porch with beer", "older man front porch chair suburban street"], pool_dir = "everyday/vance_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9367,7 +9407,7 @@ id = "hub"
 name = "Frank"
 blocks = [
   { type = "paragraph", content = "Frank's behind the till with the paper open, and he folds it the second you come in." },
-  { type = "image", props = { description = "A man of 52 behind a corner-shop till with a folded newspaper, looking up. Alone.", search_queries = ["man 52 corner shop till folded newspaper", "convenience store owner behind counter older man"], pool_dir = "everyday/frank_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 52 behind a corner-shop till with a folded newspaper, looking up. Alone.", search_queries = ["shopkeeper behind till folded newspaper", "convenience store owner behind counter older man"], pool_dir = "everyday/frank_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9427,7 +9467,7 @@ id = "hub"
 name = "Danny"
 blocks = [
   { type = "paragraph", content = "Danny's leaning on the till with his phone, and he puts it face-down when he sees you." },
-  { type = "image", props = { description = "A man of 23 leaning on a corner-shop till, phone face-down, grinning. Alone.", search_queries = ["man 23 leaning on shop counter grinning", "young guy behind convenience store till evening"], pool_dir = "everyday/danny_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 23 leaning on a corner-shop till, phone face-down, grinning. Alone.", search_queries = ["young guy leaning on shop counter grinning", "convenience store clerk behind till phone"], pool_dir = "everyday/danny_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9489,7 +9529,7 @@ id = "hub"
 name = "Marco"
 blocks = [
   { type = "paragraph", content = "Marco's by the rack between clients, a towel round his neck, and he watches you cross the floor." },
-  { type = "image", props = { description = "A muscular man of 29 in a tank top by a gym squat rack, towel round his neck. Alone.", search_queries = ["muscular man 29 tank top gym squat rack towel", "personal trainer standing by rack in gym"], pool_dir = "everyday/marco_t0", pool = 1 } },
+  { type = "image", props = { description = "A muscular man of 29 in a tank top by a gym squat rack, towel round his neck. Alone.", search_queries = ["muscular personal trainer gym squat rack towel", "personal trainer standing by rack in gym"], pool_dir = "everyday/marco_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9551,7 +9591,7 @@ id = "hub"
 name = "Nina"
 blocks = [
   { type = "paragraph", content = "Nina's behind the till in something tight and new, and she looks you up and down like she's pricing you." },
-  { type = "image", props = { description = "A woman of 26 in a tight dress behind a boutique till, looking up and smiling. Alone.", search_queries = ["woman 26 tight dress boutique counter smiling", "clothes shop owner behind till young woman"], pool_dir = "everyday/nina_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 26 in a tight dress behind a boutique till, looking up and smiling. Alone.", search_queries = ["boutique owner behind till smiling", "clothes shop owner behind counter young woman"], pool_dir = "everyday/nina_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9614,7 +9654,7 @@ id = "hub"
 name = "Tom"
 blocks = [
   { type = "paragraph", content = "Tom's behind the counter with a cloth over his shoulder. He nods you over like you're on the clock." },
-  { type = "image", props = { description = "A man of 31 in a black apron behind a café counter, a cloth over his shoulder, nodding. Alone.", search_queries = ["man 31 black apron behind cafe counter", "cafe manager leaning on counter"], pool_dir = "everyday/tom_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 31 in a black apron behind a café counter, a cloth over his shoulder, nodding. Alone.", search_queries = ["cafe manager behind counter cloth on shoulder", "cafe owner leaning on counter nodding"], pool_dir = "everyday/tom_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9676,7 +9716,7 @@ id = "hub"
 name = "Chris"
 blocks = [
   { type = "paragraph", content = "Chris is at the machine, sleeves pushed up, and he doesn't stop working to look at you. He looks anyway." },
-  { type = "image", props = { description = "A man of 24 with his sleeves pushed up working an espresso machine behind a small café counter, glancing over. Alone.", search_queries = ["man 24 sleeves pushed up espresso machine barista", "barista at coffee machine glancing over shoulder"], pool_dir = "everyday/chris_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 24 with his sleeves pushed up working an espresso machine behind a small café counter, glancing over. Alone.", search_queries = ["barista working espresso machine glancing over", "barista at coffee machine glancing over shoulder"], pool_dir = "everyday/chris_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9737,7 +9777,7 @@ id = "hub"
 name = "Sam"
 blocks = [
   { type = "paragraph", content = "Sam's sprawled on the sofa with his guitar, barefoot, and he lifts two fingers off the strings at you." },
-  { type = "image", props = { description = "A man of 22 sprawled barefoot on a sofa in a small shared student apartment, an acoustic guitar on his lap, lifting two fingers in a wave.", search_queries = ["man 22 barefoot on sofa acoustic guitar", "college guy lounging with guitar in apartment"], pool_dir = "everyday/sam_t0", pool = 1 } },
+  { type = "image", props = { description = "A man of 22 sprawled barefoot on a sofa in a small shared student apartment, an acoustic guitar on his lap, lifting two fingers in a wave.", search_queries = ["guy barefoot on sofa acoustic guitar", "college guy lounging with guitar apartment"], pool_dir = "everyday/sam_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9802,7 +9842,7 @@ id = "hub"
 name = "Kayla"
 blocks = [
   { type = "paragraph", content = "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to." },
-  { type = "image", props = { description = "A woman of 20 at a bathroom mirror holding a make-up bag, smirking at the glass. Alone. No phone, not a selfie.", search_queries = ["woman 20 bathroom mirror holding makeup bag smirk", "college girl at bathroom mirror smirking"], pool_dir = "everyday/kayla_mirror_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 20 at a bathroom mirror holding a make-up bag, smirking at the glass. Alone. No phone, not a selfie.", search_queries = ["college girl bathroom mirror makeup bag smirk", "girl at bathroom mirror smirking"], pool_dir = "everyday/kayla_mirror_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9865,7 +9905,7 @@ id = "hub"
 name = "Kayla"
 blocks = [
   { type = "paragraph", content = "Kayla's at the middle table with Tess, picking at a salad and watching who comes in." },
-  { type = "image", props = { description = "A woman of 20 at a cafeteria table picking at a salad, watching the room. Alone.", search_queries = ["woman 20 cafeteria table salad watching", "college girl at lunch table looking over"], pool_dir = "everyday/kayla_cafeteria_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 20 at a cafeteria table picking at a salad, watching the room. Alone.", search_queries = ["college girl cafeteria table salad", "college girl at lunch table looking over"], pool_dir = "everyday/kayla_cafeteria_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9928,7 +9968,7 @@ id = "hub"
 name = "Tess"
 blocks = [
   { type = "paragraph", content = "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away." },
-  { type = "image", props = { description = "A woman of 21 at a bathroom mirror holding a make-up brush, glancing shyly at the glass. Alone. No phone, not a selfie.", search_queries = ["woman 21 bathroom mirror makeup brush shy glance", "shy college girl doing makeup at mirror"], pool_dir = "everyday/tess_mirror_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 21 at a bathroom mirror holding a make-up brush, glancing shyly at the glass. Alone. No phone, not a selfie.", search_queries = ["young woman doing makeup bathroom mirror brush", "girl applying makeup brush mirror reflection"], pool_dir = "everyday/tess_mirror_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -9990,7 +10030,7 @@ id = "hub"
 name = "Tess"
 blocks = [
   { type = "paragraph", content = "Tess is at the end of the middle table, turning a make-up brush over in her fingers." },
-  { type = "image", props = { description = "A woman of 21 at a cafeteria table turning a make-up brush in her fingers, looking down. Alone.", search_queries = ["woman 21 cafeteria table makeup brush shy", "quiet college girl at lunch table"], pool_dir = "everyday/tess_cafeteria_t0", pool = 1 } },
+  { type = "image", props = { description = "A woman of 21 at a cafeteria table turning a make-up brush in her fingers, looking down. Alone.", search_queries = ["young woman cafeteria table makeup brush", "college girl sitting cafeteria looking down"], pool_dir = "everyday/tess_cafeteria_t0", pool = 1 } },
 ]
 
 [canvases.nodes.exit_block]
@@ -10055,7 +10095,7 @@ id = "moment"
 name = "At the bus stop"
 blocks = [
   { type = "paragraph", content = "The guys at the bus stop go quiet. One of them whistles, low, his eyes on your ass in the leggings." },
-  { type = "image", props = { description = "His view from a bus stop on a suburban street: a woman of 18 walking past in tight leggings, seen from behind, her ass moving as she walks. No man in frame.", search_queries = ["woman 18 walking away tight leggings suburban street from behind gif", "girl in leggings walking past bus stop rear view gif"], pool_dir = "look/notice_street_leggings_t3", pool = 2 } },
+  { type = "image", props = { description = "His view from a bus stop on a suburban street: a woman of 18 walking past in tight leggings, seen from behind, her ass moving as she walks. No man in frame.", search_queries = ["candid teen leggings ass walking street gif", "tight leggings ass walking from behind gif", "girl leggings walking candid ass amateur gif"], pool_dir = "look/notice_street_leggings_t3", pool = 2 } },
   { type = "dialog", content = "Don't walk so fast, doll. Let us look.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "Your face goes hot." },
 ]
@@ -10128,7 +10168,7 @@ id = "moment"
 name = "Across the road"
 blocks = [
   { type = "paragraph", content = "Across the road, a neighbour stops with his keys in his hand. His eyes drop to your chest in Mom's top and stay there." },
-  { type = "image", props = { description = "His view from across a suburban street: a woman of 18 walking on the pavement in a low-cut top, her cleavage showing as she walks. No man in frame.", search_queries = ["woman 18 low cut top walking on suburban pavement cleavage gif", "girl in low-cut top walking down street seen from across road gif"], pool_dir = "look/notice_street_momtop_t3", pool = 2 } },
+  { type = "image", props = { description = "His view from across a suburban street: a woman of 18 walking on the pavement in a low-cut top, her cleavage showing as she walks. No man in frame.", search_queries = ["candid cleavage walking street teen gif", "low cut top cleavage walking candid gif", "girl walking cleavage bouncing candid gif"], pool_dir = "look/notice_street_momtop_t3", pool = 2 } },
   { type = "dialog", content = "Nice top, love. It really suits you.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "Your face goes hot." },
 ]
@@ -10201,7 +10241,7 @@ id = "moment"
 name = "The van"
 blocks = [
   { type = "paragraph", content = "A van slows at the kerb. The driver leans across the seat, and his eyes go down your bare legs under Mom's skirt and back up." },
-  { type = "image", props = { description = "A van driver's view from the kerb of a suburban street: a woman of 18 on the pavement in a short skirt, bare legs, tugging the hem down. No man in frame.", search_queries = ["woman 18 short skirt bare legs walking pavement tugging hem gif", "girl in short skirt on sidewalk seen from car gif"], pool_dir = "look/notice_street_skirt_t3", pool = 2 } },
+  { type = "image", props = { description = "A van driver's view from the kerb of a suburban street: a woman of 18 on the pavement in a short skirt, bare legs, tugging the hem down. No man in frame.", search_queries = ["candid short skirt legs walking teen gif", "girl tugging short skirt down walking gif", "mini skirt candid legs sidewalk gif"], pool_dir = "look/notice_street_skirt_t3", pool = 2 } },
   { type = "dialog", content = "Legs like that, you shouldn't be walking, darling.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "You tug the hem down." },
 ]
@@ -10275,7 +10315,7 @@ id = "moment"
 name = "The jogger"
 blocks = [
   { type = "paragraph", content = "A jogger coming the other way looks at your leggings, then your face, then your leggings." },
-  { type = "image", props = { description = "A jogger's view on a park path by a pond: a woman of 18 in tight leggings walking past, seen from behind as he turns his head. No man in frame.", search_queries = ["woman 18 tight leggings walking park path from behind gif", "girl in leggings in park rear view walking gif"], pool_dir = "look/notice_park_leggings_t3", pool = 2 } },
+  { type = "image", props = { description = "A jogger's view on a park path by a pond: a woman of 18 in tight leggings walking past, seen from behind as he turns his head. No man in frame.", search_queries = ["candid leggings ass park walking gif", "teen tight leggings park path from behind gif", "girl walking leggings ass candid park gif"], pool_dir = "look/notice_park_leggings_t3", pool = 2 } },
   { type = "dialog", content = "Nice leggings. Very nice.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "Your face goes hot." },
 ]
@@ -10350,7 +10390,7 @@ id = "moment"
 name = "Between sets"
 blocks = [
   { type = "paragraph", content = "Two of the regulars stop between sets when you walk in. Your leggings show every line of your ass." },
-  { type = "image", props = { description = "Their view across a small gym with mirrors on every wall: a woman of 18 in tight leggings walking past the weights, seen from behind. No man in frame.", search_queries = ["woman 18 tight leggings walking through gym from behind mirrors gif", "girl in leggings walking past weights gym rear view gif"], pool_dir = "look/notice_gym_leggings_t3", pool = 2 } },
+  { type = "image", props = { description = "Their view across a small gym with mirrors on every wall: a woman of 18 in tight leggings walking past the weights, seen from behind. No man in frame.", search_queries = ["gym leggings ass walking candid gif", "teen tight leggings gym from behind gif", "girl leggings ass gym mirrors candid gif"], pool_dir = "look/notice_gym_leggings_t3", pool = 2 } },
   { type = "dialog", content = "Look what just walked in.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "Your face goes hot." },
 ]
@@ -10473,7 +10513,7 @@ id = "mingle"
 name = "Mingle"
 blocks = [
   { type = "paragraph", content = "You work your way round the room with a drink you didn't ask for. Every few steps a hand finds your waist to get past, and stays a second longer than it needs to." },
-  { type = "image", props = { description = "At a packed apartment party: a woman of 18 with a drink edging through the crowd, a passing man's hand on her waist that stays a second too long. Nobody looking at the camera.", search_queries = ["man's hand lingering on woman's waist squeezing past at crowded party gif", "hand on girl's waist in packed house party crowd gif"], pool_dir = "touch/party_mingle_t4", pool = 4 } },
+  { type = "image", props = { description = "At a packed apartment party: a woman of 18 with a drink edging through the crowd, a passing man's hand on her waist that stays a second too long. Nobody looking at the camera.", search_queries = ["groped at party hand on waist gif", "house party crowd hand on girl waist gif", "teen squeezing through party crowd groped gif"], pool_dir = "touch/party_mingle_t4", pool = 4 } },
   { type = "dialog", content = "You're Zoe's friend, right? From the college? She never shuts up about you.", props = { speaker = "unknown" } },
   { type = "dialog", content = "Good things, I hope.", props = { speaker = "player" } },
   { type = "dialog", content = "Mostly. Come and meet everyone. Everyone's drunk, so it's easy.", props = { speaker = "unknown" } },
@@ -10541,7 +10581,7 @@ id = "dance"
 name = "Dance"
 blocks = [
   { type = "paragraph", content = "You squeeze into the middle of the room where the bodies are tightest and let the music take you. Somebody's hip is against yours, somebody's hand is on your back, and sweat runs down between your tits." },
-  { type = "image", props = { description = "In the middle of a packed apartment party: a woman of 18 dancing in the crowd, sweaty and laughing, bodies pressed around her. Nobody looking at the camera.", search_queries = ["girl dancing sweaty in crowded apartment party gif", "woman 18 dancing laughing packed house party gif"], pool_dir = "look/party_dance_t3", pool = 2 } },
+  { type = "image", props = { description = "In the middle of a packed apartment party: a woman of 18 dancing in the crowd, sweaty and laughing, bodies pressed around her. Nobody looking at the camera.", search_queries = ["teen dancing sweaty house party gif", "girl dancing packed party crowd gif", "teen dancing party amateur gif"], pool_dir = "look/party_dance_t3", pool = 2 } },
   { type = "dialog", content = "Yes! Go on, girl!", props = { speaker = "unknown" } },
   { type = "dialog", content = "Don't stop, this is the best song!", props = { speaker = "unknown" } },
   { type = "paragraph", content = "You're breathless and laughing when the song ends." },
@@ -10607,7 +10647,7 @@ id = "moment"
 name = "A drink"
 blocks = [
   { type = "paragraph", content = "A guy you don't know puts a plastic cup in your hand and stays there, close enough that his chest brushes your tits when he leans in to talk." },
-  { type = "image", props = { description = "At a packed apartment party: a woman of 18 with a plastic cup, a man in his twenties leaning in so close his chest brushes hers. Nobody looking at the camera.", search_queries = ["man leaning in close to woman at crowded house party cup gif", "guy standing too close to girl at party chest touching gif"], pool_dir = "touch/party_drink_guy_t4", pool = 4 } },
+  { type = "image", props = { description = "At a packed apartment party: a woman of 18 with a plastic cup, a man in his twenties leaning in so close his chest brushes hers. Nobody looking at the camera.", search_queries = ["guy too close girl at party cup gif", "man leaning in at house party chest gif", "party flirt standing too close teen gif"], pool_dir = "touch/party_drink_guy_t4", pool = 4 } },
   { type = "dialog", content = "You looked thirsty. I'm being a gentleman.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "His eyes keep dropping to your mouth." },
 ]
@@ -10789,7 +10829,7 @@ id = "moment"
 name = "Zoe and the sofa"
 blocks = [
   { type = "paragraph", content = "Zoe's up on the sofa arm, arms over her head, dancing like the party's hers. She jumps down, and a guy you don't know kisses her neck on his way past. She lets him." },
-  { type = "image", props = { description = "At a packed apartment party: a woman of 19 who has just jumped down off a sofa arm, a passing man kissing her neck, and she lets him. Nobody looking at the camera.", search_queries = ["man kissing girl's neck at house party sofa gif", "woman 19 neck kissed by passing guy at party gif"], pool_dir = "look/party_zoe_sam_t3", pool = 2 } },
+  { type = "image", props = { description = "At a packed apartment party: a woman of 19 who has just jumped down off a sofa arm, a passing man kissing her neck, and she lets him. Nobody looking at the camera.", search_queries = ["guy kissing girl neck at party gif", "neck kissing house party sofa amateur gif", "teen neck kissed party gif"], pool_dir = "look/party_zoe_sam_t3", pool = 2 } },
   { type = "group", props = { conditions = { version = "1.0", logic = "AND", items = [{ type = "flag", subject = "player", flag_key = "met_sam", operator = "is_true" }] } }, blocks = [
     { type = "paragraph", content = "Sam's on the sofa under the coats, and he just grins." },
     { type = "dialog", content = "Don't look at Sam like that, babe. Sam's not mine. Nobody's mine.", props = { speaker = "npc", npcId = "npc_zoe" } },
@@ -10868,7 +10908,7 @@ id = "moment"
 name = "The guy by the speaker"
 blocks = [
   { type = "paragraph", content = "The tall guy by the speaker has been watching you since you came in. Halfway through the song he's behind you, his hand on your hip. He doesn't ask. He pulls you back against him and moves with you, slow, his hips against your ass." },
-  { type = "image", props = { description = "On a packed apartment dance floor: a woman of 18 dancing with a tall man pressed behind her, his hands on her hips, grinding slow. Nobody looking at the camera.", search_queries = ["man grinding behind woman dancing at house party hands on hips gif", "couple grinding on crowded party dance floor gif"], pool_dir = "touch/party_speaker_guy_t4", pool = 4 } },
+  { type = "image", props = { description = "On a packed apartment dance floor: a woman of 18 dancing with a tall man pressed behind her, his hands on her hips, grinding slow. Nobody looking at the camera.", search_queries = ["grinding ass on guy at party gif", "teen twerking grinding house party gif", "grinding dance floor hands on hips amateur gif"], pool_dir = "touch/party_speaker_guy_t4", pool = 4 } },
   { type = "dialog", content = "Don't stop on my account.", props = { speaker = "unknown" } },
   { type = "paragraph", content = "You can feel him getting hard through his jeans." },
 ]

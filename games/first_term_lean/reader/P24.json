@@ -1,13 +1,13 @@
 {
  "piece": "P24",
- "pass": 22,
+ "pass": 23,
  "screens": {
   "street_meet_vance.porch": {
-   "text": "e69a764c83344876",
+   "text": "4d83358f6b98de21",
    "traits": "d9172dabbd56b049",
    "facts": "093da1921eaeb199",
    "facts2": "bfd991956d1f9064",
-   "all": "ec0a7ab26be8740b"
+   "all": "7312dcdd03225d85"
   },
   "street_meet_vance.after": {
    "text": "b681518a9dc12eea",
@@ -16,7 +16,7 @@
    "facts2": "35addffdca947460",
    "all": "198beb2011e6ab38"
   },
-  "*": "217824dcf50567f8"
+  "*": "52857e88fbab79cd"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -98,6 +98,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -194,20 +197,20 @@
    "row": "B10",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles.",
-   "why": "a button at hood_next_door on Sunday (weekday 6) while he is present (Sun 09-12, 17-20) and met_vance unset; she is at his porch, so 'when he sees you' / 'his eyes go over you' hold at every minute; 'like every Sunday' true by his weekend rows; second visit impossible (is_repeatable false)",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail",
+   "why": "first and last minute and a second visit: Sunday, Vance present (Sun 09-12, 17-20), met_vance false; nobody else named; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e69a764c83344876",
+    "text": "4d83358f6b98de21",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "ec0a7ab26be8740b"
+    "all": "7312dcdd03225d85"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 16
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "B11",
@@ -362,20 +365,20 @@
    "row": "B8",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles.",
-   "why": "names her legs, no garment; 54 in the picture agrees with PLAN:62",
+   "line": "older man sitting on front porch mug",
+   "why": "names her legs, no garment; search words name his chair and mug only",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e69a764c83344876",
+    "text": "4d83358f6b98de21",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "ec0a7ab26be8740b"
+    "all": "7312dcdd03225d85"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 16
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "B9",
@@ -1133,8 +1136,47 @@
    "note": false,
    "screen_hash": "217824dcf50567f8",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 22
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "52857e88fbab79cd",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 23
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "older man on porch chair watching street",
+   "why": "6-7 words; no digit, no name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "52857e88fbab79cd",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 23
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "older man on porch chair watching street",
+   "why": "one subject on a porch chair with a mug; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "52857e88fbab79cd",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C286",
@@ -1397,20 +1439,20 @@
    "row": "C460",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "Today he puts the mug down when he sees you, and his eyes go over you, taking their time over your legs, like he's got all day. Your skin prickles.",
-   "why": "the old 'follow you up his path' claim is gone; every line true at 09:00, 11:59, 17:00, 19:59 on a Sunday, unmet, whether or not she left him on a Saturday walk-in ('Today' still true)",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail",
+   "why": "every claim true on every playthrough that reaches it: Sunday, Vance present (Sun 09-12, 17-20), met_vance false; nobody else named; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e69a764c83344876",
+    "text": "4d83358f6b98de21",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "ec0a7ab26be8740b"
+    "all": "7312dcdd03225d85"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 16
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C461",
@@ -1448,20 +1490,20 @@
    "row": "C461",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "Well. Look who stopped being a kid. Come here a minute, little lady.",
-   "why": "his cast line (PLAN:141); she grew up in the rented house (PLAN \u00a71), so 'stopped being a kid' fits",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e69a764c83344876",
+    "text": "4d83358f6b98de21",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "ec0a7ab26be8740b"
+    "all": "7312dcdd03225d85"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 16
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "C519",
@@ -2171,20 +2213,20 @@
    "row": "L106",
    "screen": "street_meet_vance.porch",
    "verdict": "PASS",
-   "line": "The man next door is in the one chair on his porch",
-   "why": "npc_at_location npc_vance hood_next_door is_present on the trigger; nobody else named",
+   "line": "The man next door is in the one chair on his porch, a mug on the rail",
+   "why": "only the screen's own person is claimed there, and their rows put them there: Sunday, Vance present (Sun 09-12, 17-20), met_vance false; nobody else named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e69a764c83344876",
+    "text": "4d83358f6b98de21",
     "traits": "d9172dabbd56b049",
     "facts": "093da1921eaeb199",
     "facts2": "bfd991956d1f9064",
-    "all": "ec0a7ab26be8740b"
+    "all": "7312dcdd03225d85"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 16
+   "carried": false,
+   "pass": 23
   },
   {
    "row": "L119",
@@ -2350,8 +2392,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P09",
- "pass": 19,
+ "pass": 21,
  "screens": {
   "class_psych.class": {
    "text": "7dc50540207a762d",
@@ -26,16 +26,16 @@
   "class_drama.class": {
    "text": "fab67ed08993a657",
    "traits": "2875b58584de3c6e",
-   "facts": "77c5977fffe46fc8",
-   "facts2": "30f91571176cc73e",
-   "all": "dad8cb2c0035883a"
+   "facts": "a24b2e3f27703817",
+   "facts2": "db877e27b941b769",
+   "all": "e49be07c102b94c5"
   },
   "stage_practise.practise": {
-   "text": "601103fec24e1708",
+   "text": "9058cdb5f00b1952",
    "traits": "44136fa355b3678a",
    "facts": "f3fdaee8cfb85e6d",
    "facts2": "f3fdaee8cfb85e6d",
-   "all": "271a448474046e50"
+   "all": "d81c58366ad88da6"
   },
   "study_library.study": {
    "text": "98a24397919bb952",
@@ -64,7 +64,7 @@
    "facts2": "ce9ea30bc0cdb549",
    "all": "ce9ea30bc0cdb549"
   },
-  "*": "58c73635b5eae988"
+  "*": "2e6fd21fb81f6759"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -202,20 +202,20 @@
    "row": "B10",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
-   "why": "Tue/Thu 11:00-11:29 + met_cross; who_is_where puts Cross at campus_theatre Tue/Thu 11-13; no promise, no past, no first-meeting word; true on visit 1 and visit 20",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Tue/Thu 11:00-11:29 start, Cross's row 'teaching drama' 11-13 puts him there; the +120 Done lands 13:00-13:30 where his new seats row keeps him; true on second visit.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "B10",
@@ -278,19 +278,20 @@
    "row": "B10",
    "screen": "stage_practise.practise",
    "verdict": "PASS",
-   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
-   "why": "trigger needs Cross absent; theatre's only rows are Cross and Brooke (Brooke 11-13/14-18 Tue/Thu/Fri, same as Cross), so with Cross out the seats are empty at every minute; work light matches the theatre's empty variant",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark, louder than you'd ever dare with anyone there.",
+   "why": "Shows only while Cross is absent; who_is_where puts nobody else at the Theatre outside his hours (Brooke is there only 11-13 Tue/Thu and 14-18 Tue/Thu/Fri, inside his). No past, no first time; true on the second go.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B10",
@@ -491,20 +492,20 @@
    "row": "B8",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
-   "why": "no garment of hers named; 10 energy and 120 minutes match PLAN (class 2 hours)",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "No number on screen; no garment named.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "B8",
@@ -567,19 +568,20 @@
    "row": "B8",
    "screen": "stage_practise.practise",
    "verdict": "PASS",
-   "line": "max_triggers_per_day = 2; Done 30 min",
-   "why": "no garment named; no number on screen; weekdays agree with theatre hours (weekdays 9am-9pm)",
+   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark, louder than you'd ever dare with anyone there.",
+   "why": "No number or garment on the screen; 30 minutes matches PLAN.md's 'Practise on the empty stage (30 min)'.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "B8",
@@ -1515,7 +1517,7 @@
    "note": false,
    "screen_hash": "58c73635b5eae988",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 19
   },
   {
@@ -1769,20 +1771,20 @@
    "row": "C460",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
-   "why": "every claim (who is there, the stage, the board) holds on every playthrough that reaches the screen",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "All claims true by Cross's rows and the class trigger window.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "C460",
@@ -1863,19 +1865,20 @@
    "row": "C460",
    "screen": "stage_practise.practise",
    "verdict": "PASS",
-   "line": "The seats are empty. You stand under the work light and say whatever comes into your head to the dark",
-   "why": "every claim (empty seats, work light, nobody there) true on every reachable visit per who_is_where",
+   "line": "The seats are empty.",
+   "why": "True at every minute it can show: Cross absent, nobody else's rows at the Theatre then.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C460",
@@ -1919,20 +1922,20 @@
    "row": "C461",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
-   "why": "texture and dialogue only; the line fits Cross's/Pratt's plan entry (Pushy, \"Louder.\" / strict)",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "'starlet', drilling lines fit Cross's entry; her body reaction is texture.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "C461",
@@ -2014,18 +2017,19 @@
    "screen": "stage_practise.practise",
    "verdict": "PASS",
    "line": "louder than you'd ever dare with anyone there",
-   "why": "her opinion, on her voice; texture can't clash",
+   "why": "Her opinion, texture that can't clash.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C461",
@@ -2484,19 +2488,20 @@
    "row": "C889",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "Label names no clock time and no duration.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Labels 'Go to drama' and 'Done' name no clock time or duration; spend is 120 min in the exit.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C889",
@@ -2596,19 +2601,20 @@
    "row": "C892",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No hour inside the act.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "The hour is on the row's cooldown_message 'Tuesday and Thursday at 11am.', not in the act.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C892",
@@ -2708,19 +2714,20 @@
    "row": "C897",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No time on rooms; the 120/30 minutes are the activity's own spend.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "The 120 minutes is the class itself; Done returns to the same Theatre, no room hop carries time.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C897",
@@ -2820,19 +2827,20 @@
    "row": "C900",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "The beat says no time.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "The beat names no time.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C900",
@@ -2932,19 +2940,20 @@
    "row": "C902",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "Read at the last minute of its window, still true.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Read at 11:29 Tue/Thu the class text still holds (Cross teaching to 13:00).",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C902",
@@ -3044,19 +3053,20 @@
    "row": "C903",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No weekday named in the beat (Psychology's greyed line names its days as a timetable on a sign, true every visit).",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "The class text names no weekday; the days sit only in the greyed row's cooldown_message, a sign.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C903",
@@ -3156,19 +3166,20 @@
    "row": "C906",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No \"till X\" on the label.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "No 'till'.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C906",
@@ -3268,19 +3279,20 @@
    "row": "C910",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "The written button says no time and no energy; a cost-blocked \"(10 Energy)\" is the engine tag clock.md rule 1 keeps.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Neither label states time or energy.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C910",
@@ -3380,19 +3392,20 @@
    "row": "C913",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "cooldown_message = \"Tuesday and Thursday at 11am.\"",
-   "why": "show_when_blocked plus cooldown_message: out of its slot the row stays on the Theatre as a dimmed line with its hours (v2.py:6716-6720, onlyTheClockShut v2.py:6079 drops the weekday and time items).",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "show_when_blocked + cooldown_message 'Tuesday and Thursday at 11am.' keep it as a dimmed line out of slot once met.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C913",
@@ -3492,19 +3505,20 @@
    "row": "C914",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "It never shows hours, so it never shows them wrongly; the missing hours are C913.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "The hours show only when weekday/time alone shut it; before met_cross the flag hides it (onlyTheClockShut false).",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C914",
@@ -3604,19 +3618,20 @@
    "row": "C916",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Go to drama",
-   "why": "A class she chooses now carries its hours as a greyed line; hidden only until met_cross, which is a flag, not the clock (onlyTheClockShut returns false, no locked_text, so hidden: v2.py:6716-6727).",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "A thing she chooses carries its hours.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "9741365e3550a76b",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C916",
@@ -3716,19 +3731,20 @@
    "row": "C920",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No hop: Done returns to the same place.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Done targets campus_theatre, the same place; no hop cost.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C920",
@@ -3827,20 +3843,21 @@
   {
    "row": "C924",
    "screen": "class_drama.class",
-   "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No travel on this screen.",
+   "verdict": "N/A",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "No travel on this screen; the row is a planning note.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C924",
@@ -3940,19 +3957,20 @@
    "row": "C926",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "Clock moves only by its minutes.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Clock moves by 120 minutes only.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C926",
@@ -4052,20 +4070,20 @@
    "row": "C927",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Done: time_progression_minutes = 120",
-   "why": "every exit on the screen carries an explicit time_progression_minutes, so the 3-minute default never applies",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Exit has time_progression_minutes = 120.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "C927",
@@ -4129,18 +4147,19 @@
    "screen": "stage_practise.practise",
    "verdict": "PASS",
    "line": "time_progression_minutes = 30",
-   "why": "exit time set",
+   "why": "The exit carries its time.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C927",
@@ -4184,19 +4203,20 @@
    "row": "C928",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
    "why": "No clock printed into prose.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C928",
@@ -4296,19 +4316,20 @@
    "row": "C929",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front. ... Everyone's watching.",
-   "why": "No activity time on the label.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Activity label carries no time; the engine tags none.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "93fc476b832b1610",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "2bbe20328eb344a2"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 4
+   "pass": 20
   },
   {
    "row": "C929",
@@ -4408,19 +4429,20 @@
    "row": "C930",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "show_when_blocked = true",
-   "why": "Windowed work no longer vanishes out of hours once she's met Cross.",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Has show_when_blocked, so it doesn't vanish out of hours once met.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "9741365e3550a76b",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "331e46e93c15eda9"
+    "text": "fab67ed08993a657",
+    "traits": "2875b58584de3c6e",
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C930",
@@ -4520,20 +4542,20 @@
    "row": "C931",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "time_of_day 11:00-11:30",
-   "why": "the trigger's time_of_day window is end-exclusive and every line agrees with it at its first and last minute",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "11:00-11:30 end exclusive within Cross's 11-13 row; re-read each render.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "C931",
@@ -4596,19 +4618,20 @@
    "row": "C931",
    "screen": "stage_practise.practise",
    "verdict": "PASS",
-   "line": "conditions: weekday + npc_at_location only",
-   "why": "no time_of_day on the row; the clock window is the theatre's hours, so no end-exclusive gap",
+   "line": "{ type = \"npc_at_location\", npc_id = \"npc_cross\", location_id = \"campus_theatre\", operator = \"is_absent\" }",
+   "why": "No time_of_day; presence is re-read each render, and his 13-14 and 14-18 rows meet, so the row never flickers on at 14:00.",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C931",
@@ -4706,20 +4729,20 @@
    "row": "L106",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "Again. Louder, starlet. Make them look at you. / Closer. Make them want to look.",
-   "why": "names only the teacher whose row puts him in the room for the whole trigger window (who_is_where)",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "Names only Cross, there by his row; the class is an unnamed crowd.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "L106",
@@ -4783,18 +4806,19 @@
    "screen": "stage_practise.practise",
    "verdict": "PASS",
    "line": "The seats are empty.",
-   "why": "claims nobody there; Cross absent by condition, Brooke's rows never put her there without Cross",
+   "why": "Names nobody; nobody's rows put anyone there when it shows.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L106",
@@ -4892,20 +4916,20 @@
    "row": "L167",
    "screen": "class_drama.class",
    "verdict": "PASS",
-   "line": "weekday [1,3] / [0,2], 11:00-11:30",
-   "why": "one row for the activity; no per-day-kind duplicate rows",
+   "line": "Mr. Cross has you all on the stage in a line, then one by one at the front.",
+   "why": "One row for Tue/Thu, same hours; greys with the full-hours cooldown_message.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "fab67ed08993a657",
     "traits": "2875b58584de3c6e",
-    "facts": "77c5977fffe46fc8",
-    "facts2": "30f91571176cc73e",
-    "all": "dad8cb2c0035883a"
+    "facts": "a24b2e3f27703817",
+    "facts2": "db877e27b941b769",
+    "all": "e49be07c102b94c5"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 17
+   "pass": 20
   },
   {
    "row": "L167",
@@ -4968,19 +4992,20 @@
    "row": "L167",
    "screen": "stage_practise.practise",
    "verdict": "PASS",
-   "line": "max_triggers_per_day = 2, no show_when_blocked",
-   "why": "one row; with a daily count it sets no show_when_blocked, so it is gone when used up or shut (clock.md rule 10, LO 2026-11-24)",
+   "line": "max_triggers_per_day = 2",
+   "why": "One row for practising alone; the 1-2pm button is a different act (in front of him) that never shows beside it, not one row per day kind.",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "601103fec24e1708",
+    "text": "9058cdb5f00b1952",
+    "traits": "44136fa355b3678a",
     "facts": "f3fdaee8cfb85e6d",
     "facts2": "f3fdaee8cfb85e6d",
-    "all": "271a448474046e50"
+    "all": "d81c58366ad88da6"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 7
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "L167",
@@ -5072,8 +5097,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }
