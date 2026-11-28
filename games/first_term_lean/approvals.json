@@ -3978,6 +3978,174 @@
       "sha256": "27bebb92e39dfcc04de6ff0053940de909c23a57d02874897ac4010ce0c65896",
       "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"1 and 2 both\". party_go_home retired, not removed (C1656), as P53 did",
       "date": "2026-11-28"
+    },
+    {
+      "card": "P40",
+      "sha256": "2adadcf15f1d4c8b720313ff1edec52508ad9d7e0eef24c9aa15e59df699e2ee",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"Start the fix\" (reader causes c1 and c2 on the release pass)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P40",
+      "sha256": "8a46fbf367ec1f52e9495e983d924ee7b3a51b7bd3dd123fed0b5e4662ee9e9c",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"Start the fix\" (reader causes c1 and c2 on the release pass)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "5df37aadeeca46765433cbdaef94cdd861f7511f7dc84a02843131d36f8eebde",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\" (Cross on the schedule in the dark seats)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P40",
+      "sha256": "380134d7dbe318a175e91ff1b2e89a08e6e69d6ffbeb549a39a5a6db1376bfdc",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\" (Cross on the schedule in the dark seats)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P09",
+      "sha256": "ce369297c2662f1b4dc19905f9965bef18817d20b3c591203b1670f575ec63a5",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\" (Cross on the schedule in the dark seats)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P32",
+      "sha256": "2676bc73dc2326621e98ca9dfe69a5a1044ff2ec28475d32b918cdf9187ce511",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\" (Cross on the schedule in the dark seats)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P40",
+      "sha256": "b5a761213f9dee731cc5f523e54b125660db6909d0213ddef4148f0b92cf3efc",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\" (Cross on the schedule in the dark seats)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P09",
+      "sha256": "b4d9b734c857cb09015ae38d4d8da18604666319f82632e827c1d39d6283bd78",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\" (Cross on the schedule in the dark seats)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "6f89bf5037941b58781e4e33cb39dd18d0639a77f5fcd8efaa040aed14d52fda",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\"",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P09",
+      "sha256": "c566ff07739dd52c8f1bc5dbd1c965bcbdbd14d58303f5c3f775112939f73798",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\"",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "9cf186e8b2c2c2ae621c6c2903943090a01a828cf3c1f56b9218c4707ebc2ae1",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\"",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "9463b648ed64aa883bf28d8651c83132889abd32d91a9121459cebe9b3d6e8f5",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\"",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "96728e1f0dbd4bf0273993faa6eeca585132cf9fb3593c97595296058e5edeaa",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\"",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "7dc51a79588def1fee26708133e8f521fb4a82f61a9337deaf2d18077735aa46",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\" (reader P84 causes c1-c3)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P40",
+      "sha256": "ad3a0bc4914b22aca06509983966b38236f1bd30bfd20ffd6133da091e007e5b",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\" (reader P84 causes c1-c3)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "d397a1061d4d14c72c78e8149c25ab478187c4e3f6fa77d0b7c4626d18a24b7a",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\" (reader P84 causes c1-c3)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "1bec95689294da45013f1a88664e547de48d25f7021c7f21c1a83037bd3d6317",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\" (reader P84 causes c1-c3)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "99fb8128b3940f18e4b8bb0bc82a6344ca4f98523880cbbf5679aa05f783b3d6",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\" (reader P84 pass 2 causes)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P84",
+      "sha256": "f86abeaf15c09d23ce700ea271b9cc0632f6ec74815a5c3642f734d83082befe",
+      "words": "ENI for LO (delegated 2026-11-24); LO 2026-11-28: \"2\", then \"Fix two\" (reader P84 pass 3, c2)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P85",
+      "sha256": "26969241a99bf549effb496aa795aa364a6544802b3d6df7ae658c4d6ca58f16",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (after \"Problem 2 nope locations should be location photo not person\" and \"Dont do. 2 ... And 5 search again\")",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P85",
+      "sha256": "c16a5bbd10b9a1108a050b6463810b505fda862bbec9cd3897c14fcfb8327500",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (after \"Problem 2 nope locations should be location photo not person\" and \"Dont do. 2 ... And 5 search again\")",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P85",
+      "sha256": "04a5e82cdd5b0b8239729c25c73a77192330ea0fa4bccd0128b663c0236cd65a",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass on P85)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P77",
+      "sha256": "1de7140dca2e946767471de4d94d4b33067df1ba070021883994c0f8779bfc33",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass on P85)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P63",
+      "sha256": "7b0fa5288f9181ca0537a37ed6f0b3c1020a5f7d26e1667128d36c573e8aa9d9",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass on P85)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P85",
+      "sha256": "cd9489b2b04a9edf47dae7ed0a00b3b90c4f45c62dc2c47c33092bed01719d4c",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass 2 on P85)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P77",
+      "sha256": "3911039df9fd0ce886bcbaa3902856c07f3ec4024d6e9804ef9d8c539a64a466",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass 2 on P85)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P26",
+      "sha256": "d692d2f4ab2c0e2a4d50ff6b8832902fc2e0592adccaabaf43c11cb771f6cb2c",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass 2 on P85)",
+      "date": "2026-11-28"
+    },
+    {
+      "card": "P04",
+      "sha256": "e315d646ea0c23bc2afd86d5fe26dbbe91c531acf86c3b5de79730a0cf07e95c",
+      "words": "LO 2026-11-28, typed in main-lean: \"Continue on media fix\" (reader pass 2 on P85)",
+      "date": "2026-11-28"
     }
   ]
 }

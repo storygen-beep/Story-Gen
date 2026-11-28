@@ -1,13 +1,13 @@
 {
  "piece": "P75",
- "pass": 6,
+ "pass": 7,
  "screens": {
   "talk_brooke_party.hub": {
-   "text": "e4c05cc54650468a",
+   "text": "9eb08df3f0d2787b",
    "traits": "ebc4051ecd3afac5",
    "facts": "9211f3fef98b48c8",
    "facts2": "706b1ec7c4943276",
-   "all": "21ddd58f2f82242d"
+   "all": "071d49dee5aafa00"
   },
   "talk_brooke_party.talk": {
    "text": "dea5daa7bcb88b7a",
@@ -17,11 +17,11 @@
    "all": "970eade4458bfdbf"
   },
   "talk_kayla_party.hub": {
-   "text": "5a1221c0e90f780c",
+   "text": "67a16459e8f03e03",
    "traits": "d79bccff03ff73e2",
    "facts": "464f8631b50219da",
    "facts2": "dc2994085a7238ab",
-   "all": "edabf330ff65a5b6"
+   "all": "85fac66b3ceb2e6a"
   },
   "talk_kayla_party.talk": {
    "text": "7c537332ceea2866",
@@ -31,11 +31,11 @@
    "all": "b1d6484cf31e4e40"
   },
   "talk_tess_party.hub": {
-   "text": "6bd4ff8ef0169027",
+   "text": "f6c1bd4bd23e71cd",
    "traits": "0b50d642c406ca77",
    "facts": "642e048f7346b8d5",
    "facts2": "3c1f586f9618a811",
-   "all": "042c95a2cb6269fb"
+   "all": "2af9155ef88f117f"
   },
   "talk_tess_party.talk": {
    "text": "d024d58cecc43940",
@@ -163,7 +163,7 @@
    "facts2": "47b195b05ada2e26",
    "all": "3ad45fffe33d465f"
   },
-  "*": "c1b1709099d916aa"
+  "*": "c57499e8480c62da"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -244,6 +244,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -381,7 +384,7 @@
     "all": "5e455fe9f1205a7c"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -400,7 +403,7 @@
     "all": "e1455732593a2b96"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -419,7 +422,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -438,7 +441,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -457,7 +460,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -476,7 +479,7 @@
     "all": "ad5c1e69b87bd5b7"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -495,7 +498,7 @@
     "all": "5d51bea7a70d11e0"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -514,7 +517,7 @@
     "all": "85c9a66e377061b7"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -533,7 +536,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -552,7 +555,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -571,7 +574,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -590,7 +593,7 @@
     "all": "ae4dc515f7c37168"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -609,7 +612,7 @@
     "all": "bbda197c9bef4314"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -628,7 +631,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -647,7 +650,7 @@
     "all": "b0c7744a92375baa"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -666,7 +669,7 @@
     "all": "876750a2266f9604"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -685,7 +688,7 @@
     "all": "96d16de87321606f"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -693,19 +696,19 @@
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "true at the first and last minute and on a second visit: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
+   "why": "true at first and last minute and on a second visit: trigger near_zoe_kitchen Sat 21-00, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen; the picture's words match the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e4c05cc54650468a",
+    "text": "9eb08df3f0d2787b",
     "traits": "ebc4051ecd3afac5",
     "facts": "9211f3fef98b48c8",
     "facts2": "706b1ec7c4943276",
-    "all": "21ddd58f2f82242d"
+    "all": "071d49dee5aafa00"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "B10",
@@ -723,7 +726,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -731,19 +734,19 @@
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "true at the first and last minute and on a second visit: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
+   "why": "true at first and last minute and on a second visit: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla; the picture's words match the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a1221c0e90f780c",
+    "text": "67a16459e8f03e03",
     "traits": "d79bccff03ff73e2",
     "facts": "464f8631b50219da",
     "facts2": "dc2994085a7238ab",
-    "all": "edabf330ff65a5b6"
+    "all": "85fac66b3ceb2e6a"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "B10",
@@ -761,7 +764,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -769,19 +772,19 @@
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "true at the first and last minute and on a second visit: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
+   "why": "true at first and last minute and on a second visit: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess; the picture's words match the line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6bd4ff8ef0169027",
+    "text": "f6c1bd4bd23e71cd",
     "traits": "0b50d642c406ca77",
     "facts": "642e048f7346b8d5",
     "facts2": "3c1f586f9618a811",
-    "all": "042c95a2cb6269fb"
+    "all": "2af9155ef88f117f"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "B10",
@@ -799,7 +802,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1100,7 +1103,7 @@
     "all": "5e455fe9f1205a7c"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1119,7 +1122,7 @@
     "all": "e1455732593a2b96"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1138,7 +1141,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1157,7 +1160,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1176,7 +1179,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1195,7 +1198,7 @@
     "all": "ad5c1e69b87bd5b7"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1214,7 +1217,7 @@
     "all": "5d51bea7a70d11e0"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1233,7 +1236,7 @@
     "all": "85c9a66e377061b7"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1252,7 +1255,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1271,7 +1274,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1290,7 +1293,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1309,7 +1312,7 @@
     "all": "ae4dc515f7c37168"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1328,7 +1331,7 @@
     "all": "bbda197c9bef4314"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1347,7 +1350,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1366,7 +1369,7 @@
     "all": "b0c7744a92375baa"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1385,7 +1388,7 @@
     "all": "876750a2266f9604"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1404,27 +1407,27 @@
     "all": "96d16de87321606f"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
    "row": "B8",
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
-   "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "picture 'A blonde woman of 21 leaning on a kitchen counter': Brooke 21, and she is at the kitchen counter now; no garment of hers",
+   "line": "blonde college girl leaning on kitchen counter party (Brooke 21)",
+   "why": "ages in the descriptions match the npcs; she is in the kitchen; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e4c05cc54650468a",
+    "text": "9eb08df3f0d2787b",
     "traits": "ebc4051ecd3afac5",
     "facts": "9211f3fef98b48c8",
     "facts2": "706b1ec7c4943276",
-    "all": "21ddd58f2f82242d"
+    "all": "071d49dee5aafa00"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "B8",
@@ -1442,27 +1445,27 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
    "row": "B8",
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
-   "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "picture 'A woman of 20 at a house party kitchen': Kayla 20, in the kitchen; no garment",
+   "line": "college girl laughing at house party cup (Kayla 20)",
+   "why": "ages in the descriptions match the npcs; she is in the kitchen; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a1221c0e90f780c",
+    "text": "67a16459e8f03e03",
     "traits": "d79bccff03ff73e2",
     "facts": "464f8631b50219da",
     "facts2": "dc2994085a7238ab",
-    "all": "edabf330ff65a5b6"
+    "all": "85fac66b3ceb2e6a"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "B8",
@@ -1480,27 +1483,27 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
    "row": "B8",
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
-   "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "picture 'A shy woman of 21 at the end of a kitchen counter': Tess 21, in the kitchen; no garment",
+   "line": "girl at party kitchen counter cup (Tess 21)",
+   "why": "ages in the descriptions match the npcs; she is in the kitchen; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6bd4ff8ef0169027",
+    "text": "f6c1bd4bd23e71cd",
     "traits": "0b50d642c406ca77",
     "facts": "642e048f7346b8d5",
     "facts2": "3c1f586f9618a811",
-    "all": "042c95a2cb6269fb"
+    "all": "2af9155ef88f117f"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "B8",
@@ -1518,7 +1521,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1595,7 +1598,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1614,7 +1617,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1864,7 +1867,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -1883,7 +1886,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3154,7 +3157,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3173,7 +3176,7 @@
     "all": "85c9a66e377061b7"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3192,7 +3195,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3211,7 +3214,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3230,7 +3233,7 @@
     "all": "96d16de87321606f"
    },
    "row_hash": "a8ae0700d13a7f9b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3469,6 +3472,45 @@
    "row_hash": "d8ebf6d6b2abf6a5",
    "carried": true,
    "pass": 5
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in the party canvases)",
+   "why": "scene spots and faces only; near_zoe_apartment/kitchen place pictures belong to P05/P83",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c57499e8480c62da",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "groped at party hand on waist gif \u00b7 teen dancing sweaty house party gif \u00b7 guy kissing girl neck at party gif \u00b7 grinding dance floor hands on hips amateur gif",
+   "why": "every search line is 8 words or fewer, no digit, no 'woman of', no caption camera direction, no 'no ___', no name; 'gif' on every spot where something moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c57499e8480c62da",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 7
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "guy too close girl at party cup gif \u00b7 grinding ass on guy at party gif",
+   "why": "common filed acts (crowd grope, dancing, neck kiss, grinding, standing too close); two people only where the act is the picture; no garment named on any spot",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c57499e8480c62da",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 7
   },
   {
    "row": "C286",
@@ -3827,7 +3869,7 @@
     "all": "5e455fe9f1205a7c"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3846,7 +3888,7 @@
     "all": "e1455732593a2b96"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3865,7 +3907,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3884,7 +3926,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3903,7 +3945,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3922,7 +3964,7 @@
     "all": "ad5c1e69b87bd5b7"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3941,7 +3983,7 @@
     "all": "5d51bea7a70d11e0"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3960,7 +4002,7 @@
     "all": "85c9a66e377061b7"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3979,7 +4021,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -3998,7 +4040,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4017,7 +4059,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4036,7 +4078,7 @@
     "all": "ae4dc515f7c37168"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4055,7 +4097,7 @@
     "all": "bbda197c9bef4314"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4074,7 +4116,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4093,7 +4135,7 @@
     "all": "b0c7744a92375baa"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4112,7 +4154,7 @@
     "all": "876750a2266f9604"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4131,7 +4173,7 @@
     "all": "96d16de87321606f"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4139,19 +4181,19 @@
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "true at the first and last minute and on a second visit: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
+   "why": "trigger near_zoe_kitchen Sat 21-00, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e4c05cc54650468a",
+    "text": "9eb08df3f0d2787b",
     "traits": "ebc4051ecd3afac5",
     "facts": "9211f3fef98b48c8",
     "facts2": "706b1ec7c4943276",
-    "all": "21ddd58f2f82242d"
+    "all": "071d49dee5aafa00"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C460",
@@ -4169,7 +4211,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4177,19 +4219,19 @@
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "true at the first and last minute and on a second visit: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
+   "why": "Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a1221c0e90f780c",
+    "text": "67a16459e8f03e03",
     "traits": "d79bccff03ff73e2",
     "facts": "464f8631b50219da",
     "facts2": "dc2994085a7238ab",
-    "all": "edabf330ff65a5b6"
+    "all": "85fac66b3ceb2e6a"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C460",
@@ -4207,7 +4249,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4215,19 +4257,19 @@
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "true at the first and last minute and on a second visit: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
+   "why": "Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6bd4ff8ef0169027",
+    "text": "f6c1bd4bd23e71cd",
     "traits": "0b50d642c406ca77",
     "facts": "642e048f7346b8d5",
     "facts2": "3c1f586f9618a811",
-    "all": "042c95a2cb6269fb"
+    "all": "2af9155ef88f117f"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C460",
@@ -4245,7 +4287,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4277,7 +4319,7 @@
     "all": "5e455fe9f1205a7c"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4296,7 +4338,7 @@
     "all": "e1455732593a2b96"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4315,7 +4357,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4334,7 +4376,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4353,7 +4395,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4372,7 +4414,7 @@
     "all": "ad5c1e69b87bd5b7"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4391,7 +4433,7 @@
     "all": "5d51bea7a70d11e0"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4410,7 +4452,7 @@
     "all": "85c9a66e377061b7"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4429,7 +4471,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4448,7 +4490,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4467,7 +4509,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4486,7 +4528,7 @@
     "all": "ae4dc515f7c37168"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4505,7 +4547,7 @@
     "all": "bbda197c9bef4314"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4524,7 +4566,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4543,7 +4585,7 @@
     "all": "b0c7744a92375baa"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4562,7 +4604,7 @@
     "all": "876750a2266f9604"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4581,7 +4623,7 @@
     "all": "96d16de87321606f"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4589,19 +4631,19 @@
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "texture and cast-true dialogue that can't clash: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
+   "why": "texture and cast-true dialogue that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e4c05cc54650468a",
+    "text": "9eb08df3f0d2787b",
     "traits": "ebc4051ecd3afac5",
     "facts": "9211f3fef98b48c8",
     "facts2": "706b1ec7c4943276",
-    "all": "21ddd58f2f82242d"
+    "all": "071d49dee5aafa00"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C461",
@@ -4619,7 +4661,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4627,19 +4669,19 @@
    "screen": "talk_kayla_party.hub",
    "verdict": "PASS",
    "line": "Kayla's at Brooke's elbow, laughing a beat after Brooke does.",
-   "why": "texture and cast-true dialogue that can't clash: Kayla and Brooke both near_zoe_kitchen Sat 21-24; requires_npc npc_kayla",
+   "why": "texture and cast-true dialogue that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a1221c0e90f780c",
+    "text": "67a16459e8f03e03",
     "traits": "d79bccff03ff73e2",
     "facts": "464f8631b50219da",
     "facts2": "dc2994085a7238ab",
-    "all": "edabf330ff65a5b6"
+    "all": "85fac66b3ceb2e6a"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C461",
@@ -4657,7 +4699,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -4665,19 +4707,19 @@
    "screen": "talk_tess_party.hub",
    "verdict": "PASS",
    "line": "Tess is at the end of the counter, turning a plastic cup round and round in her hands.",
-   "why": "texture and cast-true dialogue that can't clash: Tess near_zoe_kitchen Sat 21-24; requires_npc npc_tess",
+   "why": "texture and cast-true dialogue that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6bd4ff8ef0169027",
+    "text": "f6c1bd4bd23e71cd",
     "traits": "0b50d642c406ca77",
     "facts": "642e048f7346b8d5",
     "facts2": "3c1f586f9618a811",
-    "all": "042c95a2cb6269fb"
+    "all": "2af9155ef88f117f"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "C461",
@@ -4695,7 +4737,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5509,7 +5551,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5528,7 +5570,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5560,7 +5602,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5579,7 +5621,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5611,7 +5653,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5630,7 +5672,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5662,7 +5704,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5681,7 +5723,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5713,7 +5755,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5732,7 +5774,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5764,7 +5806,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5783,7 +5825,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5815,7 +5857,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5834,7 +5876,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5866,7 +5908,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5885,7 +5927,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5917,7 +5959,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5936,7 +5978,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -5987,7 +6029,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6006,7 +6048,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6057,7 +6099,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6076,7 +6118,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6108,7 +6150,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6127,7 +6169,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6159,7 +6201,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6178,7 +6220,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6210,7 +6252,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6229,7 +6271,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6261,7 +6303,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6280,7 +6322,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6299,7 +6341,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6318,7 +6360,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6337,7 +6379,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6356,7 +6398,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6375,7 +6417,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6394,7 +6436,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6426,7 +6468,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6445,7 +6487,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6477,7 +6519,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6496,7 +6538,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6528,7 +6570,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6547,7 +6589,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6579,7 +6621,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6598,7 +6640,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6617,7 +6659,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6636,7 +6678,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6655,7 +6697,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6674,7 +6716,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6693,7 +6735,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6712,7 +6754,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6776,7 +6818,7 @@
     "all": "5e455fe9f1205a7c"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6795,7 +6837,7 @@
     "all": "e1455732593a2b96"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6814,7 +6856,7 @@
     "all": "6a5b117a2881c822"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6833,7 +6875,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6852,7 +6894,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6871,7 +6913,7 @@
     "all": "ad5c1e69b87bd5b7"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6890,7 +6932,7 @@
     "all": "5d51bea7a70d11e0"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6909,7 +6951,7 @@
     "all": "85c9a66e377061b7"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6928,7 +6970,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6947,7 +6989,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6966,7 +7008,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -6985,7 +7027,7 @@
     "all": "ae4dc515f7c37168"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7004,7 +7046,7 @@
     "all": "bbda197c9bef4314"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7023,7 +7065,7 @@
     "all": "347de1eb61eeb814"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7042,7 +7084,7 @@
     "all": "b0c7744a92375baa"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7061,7 +7103,7 @@
     "all": "876750a2266f9604"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7080,7 +7122,7 @@
     "all": "96d16de87321606f"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7088,19 +7130,19 @@
    "screen": "talk_brooke_party.hub",
    "verdict": "PASS",
    "line": "Brooke's by the kitchen counter with a cup she isn't drinking from, watching the room like she owns it.",
-   "why": "names only who is there: trigger now near_zoe_kitchen, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
+   "why": "names only who is there: trigger near_zoe_kitchen Sat 21-00, requires_npc npc_brooke, her row Sat 21-24 near_zoe_kitchen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "e4c05cc54650468a",
+    "text": "9eb08df3f0d2787b",
     "traits": "ebc4051ecd3afac5",
     "facts": "9211f3fef98b48c8",
     "facts2": "706b1ec7c4943276",
-    "all": "21ddd58f2f82242d"
+    "all": "071d49dee5aafa00"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "L106",
@@ -7118,7 +7160,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7130,15 +7172,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "5a1221c0e90f780c",
+    "text": "67a16459e8f03e03",
     "traits": "d79bccff03ff73e2",
     "facts": "464f8631b50219da",
     "facts2": "dc2994085a7238ab",
-    "all": "edabf330ff65a5b6"
+    "all": "85fac66b3ceb2e6a"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "L106",
@@ -7156,7 +7198,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7168,15 +7210,15 @@
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "6bd4ff8ef0169027",
+    "text": "f6c1bd4bd23e71cd",
     "traits": "0b50d642c406ca77",
     "facts": "642e048f7346b8d5",
     "facts2": "3c1f586f9618a811",
-    "all": "042c95a2cb6269fb"
+    "all": "2af9155ef88f117f"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 6
+   "pass": 7
   },
   {
    "row": "L106",
@@ -7194,7 +7236,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7323,7 +7365,7 @@
     "all": "c623174c8e8121aa"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7342,7 +7384,7 @@
     "all": "e198c5a4b6a73253"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7361,7 +7403,7 @@
     "all": "8416f1077e8c2445"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7380,7 +7422,7 @@
     "all": "3ad45fffe33d465f"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7399,7 +7441,7 @@
     "all": "6a54149924d4ad91"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7418,7 +7460,7 @@
     "all": "970eade4458bfdbf"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7437,7 +7479,7 @@
     "all": "b1d6484cf31e4e40"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7456,7 +7498,7 @@
     "all": "efa078348f680792"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 6
   },
   {
@@ -7520,8 +7562,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 182,
- "answered": 182,
+ "asked": 18,
+ "answered": 18,
  "pass_items": [],
  "unowed": []
 }

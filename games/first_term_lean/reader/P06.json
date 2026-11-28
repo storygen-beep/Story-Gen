@@ -1,13 +1,13 @@
 {
  "piece": "P06",
- "pass": 19,
+ "pass": 22,
  "screens": {
   "loop_sleep.do": {
-   "text": "3c1f6073c033b3c9",
+   "text": "1d979cd3d8f07e29",
    "traits": "44136fa355b3678a",
    "facts": "360f3049c5f88f27",
    "facts2": "360f3049c5f88f27",
-   "all": "72c631ead2fbd500"
+   "all": "eaf571a9fb3b9dcb"
   },
   "loop_eat.do": {
    "text": "636d07a3956c340a",
@@ -17,13 +17,13 @@
    "all": "6405fbb818a41081"
   },
   "loop_shower.do": {
-   "text": "839f0962e74c85d1",
+   "text": "68e1a63d434548f1",
    "traits": "44136fa355b3678a",
    "facts": "875ee150348bbbd9",
    "facts2": "875ee150348bbbd9",
-   "all": "34137dc5a717631d"
+   "all": "63d0b72d16259fb2"
   },
-  "*": "0059577e01d700ca"
+  "*": "3776b863a381ccc6"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -160,17 +160,21 @@
   "C1284": "d631d4c69f1d3b74",
   "L120": "22461386046b4605",
   "C1278": "a511d81564cef526",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C769": "cf7d7a82afabcbbb",
   "C794": "3281d513b7f90d6e",
   "C2201": "1137a7018841fcb3",
@@ -343,36 +347,38 @@
    "screen": "loop_shower.do",
    "verdict": "PASS",
    "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "No one is named on the screen; the grey 'Ryan's in the shower.' is gated on his presence in the bathroom (weekdays 07:25-07:45, weekends 10:00-10:30). The razor substitution checks weekday 07:45-08:30 and Ryan in his room, where his row 07:45-12:00 puts him. True at any hour.",
+   "why": "names nobody; the trigger needs Ryan absent from the bathroom (sheet: npc_ryan part, shut by is_absent); no past; true on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "B10",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
-   "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Nobody named; no past; the line is the act. True at 21:00 and at 02:59, the window's last minute.",
+   "line": "You're gone before you've finished thinking about tomorrow.",
+   "why": "names nobody, no past; true at 21:00 and 02:59 and on a second night; the new search words ('teen sleeping in bed night') say what the screen shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "B11",
@@ -526,37 +532,39 @@
    "row": "B8",
    "screen": "loop_shower.do",
    "verdict": "PASS",
-   "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "No number printed; naked by the act (undressing in an act is backed by the act).",
+   "line": "Done: 15 minutes, energy +5 (clamped)",
+   "why": "agrees with the card and PLAN line 309; naked by the act",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "B8",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "The pyjamas are named on the beat that puts them on; no number printed.",
+   "why": "pyjamas named by the beat that puts them on (prose only, LO's yes on the P06 card, NOTES 175-176); 480 minutes and energy 100 agree; the search words no longer name a garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "B9",
@@ -619,37 +627,39 @@
    "row": "C1158",
    "screen": "loop_shower.do",
    "verdict": "PASS",
-   "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "'runs down your belly and between your legs': no garment; undressing is backed by the act.",
+   "line": "Then it warms, and runs down your belly and between your legs",
+   "why": "no garment named; undressing is backed by the act",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C1158",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "The pyjamas are named by the beat that dresses her in them (clothes.md C1158: 'or the beat that equips her'); prose only, as the card says and NOTES 179 notes 'as with P06's sleep'.",
+   "why": "the beat that dresses her names them (clothes.md rule 4)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "212d17eda04f2799",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C1166",
@@ -949,36 +959,38 @@
    "screen": "loop_shower.do",
    "verdict": "N/A",
    "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "No garment named.",
+   "why": "no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C1206",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
-   "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "She is wearing the pyjamas the line just put on her; 'the thin top' after it refers to the same.",
+   "line": "your nipples tighten against the thin top",
+   "why": "the top she just pulled on; search words name no garment",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "6b4e6ea1fe51ab17",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C1207",
@@ -1305,20 +1317,21 @@
   {
    "row": "C1313",
    "screen": "loop_sleep.do",
-   "verdict": "FAIL",
-   "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Note row. Still one text every visit and no substitution; the room's other canvases (home_wait, study_room) are her own activities, not an event.",
+   "verdict": "PASS",
+   "line": "ryan_charger / ryan_charger_back: trigger location home_her_room, trigger_mode random, chance 0.65",
+   "why": "note row; her room now holds events (Ryan's knock, 23:00-24:00 inside the sleep window for ryan_charger_back)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "e4a4aa343d59994b",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "71bde3b372c8d7fa"
    },
    "row_hash": "1102503d50722e90",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C1337",
@@ -1531,20 +1544,21 @@
   {
    "row": "C1434",
    "screen": "loop_sleep.do",
-   "verdict": "FAIL",
-   "line": "You're gone before you've finished thinking about tomorrow.",
-   "why": "Note row. The energy refill sends her to her bedroom and nothing happens there: no substitution, no event canvas.",
+   "verdict": "PASS",
+   "line": "ryan_charger_back: time_of_day 23:00-24:00, location home_her_room",
+   "why": "note row; the refill place has something happen (Ryan's knock)",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "e4a4aa343d59994b",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "71bde3b372c8d7fa"
    },
    "row_hash": "1990815abef56d49",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C1438",
@@ -1933,8 +1947,47 @@
    "note": false,
    "screen_hash": "0059577e01d700ca",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "Builds: loop_sleep, loop_eat, loop_shower",
+   "why": "P06 builds no place picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3776b863a381ccc6",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "'teen sleeping in bed night' / 'amateur girl showering nude head back gif'",
+   "why": "both spots' lines are 7 words or fewer, tags, gif on the moving shower, still on the held body in bed; no digit, 'woman of', camera direction, 'no ___' or name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3776b863a381ccc6",
+   "row_hash": "21548e787d7f48ee",
+   "carried": true,
+   "pass": 21
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "girl lying in bed dark sheet / naked shower wet body teen gif",
+   "why": "one subject in a common pose each; no garment in the search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3776b863a381ccc6",
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 21
   },
   {
    "row": "C239",
@@ -2314,36 +2367,38 @@
    "screen": "loop_shower.do",
    "verdict": "PASS",
    "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "No one is named on the screen; the grey 'Ryan's in the shower.' is gated on his presence in the bathroom (weekdays 07:25-07:45, weekends 10:00-10:30). The razor substitution checks weekday 07:45-08:30 and Ryan in his room, where his row 07:45-12:00 puts him. True at any hour.",
+   "why": "every line is her own act; true at any minute the row opens",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C460",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Nobody named; no past; the line is the act. True at 21:00 and at 02:59, the window's last minute.",
+   "why": "her own act; true at every minute of 21:00-03:00",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "beb5a109bde77305",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C461",
@@ -2380,37 +2435,39 @@
    "row": "C461",
    "screen": "loop_shower.do",
    "verdict": "PASS",
-   "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "Texture that can't clash; her own act.",
+   "line": "You towel off. Out there, the rent isn't paying itself.",
+   "why": "texture and her opinion; can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C461",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Texture that can't clash; her own act.",
+   "why": "texture that can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "153b0804e686abae",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C593",
@@ -3136,37 +3193,39 @@
    "row": "C921",
    "screen": "loop_shower.do",
    "verdict": "PASS",
-   "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes.",
+   "line": "Ryan's rows (weekdays 07-08 bathroom/hall/room)",
+   "why": "note row; the screen reads presence by place only",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C921",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
-   "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Note row. The screen reads only presence by place. The new night rows wrap past midnight and the engine handles it (isCurrentTimeSlot). Ryan's weekdays-only 23:00-01:00 row reads the weekday against today, so Sun 23:00 'asleep' turns into Mon 00:00-01:00 'on his phone', and Fri 23:00 phone into Sat 00:00 asleep; his place stays home_ryans_room, so nothing on this screen changes.",
+   "line": "time_of_day 21:00-03:00",
+   "why": "note row; the window wraps past midnight and the engine handles it",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "19da817e808ac3d6",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C924",
@@ -3265,37 +3324,39 @@
    "row": "C927",
    "screen": "loop_shower.do",
    "verdict": "PASS",
-   "line": "Done (15)",
-   "why": "Note row. Every exit states its minutes.",
+   "line": "Done: time_progression_minutes = 15",
+   "why": "note row; exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C927",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
-   "line": "Wake up (480)",
-   "why": "Note row. Every exit states its minutes.",
+   "line": "Wake up: time_progression_minutes = 480",
+   "why": "note row; the exit states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "1e009d83817fb566",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C928",
@@ -3425,37 +3486,39 @@
    "row": "C931",
    "screen": "loop_shower.do",
    "verdict": "PASS",
-   "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "Note row. The substitution's 07:45-08:30 is end exclusive and matches Ryan's 07:45 row start.",
+   "line": "substitution time_of_day 07:45-08:30",
+   "why": "note row; end exclusive, matches Ryan's 07:45 return to his room",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "C931",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
-   "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Note row. 21:00-03:00 wraps, end exclusive: open 21:00-02:59; 'not until 9pm.' is true from 03:00 to 20:59.",
+   "line": "time_of_day 21:00-03:00; cooldown 'not until 9pm.'",
+   "why": "note row; open 21:00-02:59, the grey line true 03:00-20:59",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "1b8984f52b99537e",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "C953",
@@ -3519,36 +3582,38 @@
    "screen": "loop_shower.do",
    "verdict": "PASS",
    "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "Nobody named on the screen; the grey line is presence-gated.",
+   "why": "names nobody; the grey 'Ryan's in the shower.' is presence-gated",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "L106",
    "screen": "loop_sleep.do",
    "verdict": "PASS",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Nobody named.",
+   "why": "names nobody; sheet: nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "759e6667d7fc3183",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "L119",
@@ -3677,36 +3742,38 @@
    "screen": "loop_shower.do",
    "verdict": "N/A",
    "line": "The water takes forever to run hot. You step in anyway.",
-   "why": "No hours.",
+   "why": "no hours on this row (a count and presence only)",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "839f0962e74c85d1",
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
     "facts": "875ee150348bbbd9",
     "facts2": "875ee150348bbbd9",
-    "all": "34137dc5a717631d"
+    "all": "63d0b72d16259fb2"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 20
   },
   {
    "row": "L167",
    "screen": "loop_sleep.do",
    "verdict": "N/A",
    "line": "You pull on your pyjamas: the thin top and the little shorts.",
-   "why": "Sleep's hours are the same every day, one row, no day kinds.",
+   "why": "sleep's hours are the same every day: one row, no day kinds",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "3c1f6073c033b3c9",
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
     "facts": "360f3049c5f88f27",
     "facts2": "360f3049c5f88f27",
-    "all": "72c631ead2fbd500"
+    "all": "eaf571a9fb3b9dcb"
    },
    "row_hash": "adf7bb3f8b632ac3",
    "carried": true,
-   "pass": 5
+   "pass": 21
   },
   {
    "row": "L170",
@@ -4181,13 +4248,13 @@
    "screen": "*",
    "verdict": "N/A",
    "line": "Builds: loop_sleep, loop_eat, loop_shower",
-   "why": "shape 2 is a place's picture; P06 builds canvases only",
+   "why": "shape 2 is a place's picture; P06 builds none",
    "cause": null,
    "note": false,
-   "screen_hash": "61d7a895737acd44",
-   "row_hash": "69a8103be1e1032a",
+   "screen_hash": "3776b863a381ccc6",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 13
+   "pass": 21
   },
   {
    "row": "media#3",
@@ -4243,16 +4310,41 @@
   },
   {
    "row": "media#7",
-   "screen": "*",
-   "verdict": "N/A",
-   "line": "",
-   "why": "no spot",
+   "screen": "loop_shower.do",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a small family bathroom shower, water running down her bare body, head tipped back. Alone.",
+   "why": "a body moment alone, not a look or a walk-in, so no view is asked; age, place and what she wears (nothing) are named; search tags 6-7 words with gif",
    "cause": null,
    "note": false,
-   "screen_hash": "a3cd947a82240952",
-   "row_hash": "eff6dc1369755c34",
-   "carried": true,
-   "pass": 4
+   "screen_hash": {
+    "text": "68e1a63d434548f1",
+    "traits": "44136fa355b3678a",
+    "facts": "875ee150348bbbd9",
+    "facts2": "875ee150348bbbd9",
+    "all": "63d0b72d16259fb2"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "media#7",
+   "screen": "loop_sleep.do",
+   "verdict": "PASS",
+   "line": "A woman of 18 in a single bed under a thin sheet, in a thin pyjama top and shorts, lights off. Alone.",
+   "why": "a body moment alone, no view asked; age, bed and the pyjamas the beat puts on her are named (pyjama top waived, NOTES 179); search tags with no gif, nothing moves",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "1d979cd3d8f07e29",
+    "traits": "44136fa355b3678a",
+    "facts": "360f3049c5f88f27",
+    "facts2": "360f3049c5f88f27",
+    "all": "eaf571a9fb3b9dcb"
+   },
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "media#8",
@@ -4266,6 +4358,19 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 18
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "teen sleeping in bed night / teen shower naked water running gif",
+   "why": "one subject, a common pose each",
+   "cause": null,
+   "note": false,
+   "screen_hash": "3776b863a381ccc6",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": true,
+   "pass": 21
   },
   {
    "row": "places#1",
@@ -4816,8 +4921,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 2,
+ "answered": 2,
  "pass_items": [],
  "unowed": []
 }

@@ -1,6 +1,6 @@
 {
  "piece": "P78",
- "pass": 1,
+ "pass": 3,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -37,17 +37,21 @@
   "C1274": "ca72df83c67acc75",
   "C1278": "a511d81564cef526",
   "C1277": "2b934524a49c49e9",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "ae6557de353f1fae",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -140,7 +144,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -309,7 +313,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "af95eb45b0bdc9db",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -738,8 +742,73 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture)",
+   "why": "P78's three chain ends carry scene spots only",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "pov staring at clothed teen boobs gif \u00b7 teen showing off her ass gif \u00b7 older man holding girl wrist gif",
+   "why": "every search line is 8 words or fewer, no digit, no 'woman of', no caption camera direction, no 'no ___', no name on all five spots (ryan's three versions, zoe, vance); 'gif' on each; 'pov' and 'close up' read as filed site tags",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "21548e787d7f48ee",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "girl at bedroom door night amateur gif",
+   "why": "ryan_charger_back's three versions: one subject at a door, a common pose; no garment named ('braless tank top' and 'tshirt' are out, nothing on the trigger backs a garment)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "abcad271992139b6",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "C2209",
+   "screen": "vance_envelope.moment",
+   "verdict": "PASS",
+   "line": "Close at the bottom of a porch's steps: an older man's hand holding a young woman's wrist (she is 18). Only their hands in frame.",
+   "why": "no envelope, no thumb choreography: a close-up of a hand holding a wrist is a filed picture, the touch is the act; search and description ask the same picture",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "abcad271992139b6",
+   "carried": false,
+   "pass": 3
+  },
+  {
+   "row": "C2209",
+   "screen": "zoe_give_him.moment",
+   "verdict": "PASS",
+   "line": "His view from the steps of a college quad: a woman of 18 turning round to show her ass to the camera, laughing. No man in frame.",
+   "why": "no friend's hands: one subject showing her ass, a common act; search and description agree",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "abcad271992139b6",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "C28",
@@ -868,7 +937,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "beb5a109bde77305",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1187,14 +1256,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "N/A",
-   "line": "",
-   "why": "no place picture",
+   "line": "(no place picture)",
+   "why": "",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "69a8103be1e1032a",
+   "row_hash": "9c523f03c9ecb512",
    "carried": true,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "media#3",
@@ -1252,14 +1321,14 @@
    "row": "media#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "",
-   "why": "age, place and search phrases on each; her clothes vary by visit and none are named",
+   "line": "His view at a bedroom door at night in a family house: a woman of 18 ... / teen at bedroom door night gif",
+   "why": "descriptions carry age, place and view; search words are separate short tags; her clothes vary by visit and are named in neither",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "eff6dc1369755c34",
+   "row_hash": "35ceae067dce34a1",
    "carried": true,
-   "pass": 1
+   "pass": 2
   },
   {
    "row": "media#8",
@@ -1273,6 +1342,45 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "teen in doorway slow pov gif",
+   "why": "ryan's three door pictures are a common filed pose, one subject",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": true,
+   "pass": 2
+  },
+  {
+   "row": "media#9",
+   "screen": "vance_envelope.moment",
+   "verdict": "PASS",
+   "line": "Close at the bottom of a porch's steps: an older man's hand holding a young woman's wrist (she is 18). Only their hands in frame.",
+   "why": "rule 9: the nearest filed picture (a wrist held close up), the words carry the rest",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": false,
+   "pass": 3
+  },
+  {
+   "row": "media#9",
+   "screen": "zoe_give_him.moment",
+   "verdict": "PASS",
+   "line": "His view from the steps of a college quad: a woman of 18 turning round to show her ass to the camera, laughing. No man in frame.",
+   "why": "rule 9: one subject, a common tagged act, no choreographed gesture",
+   "cause": null,
+   "note": false,
+   "screen_hash": null,
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": false,
+   "pass": 3
   },
   {
    "row": "voice#1",
@@ -1362,7 +1470,7 @@
    "note": false,
    "screen_hash": null,
    "row_hash": "321cc76cff93aadb",
-   "carried": false,
+   "carried": true,
    "pass": 1
   },
   {
@@ -1548,19 +1656,10 @@
    "pass": 1
   }
  ],
- "causes": [
-  {
-   "id": "c1",
-   "what": "ryan_charger_back.moment's after-yes version says his eyes stay on her chest, but the shared picture (look/ryan_charger_back_t3) shows the frame dropping and snapping away"
-  },
-  {
-   "id": "c2",
-   "what": "ryan_charger_back.moment's after-yes version says 'He knows you won't shut the door.', which is false after a loop visit where she shut it, since ryan_looked stays true"
-  }
- ],
+ "causes": [],
  "pending": [],
- "asked": 5,
- "answered": 5,
+ "asked": 4,
+ "answered": 4,
  "pass_items": [],
  "unowed": []
 }

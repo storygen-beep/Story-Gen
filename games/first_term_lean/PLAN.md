@@ -553,7 +553,7 @@ house: weekday mornings 8–12 (Friday has no lectures).
 | Dr. Hale | Lecture Hall Mon/Wed 9–11 · his office Mon/Wed 2–5 (office hours) | 10 |
 | Mr. Pratt | Lecture Hall Mon/Wed 11–1 · his office Mon/Wed 1–3 | 8 |
 | Prof. Walsh | Lecture Hall Tue/Thu 9–11 · her office Tue/Thu 2–4 (advisor hours) | 8 |
-| Mr. Cross | Theatre Tue/Thu 11–1 (class) · Theatre Tue/Thu/Fri 2–6 (rehearsals) | 16 |
+| Mr. Cross | Theatre Tue/Thu 11–1 (class) · Theatre Tue/Thu/Fri 1–2 (in the dark seats, P84) · Theatre Tue/Thu/Fri 2–6 (rehearsals) | 16 |
 | Nadia | Lecture Hall Mon/Wed 9–11 · Cafeteria Mon/Wed 1–2 · Library weekdays 2–6 | 26 |
 | Ms. Ivy Holt | Library desk weekdays 8–4, Saturday 10–4 | 46 |
 | Rosa Diaz | Cafeteria counter weekdays 8–4 | 40 |
@@ -631,7 +631,7 @@ Count: 6 scenes, 3 everyday (C802); 4 of 6 name someone she knows (C678). Seen, 
 | Ms. Holt at the desk, a romance novel inside a library-science cover | she walks in on | Ivy Holt | yes | weekdays 8am–4pm, Library | once a day | Ask what she's reading · Leave her to it |
 | Tess doing Brooke's make-up at the mirror, Kayla holding the bag, all three on one guy's name | she walks in on | Brooke, Kayla, Tess | yes | weekdays 8–9am and 1–2pm, Women's Bathroom | once a day | Fix your hair beside them · Leave |
 | Cross running a scene with Brooke: "Again. Slower." His hand on her waist | she walks in on | Cross, Brooke | no | Tue/Thu/Fri 2–6pm, Theatre | once a day | Watch from the back row · Leave |
-| Cross in the dark seats while she practises alone; one clap: "Again. Louder." | walks in on her | Cross | yes | on Practise on the stage, Tue/Thu/Fri 2–6pm, chance 0.25 | once a day | Do it again · Get off the stage |
+| Cross in the dark seats while she practises; one clap: "Again. Louder." | walks in on her | Cross | yes | on Practise on the stage, Tue/Thu/Fri 1–2pm, her first go once she has met him (P84) | once a day | Do it again · Get off the stage |
 
 Count: 6 scenes, 4 everyday (early share 65%, C802); 5 of 6 name someone she knows (C678). Seen,
 not heard. Release 1: a flag each, no meter. People not met yet show as "a professor", "the

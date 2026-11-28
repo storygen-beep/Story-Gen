@@ -565,6 +565,8 @@ flagEffects = [
   { targetType = "player", flag = "talked_jake_today", op = "unset" },
   { targetType = "player", flag = "talked_brooke_today", op = "unset" },
   { targetType = "player", flag = "ate_with_mom_today", op = "unset" },
+  # P84 — Cross watches her practise once a day, then the stage is his until two
+  { targetType = "player", flag = "cross_seats_today", op = "unset" },
   # P21 — "Not today." at the café parks the ask until the next day
   { targetType = "player", flag = "cafe_ask_parked", op = "unset" },
   # P11 — the rent week: cleared on Tuesday, after Monday's check has read it
@@ -977,6 +979,11 @@ toast = false
 [[flags.labels]]
 key = "talked_rosa_today"
 label = "Talked rosa today"
+toast = false
+
+[[flags.labels]]
+key = "cross_seats_today"
+label = "Cross watched her practise today"
 toast = false
 
 [[flags.labels]]

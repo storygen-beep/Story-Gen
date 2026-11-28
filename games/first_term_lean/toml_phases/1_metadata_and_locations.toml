@@ -84,7 +84,7 @@ flag_keys = [
   "noticed_street_leggings", "noticed_street_momtop", "noticed_street_skirt", "noticed_park_leggings", "noticed_gym_leggings",
   "saw_park_couple", "said_hello_vance", "saw_danny_deal", "saw_marco_squat", "told_nina_dress", "curtain_stranger",
   # P40 — walk-ins, campus
-  "saw_stacks_couple", "saw_hale_note", "asked_holt_novel", "mirror_beside_brooke", "watched_cross_brooke", "cross_saw_practise",
+  "saw_stacks_couple", "saw_hale_note", "asked_holt_novel", "mirror_beside_brooke", "watched_cross_brooke", "cross_saw_practise", "cross_seats_today",
   # P41 — walk-ins, near campus
   "saw_zoe_sam", "sam_guitar", "zoe_outfit", "saw_tom_tips", "saw_chris_store", "saw_party_bathroom",
   # P47 — the dean
@@ -141,7 +141,7 @@ parent = "home"
 entry_from = "home_hall"
 kind = "destination"
 image = "locations/home_kitchen_t0.jpg"
-image_search_queries = ["woman of 18 eating toast at a small family kitchen counter", "young woman with a coffee mug in a kitchen"]
+image_search_queries = ["family home kitchen interior daylight", "small kitchen table fridge coffee pot", "suburban house kitchen interior"]
 
 [[locations]]
 id = "home_living_room"
@@ -155,7 +155,7 @@ parent = "home"
 entry_from = "home_hall"
 kind = "destination"
 image = "locations/home_living_room_t0.jpg"
-image_search_queries = ["woman of 18 curled on a couch watching TV in a family living room", "young woman on a sofa with the remote"]
+image_search_queries = ["family living room interior couch tv armchair", "suburban house living room sofa television", "cosy living room big armchair"]
 
 [[locations]]
 id = "home_bathroom"
@@ -165,7 +165,7 @@ parent = "home"
 entry_from = "home_hall"
 kind = "destination"
 image = "locations/home_bathroom_t0.jpg"
-image_search_queries = ["woman of 18 brushing her teeth at a small bathroom sink", "young woman at a bathroom sink, shower behind her"]
+image_search_queries = ["small family bathroom interior shower", "small house bathroom shower sink interior"]
 
 [[locations]]
 id = "home_her_room"
@@ -175,7 +175,7 @@ parent = "home"
 entry_from = "home_hall"
 kind = "destination"
 image = "locations/home_her_room_t0.jpg"
-image_search_queries = ["woman of 18 sitting cross-legged on a single bed in a small bedroom", "young woman on a narrow bed with a laptop"]
+image_search_queries = ["small bedroom interior single bed", "small single bedroom interior daylight", "narrow single bed small room"]
 
 [[locations]]
 id = "home_ryans_room"
@@ -189,7 +189,7 @@ parent = "home"
 entry_from = "home_hall"
 kind = "destination"
 image = "locations/home_ryans_room_t0.jpg"
-image_search_queries = ["woman of 18 standing in a messy guy's bedroom doorway, curtains shut", "young woman looking into her stepbrother's untidy bedroom"]
+image_search_queries = ["messy bedroom interior clothes on floor", "untidy bedroom curtains closed dim", "messy student bedroom interior"]
 
 [[locations]]
 id = "home_master_bedroom"
@@ -199,7 +199,7 @@ parent = "home"
 entry_from = "home_hall"
 kind = "destination"
 image = "locations/home_master_bedroom_t0.jpg"
-image_search_queries = ["woman of 18 standing at the foot of a big bed in her parents' bedroom", "young woman in a tidy master bedroom by the bed"]
+image_search_queries = ["master bedroom interior double bed", "master bedroom big bed wardrobe", "tidy master bedroom interior"]
 
 # ── P03 · Neighbourhood: one area, her street its hub ──
 
@@ -242,7 +242,7 @@ image = "locations/hood_next_door_t0.jpg"
 description_variants = [
   { conditions = { version = "1.0", logic = "AND", items = [{ type = "npc_at_location", npc_id = "npc_vance", location_id = "hood_next_door", operator = "is_absent" }] }, text = "The house next door. The man who owns your family's house lives here: a porch, one chair on it, and a clear view of your front door. The chair is empty." },
 ]
-image_search_queries = ["woman of 18 on the pavement in front of a neighbour's porch with one chair", "young woman at the bottom of porch steps, suburban street"]
+image_search_queries = ["suburban house front porch one chair", "small front porch chair house exterior", "neighbour house porch suburban street"]
 entry_from = "hood_street"
 
 [[locations]]
@@ -257,7 +257,7 @@ description_variants = [
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_shop_t0.jpg"
-image_search_queries = ["woman of 18 picking snacks off a shelf in a small corner shop", "young woman at the till of a convenience store"]
+image_search_queries = ["corner shop interior counter shelves", "small convenience store interior till", "corner shop cigarettes behind counter"]
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "07:00", close = "23:00" }]
 closed_text = "The corner shop is shut. It opens at 7am."
@@ -270,7 +270,7 @@ description = "The park: a running loop, benches, the pond. Joggers, dog walkers
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_park_t0.jpg"
-image_search_queries = ["woman of 18 sitting on a park bench by a pond", "young woman on a bench in a small town park"]
+image_search_queries = ["town park pond benches path", "small park running path pond", "park bench by pond daylight"]
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "21:00" }]
 closed_text = "The park gates are locked. They open at 6am."
@@ -285,7 +285,7 @@ description_variants = [
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_clothes_t0.jpg"
-image_search_queries = ["woman of 18 browsing a clothes rail in a small boutique", "girl shopping inside a tiny clothes shop, rails and a fitting room"]
+image_search_queries = ["small clothes shop interior rails", "boutique clothing store interior fitting room", "small boutique clothes rails mirror"]
 entry_from = "hood_street"
 hours = [{ weekdays = [0, 1, 2, 3, 4, 5], open = "10:00", close = "19:00" }]
 closed_text = "The clothes shop is shut. It opens at 10am, Monday to Saturday."
@@ -298,7 +298,7 @@ description = "The gym: weights, treadmills, mirrors on every wall. The same reg
 parent = "neighbourhood"
 kind = "destination"
 image = "locations/hood_gym_t0.jpg"
-image_search_queries = ["woman of 18 with a gym bag walking past the weights in a small gym", "young woman in a gym with mirrors on every wall"]
+image_search_queries = ["small gym interior weights mirrors", "local gym interior treadmills weights", "gym weight room mirrored walls"]
 entry_from = "hood_street"
 hours = [{ weekdays = [], open = "06:00", close = "22:00" }]
 closed_text = "The gym is closed. It opens at 6am."
@@ -339,7 +339,7 @@ description_variants = [
 parent = "campus"
 kind = "destination"
 image = "locations/campus_lecture_hall_t0.jpg"
-image_search_queries = ["woman of 18 sitting in a tiered college lecture hall with a notebook", "young woman in a lecture theatre seat"]
+image_search_queries = ["university lecture hall interior tiered seats", "empty lecture theatre rows lectern screen", "college lecture hall interior"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The lecture hall is locked. It opens at 8am on weekdays."
@@ -352,7 +352,7 @@ description = "The women's bathroom off the quad: three stalls and one long mirr
 parent = "campus"
 kind = "destination"
 image = "locations/campus_bathroom_t0.jpg"
-image_search_queries = ["woman of 18 washing her hands at a long college bathroom mirror, no phone", "young woman at a row of sinks in a campus restroom, no phone"]
+image_search_queries = ["college restroom interior stalls long mirror", "public restroom sinks long mirror", "campus bathroom interior stalls"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "18:00" }]
 closed_text = "The bathroom is locked. It's open weekdays, 8am to 6pm."
@@ -368,7 +368,7 @@ description_variants = [
 parent = "campus"
 kind = "destination"
 image = "locations/campus_library_t0.jpg"
-image_search_queries = ["woman of 18 at a long library table with books", "young woman studying in a quiet college library"]
+image_search_queries = ["university library interior long tables", "quiet college library reading room", "library front desk interior"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [], open = "08:00", close = "22:00" }]
 closed_text = "The library is closed. It opens at 8am."
@@ -380,7 +380,7 @@ description = "The cafeteria: trays, long tables, the lunch counter. A sign says
 parent = "campus"
 kind = "destination"
 image = "locations/campus_cafeteria_t0.jpg"
-image_search_queries = ["woman of 18 with a tray in a college cafeteria", "young woman eating lunch at a long cafeteria table"]
+image_search_queries = ["college cafeteria interior long tables", "university dining hall lunch counter", "empty school cafeteria trays tables"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "16:00" }]
 closed_text = "The cafeteria is closed. It's open weekdays, 8am to 4pm."
@@ -393,7 +393,7 @@ description = "The faculty corridor: a row of office doors with name plates, the
 parent = "campus"
 kind = "destination"
 image = "locations/campus_offices_t0.jpg"
-image_search_queries = ["woman of 18 in a college corridor of office doors", "young woman waiting outside a professor's office"]
+image_search_queries = ["university corridor office doors name plates", "quiet faculty office hallway", "college office corridor doors"]
 # P04 re-check: hidden until her advisor asks to see her (P16 sets met_walsh).
 # P47 (ENI for LO 2026-11-24): on the menu from the end of the opening, for the dean's first day.
 hidden_until = { flag = "goal1_shown" }
@@ -411,7 +411,7 @@ description = "The dean's office: a big desk, a window, and a chair nobody's ask
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_dean_t0.jpg"
-image_search_queries = ["seen from behind a big desk: woman of 18 standing in the doorway of a college dean's office, waiting", "young woman standing in front of a dean's desk, view from his chair"]
+image_search_queries = ["dean office interior big desk window", "university executive office large desk", "dean office desk chairs window"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "08:00", close = "17:00" }]
 closed_text = "The dean's door is shut. He's in weekdays, 8am to 5pm."
@@ -423,7 +423,7 @@ description = "The psychology office: shelves of files, a desk, and a chair faci
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_hale_t0.jpg"
-image_search_queries = ["seen from behind a professor's desk: woman of 18 standing by the visitor chair, shelves of files behind her", "young woman in a small college faculty office, view from the professor's chair"]
+image_search_queries = ["professor office interior desk shelves files", "small university faculty office desk chair", "academic office bookshelves files desk"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [0, 2], open = "14:00", close = "17:00" }]
 closed_text = "The psychology office is locked. Office hours: Monday and Wednesday, 2 to 5pm."
@@ -435,7 +435,7 @@ description = "The statistics office: whiteboards on every wall, every one full.
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_pratt_t0.jpg"
-image_search_queries = ["seen from a professor's desk: woman of 18 standing among whiteboards full of numbers", "young woman in a math professor's office, view from his desk"]
+image_search_queries = ["office whiteboards full of equations", "math professor office whiteboard walls", "small office whiteboards interior"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [0, 2], open = "13:00", close = "15:00" }]
 closed_text = "The statistics office is locked. Office hours: Monday and Wednesday, 1 to 3pm."
@@ -447,7 +447,7 @@ description = "The English office: books stacked on every surface and a kettle o
 parent = "campus"
 kind = "destination"
 image = "locations/campus_office_walsh_t0.jpg"
-image_search_queries = ["seen from a professor's desk: woman of 18 in an english professor's office, books stacked everywhere, a kettle on the windowsill", "young woman in a cluttered college office full of books, view from the desk"]
+image_search_queries = ["cluttered professor office stacked books", "english professor office books kettle windowsill", "small academic office full of books"]
 entry_from = "campus_offices"
 hours = [{ weekdays = [1, 3], open = "14:00", close = "16:00" }]
 closed_text = "The English office is locked. Office hours: Tuesday and Thursday, 2 to 4pm."
@@ -463,7 +463,7 @@ description_variants = [
 parent = "campus"
 kind = "destination"
 image = "locations/campus_theatre_t0.jpg"
-image_search_queries = ["woman of 18 standing at the edge of a black stage under the lights, the seats dark in front of her", "young woman on a small college theatre stage"]
+image_search_queries = ["black box theatre stage folding seats", "small college theatre stage lights rig", "empty black stage theatre interior"]
 entry_from = "campus_quad"
 hours = [{ weekdays = [0, 1, 2, 3, 4], open = "09:00", close = "21:00" }]
 closed_text = "The theatre is dark. It's open weekdays, 9am to 9pm."
@@ -505,7 +505,7 @@ parent = "near_campus"
 entry_from = "town_square"
 kind = "destination"
 image = "locations/near_cafe_t0.jpg"
-image_search_queries = ["woman of 18 at a cafe window table with a coffee", "young woman sitting in a small cafe across from a college"]
+image_search_queries = ["small cafe interior long counter espresso machine", "coffee shop counter tip jar", "cosy cafe interior daylight"]
 hours = [{ weekdays = [], open = "07:00", close = "21:00" }]
 closed_text = "The café is shut. It opens at 7am."
 
@@ -519,7 +519,7 @@ parent = "near_campus"
 entry_from = "town_square"
 kind = "destination"
 image = "locations/near_zoe_apartment_t0.jpg"
-image_search_queries = ["woman of 18 on a messy sofa in a student apartment, clothes on the chairs", "young woman on a couch in a cluttered apartment"]
+image_search_queries = ["messy student apartment living room sofa", "cluttered apartment sofa clothes on chairs", "small student flat living room"]
 hidden_until = { flag = "zoe_place_known" }
 # P27 — what opens the door (LO, NOTES 41): someone home to answer, every day 12:00–02:00 (Sam's row).
 hours = [{ weekdays = [], open = "12:00", close = "02:00" }]
@@ -547,7 +547,7 @@ entry_from = "near_zoe_apartment"
 kind = "destination"
 hidden_until = { flag = "zoe_place_known" }
 image = "locations/near_zoe_kitchen_t0.jpg"
-image_search_queries = ["woman of 18 leaning on a messy student kitchen counter, mugs in the sink", "young woman in a small cluttered apartment kitchen"]
+image_search_queries = ["messy student kitchen mugs in sink", "small cluttered apartment kitchen interior", "student flat kitchen table fridge"]
 
 [[locations]]
 id = "near_zoe_room"
@@ -563,7 +563,7 @@ entry_from = "near_zoe_apartment"
 kind = "destination"
 hidden_until = { flag = "zoe_place_known" }
 image = "locations/near_zoe_room_t0.jpg"
-image_search_queries = ["woman of 18 sitting on an unmade double bed in a friend's messy bedroom, clothes everywhere", "young woman by a full-length mirror in a cluttered student bedroom"]
+image_search_queries = ["messy bedroom unmade double bed", "student bedroom full length mirror clothes rail", "cluttered bedroom interior unmade bed"]
 
 [[locations]]
 id = "near_zoe_bathroom"
@@ -574,7 +574,7 @@ entry_from = "near_zoe_apartment"
 kind = "destination"
 hidden_until = { flag = "zoe_place_known" }
 image = "locations/near_zoe_bathroom_t0.jpg"
-image_search_queries = ["woman of 18 at the mirror in a small shared apartment bathroom, no phone", "young woman by a bath with a half-open shower curtain, no phone"]
+image_search_queries = ["small apartment bathroom bath shower curtain", "shared flat bathroom interior bathtub", "small bathroom bath curtain half open"]
 
 # ── People. Everyone is 18 or over, and the game says so on their card. ──
 
@@ -1340,6 +1340,14 @@ weekdays = [1, 3]
 start_time = "11:00"
 end_time = "13:00"
 activity = "teaching drama"
+
+# P84 — in the dark seats before his 2pm rehearsal (LO 2026-11-28: "2"), so walk_cross_seats is true at every minute.
+[[npcs.schedules]]
+location = "campus_theatre"
+weekdays = [1, 3, 4]
+start_time = "13:00"
+end_time = "14:00"
+activity = "in the dark seats"
 
 [[npcs.schedules]]
 location = "campus_theatre"

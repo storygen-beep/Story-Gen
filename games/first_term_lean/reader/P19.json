@@ -1,13 +1,13 @@
 {
  "piece": "P19",
- "pass": 18,
+ "pass": 19,
  "screens": {
   "cafeteria_meet_rosa.meet": {
-   "text": "b626daf6602713a3",
+   "text": "91fbd87c5c89a839",
    "traits": "0d86d720cd5d73aa",
    "facts": "515715e73cf05730",
    "facts2": "1b927de09fedcd26",
-   "all": "d4caa8c046ffd471"
+   "all": "dee6c70e6b694caa"
   },
   "cafeteria_meet_rosa.after": {
    "text": "40b129a8944f8d9a",
@@ -16,7 +16,7 @@
    "facts2": "7407c20b0dd18e4a",
    "all": "49ea2b2f4b7153d9"
   },
-  "*": "4f6d0b349e1d97a2"
+  "*": "e578133c38d16ea2"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -89,6 +89,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -192,19 +195,20 @@
    "row": "B10",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
-   "why": "every line holds at the first and last minute and on a second visit; no person named (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
+   "line": "A woman in her forties runs the counter, hairnet on",
+   "why": "first and last minute and a second visit: one-time, Rosa present by trigger (cafeteria weekdays 08-16); no other person named; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b626daf6602713a3",
+    "text": "91fbd87c5c89a839",
+    "traits": "0d86d720cd5d73aa",
     "facts": "515715e73cf05730",
     "facts2": "1b927de09fedcd26",
-    "all": "d4caa8c046ffd471"
+    "all": "dee6c70e6b694caa"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B11",
@@ -358,19 +362,20 @@
    "row": "B8",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
-   "why": "no garment of hers named; no number that disagrees with PLAN",
+   "line": "cafeteria lunch lady behind counter",
+   "why": "no garment of hers named; forties agrees with 45",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b626daf6602713a3",
+    "text": "91fbd87c5c89a839",
+    "traits": "0d86d720cd5d73aa",
     "facts": "515715e73cf05730",
     "facts2": "1b927de09fedcd26",
-    "all": "d4caa8c046ffd471"
+    "all": "dee6c70e6b694caa"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B9",
@@ -1086,8 +1091,47 @@
    "note": false,
    "screen_hash": "4f6d0b349e1d97a2",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e578133c38d16ea2",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "school canteen server holding bread roll",
+   "why": "5-6 words; role ('lunch lady') in place of the age",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e578133c38d16ea2",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "school canteen server holding bread roll",
+   "why": "one subject behind a counter holding a roll; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e578133c38d16ea2",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C422",
@@ -1207,19 +1251,20 @@
    "row": "C460",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
-   "why": "no claim about who is there, the clock, her past or her clothes that can be false (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
+   "line": "A woman in her forties runs the counter, hairnet on",
+   "why": "every claim true on every playthrough that reaches it: one-time, Rosa present by trigger (cafeteria weekdays 08-16); no other person named; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b626daf6602713a3",
+    "text": "91fbd87c5c89a839",
+    "traits": "0d86d720cd5d73aa",
     "facts": "515715e73cf05730",
     "facts2": "1b927de09fedcd26",
-    "all": "d4caa8c046ffd471"
+    "all": "dee6c70e6b694caa"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
@@ -1256,19 +1301,20 @@
    "row": "C461",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
-   "why": "texture only, and dialogue that fits the cast entry",
+   "line": "A woman in her forties runs the counter, hairnet on",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b626daf6602713a3",
+    "text": "91fbd87c5c89a839",
+    "traits": "0d86d720cd5d73aa",
     "facts": "515715e73cf05730",
     "facts2": "1b927de09fedcd26",
-    "all": "d4caa8c046ffd471"
+    "all": "dee6c70e6b694caa"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C519",
@@ -2258,19 +2304,20 @@
    "row": "L106",
    "screen": "cafeteria_meet_rosa.meet",
    "verdict": "PASS",
-   "line": "A woman in her forties runs the counter, hairnet on, forearms like a baker's.",
-   "why": "no line names a person whose rows don't put them there (it fires on entry while Rosa's row has her at the counter, weekdays 8-16; Kayla and Tess 12-13, Jake 12-14, Zoe Tue/Thu 13-14 and Nadia may be in the room unnamed, and nothing says the room is empty; 'the next tray' fits a lunch crowd)",
+   "line": "A woman in her forties runs the counter, hairnet on",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Rosa present by trigger (cafeteria weekdays 08-16); no other person named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "b626daf6602713a3",
+    "text": "91fbd87c5c89a839",
+    "traits": "0d86d720cd5d73aa",
     "facts": "515715e73cf05730",
     "facts2": "1b927de09fedcd26",
-    "all": "d4caa8c046ffd471"
+    "all": "dee6c70e6b694caa"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L119",
@@ -2417,8 +2464,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

@@ -1,13 +1,13 @@
 {
  "piece": "P18",
- "pass": 18,
+ "pass": 19,
  "screens": {
   "library_meet_holt.meet": {
-   "text": "ac593b3110c2d464",
+   "text": "4bc16c73a62179ac",
    "traits": "f6d8d0533b3ef51b",
    "facts": "23f40f82e37b629e",
    "facts2": "c3e9942b4c955381",
-   "all": "d6de0ab85a3697e9"
+   "all": "0ef8c95dec39487a"
   },
   "library_meet_holt.after": {
    "text": "c4401e87c0d8b5bc",
@@ -16,7 +16,7 @@
    "facts2": "eae8a45ad0ea5137",
    "all": "bcfc1ea04cc852ed"
   },
-  "*": "7e81c09e121d515b"
+  "*": "35e5d4b7c43e82a1"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -89,6 +89,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -192,19 +195,20 @@
    "row": "B10",
    "screen": "library_meet_holt.meet",
    "verdict": "PASS",
-   "line": "A woman of about thirty sits behind the desk ... She reads your student card",
-   "why": "first visit only (is_repeatable false), Holt present by the trigger at every minute it can fire; no past named, no 'first time' claim",
-   "cause": "",
+   "line": "cardigan buttoned to the throat, reading glasses on a chain",
+   "why": "first and last minute and a second visit: one-time, Holt present by trigger (library weekdays 08-16, Sat 10-16); no past or 'first time' claim; the new search words claim nothing the screen doesn't",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ac593b3110c2d464",
+    "text": "4bc16c73a62179ac",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "23f40f82e37b629e",
     "facts2": "c3e9942b4c955381",
-    "all": "d6de0ab85a3697e9"
+    "all": "0ef8c95dec39487a"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B11",
@@ -358,19 +362,20 @@
    "row": "B8",
    "screen": "library_meet_holt.meet",
    "verdict": "PASS",
-   "line": "a woman of 31 in a buttoned cardigan ... (she is 18, out of frame)",
-   "why": "31 matches PLAN \u00a76 'Ms. Ivy Holt (31, librarian)'; 'about thirty' agrees; the cardigan is Holt's, none of hers named",
-   "cause": "",
+   "line": "librarian reading glasses chain behind desk",
+   "why": "the cardigan is Holt's; none of hers named; 'about thirty' agrees with 31",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ac593b3110c2d464",
+    "text": "4bc16c73a62179ac",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "23f40f82e37b629e",
     "facts2": "c3e9942b4c955381",
-    "all": "d6de0ab85a3697e9"
+    "all": "0ef8c95dec39487a"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "B9",
@@ -1025,8 +1030,47 @@
    "note": false,
    "screen_hash": "7e81c09e121d515b",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35e5d4b7c43e82a1",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "librarian reading glasses chain behind desk",
+   "why": "6 words each; role in place of the age",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35e5d4b7c43e82a1",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 19
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "librarian reading glasses chain behind desk",
+   "why": "one subject behind a library counter, a common photo; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "35e5d4b7c43e82a1",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C422",
@@ -1141,19 +1185,20 @@
    "row": "C460",
    "screen": "library_meet_holt.meet",
    "verdict": "PASS",
-   "line": "Quiet floor's upstairs, hon. No food, no phones, no noise.",
-   "why": "desk, Holt and her rules true on the single visit it can fire, any day or hour of her row",
-   "cause": "",
+   "line": "cardigan buttoned to the throat, reading glasses on a chain",
+   "why": "every claim true on every playthrough that reaches it: one-time, Holt present by trigger (library weekdays 08-16, Sat 10-16); no past or 'first time' claim; the search words describe what the prose shows",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ac593b3110c2d464",
+    "text": "4bc16c73a62179ac",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "23f40f82e37b629e",
     "facts2": "c3e9942b4c955381",
-    "all": "d6de0ab85a3697e9"
+    "all": "0ef8c95dec39487a"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C461",
@@ -1191,18 +1236,19 @@
    "screen": "library_meet_holt.meet",
    "verdict": "PASS",
    "line": "cardigan buttoned to the throat, reading glasses on a chain",
-   "why": "texture that can't clash; student card is plain college texture",
-   "cause": "",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ac593b3110c2d464",
+    "text": "4bc16c73a62179ac",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "23f40f82e37b629e",
     "facts2": "c3e9942b4c955381",
-    "all": "d6de0ab85a3697e9"
+    "all": "0ef8c95dec39487a"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "C519",
@@ -1901,19 +1947,20 @@
    "row": "L106",
    "screen": "library_meet_holt.meet",
    "verdict": "PASS",
-   "line": "A woman of about thirty sits behind the desk",
-   "why": "only Holt claimed; her row puts her there whenever the canvas can fire",
-   "cause": "",
+   "line": "cardigan buttoned to the throat, reading glasses on a chain",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Holt present by trigger (library weekdays 08-16, Sat 10-16); no past or 'first time' claim",
+   "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ac593b3110c2d464",
+    "text": "4bc16c73a62179ac",
+    "traits": "f6d8d0533b3ef51b",
     "facts": "23f40f82e37b629e",
     "facts2": "c3e9942b4c955381",
-    "all": "d6de0ab85a3697e9"
+    "all": "0ef8c95dec39487a"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 19
   },
   {
    "row": "L119",
@@ -2040,8 +2087,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

@@ -1,13 +1,13 @@
 {
  "piece": "P36",
- "pass": 15,
+ "pass": 16,
  "screens": {
   "rep_mirror.listen": {
    "text": "4727bf6c4b4ed33a",
    "traits": "ebc4051ecd3afac5",
-   "facts": "a2c742f13651416e",
-   "facts2": "805ffde1713f555a",
-   "all": "1d48c2b3be46d559"
+   "facts": "d9d87fc5b962be38",
+   "facts2": "1a4880620f81ed6a",
+   "all": "a578a13cb3bff4ff"
   },
   "rep_table.listen": {
    "text": "0756a10c45c782eb",
@@ -22,7 +22,7 @@
    "facts2": "09e109c3aa6c7876",
    "all": "09e109c3aa6c7876"
   },
-  "*": "d0c9bdf30724385f"
+  "*": "3539cc9040831e9a"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -148,20 +148,20 @@
    "row": "B10",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "That blonde from drama's telling everyone she's getting the lead in Cross's play.",
-   "why": "four groups, met_brooke x met_cross (toml:7769-7787): a name shows only behind its met flag (C625; setters toml:6700, 7657); Brooke is blonde (toml:7599) and absent by trigger; repeat visits make no first-time claim",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror and talking like you're not there.",
+   "why": "Bathroom open weekdays 08-18 (toml:1660); Brooke gated is_absent, and Kayla and Tess are there only 08-09 and 13-14, with Brooke, when the row hides (onlyTheClockShut false on presence, v2.py:6110-6130, 6775-6784), so no named person is ever there; names behind met_brooke x met_cross; nothing moves reputation (only toml:195/240/1311 declare it), so 'Not yet' holds on every visit",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "B10",
@@ -361,20 +361,20 @@
    "row": "B8",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "Two girls you don't know",
-   "why": "no number, no garment of hers",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror and talking like you're not there.",
+   "why": "no number and no garment of hers on the screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "B8",
@@ -996,7 +996,7 @@
     "all": "1d48c2b3be46d559"
    },
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -1141,20 +1141,20 @@
    "row": "C460",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "Nobody's saying your name in here. Not yet.",
-   "why": "nothing in the build moves reputation (only toml:195/240 declare it), so true on every visit; Cross named only after met_cross",
+   "line": "You keep your eyes on your own reflection. Your ears are hot. Neither of them looks your way. Nobody's saying your name in here. Not yet.",
+   "why": "true at 08:00 and 17:59, any weekday, every met state, and on a second day: reputation stays 0, Brooke absent by trigger, Cross named only after met_cross",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "C460",
@@ -1210,19 +1210,19 @@
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
    "line": "Brooke tells everyone everything. That's how you know it's not true.",
-   "why": "stranger gossip fitting PLAN:228/266 (Brooke wants Cross's part)",
+   "why": "stranger gossip fitting Brooke's entry (wants Cross's lead); her reaction on her body",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "C461",
@@ -1621,6 +1621,25 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror",
+   "why": "label names no clock time and no duration; Done's 10 minutes sit in time_progression_minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -1632,6 +1651,25 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror and talking like you're not there.",
+   "why": "the act names no hour; true at every minute the bathroom is open",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C897",
@@ -1647,6 +1685,25 @@
    "pass": 1
   },
   {
+   "row": "C897",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "no travel on this screen; Done returns to the same place, the 10 minutes are the act's",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -1658,6 +1715,25 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C900",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "You keep your eyes on your own reflection. Your ears are hot. Neither of them looks your way. Nobody's saying your name in here. Not yet.",
+   "why": "no line says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C902",
@@ -1673,6 +1749,25 @@
    "pass": 1
   },
   {
+   "row": "C902",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror and talking like you're not there.",
+   "why": "at 17:59, the last open minute, two girls doing their lips is still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -1684,6 +1779,25 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C903",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "You keep your eyes on your own reflection. Your ears are hot. Neither of them looks your way. Nobody's saying your name in here. Not yet.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C906",
@@ -1699,6 +1813,25 @@
    "pass": 1
   },
   {
+   "row": "C906",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -1710,6 +1843,25 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "button and label carry no time, no energy; no money cost",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C913",
@@ -1725,22 +1877,42 @@
    "pass": 1
   },
   {
-   "row": "C914",
+   "row": "C913",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "they've moved on to someone else.",
-   "why": "no hours on its grey",
+   "line": "cooldown_message = \"they've moved on to someone else.\"",
+   "why": "the row has no hours of its own; the place's hours are its closed_text (toml:1661); once used it stays as a dimmed line",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "4a84c31384be8f1d",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "ab91cc0ef58e88cf"
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": false,
+   "pass": 16
+  },
+  {
+   "row": "C914",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "cooldown_message = \"they've moved on to someone else.\"",
+   "why": "the grey names no hours; with Brooke there it hides (presence is not the clock)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true,
-   "pass": 1
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C914",
@@ -1774,6 +1946,25 @@
    "pass": 1
   },
   {
+   "row": "C916",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror",
+   "why": "something she chooses; its grey is on her button",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "N/A",
@@ -1785,6 +1976,25 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "no hop: Done targets campus_bathroom, where she already is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C924",
@@ -1800,6 +2010,25 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "no travel cost asked here; the act's minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -1811,6 +2040,25 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 10",
+   "why": "the spend is minutes; nothing sends the clock to an hour",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C927",
@@ -1836,13 +2084,13 @@
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "C927",
@@ -1876,6 +2124,25 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "You keep your eyes on your own reflection. Your ears are hot. Neither of them looks your way. Nobody's saying your name in here. Not yet.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -1889,6 +2156,25 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "Listen to the girls at the mirror",
+   "why": "no time or energy in the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 16
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -1900,6 +2186,25 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "rep_mirror.listen",
+   "verdict": "PASS",
+   "line": "show_when_blocked = true",
+   "why": "it doesn't vanish once used; it greys with its message",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "4727bf6c4b4ed33a",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 16
   },
   {
    "row": "C931",
@@ -1919,19 +2224,19 @@
    "screen": "rep_mirror.listen",
    "verdict": "N/A",
    "line": "",
-   "why": "rep_mirror has no time_of_day condition (toml:7761)",
+   "why": "rep_mirror has no time_of_day condition",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "C931",
@@ -1981,20 +2286,20 @@
    "row": "L106",
    "screen": "rep_mirror.listen",
    "verdict": "PASS",
-   "line": "Two girls you don't know",
-   "why": "only unnamed strangers claimed present; Brooke's absence is a trigger condition",
+   "line": "Two girls you don't know are doing their lips at the far end of the mirror and talking like you're not there.",
+   "why": "only unnamed strangers are claimed there; Brooke's absence is a trigger condition and Kayla/Tess are never there while the row shows",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "L106",
@@ -2045,19 +2350,19 @@
    "screen": "rep_mirror.listen",
    "verdict": "N/A",
    "line": "",
-   "why": "rep_mirror has no hours of its own; its grey is the daily cap",
+   "why": "rep_mirror has no hours of its own, so there is no per-day-kind row to judge",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "4727bf6c4b4ed33a",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a2c742f13651416e",
-    "facts2": "805ffde1713f555a",
-    "all": "1d48c2b3be46d559"
+    "facts": "d9d87fc5b962be38",
+    "facts2": "1a4880620f81ed6a",
+    "all": "a578a13cb3bff4ff"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": false,
-   "pass": 15
+   "pass": 16
   },
   {
    "row": "L167",
@@ -2093,8 +2398,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 9,
- "answered": 9,
+ "asked": 25,
+ "answered": 25,
  "pass_items": [],
  "unowed": []
 }

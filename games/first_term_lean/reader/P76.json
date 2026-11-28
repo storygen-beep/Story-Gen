@@ -1,15 +1,15 @@
 {
  "piece": "P76",
- "pass": 4,
+ "pass": 5,
  "screens": {
   "quad_board.board": {
    "text": "9f144f567628b155",
    "traits": "ebc4051ecd3afac5",
-   "facts": "a81feb1c5ac6385f",
-   "facts2": "d1b4b9ad583865c2",
-   "all": "631469b626f998c8"
+   "facts": "dc17a8f43c6b3958",
+   "facts2": "5839dcd75ffcc2a9",
+   "all": "e7316cb6e3373dd2"
   },
-  "*": "0bb2f44597deabae"
+  "*": "ab27f21e52568691"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -136,19 +136,19 @@
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "You read it twice. Yours isn't on it, and your face goes hot anyway.",
-   "why": "Sunday only (weekday 6); Brooke named only behind met_brooke, else 'a blonde girl'; ranking never changes in release 1 (PLAN.md:503) so 'Yours isn't on it' holds every Sunday; stranger only 08:00-20:00, her own line 20:00-08:00; a re-read stays true.",
+   "why": "Sunday only (weekday 6); the quad has no hours and nobody's rows put anyone there on Sunday (who_is_where: Zoe and Jake weekdays only); Brooke named only behind met_brooke, else 'a blonde girl'; the ranking never changes in release 1, so a second read the same Sunday or a later Sunday stays true; stranger 08:00-20:00, her line 20:00-08:00",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "B11",
@@ -290,20 +290,20 @@
    "row": "B8",
    "screen": "quad_board.board",
    "verdict": "PASS",
-   "line": "Same name on top every week.",
-   "why": "No garment, no number; matches PLAN.md:503 (Brooke on top, never changes).",
+   "line": "Same name on top every week. Don't take it personally.",
+   "why": "no garment, no number; matches PLAN (Brooke on top, never changes)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "B9",
@@ -853,7 +853,7 @@
    "note": false,
    "screen_hash": "0bb2f44597deabae",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 4
   },
   {
@@ -925,20 +925,20 @@
    "row": "C460",
    "screen": "quad_board.board",
    "verdict": "PASS",
-   "line": "It's a list of names, with a blonde girl's photo at the top.",
-   "why": "Every claim true on each Sunday visit, both met states, day and night.",
+   "line": "Brooke's name is at the top, in bigger letters than anyone needs.",
+   "why": "true on every Sunday visit, both met states, day and night; Brooke's new Saturday-night party rows (near_zoe_kitchen) put her nowhere near this claim",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C461",
@@ -958,19 +958,19 @@
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "Of course it isn't. Not even close.",
-   "why": "Her own opinion; stranger's line is fitting texture.",
+   "why": "her own opinion, said aloud; the stranger's line is texture",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C519",
@@ -1246,6 +1246,25 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "Read the board",
+   "why": "label names no clock time and no duration",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "N/A",
@@ -1257,6 +1276,25 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "You read it twice. Yours isn't on it, and your face goes hot anyway.",
+   "why": "the act names no hour; the hour only switches who is around (stranger by day, her line by night)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C897",
@@ -1272,6 +1310,25 @@
    "pass": 1
   },
   {
+   "row": "C897",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "no travel; Done returns to campus_quad",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -1285,23 +1342,42 @@
    "pass": 1
   },
   {
+   "row": "C900",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "You read it twice. Yours isn't on it, and your face goes hot anyway.",
+   "why": "no line says what time it is; 'each Sunday' is a rule on the grey",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C902",
    "screen": "quad_board.board",
    "verdict": "PASS",
-   "line": "time_of_day 08:00-20:00 / 20:00-08:00",
-   "why": "At 19:59 a guy by the steps is plausible; at 20:00 the line switches to hers.",
+   "line": "Of course it isn't. Not even close.",
+   "why": "at 23:59 Sunday her own line shows; at 19:59 a guy by the steps is still plausible",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ace93b21915fc0e1",
+    "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "96846f5da8780b6e"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C903",
@@ -1317,6 +1393,25 @@
    "pass": 1
   },
   {
+   "row": "C903",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "a new ranking goes up each Sunday.",
+   "why": "the grey names Sunday as a rule, true on every day it shows; the screen itself is behind weekday 6",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C906",
    "screen": "*",
    "verdict": "N/A",
@@ -1328,6 +1423,25 @@
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C906",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C910",
@@ -1343,61 +1457,80 @@
    "pass": 1
   },
   {
+   "row": "C910",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "Read the board",
+   "why": "no time, no energy, no money in the labels",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C913",
    "screen": "quad_board.board",
    "verdict": "PASS",
-   "line": "show_when_blocked = true \u00b7 cooldown_message",
-   "why": "Monday to Saturday it stays as a dimmed line with its day.",
+   "line": "cooldown_message = \"a new ranking goes up each Sunday.\"",
+   "why": "Monday to Saturday it stays as a dimmed line with its day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ace93b21915fc0e1",
+    "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "96846f5da8780b6e"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C914",
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "cooldown_message = \"a new ranking goes up each Sunday.\"",
-   "why": "Conditions are only a weekday, so onlyTheClockShut is true (v2.py:6110-6130) and it greys with its day (v2.py:6782-6784, drawn 6830-6837); no daily count left to grey falsely.",
+   "why": "conditions are only a weekday, so only the clock shuts it (v2.py:6110-6130); no daily count to grey falsely",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C916",
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "Read the board",
-   "why": "Something she chooses, so its day goes on it.",
+   "why": "something she chooses, so its day goes on it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "ace93b21915fc0e1",
+    "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "96846f5da8780b6e"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C920",
@@ -1413,6 +1546,25 @@
    "pass": 1
   },
   {
+   "row": "C920",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "no hop: Done targets the quad she is on",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C924",
    "screen": "*",
    "verdict": "N/A",
@@ -1426,6 +1578,25 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "the act's minutes only; no travel cost asked",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -1437,6 +1608,25 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 5",
+   "why": "minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C927",
@@ -1456,19 +1646,19 @@
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "time_progression_minutes = 5",
-   "why": "Done costs 5 minutes, stated.",
+   "why": "Done states its minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C928",
@@ -1484,6 +1674,25 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "You read it twice. Yours isn't on it, and your face goes hot anyway.",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -1497,23 +1706,42 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "quad_board.board",
+   "verdict": "PASS",
+   "line": "Read the board",
+   "why": "no time or energy in the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "9f144f567628b155",
+    "traits": "ebc4051ecd3afac5",
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 5
+  },
+  {
    "row": "C930",
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "show_when_blocked = true",
-   "why": "It no longer vanishes out of its day.",
+   "why": "it doesn't vanish off Sunday",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "ace93b21915fc0e1",
+    "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "96846f5da8780b6e"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": true,
-   "pass": 2
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C931",
@@ -1533,19 +1761,19 @@
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "start_time = \"20:00\", end_time = \"08:00\"",
-   "why": "time_of_day re-read each render via isCurrentTimeSlot (v2.py:5323-5326), end exclusive, overnight wrap (v2.py:4828-4831); 08-20 and 20-08 meet with no gap or overlap.",
+   "why": "two time_of_day groups, 08-20 and 20-08, re-read each render, end exclusive, wrap past midnight (v2.py:4826-4829, 5323-5326): no gap, no overlap",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "C953",
@@ -1578,19 +1806,19 @@
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "A guy waiting by the steps reads it over your shoulder.",
-   "why": "Unnamed stranger, daytime only; Brooke is named on the board, not claimed present.",
+   "why": "an unnamed stranger, daytime only; Brooke is named on the board, not claimed present",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L166",
@@ -1623,19 +1851,19 @@
    "screen": "quad_board.board",
    "verdict": "PASS",
    "line": "Read the board \u2014 a new ranking goes up each Sunday.",
-   "why": "One row, one day; greys with show_when_blocked and a cooldown_message naming its full hours (all Sunday).",
+   "why": "one row, one day kind; greys with show_when_blocked and a cooldown_message naming its day",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "9f144f567628b155",
     "traits": "ebc4051ecd3afac5",
-    "facts": "a81feb1c5ac6385f",
-    "facts2": "d1b4b9ad583865c2",
-    "all": "631469b626f998c8"
+    "facts": "dc17a8f43c6b3958",
+    "facts2": "5839dcd75ffcc2a9",
+    "all": "e7316cb6e3373dd2"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 5
   },
   {
    "row": "L170",
@@ -1653,8 +1881,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 25,
+ "answered": 25,
  "pass_items": [],
  "unowed": []
 }

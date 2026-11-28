@@ -1,6 +1,6 @@
 {
  "piece": "P63",
- "pass": 9,
+ "pass": 10,
  "screens": {
   "*": "4f53cda18c2baa0c"
  },
@@ -37,17 +37,21 @@
   "C1274": "ca72df83c67acc75",
   "C1278": "a511d81564cef526",
   "C1277": "2b934524a49c49e9",
+  "C2207": "b9c91f7190bf24aa",
+  "C2208": "21548e787d7f48ee",
+  "C2209": "abcad271992139b6",
   "C1238": "af95eb45b0bdc9db",
   "C1255": "d81893b9077b4b53",
   "L97": "2bfb9527e76ad93b",
   "media#1": "3641bf707d9adfce",
-  "media#2": "69a8103be1e1032a",
+  "media#2": "9c523f03c9ecb512",
   "media#3": "6632678381731161",
   "media#4": "03599fc0722690b6",
   "media#5": "2cf5e3607ccecd4a",
   "media#6": "3016751837a9b0a0",
-  "media#7": "eff6dc1369755c34",
+  "media#7": "35ceae067dce34a1",
   "media#8": "599313c7948d2a50",
+  "media#9": "8abe9bc90fe56cc5",
   "C442": "a2b07f40e1a9e908",
   "C449": "ac5932d70cd775a1",
   "C451": "6b0fd679047fc9b8",
@@ -562,8 +566,47 @@
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
    "row_hash": "99ccaf869af30473",
-   "carried": false,
+   "carried": true,
    "pass": 9
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "dean office interior big desk window \u00b7 professor office interior desk shelves files \u00b7 office whiteboards full of equations \u00b7 english professor office books kettle windowsill \u00b7 black box theatre stage folding seats",
+   "why": "every place line names the room or street and one or two details, nobody in it; no woman/man/girl/her/people word. Role words used as the room's kind ('dean office', 'professor office') name the room the way the old first_term's \"dean's office\" / \"landlord's house\" did (LO's model, card P85), not a person in frame",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "b9c91f7190bf24aa",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "dean office interior big desk window \u00b7 professor office interior desk shelves files \u00b7 office whiteboards full of equations \u00b7 english professor office books kettle windowsill \u00b7 black box theatre stage folding seats",
+   "why": "tags: each line 8 words or fewer, no age or digit, no camera direction, no 'no ___', no name; nothing moves, so no gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "21548e787d7f48ee",
+   "carried": false,
+   "pass": 10
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "dean office interior big desk window \u00b7 professor office interior desk shelves files \u00b7 office whiteboards full of equations \u00b7 english professor office books kettle windowsill \u00b7 black box theatre stage folding seats",
+   "why": "each is a common, filed room photo; no person, no garment",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "abcad271992139b6",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "C422",
@@ -829,14 +872,14 @@
    "row": "media#2",
    "screen": "*",
    "verdict": "PASS",
-   "line": "dean 'seen from behind a big desk: woman of 18 standing in the doorway ... waiting' \u00b7 hale/pratt/walsh 'seen from a professor's desk'",
-   "why": "one tier-0 file each, her in it, the person out of frame; each office's hours equal its person's row (Dean Mon-Fri 08-17, Hale Mon/Wed 14-17, Pratt Mon/Wed 13-15, Walsh Tue/Thu 14-16)",
+   "line": "dean office interior big desk window \u00b7 professor office interior desk shelves files \u00b7 office whiteboards full of equations \u00b7 english professor office books kettle windowsill \u00b7 black box theatre stage folding seats",
+   "why": "one file each, tier 0 (_t0.jpg), the place itself with nobody in it, searched by the room and one or two details, shown only while open (hours set)",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "69a8103be1e1032a",
-   "carried": true,
-   "pass": 5
+   "row_hash": "9c523f03c9ecb512",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "media#3",
@@ -894,14 +937,14 @@
    "row": "media#7",
    "screen": "*",
    "verdict": "PASS",
-   "line": "\"woman of 18 ... college dean's office ...\" + second phrase",
-   "why": "age, place, two plain phrases; no garment, and none can be true: the card shows over every outfit she can wear to campus",
+   "line": "dean office interior big desk window \u00b7 professor office interior desk shelves files \u00b7 office whiteboards full of equations \u00b7 english professor office books kettle windowsill \u00b7 black box theatre stage folding seats",
+   "why": "a place has no description field; its search words are short tag lines (rule 7), no age, no camera direction, no 'no ___', no garment",
    "cause": null,
    "note": false,
    "screen_hash": "4f53cda18c2baa0c",
-   "row_hash": "eff6dc1369755c34",
-   "carried": true,
-   "pass": 1
+   "row_hash": "35ceae067dce34a1",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "media#8",
@@ -915,6 +958,19 @@
    "row_hash": "599313c7948d2a50",
    "carried": true,
    "pass": 8
+  },
+  {
+   "row": "media#9",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "dean office interior big desk window \u00b7 professor office interior desk shelves files \u00b7 office whiteboards full of equations \u00b7 english professor office books kettle windowsill \u00b7 black box theatre stage folding seats",
+   "why": "a picture that exists: a plain room or street photo, one subject (the place)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "4f53cda18c2baa0c",
+   "row_hash": "8abe9bc90fe56cc5",
+   "carried": false,
+   "pass": 10
   },
   {
    "row": "voice#1",
@@ -1062,8 +1118,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 6,
+ "answered": 6,
  "pass_items": [],
  "unowed": []
 }

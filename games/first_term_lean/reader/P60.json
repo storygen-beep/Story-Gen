@@ -1,64 +1,64 @@
 {
  "piece": "P60",
- "pass": 11,
+ "pass": 13,
  "screens": {
   "talk_kayla_mirror.hub": {
-   "text": "e21728782499bf58",
+   "text": "d3ffa1de5cff0f74",
    "traits": "d79bccff03ff73e2",
-   "facts": "05a223d1f064cc08",
-   "facts2": "740698482b6cbecc",
-   "all": "71e0cb0d11ef7b6f"
+   "facts": "c4c8e3c8d556adad",
+   "facts2": "8feaf463e2815670",
+   "all": "57a15d65765182d6"
   },
   "talk_kayla_mirror.talk": {
    "text": "85243f6b723592fb",
    "traits": "39038d9b4c4b47e1",
-   "facts": "22bab9cd12b37346",
-   "facts2": "a611f0af0f1eadef",
-   "all": "45aeab5c6b3e726a"
+   "facts": "f6b9338e3524fc0e",
+   "facts2": "b96840739bc14e5c",
+   "all": "8b1c9a07ec839fc0"
   },
   "talk_kayla_cafeteria.hub": {
-   "text": "04214bc49444dd26",
+   "text": "a8db1f3bdaec4a33",
    "traits": "85bb3b602dd90b82",
-   "facts": "af8dc7371cd64439",
-   "facts2": "1ddd321d9ad83dfa",
-   "all": "962dd9fb19241684"
+   "facts": "733fce5666d85320",
+   "facts2": "302908ba12bb8ab7",
+   "all": "a21425d2d0bcd424"
   },
   "talk_kayla_cafeteria.talk": {
    "text": "776db09db747ab90",
    "traits": "39038d9b4c4b47e1",
-   "facts": "35753a8da1560177",
-   "facts2": "bfffecabfc4fd08b",
-   "all": "2ee1353c2a56c125"
+   "facts": "c9e13601b6cf60f4",
+   "facts2": "3ecb4c59fe60a232",
+   "all": "40d9eb8022d83362"
   },
   "talk_tess_mirror.hub": {
-   "text": "46ee27310f0fec33",
+   "text": "3d6279d61731af61",
    "traits": "0b50d642c406ca77",
-   "facts": "231c0674ccebcde6",
-   "facts2": "139bdb4614554456",
-   "all": "c4d1b9de0c237aa3"
+   "facts": "bebcc104bc897e7a",
+   "facts2": "6be6a136e5937131",
+   "all": "f4c12201f53dea0d"
   },
   "talk_tess_mirror.talk": {
    "text": "fa0463a49564eae1",
    "traits": "85bb3b602dd90b82",
-   "facts": "f83baed1e7d3f000",
-   "facts2": "f13cfb0d5493b0a5",
-   "all": "bdd93b3a4cb986e5"
+   "facts": "fa6492cd77b28caa",
+   "facts2": "aa609178bbcab23c",
+   "all": "cb241e750a4f56b5"
   },
   "talk_tess_cafeteria.hub": {
-   "text": "0bfed101c6954280",
+   "text": "6e9e53ef5381edf7",
    "traits": "0b50d642c406ca77",
-   "facts": "a93c7ec2456e267d",
-   "facts2": "72034b1d27a348cb",
-   "all": "c584609c6da46b07"
+   "facts": "111b13c2977f4672",
+   "facts2": "867ccf0693cbe3cb",
+   "all": "a7ee5fdcf7e1ac65"
   },
   "talk_tess_cafeteria.talk": {
    "text": "7daa4462ffc35e00",
    "traits": "85bb3b602dd90b82",
-   "facts": "936e9b69529317a6",
-   "facts2": "2f2e5ab0a243d432",
-   "all": "9c56d3e4ae44f0c6"
+   "facts": "68e50f0b61e5bf39",
+   "facts2": "2f728cdf3b909a36",
+   "all": "f7dc91adc0b04d35"
   },
-  "*": "4f52a0abae4fd4f8"
+  "*": "df925f3bcdce4196"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -124,6 +124,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -214,41 +217,155 @@
   },
   {
    "row": "B10",
+   "screen": "talk_kayla_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Kayla's at the middle table with Tess, picking at a salad and watching who comes in.",
+   "why": "who_is_where: Kayla and Tess both at campus_cafeteria weekdays 12-13 (requires_npc); 'salad' and 'lunch' fit the hour; search words claim no time, person or garment the screen contradicts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8db1f3bdaec4a33",
+    "traits": "85bb3b602dd90b82",
+    "facts": "733fce5666d85320",
+    "facts2": "302908ba12bb8ab7",
+    "all": "a21425d2d0bcd424"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "B10",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "read at the meeting's own visit (menu right after the meeting), the last minute of the row and the fifth visit: the opening claims no return and no first time; Kayla's cafeteria row is weekdays 12-13, so \"ours at lunch\" is true; she is named by Brooke at the meeting (\"Kayla, Tess, it's the new girl\"), so \"I have a name, Kayla\" is earned behind met_brooke; \"Oh. It's you.\" claims only that they have met; read in the cafeteria at 12-13, where she is at that table with Tess",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "true at the cafeteria 12-13 on every visit: she is at that table with Tess; 'ours at lunch' is her own row; no past, no time, no weekday",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "B10",
+   "screen": "talk_kayla_mirror.hub",
+   "verdict": "PASS",
+   "line": "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to.",
+   "why": "who_is_where: Kayla and Brooke both at campus_bathroom weekdays 08-09 and 13-14 (requires_npc), so Brooke's bag is there whenever the menu is; search words claim no time, person or garment the screen contradicts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d3ffa1de5cff0f74",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c4c8e3c8d556adad",
+    "facts2": "8feaf463e2815670",
+    "all": "57a15d65765182d6"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "B10",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "read at the meeting's own visit (menu right after the meeting), the last minute of the row and the fifth visit: the opening claims no return and no first time; Kayla's cafeteria row is weekdays 12-13, so \"ours at lunch\" is true; she is named by Brooke at the meeting (\"Kayla, Tess, it's the new girl\"), so \"I have a name, Kayla\" is earned behind met_brooke; \"Oh. It's you.\" claims only that they have met; read at the mirror, where Brooke's and Kayla's rows match (weekdays 08-09, 13-14)",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "true at the mirror on every weekday visit: Kayla's cafeteria row is weekdays 12-13, so 'ours at lunch' holds; Brooke named her at the meeting (met_brooke gates the menu), so 'I have a name, Kayla' is earned; no time, no weekday, no first-time words",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "B10",
+   "screen": "talk_tess_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the end of the middle table, turning a make-up brush over in her fingers.",
+   "why": "who_is_where: Tess at campus_cafeteria weekdays 12-13 (requires_npc); the middle table fits Kayla's line; search words claim no time, person or garment the screen contradicts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6e9e53ef5381edf7",
+    "traits": "0b50d642c406ca77",
+    "facts": "111b13c2977f4672",
+    "facts2": "867ccf0693cbe3cb",
+    "all": "a7ee5fdcf7e1ac65"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "B10",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "the brush is in her fingers on the hub; nothing names the place or the hour; 'sometime' promises no date; true on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "B10",
+   "screen": "talk_tess_mirror.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away.",
+   "why": "who_is_where: Tess at campus_bathroom weekdays 08-09, 13-14 with Brooke and Kayla, so 'someone else's face' always has a face; search words claim no time, person or garment the screen contradicts",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3d6279d61731af61",
+    "traits": "0b50d642c406ca77",
+    "facts": "bebcc104bc897e7a",
+    "facts2": "6be6a136e5937131",
+    "all": "f4c12201f53dea0d"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "B10",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "the brush is in her hand on the hub; 'I do Kayla's' is her role (PLAN cast, 'she does the make-up'); 'sometime' promises no date; true on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "c1c0e2ac2588a579",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "B11",
@@ -382,41 +499,155 @@
   },
   {
    "row": "B8",
+   "screen": "talk_kayla_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Kayla's at the middle table with Tess, picking at a salad and watching who comes in.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8db1f3bdaec4a33",
+    "traits": "85bb3b602dd90b82",
+    "facts": "733fce5666d85320",
+    "facts2": "302908ba12bb8ab7",
+    "all": "a21425d2d0bcd424"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "B8",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "no garment of hers is named; Kayla's cafeteria row is weekdays 12-13, so \"ours at lunch\" is true; she is named by Brooke at the meeting (\"Kayla, Tess, it's the new girl\"), so \"I have a name, Kayla\" is earned behind met_brooke; \"Oh. It's you.\" claims only that they have met; read in the cafeteria at 12-13, where she is at that table with Tess",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no garment of hers named; no number on screen; Done spends 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "B8",
+   "screen": "talk_kayla_mirror.hub",
+   "verdict": "PASS",
+   "line": "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d3ffa1de5cff0f74",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c4c8e3c8d556adad",
+    "facts2": "8feaf463e2815670",
+    "all": "57a15d65765182d6"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "B8",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "no garment of hers is named; Kayla's cafeteria row is weekdays 12-13, so \"ours at lunch\" is true; she is named by Brooke at the meeting (\"Kayla, Tess, it's the new girl\"), so \"I have a name, Kayla\" is earned behind met_brooke; \"Oh. It's you.\" claims only that they have met; read at the mirror, where Brooke's and Kayla's rows match (weekdays 08-09, 13-14)",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no garment of hers named; no number on screen; Done spends 10 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "B8",
+   "screen": "talk_tess_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the end of the middle table, turning a make-up brush over in her fingers.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6e9e53ef5381edf7",
+    "traits": "0b50d642c406ca77",
+    "facts": "111b13c2977f4672",
+    "facts2": "867ccf0693cbe3cb",
+    "all": "a7ee5fdcf7e1ac65"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "B8",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no garment of hers named; no number on screen; Done spends 10 minutes as the card says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "B8",
+   "screen": "talk_tess_mirror.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away.",
+   "why": "no number printed; no garment of hers named on the screen or in its search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3d6279d61731af61",
+    "traits": "0b50d642c406ca77",
+    "facts": "bebcc104bc897e7a",
+    "facts2": "6be6a136e5937131",
+    "all": "f4c12201f53dea0d"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "B8",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no garment of hers named; no number on screen; Done spends 10 minutes as the card says",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "B9",
@@ -1206,8 +1437,47 @@
    "note": false,
    "screen_hash": "4f52a0abae4fd4f8",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "(no place picture in Builds)",
+   "why": "P60 builds four talk canvases, no [[locations]] row",
+   "cause": null,
+   "note": false,
+   "screen_hash": "df925f3bcdce4196",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"college girl bathroom mirror makeup bag smirk\" \u00b7 \"girl applying makeup brush mirror reflection\"",
+   "why": "eight lines of 5-7 words, tags only; no age number, camera direction, 'no ___', name or story word",
+   "cause": null,
+   "note": false,
+   "screen_hash": "df925f3bcdce4196",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "\"college girl cafeteria table salad\"",
+   "why": "each is one subject in a common pose (at a mirror, at a lunch table); no garment of hers named",
+   "cause": null,
+   "note": false,
+   "screen_hash": "df925f3bcdce4196",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C422",
@@ -1289,41 +1559,155 @@
   },
   {
    "row": "C460",
+   "screen": "talk_kayla_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Kayla's at the middle table with Tess, picking at a salad and watching who comes in.",
+   "why": "who_is_where: Kayla and Tess both at campus_cafeteria weekdays 12-13 (requires_npc); 'salad' and 'lunch' fit the hour",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8db1f3bdaec4a33",
+    "traits": "85bb3b602dd90b82",
+    "facts": "733fce5666d85320",
+    "facts2": "302908ba12bb8ab7",
+    "all": "a21425d2d0bcd424"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C460",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "every claim holds on every playthrough that reaches the screen: Kayla's cafeteria row is weekdays 12-13, so \"ours at lunch\" is true; she is named by Brooke at the meeting (\"Kayla, Tess, it's the new girl\"), so \"I have a name, Kayla\" is earned behind met_brooke; \"Oh. It's you.\" claims only that they have met; read in the cafeteria at 12-13, where she is at that table with Tess",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "true at the cafeteria 12-13 on every visit: she is at that table with Tess; 'ours at lunch' is her own row; no past, no time, no weekday",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "C460",
+   "screen": "talk_kayla_mirror.hub",
+   "verdict": "PASS",
+   "line": "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to.",
+   "why": "who_is_where: Kayla and Brooke both at campus_bathroom weekdays 08-09 and 13-14 (requires_npc), so Brooke's bag is there whenever the menu is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d3ffa1de5cff0f74",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c4c8e3c8d556adad",
+    "facts2": "8feaf463e2815670",
+    "all": "57a15d65765182d6"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C460",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "every claim holds on every playthrough that reaches the screen: Kayla's cafeteria row is weekdays 12-13, so \"ours at lunch\" is true; she is named by Brooke at the meeting (\"Kayla, Tess, it's the new girl\"), so \"I have a name, Kayla\" is earned behind met_brooke; \"Oh. It's you.\" claims only that they have met; read at the mirror, where Brooke's and Kayla's rows match (weekdays 08-09, 13-14)",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "true at the mirror on every weekday visit: Kayla's cafeteria row is weekdays 12-13, so 'ours at lunch' holds; Brooke named her at the meeting (met_brooke gates the menu), so 'I have a name, Kayla' is earned; no time, no weekday, no first-time words",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "C460",
+   "screen": "talk_tess_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the end of the middle table, turning a make-up brush over in her fingers.",
+   "why": "who_is_where: Tess at campus_cafeteria weekdays 12-13 (requires_npc); the middle table fits Kayla's line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6e9e53ef5381edf7",
+    "traits": "0b50d642c406ca77",
+    "facts": "111b13c2977f4672",
+    "facts2": "867ccf0693cbe3cb",
+    "all": "a7ee5fdcf7e1ac65"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C460",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "the brush is in her fingers on the hub; nothing names the place or the hour; 'sometime' promises no date; true on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C460",
+   "screen": "talk_tess_mirror.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away.",
+   "why": "who_is_where: Tess at campus_bathroom weekdays 08-09, 13-14 with Brooke and Kayla, so 'someone else's face' always has a face",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3d6279d61731af61",
+    "traits": "0b50d642c406ca77",
+    "facts": "bebcc104bc897e7a",
+    "facts2": "6be6a136e5937131",
+    "all": "f4c12201f53dea0d"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C460",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "the brush is in her hand on the hub; 'I do Kayla's' is her role (PLAN cast, 'she does the make-up'); 'sometime' promises no date; true on every visit",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "67e48e60d5053a2e",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C461",
@@ -1340,41 +1724,155 @@
   },
   {
    "row": "C461",
+   "screen": "talk_kayla_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Kayla's at the middle table with Tess, picking at a salad and watching who comes in.",
+   "why": "texture that can't clash; dialogue and look fit the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8db1f3bdaec4a33",
+    "traits": "85bb3b602dd90b82",
+    "facts": "733fce5666d85320",
+    "facts2": "302908ba12bb8ab7",
+    "all": "a21425d2d0bcd424"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C461",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "the rest is texture and the person's own manner; nothing can clash",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "her pushback and the dialogue fit the cast entries (Kayla Mean/Gives way, Tess Shy/Gives way)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "C461",
+   "screen": "talk_kayla_mirror.hub",
+   "verdict": "PASS",
+   "line": "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to.",
+   "why": "texture that can't clash; dialogue and look fit the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d3ffa1de5cff0f74",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c4c8e3c8d556adad",
+    "facts2": "8feaf463e2815670",
+    "all": "57a15d65765182d6"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C461",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there.",
-   "why": "the rest is texture and the person's own manner; nothing can clash",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "her pushback and the dialogue fit the cast entries (Kayla Mean/Gives way, Tess Shy/Gives way)",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "C461",
+   "screen": "talk_tess_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the end of the middle table, turning a make-up brush over in her fingers.",
+   "why": "texture that can't clash; dialogue and look fit the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6e9e53ef5381edf7",
+    "traits": "0b50d642c406ca77",
+    "facts": "111b13c2977f4672",
+    "facts2": "867ccf0693cbe3cb",
+    "all": "a7ee5fdcf7e1ac65"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C461",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "her pushback and the dialogue fit the cast entries (Kayla Mean/Gives way, Tess Shy/Gives way)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C461",
+   "screen": "talk_tess_mirror.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away.",
+   "why": "texture that can't clash; dialogue and look fit the cast entry",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3d6279d61731af61",
+    "traits": "0b50d642c406ca77",
+    "facts": "bebcc104bc897e7a",
+    "facts2": "6be6a136e5937131",
+    "all": "f4c12201f53dea0d"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C461",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "her pushback and the dialogue fit the cast entries (Kayla Mean/Gives way, Tess Shy/Gives way)",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C519",
@@ -1713,6 +2211,82 @@
    "pass": 1
   },
   {
+   "row": "C889",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label names no clock time and no duration; the 10 minutes sit in time_progression_minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C889",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label names no clock time and no duration; the 10 minutes sit in time_progression_minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C889",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label names no clock time and no duration; the 10 minutes sit in time_progression_minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C889",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label names no clock time and no duration; the 10 minutes sit in time_progression_minutes",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -1724,6 +2298,82 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C892",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C892",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C892",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C892",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C897",
@@ -1739,6 +2389,82 @@
    "pass": 1
   },
   {
+   "row": "C897",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "time is the talk's own spend, not a cost on a room hop; Leave is 0",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C897",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "time is the talk's own spend, not a cost on a room hop; Leave is 0",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C897",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "time is the talk's own spend, not a cost on a room hop; Leave is 0",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C897",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "time is the talk's own spend, not a cost on a room hop; Leave is 0",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -1750,6 +2476,82 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C900",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "the beat never says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C900",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "the beat never says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C900",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "the beat never says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C900",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "the beat never says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C902",
@@ -1765,6 +2567,82 @@
    "pass": 1
   },
   {
+   "row": "C902",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "read at 12:59 / 08:59 / 13:59, the last minute of the rows: still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C902",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "read at 12:59 / 08:59 / 13:59, the last minute of the rows: still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C902",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "read at 12:59 / 08:59 / 13:59, the last minute of the rows: still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C902",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "read at 12:59 / 08:59 / 13:59, the last minute of the rows: still true",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -1776,6 +2654,82 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C903",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C903",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C903",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C903",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C906",
@@ -1791,6 +2745,82 @@
    "pass": 1
   },
   {
+   "row": "C906",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C906",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C906",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C906",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no 'till X' on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -1802,6 +2832,82 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C910",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label says no time, no energy, no money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C910",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label says no time, no energy, no money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C910",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label says no time, no energy, no money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C910",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "the label says no time, no energy, no money",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C913",
@@ -1817,6 +2923,82 @@
    "pass": 1
   },
   {
+   "row": "C913",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no activity with hours on this screen; the menu's daily lock is a count, not hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C913",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no activity with hours on this screen; the menu's daily lock is a count, not hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C913",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no activity with hours on this screen; the menu's daily lock is a count, not hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C913",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no activity with hours on this screen; the menu's daily lock is a count, not hours",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "c750f9b6ab4ace14",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C914",
    "screen": "*",
    "verdict": "PASS",
@@ -1828,6 +3010,82 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C914",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no hours shown on any row of this screen; none is shut by the clock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C914",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no hours shown on any row of this screen; none is shut by the clock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C914",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no hours shown on any row of this screen; none is shut by the clock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C914",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no hours shown on any row of this screen; none is shut by the clock",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C916",
@@ -1843,6 +3101,82 @@
    "pass": 1
   },
   {
+   "row": "C916",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no event that happens to her on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C916",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no event that happens to her on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C916",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no event that happens to her on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C916",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no event that happens to her on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "7b2bb0dfdbcfe946",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C920",
    "screen": "*",
    "verdict": "PASS",
@@ -1854,6 +3188,82 @@
    "row_hash": "513927dd127fca04",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C920",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "Done returns to the same place; the 10 minutes are the talk, not a hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C920",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "Done returns to the same place; the 10 minutes are the talk, not a hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C920",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "Done returns to the same place; the 10 minutes are the talk, not a hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C920",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "Done returns to the same place; the 10 minutes are the talk, not a hop cost",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C924",
@@ -1869,6 +3279,82 @@
    "pass": 1
   },
   {
+   "row": "C924",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "a plan-level note about travel cost; no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C924",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "a plan-level note about travel cost; no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C924",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "a plan-level note about travel cost; no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C924",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "a plan-level note about travel cost; no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -1880,6 +3366,82 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C926",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the clock moves by minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C926",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the clock moves by minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C926",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the clock moves by minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C926",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the clock moves by minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C927",
@@ -1898,39 +3460,77 @@
    "row": "C927",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes (v2.py:17877 reads the value given); Done is 10",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the exit states its time, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 12
   },
   {
    "row": "C927",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "Talk 0 \u00b7 Leave 0 \u00b7 Done 10",
-   "why": "every exit states its minutes (v2.py:17877 reads the value given); Done is 10",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the exit states its time, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "C927",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the exit states its time, so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C927",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done (time_progression_minutes = 10)",
+   "why": "the exit states its time, so the 3-minute default never applies",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C928",
@@ -1946,6 +3546,82 @@
    "pass": 1
   },
   {
+   "row": "C928",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C928",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C928",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C928",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -1959,6 +3635,82 @@
    "pass": 1
   },
   {
+   "row": "C929",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time tagged in the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C929",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time tagged in the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C929",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time tagged in the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C929",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Done",
+   "why": "no activity time tagged in the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": true,
+   "pass": 12
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -1970,6 +3722,82 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 1
+  },
+  {
+   "row": "C930",
+   "screen": "talk_kayla_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no windowed work on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "776db09db747ab90",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C930",
+   "screen": "talk_kayla_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no windowed work on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "85243f6b723592fb",
+    "traits": "39038d9b4c4b47e1",
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C930",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no windowed work on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C930",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no windowed work on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C931",
@@ -1988,39 +3816,77 @@
    "row": "C931",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row via requires_npc",
+   "line": "Done",
+   "why": "no time_of_day condition on this canvas (the menu reads met_brooke and the person's row)",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 12
   },
   {
    "row": "C931",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day condition on this canvas; presence comes from the person's row via requires_npc",
+   "line": "Done",
+   "why": "no time_of_day condition on this canvas (the menu reads met_brooke and the person's row)",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "C931",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no time_of_day condition on this canvas (the menu reads met_brooke and the person's row)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "C931",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no time_of_day condition on this canvas (the menu reads met_brooke and the person's row)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "C953",
@@ -2050,41 +3916,155 @@
   },
   {
    "row": "L106",
+   "screen": "talk_kayla_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Kayla's at the middle table with Tess, picking at a salad and watching who comes in.",
+   "why": "everyone named is placed there by requires_npc and who_is_where",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a8db1f3bdaec4a33",
+    "traits": "85bb3b602dd90b82",
+    "facts": "733fce5666d85320",
+    "facts2": "302908ba12bb8ab7",
+    "all": "a21425d2d0bcd424"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "L106",
    "screen": "talk_kayla_cafeteria.talk",
    "verdict": "PASS",
-   "line": "Kayla tips her head at you.",
-   "why": "only the menu's own person is placed (requires_npc); nobody else is said to be there",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "nobody is placed on screen except the menu's own person (requires_npc); 'Kayla's' in Tess's line names a habit, not presence",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "L106",
+   "screen": "talk_kayla_mirror.hub",
+   "verdict": "PASS",
+   "line": "Kayla's holding Brooke's bag at the mirror. She sees you in the glass and smirks before she's decided to.",
+   "why": "everyone named is placed there by requires_npc and who_is_where",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "d3ffa1de5cff0f74",
+    "traits": "d79bccff03ff73e2",
+    "facts": "c4c8e3c8d556adad",
+    "facts2": "8feaf463e2815670",
+    "all": "57a15d65765182d6"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "L106",
    "screen": "talk_kayla_mirror.talk",
    "verdict": "PASS",
-   "line": "Kayla tips her head at you.",
-   "why": "only the menu's own person is placed (requires_npc); nobody else is said to be there",
+   "line": "Oh. It's you. ... The middle table in the cafeteria is ours at lunch. You don't sit there. Just so you know.",
+   "why": "nobody is placed on screen except the menu's own person (requires_npc); 'Kayla's' in Tess's line names a habit, not presence",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "L106",
+   "screen": "talk_tess_cafeteria.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the end of the middle table, turning a make-up brush over in her fingers.",
+   "why": "everyone named is placed there by requires_npc and who_is_where",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "6e9e53ef5381edf7",
+    "traits": "0b50d642c406ca77",
+    "facts": "111b13c2977f4672",
+    "facts2": "867ccf0693cbe3cb",
+    "all": "a7ee5fdcf7e1ac65"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "L106",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "nobody is placed on screen except the menu's own person (requires_npc); 'Kayla's' in Tess's line names a habit, not presence",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "L106",
+   "screen": "talk_tess_mirror.hub",
+   "verdict": "PASS",
+   "line": "Tess is at the mirror with a brush in her hand, doing someone else's face. She looks at you in the glass, then away.",
+   "why": "everyone named is placed there by requires_npc and who_is_where",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "3d6279d61731af61",
+    "traits": "0b50d642c406ca77",
+    "facts": "bebcc104bc897e7a",
+    "facts2": "6be6a136e5937131",
+    "all": "f4c12201f53dea0d"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "L106",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "PASS",
+   "line": "Hi, Tess. ... Nobody. Me. I do Kayla's, mostly. I could do yours sometime. If you want.",
+   "why": "nobody is placed on screen except the menu's own person (requires_npc); 'Kayla's' in Tess's line names a habit, not presence",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "L119",
@@ -2167,40 +4147,78 @@
   {
    "row": "L167",
    "screen": "talk_kayla_cafeteria.talk",
-   "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no row with hours on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "776db09db747ab90",
     "traits": "39038d9b4c4b47e1",
-    "facts": "35753a8da1560177",
-    "facts2": "bfffecabfc4fd08b",
-    "all": "2ee1353c2a56c125"
+    "facts": "c9e13601b6cf60f4",
+    "facts2": "3ecb4c59fe60a232",
+    "all": "40d9eb8022d83362"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 12
   },
   {
    "row": "L167",
    "screen": "talk_kayla_mirror.talk",
-   "verdict": "PASS",
-   "line": "[canvases.trigger] one canvas per person per place",
-   "why": "one canvas whatever the day; days come from the person's row via requires_npc, not one canvas per day kind",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no row with hours on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "85243f6b723592fb",
     "traits": "39038d9b4c4b47e1",
-    "facts": "22bab9cd12b37346",
-    "facts2": "a611f0af0f1eadef",
-    "all": "45aeab5c6b3e726a"
+    "facts": "f6b9338e3524fc0e",
+    "facts2": "b96840739bc14e5c",
+    "all": "8b1c9a07ec839fc0"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 12
+  },
+  {
+   "row": "L167",
+   "screen": "talk_tess_cafeteria.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no row with hours on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "7daa4462ffc35e00",
+    "traits": "85bb3b602dd90b82",
+    "facts": "68e50f0b61e5bf39",
+    "facts2": "2f728cdf3b909a36",
+    "all": "f7dc91adc0b04d35"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 12
+  },
+  {
+   "row": "L167",
+   "screen": "talk_tess_mirror.talk",
+   "verdict": "N/A",
+   "line": "Done",
+   "why": "no row with hours on this screen",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "fa0463a49564eae1",
+    "traits": "85bb3b602dd90b82",
+    "facts": "fa6492cd77b28caa",
+    "facts2": "aa609178bbcab23c",
+    "all": "cb241e750a4f56b5"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": true,
+   "pass": 12
   },
   {
    "row": "L170",
@@ -2218,8 +4236,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 23,
+ "answered": 23,
  "pass_items": [],
  "unowed": []
 }

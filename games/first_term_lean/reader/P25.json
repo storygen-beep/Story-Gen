@@ -1,6 +1,6 @@
 {
  "piece": "P25",
- "pass": 19,
+ "pass": 21,
  "screens": {
   "quad_meet_jake.ask": {
    "text": "8894fc030db920d6",
@@ -10,13 +10,13 @@
    "all": "0f7f4c6ba71dc46e"
   },
   "quad_meet_jake.after": {
-   "text": "56a2a1e9b53909ca",
+   "text": "33df3c6934b10daf",
    "traits": "435644be785b94c8",
    "facts": "29db4ec2f8f4b7d9",
    "facts2": "679fc34857b92f9e",
-   "all": "785056cbbffc4241"
+   "all": "7789706848b7fedb"
   },
-  "*": "c77673dc0f621531"
+  "*": "0c119fd7b4c41d52"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -101,6 +101,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -191,19 +194,20 @@
    "row": "B10",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
-   "why": "every line holds at the first and last minute and on a second visit; no person named (fires while Jake's row has him on the quad, weekdays 14-16, from week two; his friends are unscheduled texture; Zoe 14-15 may be there unnamed and nothing claims she isn't)",
+   "line": "See you around, trouble. ... And I'm asking again. Fair warning.",
+   "why": "one-time, fires only while Jake's row has him on the quad (weekdays 14-16, from week two); his friends by the steps agree with the row's on_route ('students hang out on the quad's steps between classes'); no person else named, no past claimed; true at 14:00 and 15:59",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "B11",
@@ -344,19 +348,20 @@
    "row": "B8",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
-   "why": "no garment of hers named; no number that disagrees with PLAN",
+   "line": "He jogs back to his friends, and they shove him like he's won something. You feel them all looking at you for the rest of the way across the quad.",
+   "why": "no garment of hers named (the hoodie in the picture spot is his); Jake 20 agrees with PLAN; Done spends 5 minutes as the card says",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "B9",
@@ -1186,8 +1191,47 @@
    "note": false,
    "screen_hash": "c77673dc0f621531",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 19
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0c119fd7b4c41d52",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 21
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "college guy hoodie jogging looking back grinning gif",
+   "why": "7-8 words, gif for a moving look-back; 'looking back' is his act, not a camera direction",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0c119fd7b4c41d52",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 21
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "college guy hoodie jogging looking back grinning gif",
+   "why": "one subject jogging and looking over his shoulder, a common candid; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "0c119fd7b4c41d52",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 21
   },
   {
    "row": "C286",
@@ -1434,19 +1478,20 @@
    "row": "C460",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "\"And I'm asking again. Fair warning.\"",
-   "why": "his intent in his own voice; the plan has the step that reaches it (PLAN \u00a76, \u00a77); no date, no past, no one named who isn't there",
+   "line": "And I'm asking again. Fair warning.",
+   "why": "his intent in his own voice; PLAN has the steps that reach it (Jake's dates, release 3, PLAN.md:264, 279); no date, no past, nobody named who isn't there",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "C461",
@@ -1465,19 +1510,20 @@
    "row": "C461",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
-   "why": "texture only, and dialogue that fits the cast entry",
+   "line": "Not right now isn't no. I'll take it.",
+   "why": "dialogue fits his cast entry (Nervous, Gives way: 'Okay. Okay, good.', PLAN.md:136); texture can't clash",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "C519",
@@ -2062,19 +2108,20 @@
    "row": "C927",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
-   "why": "every exit carries its own minutes",
+   "line": "Done (time_progression_minutes = 5)",
+   "why": "the exit states its time, so the 3-minute default never applies",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "C928",
@@ -2132,19 +2179,20 @@
    "row": "C931",
    "screen": "quad_meet_jake.after",
    "verdict": "N/A",
-   "line": "",
-   "why": "no time_of_day; the trigger reads his row and days_since_flag",
+   "line": "Done",
+   "why": "no time_of_day condition: the trigger reads Jake's presence and days_since_flag met_laura",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "C953",
@@ -2176,19 +2224,20 @@
    "row": "L106",
    "screen": "quad_meet_jake.after",
    "verdict": "PASS",
-   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
-   "why": "no line names a person whose rows don't put them there (fires while Jake's row has him on the quad, weekdays 14-16, from week two; his friends are unscheduled texture; Zoe 14-15 may be there unnamed and nothing claims she isn't)",
+   "line": "He jogs back to his friends, and they shove him like he's won something. You feel them all looking at you for the rest of the way across the quad.",
+   "why": "only Jake is named, and his row puts him on the quad whenever this fires; his friends are an unnamed crowd backed by on_route; Zoe (sheet: part) is not named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "L119",
@@ -2279,19 +2328,20 @@
    "row": "L167",
    "screen": "quad_meet_jake.after",
    "verdict": "N/A",
-   "line": "He's three steps away before he turns and calls back over his shoulder. / Jake: \"And I'm asking again. Fair warning.\"",
-   "why": "no row on this screen has hours or a window",
+   "line": "Done",
+   "why": "no row with hours on this screen",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "56a2a1e9b53909ca",
-    "facts": "2bb99faa28c46fca",
+    "text": "33df3c6934b10daf",
+    "traits": "435644be785b94c8",
+    "facts": "29db4ec2f8f4b7d9",
     "facts2": "679fc34857b92f9e",
-    "all": "59df2443b3100c69"
+    "all": "7789706848b7fedb"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 2
+   "pass": 20
   },
   {
    "row": "L168",
@@ -2348,8 +2398,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

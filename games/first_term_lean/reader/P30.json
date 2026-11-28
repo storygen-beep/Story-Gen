@@ -1,20 +1,20 @@
 {
  "piece": "P30",
- "pass": 15,
+ "pass": 17,
  "screens": {
   "watch_rehearsal.watch": {
    "text": "350d7868a423a75f",
    "traits": "e6b79f0e524c6de5",
-   "facts": "416b4c1dc31325c8",
-   "facts2": "581155b1059f8df1",
-   "all": "ac58338a8ea58f94"
+   "facts": "4fd35885be544622",
+   "facts2": "00f65248bca9f558",
+   "all": "96d8b0b09a5b7643"
   },
   "watch_class.watch": {
    "text": "ddbfe21d30fd4527",
    "traits": "2875b58584de3c6e",
-   "facts": "421a252894aad712",
-   "facts2": "35c67911f123cdb4",
-   "all": "199840d601a6ad22"
+   "facts": "91da2f856f0b37c2",
+   "facts2": "d405951f19b5881d",
+   "all": "ea60e15d5049ebd9"
   },
   "sit_seats.sit": {
    "text": "457a182cc8a999da",
@@ -23,7 +23,7 @@
    "facts2": "e60043bc128dc9f4",
    "all": "56633b9908841b96"
   },
-  "*": "e0abecb5e68b2fe8"
+  "*": "e8e582345b2ec630"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -193,38 +193,38 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "You. The back row's for people who've given up. Up here, with the rest of them.",
-   "why": "Tue/Thu 11:00-13:00; Cross at campus_theatre 11-13 the whole window; met_cross false shows \"The drama teacher\"; the new line promises nothing and is true on every visit",
+   "why": "trigger Tue/Thu 11:00-13:00 end exclusive; Cross's class row covers 11-13, so he is there at 11:00, 12:59 and on visit 2; names behind met_cross; P84's new Cross row (Tue/Thu/Fri 13-14, campus_theatre) sits outside this window",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B10",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
    "line": "Brooke finds you in the dark between lines and smiles like she's won something.",
-   "why": "Trigger Tue/Thu/Fri 14:00-18:00, max 2 a day; Cross and Brooke both at campus_theatre 14-18 on those days; each name behind its own met flag in the four-way chain. Reads true on a second showing the same afternoon.",
+   "why": "trigger Tue/Thu/Fri 14:00-18:00; Cross's and Brooke's rows both put them at campus_theatre 14-18 (who_is_where); names behind met flags; P84's new Cross row (Tue/Thu/Fri 13-14, campus_theatre) sits outside this window",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B11",
@@ -522,39 +522,39 @@
    "row": "B8",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "Done: 30 minutes; max_triggers_per_day = 2",
-   "why": "matches the card and PLAN; no garment named",
+   "line": "Done: time_progression_minutes = 30; max_triggers_per_day = 2",
+   "why": "matches the card (30 minutes, twice a day, Tue/Thu 11-1) and Cross's rows; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B8",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
    "line": "weekday [1, 3, 4], 14:00-18:00; max_triggers_per_day = 2; Done 30 minutes",
-   "why": "Matches PLAN lines 544/575 (rehearsals Tue/Thu/Fri 2-6) and the Amendment (2 a day). No garment named.",
+   "why": "agrees with the card, PLAN (rehearsals Tue/Thu/Fri 2-6) and Cross's tip; no garment named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "B9",
@@ -1325,7 +1325,7 @@
    "note": false,
    "screen_hash": "e0abecb5e68b2fe8",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 15
   },
   {
@@ -1521,39 +1521,39 @@
    "row": "C460",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "You. The back row's for people who've given up. Up here, with the rest of them.",
-   "why": "every claim (the class on the stage, Cross finding her) holds in the trigger window",
+   "line": "The class is in a line on the stage, saying their line louder each time.",
+   "why": "class row puts Cross and the class there for the whole window; the 13-14 dark-seats row starts after the window ends",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C460",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
-   "line": "Cross makes Brooke run the same four lines, over and over.",
-   "why": "Both rows put them in the Theatre for the whole window; names behind met flags. No out-of-hours line remains to be false (no cooldown_message; built help data showWhenBlocked false).",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "both rows put them there for the whole window; Cross's seat hour 13-14 ends before it opens",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C461",
@@ -1591,38 +1591,38 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "You. The back row's for people who've given up. Up here, with the rest of them.",
-   "why": "dialogue that fits Cross's entry (Pushy, Takes charge)",
+   "why": "dialogue fits Cross's entry; no invented fact",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C461",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
    "line": "I always mean it.",
-   "why": "Fits Brooke as the rival for the part; 'smiles like she's won something' fits rival. Unchanged text.",
+   "why": "fits Brooke as the rival; no invented fact",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C519",
@@ -1952,6 +1952,44 @@
    "pass": 3
   },
   {
+   "row": "C889",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Sit at the back of drama / Done",
+   "why": "note row; no clock time or duration on a label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C889",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal",
+   "why": "note row; no time on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "def1348d483d0c40",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C892",
    "screen": "*",
    "verdict": "PASS",
@@ -1963,6 +2001,44 @@
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C892",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "You stay in the back row instead of joining in.",
+   "why": "note row; the hour is on the trigger, not in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C892",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "note row; no hour in the act",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "5c890033f6ac38b8",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C897",
@@ -1978,6 +2054,44 @@
    "pass": 3
   },
   {
+   "row": "C897",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Done: locationId campus_theatre, 30 minutes",
+   "why": "note row; the 30 minutes are the act, not a room crossing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C897",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Done: back to campus_theatre, 30 minutes",
+   "why": "note row; act minutes, not a crossing",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "265ece64add83676",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C900",
    "screen": "*",
    "verdict": "PASS",
@@ -1989,6 +2103,44 @@
    "row_hash": "6372efb027eb2034",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C900",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "The class is in a line on the stage, saying their line louder each time.",
+   "why": "no beat says what time it is",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C900",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "no beat says the time",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "6372efb027eb2034",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C902",
@@ -2004,6 +2156,44 @@
    "pass": 3
   },
   {
+   "row": "C902",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Cross finds you in the back row.",
+   "why": "note row; at 12:59 Cross's class row (11-13) still puts him there",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C902",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "note row; at 17:59 both still there (rows end 18:00)",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "df5ed7a36dbc74e4",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C903",
    "screen": "*",
    "verdict": "PASS",
@@ -2015,6 +2205,44 @@
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C903",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "You stay in the back row instead of joining in.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C903",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "no weekday named",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "4f83b0b5eb45f71b",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C906",
@@ -2030,6 +2258,44 @@
    "pass": 3
   },
   {
+   "row": "C906",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Sit at the back of drama",
+   "why": "note row; no 'till X'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C906",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal",
+   "why": "note row; no 'till X'",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "71713a7e7ae739e7",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C910",
    "screen": "*",
    "verdict": "PASS",
@@ -2041,6 +2307,44 @@
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C910",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Sit at the back of drama / Done",
+   "why": "note row; no time, energy or money on a button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C910",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal / Done",
+   "why": "note row; no time or energy on a button",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "d5a109f1ef88419a",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C913",
@@ -2059,37 +2363,39 @@
    "row": "C913",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "Tuesday and Thursday, 11am to 1pm.",
-   "why": "Shut by the clock alone, it stays as a dimmed line with its hours.",
+   "line": "Drama is in the Theatre, Tuesday and Thursday at 11am. (Quests hint)",
+   "why": "clock-and-count row hides under clock.md rule 10 (amendment 2026-11-26); its hours are published on the Quests hint",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bfee9c23d859b571",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "f1d32bb391df1e0e"
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C913",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
-   "line": "Tuesday, Thursday and Friday, 2 to 6pm.",
-   "why": "Dimmed with its hours out of hours.",
+   "line": "Rehearsals Tuesday, Thursday and Friday, 2 to 6pm. (Cross's tip; Quests entry)",
+   "why": "clock-and-count row hides under clock.md rule 10; hours published on the tip and the Quests entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "76180fc6c9ebadc2",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "45299ea575dfbef7"
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C914",
@@ -2103,6 +2409,44 @@
    "row_hash": "bd07273d5822f34f",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C914",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "no show_when_blocked",
+   "why": "never shows an hours line, so never a wrong one after the count",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C914",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "no show_when_blocked",
+   "why": "never shows an hours line",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "bd07273d5822f34f",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C916",
@@ -2122,36 +2466,38 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "Sit at the back of drama",
-   "why": "A thing she chooses carries its hours when shut.",
+   "why": "her choice; its hours published on the Quests page",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "bfee9c23d859b571",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "f1d32bb391df1e0e"
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C916",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
    "line": "Sit in on the rehearsal",
-   "why": "A thing she chooses carries its hours when shut.",
+   "why": "her choice; hours published on the people and Quests pages",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "76180fc6c9ebadc2",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "45299ea575dfbef7"
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": true,
-   "pass": 4
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C920",
@@ -2167,6 +2513,44 @@
    "pass": 3
   },
   {
+   "row": "C920",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Done: locationId campus_theatre, 30 minutes",
+   "why": "Done returns to the same place; minutes are the act's",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C920",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Done: locationId campus_theatre, 30 minutes",
+   "why": "same place; minutes are the act's",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "513927dd127fca04",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C924",
    "screen": "*",
    "verdict": "PASS",
@@ -2180,6 +2564,44 @@
    "pass": 3
   },
   {
+   "row": "C924",
+   "screen": "watch_class.watch",
+   "verdict": "N/A",
+   "line": "Done: back to campus_theatre",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C924",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "N/A",
+   "line": "Done: back to campus_theatre",
+   "why": "no travel on this screen",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "791cd173e23fb130",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C926",
    "screen": "*",
    "verdict": "PASS",
@@ -2191,6 +2613,44 @@
    "row_hash": "177d1e1776fac74b",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C926",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "note row; minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C926",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "time_progression_minutes = 30",
+   "why": "note row; minutes only",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "177d1e1776fac74b",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C927",
@@ -2228,38 +2688,38 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "Done: time_progression_minutes = 30",
-   "why": "every exit on the screen carries an explicit time_progression_minutes, so the 3-minute default never applies",
+   "why": "note row; the exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C927",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
    "line": "Done: time_progression_minutes = 30",
-   "why": "Exit time stated; matches the card's 30 minutes.",
+   "why": "note row; exit states its time",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C928",
@@ -2275,6 +2735,44 @@
    "pass": 3
   },
   {
+   "row": "C928",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Your face goes hot all the way down your neck.",
+   "why": "no clock printed into prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C928",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "no clock in prose",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "2c3ccc6bd9929d7f",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C929",
    "screen": "*",
    "verdict": "PASS",
@@ -2288,6 +2786,44 @@
    "pass": 3
   },
   {
+   "row": "C929",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "Sit at the back of drama",
+   "why": "note row; no time tag on the label",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C929",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "Sit in on the rehearsal",
+   "why": "note row; no time tag",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "18b0ecdf6d7fc901",
+   "carried": false,
+   "pass": 17
+  },
+  {
    "row": "C930",
    "screen": "*",
    "verdict": "PASS",
@@ -2299,6 +2835,44 @@
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
    "pass": 3
+  },
+  {
+   "row": "C930",
+   "screen": "watch_class.watch",
+   "verdict": "PASS",
+   "line": "no show_when_blocked; max_triggers_per_day = 2",
+   "why": "note row; vanishes out of hours as clock.md rule 10 wants",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "ddbfe21d30fd4527",
+    "traits": "2875b58584de3c6e",
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 17
+  },
+  {
+   "row": "C930",
+   "screen": "watch_rehearsal.watch",
+   "verdict": "PASS",
+   "line": "no show_when_blocked; max_triggers_per_day = 2",
+   "why": "note row; vanishes out of hours",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "350d7868a423a75f",
+    "traits": "e6b79f0e524c6de5",
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
+   },
+   "row_hash": "beb57cd46fe906bf",
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C931",
@@ -2336,38 +2910,38 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "time_of_day 11:00-13:00",
-   "why": "the trigger's time_of_day window is end-exclusive and every line agrees with it at its first and last minute",
+   "why": "end exclusive; inside Cross's 11-13 class row; the 13-14 row is separate",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C931",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
    "line": "time_of_day 14:00-18:00, weekday [1, 3, 4]",
-   "why": "End exclusive; matches the 14-18 rows for Cross and Brooke; sheet says 14:00-18:00. Out of hours and after two it hides (v2.py:6732-6751); no greyed line can claim hours at a time the count shut it, which is rule 10's point.",
+   "why": "end exclusive; matches the 14-18 rows; the 13-14 row does not overlap",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "C953",
@@ -2431,38 +3005,38 @@
    "screen": "watch_class.watch",
    "verdict": "PASS",
    "line": "Cross finds you in the back row.",
-   "why": "his row puts him at campus_theatre Tue/Thu 11-13",
+   "why": "his row puts him at campus_theatre Tue/Thu 11-13, the whole window",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L106",
    "screen": "watch_rehearsal.watch",
    "verdict": "PASS",
-   "line": "Cross makes Brooke run the same four lines",
-   "why": "Cross's and Brooke's rows put both at campus_theatre Tue/Thu/Fri 14-18, the whole window.",
+   "line": "In the dark at the back: Cross makes Brooke run the same four lines, over and over.",
+   "why": "Cross's and Brooke's rows put both at campus_theatre Tue/Thu/Fri 14-18",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L116",
@@ -2556,39 +3130,39 @@
    "row": "L167",
    "screen": "watch_class.watch",
    "verdict": "PASS",
-   "line": "weekday [1,3], 11:00-13:00",
-   "why": "one row for the activity; no per-day-kind duplicate rows",
+   "line": "weekday [1, 3] AND time_of_day 11:00-13:00",
+   "why": "one row; same hours on each day",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "ddbfe21d30fd4527",
     "traits": "2875b58584de3c6e",
-    "facts": "421a252894aad712",
-    "facts2": "35c67911f123cdb4",
-    "all": "199840d601a6ad22"
+    "facts": "91da2f856f0b37c2",
+    "facts2": "d405951f19b5881d",
+    "all": "ea60e15d5049ebd9"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 13
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L167",
    "screen": "watch_rehearsal.watch",
-   "verdict": "PASS",
-   "line": "conditions = weekday [1, 3, 4] AND time_of_day 14:00-18:00; max_triggers_per_day = 2; no show_when_blocked",
-   "why": "One row, same hours on each day; rule 10 governs (counted row hides, no greyed hours line). Hours findable and true: Drama hint once met_cross '...sit in on his rehearsals Tuesday, Thursday and Friday, 2 to 6pm.', Cross's tip 'Rehearsals Tuesday, Thursday and Friday, 2 to 6pm.', Brooke's tip 'rehearsals Tuesday, Thursday and Friday afternoons', and Cross's class line 'Rehearsals are Tuesday, Thursday and Friday afternoons.'",
+   "verdict": "N/A",
+   "line": "weekday [1, 3, 4] AND time_of_day 14:00-18:00",
+   "why": "same hours each day; nothing to fold; one row",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "350d7868a423a75f",
     "traits": "e6b79f0e524c6de5",
-    "facts": "416b4c1dc31325c8",
-    "facts2": "581155b1059f8df1",
-    "all": "ac58338a8ea58f94"
+    "facts": "4fd35885be544622",
+    "facts2": "00f65248bca9f558",
+    "all": "96d8b0b09a5b7643"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 9
+   "carried": false,
+   "pass": 17
   },
   {
    "row": "L170",
@@ -2619,8 +3193,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 50,
+ "answered": 50,
  "pass_items": [],
  "unowed": []
 }

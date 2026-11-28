@@ -1,22 +1,22 @@
 {
  "piece": "P26",
- "pass": 18,
+ "pass": 22,
  "screens": {
   "mirror_meet_brooke.mirror": {
-   "text": "c1e3f57c50f6d293",
+   "text": "ae46a1829365e92a",
    "traits": "9e12469ed756975c",
-   "facts": "862794d34277cc92",
-   "facts2": "e0a8d361ec88aeca",
-   "all": "1f6d0a0567942779"
+   "facts": "5cfd763b96cca747",
+   "facts2": "71c2b5737d5ca2a9",
+   "all": "52f53d84eade1ef6"
   },
   "mirror_meet_brooke.after": {
    "text": "99d52f3067ea6acf",
    "traits": "9e12469ed756975c",
-   "facts": "cb8f003e7158e04b",
-   "facts2": "47b8d2fb5c8e7ee5",
-   "all": "557078cbb7f69be6"
+   "facts": "16720fed139db2f0",
+   "facts2": "a977d236e07f984f",
+   "all": "687d6ea9711b8728"
   },
-  "*": "0c4a950f844ca323"
+  "*": "cbe17214c5505e2e"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -92,6 +92,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -165,36 +168,38 @@
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
    "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "all three are still at the mirror (gated present; one-time step); 'see that mirror again' is built by rep_mirror and Brooke's weekday mirror rows",
+   "why": "Done lands in campus_bathroom where the three stay by rows, so 'behind you' holds; 'still ... laughing' follows Kayla's laugh on the screen before; the promise is built (walk_mirror_girls, behind met_brooke set here); each group fits its answer",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "B10",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "Brooke, Kayla and Tess are all gated present by the trigger (weekdays 08-09 and 13-14 at the campus bathroom); the party rows don't touch this window",
+   "line": "They all stop when they see you, and the blonde finds you in the mirror and looks you over",
+   "why": "trigger gates all three present; who_is_where puts Brooke, Kayla and Tess at campus_bathroom weekdays 08-09 and 13-14; one-time, week two (met_laura gte 7); the picture of Brooke alone in the mirror matches the line on its one visit",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B11",
@@ -331,36 +336,38 @@
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
    "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "no number, and no garment of hers is named",
+   "why": "no number, no garment of hers",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "B8",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "no number, and no garment of hers is named",
+   "line": "Her view in the long mirror (she is 18, out of frame): a blonde woman of 21 in a fitted blazer at a bathroom mirror, looking at the camera in the reflection with a smirk.",
+   "why": "ages agree (Ella 18, Brooke 21, NOTES 71); the blazer is Brooke's, named in the line; no garment of hers named",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B9",
@@ -432,18 +439,19 @@
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
    "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "a jab at whatever she wears; no garment of hers is named",
+   "why": "no garment of hers named; the blazer is Brooke's",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "f40f51a0fd6cfd10",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C1173",
@@ -475,19 +483,20 @@
    "row": "C1177",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "the blonde finds you in the mirror and looks you over, slow, from your feet up",
-   "why": "a note row; no exposure, she is dressed on campus",
+   "line": "looks you over, slow, from your feet up",
+   "why": "a note row: no exposure on screen; the look is at an ordinary outfit",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "a9c40d36e311dcef"
    },
    "row_hash": "ef9bbbe96651efc7",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C1184",
@@ -584,19 +593,20 @@
    "row": "C1206",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "names no garment she may not be wearing",
+   "line": "blonde college girl smirking bathroom mirror",
+   "why": "neither prose, description nor search words name a garment she may not be wearing",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "bfff76edbee583de",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C1220",
@@ -1158,8 +1168,53 @@
    "note": false,
    "screen_hash": "0c4a950f844ca323",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 18
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e3c4e097ef36a041",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "three friends at bathroom mirror makeup",
+   "why": "6 words each, no digit, no camera direction, no name; the old 'No phone, not a selfie' is out of the search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": "e3c4e097ef36a041",
+   "row_hash": "4247ea8697822bed",
+   "carried": true,
+   "pass": 20
+  },
+  {
+   "row": "C2209",
+   "screen": "mirror_meet_brooke.mirror",
+   "verdict": "PASS",
+   "line": "Her view in the long mirror (she is 18, out of frame): a blonde woman of 21 in a fitted blazer at a bathroom mirror, looking at the camera in the reflection with a smirk.",
+   "why": "one subject (Brooke alone) where one can be, a common pose (smirk in a bathroom mirror); description and search words now ask the same picture; no garment of hers in the search words",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
+   },
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C422",
@@ -1244,72 +1299,76 @@
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
    "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "all three are still at the mirror (gated present; one-time step); 'see that mirror again' is built by rep_mirror and Brooke's weekday mirror rows",
+   "why": "every path's group plus the shared line is true: she is at the sink, they are behind her",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C460",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "Brooke, Kayla and Tess are all gated present by the trigger (weekdays 08-09 and 13-14 at the campus bathroom); the party rows don't touch this window",
+   "line": "Oh, look. Kayla, Tess, it's the new girl everybody's whispering about.",
+   "why": "true on the one playthrough it shows: all three present, week two, first meeting; the redhead doing lashes is Tess, as PLAN 140/632 and the after screen have it",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C461",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "line": "Cute. Say that again when it's not just us.",
+   "why": "each line fits its speaker: Kayla's 'Ooh.', Tess snorts (meaner, says less), Brooke's threat",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C461",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "texture and dialogue that fit the cast entries; no past or fact assumed",
+   "line": "a third holds the make-up bag open like a nurse holding instruments",
+   "why": "texture that can't clash; Brooke's cruelty fits her plan entry",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C519",
@@ -1679,19 +1738,20 @@
    "row": "C889",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "labels name no clock time and no duration; the spend sits in the costs",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "the only label is \"Done\": no clock time, no duration",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C892",
@@ -1710,19 +1770,20 @@
    "row": "C892",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "no hour in the act",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no hour printed in the act",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C897",
@@ -1741,19 +1802,20 @@
    "row": "C897",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "the only time here is the act's own, not a per-room charge",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no room hop; the 5 minutes are the scene's",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C900",
@@ -1772,19 +1834,20 @@
    "row": "C900",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "no line says what time it is",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "the beat says no time of day",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C902",
@@ -1803,19 +1866,20 @@
    "row": "C902",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "true at the last minute it can show; it names no time",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "at the window's last minute (08:59 / 13:59) the line holds",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C903",
@@ -1834,19 +1898,20 @@
    "row": "C903",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "names no weekday",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no weekday named",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C906",
@@ -1865,19 +1930,20 @@
    "row": "C906",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "no 'till X' anywhere",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no 'till X'",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C910",
@@ -1896,19 +1962,20 @@
    "row": "C910",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "buttons say no time and no energy, and this act costs no money",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "\"Done\" says no time, no energy, no money",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C913",
@@ -1927,19 +1994,20 @@
    "row": "C913",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Brooke\" (trigger)",
-   "why": "a one-time meeting gated on presence; nothing with hours",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "a meeting gated on presence, not on the clock",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C914",
@@ -1958,19 +2026,20 @@
    "row": "C914",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Brooke\" (trigger)",
-   "why": "no hours printed",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no hours shown",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C916",
@@ -1989,19 +2058,20 @@
    "row": "C916",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Brooke\" (trigger)",
-   "why": "an event gated on who is there stays hidden when shut",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "nothing shut by the clock here",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C920",
@@ -2020,19 +2090,20 @@
    "row": "C920",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min) to campus_bathroom",
-   "why": "Done stays in the bathroom; the 5 minutes are the scene",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "Done targets the same place, no hop cost",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C924",
@@ -2051,19 +2122,20 @@
    "row": "C924",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "travel cost stays on the moves between areas, not here",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no travel on this screen",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C926",
@@ -2082,19 +2154,20 @@
    "row": "C926",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "the clock moves only by the choice's minutes",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "the clock only adds 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C927",
@@ -2113,19 +2186,20 @@
    "row": "C927",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "the exit states its minutes",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "the exit carries its own 5 minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C928",
@@ -2144,19 +2218,20 @@
    "row": "C928",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "no clock printed in the prose",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no clock in prose",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C929",
@@ -2175,19 +2250,20 @@
    "row": "C929",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\"",
-   "why": "no activity time on the label",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no time or energy in the label",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C930",
@@ -2205,20 +2281,21 @@
   {
    "row": "C930",
    "screen": "mirror_meet_brooke.after",
-   "verdict": "N/A",
-   "line": "\"Done\"",
-   "why": "not work",
+   "verdict": "PASS",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "not windowed work",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C931",
@@ -2237,19 +2314,20 @@
    "row": "C931",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "\"Done\" (5 min)",
-   "why": "no time_of_day on this canvas; presence gates it",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no time_of_day on the trigger",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "C953",
@@ -2282,36 +2360,38 @@
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
    "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "all three are still at the mirror (gated present; one-time step); 'see that mirror again' is built by rep_mirror and Brooke's weekday mirror rows",
+   "why": "'them' and 'her' are the three gated is_present, kept there by their rows when Done lands",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "L106",
    "screen": "mirror_meet_brooke.mirror",
    "verdict": "PASS",
-   "line": "Nice outfit, princess. Did you get dressed in the dark?",
-   "why": "Brooke, Kayla and Tess are all gated present by the trigger (weekdays 08-09 and 13-14 at the campus bathroom); the party rows don't touch this window",
+   "line": "Kayla laughs. Tess doesn't, but she doesn't stop her either.",
+   "why": "every named person is gated is_present at campus_bathroom in the trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c1e3f57c50f6d293",
-    "facts": "862794d34277cc92",
-    "facts2": "e0a8d361ec88aeca",
-    "all": "1f6d0a0567942779"
+    "text": "ae46a1829365e92a",
+    "traits": "9e12469ed756975c",
+    "facts": "5cfd763b96cca747",
+    "facts2": "71c2b5737d5ca2a9",
+    "all": "52f53d84eade1ef6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L119",
@@ -2382,19 +2462,20 @@
    "row": "L167",
    "screen": "mirror_meet_brooke.after",
    "verdict": "PASS",
-   "line": "You turn back to the sink, and you can still hear them laughing behind you. You know you'll see that mirror again, and her in it.",
-   "why": "one row, one set of hours; a walk-in that hides when shut (C916), so no greyed duplicate",
+   "line": "Done (5 min, to campus_bathroom)",
+   "why": "no activity row; one trigger",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "99d52f3067ea6acf",
-    "facts": "cb8f003e7158e04b",
-    "facts2": "47b8d2fb5c8e7ee5",
-    "all": "557078cbb7f69be6"
+    "traits": "9e12469ed756975c",
+    "facts": "16720fed139db2f0",
+    "facts2": "a977d236e07f984f",
+    "all": "687d6ea9711b8728"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 3
+   "pass": 19
   },
   {
    "row": "L168",
@@ -2438,8 +2519,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 8,
+ "answered": 8,
  "pass_items": [],
  "unowed": []
 }

@@ -1,13 +1,13 @@
 {
  "piece": "P11",
- "pass": 23,
+ "pass": 24,
  "screens": {
   "mark_kitchen.hub": {
-   "text": "cebee1bac30c4ca9",
+   "text": "a74fc72d8e211023",
    "traits": "a13af4c65af9f24a",
    "facts": "e8065fe0f1b995c1",
    "facts2": "8ff6682bbd8fcf1c",
-   "all": "a6f6a2b85d23b3a2"
+   "all": "5db6e04109e14816"
   },
   "mark_kitchen.talk": {
    "text": "fe35e365dcfda4ec",
@@ -114,7 +114,7 @@
    "facts2": "796eee3dad582482",
    "all": "7113df17e1323a0e"
   },
-  "*": "a39e91e49c8b67e1"
+  "*": "55c1ac623eb1a395"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -191,6 +191,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C2181": "74c68b4029782b5f",
@@ -286,19 +289,19 @@
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "Mark's kitchen rows put him at the table on every row the menu shows on",
+   "why": "first and last minute and a second visit: button gated requires_npc npc_mark; his rows put him in home_kitchen weekdays 07-08, Sat 08-10, Sun 08-12, so 'at the table' holds whenever the menu shows it; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cebee1bac30c4ca9",
+    "text": "a74fc72d8e211023",
     "traits": "a13af4c65af9f24a",
     "facts": "e8065fe0f1b995c1",
     "facts2": "8ff6682bbd8fcf1c",
-    "all": "a6f6a2b85d23b3a2"
+    "all": "5db6e04109e14816"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 17
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "B10",
@@ -714,6 +717,25 @@
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
    "pass": 17
+  },
+  {
+   "row": "B8",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "middle aged man kitchen table coffee mug",
+   "why": "no garment of hers named in prose or search words; 46 in the description agrees with PLAN",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a74fc72d8e211023",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "5db6e04109e14816"
+   },
+   "row_hash": "80d415cf08e0ebfe",
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "B8",
@@ -1969,8 +1991,47 @@
    "note": false,
    "screen_hash": "a39e91e49c8b67e1",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 23
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "55c1ac623eb1a395",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 24
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "middle aged man kitchen table coffee mug",
+   "why": "7 and 6 words, a man and the place, no digit, no 'man of', no camera direction, no name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "55c1ac623eb1a395",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 24
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "middle aged man kitchen table coffee mug",
+   "why": "one subject, a common pose (a man at a breakfast table with coffee); no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "55c1ac623eb1a395",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "C338",
@@ -2081,19 +2142,19 @@
    "screen": "mark_kitchen.hub",
    "verdict": "PASS",
    "line": "Mark's at the table with his coffee. He looks at you over the rim.",
-   "why": "Mark's kitchen rows put him at the table on every row the menu shows on",
+   "why": "every claim true on every playthrough that reaches it: button gated requires_npc npc_mark; his rows put him in home_kitchen weekdays 07-08, Sat 08-10, Sun 08-12, so 'at the table' holds whenever the menu shows it; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "cebee1bac30c4ca9",
+    "text": "a74fc72d8e211023",
     "traits": "a13af4c65af9f24a",
     "facts": "e8065fe0f1b995c1",
     "facts2": "8ff6682bbd8fcf1c",
-    "all": "a6f6a2b85d23b3a2"
+    "all": "5db6e04109e14816"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 17
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "C460",
@@ -2392,6 +2453,25 @@
    "row_hash": "310706ee076318f2",
    "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C461",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a74fc72d8e211023",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "5db6e04109e14816"
+   },
+   "row_hash": "310706ee076318f2",
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "C461",
@@ -3037,6 +3117,25 @@
   },
   {
    "row": "C927",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Done / Leave",
+   "why": "every exit states its own minutes; no 3-minute default",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a74fc72d8e211023",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "5db6e04109e14816"
+   },
+   "row_hash": "4e86d143688ba8e5",
+   "carried": false,
+   "pass": 24
+  },
+  {
+   "row": "C927",
    "screen": "mark_kitchen.pay100",
    "verdict": "PASS",
    "line": "Done",
@@ -3162,6 +3261,25 @@
    "row_hash": "1aadffd96e76381c",
    "carried": true,
    "pass": 17
+  },
+  {
+   "row": "C931",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "time_of_day window",
+   "why": "the trigger or button window is end exclusive and sits inside the person's row",
+   "cause": null,
+   "note": true,
+   "screen_hash": {
+    "text": "a74fc72d8e211023",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "5db6e04109e14816"
+   },
+   "row_hash": "1aadffd96e76381c",
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "C931",
@@ -3316,6 +3434,25 @@
    "row_hash": "13a714429d15f3b2",
    "carried": true,
    "pass": 17
+  },
+  {
+   "row": "L106",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "Mark's at the table with his coffee. He looks at you over the rim.",
+   "why": "only the screen's own person is claimed there, and their rows put them there: button gated requires_npc npc_mark; his rows put him in home_kitchen weekdays 07-08, Sat 08-10, Sun 08-12, so 'at the table' holds whenever the menu shows it",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a74fc72d8e211023",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "5db6e04109e14816"
+   },
+   "row_hash": "13a714429d15f3b2",
+   "carried": false,
+   "pass": 24
   },
   {
    "row": "L106",
@@ -3521,6 +3658,25 @@
   },
   {
    "row": "L167",
+   "screen": "mark_kitchen.hub",
+   "verdict": "PASS",
+   "line": "time_of_day window",
+   "why": "one row or button per activity, the same hours on each day it shows; no per-day-kind duplicates",
+   "cause": null,
+   "note": false,
+   "screen_hash": {
+    "text": "a74fc72d8e211023",
+    "traits": "a13af4c65af9f24a",
+    "facts": "e8065fe0f1b995c1",
+    "facts2": "8ff6682bbd8fcf1c",
+    "all": "5db6e04109e14816"
+   },
+   "row_hash": "e64ce2672d85d2d8",
+   "carried": false,
+   "pass": 24
+  },
+  {
+   "row": "L167",
    "screen": "mark_kitchen.pay100",
    "verdict": "N/A",
    "line": "Done",
@@ -3624,8 +3780,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 11,
+ "answered": 11,
  "pass_items": [],
  "unowed": []
 }

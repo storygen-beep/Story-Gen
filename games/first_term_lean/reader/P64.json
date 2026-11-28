@@ -1,6 +1,6 @@
 {
  "piece": "P64",
- "pass": 11,
+ "pass": 13,
  "screens": {
   "home_tv.watch": {
    "text": "421db0e327503c92",
@@ -45,13 +45,13 @@
    "all": "80b203fab047d65e"
   },
   "home_tv.after_dark": {
-   "text": "c958337be22edf51",
+   "text": "ef15786c7263705b",
    "traits": "44136fa355b3678a",
    "facts": "8b0f7870497b38b6",
    "facts2": "8b0f7870497b38b6",
-   "all": "b3043cb0106c97ea"
+   "all": "ad75dfb2dbe1d70e"
   },
-  "*": "dcd2e4fdb1327161"
+  "*": "edba70c0f191d3ef"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -129,6 +129,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C2181": "74c68b4029782b5f",
@@ -227,19 +230,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "A line crawls along the bottom of the screen: Channel 5 After Dark, every night at eleven.",
-   "why": "open only 23:00-02:00 with Laura, Mark and Ryan absent (who_is_where: all gone by 23:00 every day); 'Channel 5' agrees with the label and the crawl; no past, no first time; a replay from watch_more reads the same (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "why": "open only 23:00-02:00 with Laura, Mark and Ryan absent (who_is_where: all out of the living room from 23:00 every day); 'every night at eleven' matches the every-day window; no past, no first time",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "B10",
@@ -660,20 +663,20 @@
    "row": "B8",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "Your nipples go tight against your top.",
-   "why": "30 minutes on each exit, the flag set, no meter; 'your top' behind clothing_slot top equipped (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "line": "Change the channel / Turn it off: time_progression_minutes = 30",
+   "why": "agrees with the card's 30 minutes; 'your top' behind clothing_slot top equipped. Card text still says 'Channel 9' but notes the rename to Channel 5 at P71",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "B8",
@@ -852,19 +855,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "Your nipples go tight against your top.",
-   "why": "inside a group on clothing_slot top equipped; 'Your nipples go tight.' where none is (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "why": "inside a group on clothing_slot top equipped; the plain line where none is",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "C1173",
@@ -1083,19 +1086,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "Your nipples go tight against your top.",
-   "why": "the top is named only when one is worn (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "why": "the top is named only when one is worn",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "bfff76edbee583de",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "C1220",
@@ -2264,8 +2267,47 @@
    "note": false,
    "screen_hash": "dcd2e4fdb1327161",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 11
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "edba70c0f191d3ef",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "blowjob porn on tv screen dark room gif",
+   "why": "8, 7 and 6 words; the act, the TV, gif",
+   "cause": null,
+   "note": false,
+   "screen_hash": "edba70c0f191d3ef",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 13
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "blowjob porn on tv screen dark room gif",
+   "why": "sex on a TV screen: two people where the act is the picture, a common filed clip; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "edba70c0f191d3ef",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 13
   },
   {
    "row": "C286",
@@ -2582,19 +2624,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "A line crawls along the bottom of the screen: Channel 5 After Dark, every night at eleven.",
-   "why": "every night at eleven is true: the window is every day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "why": "true: the window is every day from 23:00; the room is empty by the choice's conditions",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "C460",
@@ -2728,19 +2770,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "He tells her she's a good girl.",
-   "why": "what is on the screen; no clashing fact (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "why": "what is on the screen; no clashing fact",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "C461",
@@ -3614,20 +3656,20 @@
    "row": "C927",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "time_progression_minutes = 30",
-   "why": "explicit on both exits (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "line": "time_progression_minutes = 30 on both exits",
+   "why": "note row; both exits state their minutes",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "4e86d143688ba8e5",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "C927",
@@ -3761,20 +3803,20 @@
    "row": "C931",
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
-   "line": "time_of_day 23:00-02:00 (on the list's Channel 5 choice)",
-   "why": "re-read each time the list shows; end exclusive; wraps past midnight (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "line": "time_of_day 23:00-02:00 on the Channel 5 choice",
+   "why": "note row; re-read each time the list shows, end exclusive, wraps past midnight",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "1aadffd96e76381c",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "C931",
@@ -3915,19 +3957,19 @@
    "screen": "home_tv.after_dark",
    "verdict": "PASS",
    "line": "You turn the sound right down and find Channel 5.",
-   "why": "names nobody in the room (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "why": "names nobody in the room; sheet: nobody",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "L106",
@@ -4157,20 +4199,20 @@
    "row": "L167",
    "screen": "home_tv.after_dark",
    "verdict": "N/A",
-   "line": "",
-   "why": "no hours that differ by day (pass 2: only the trigger's cooldown_message changed; this screen's text and facts re-read unchanged)",
+   "line": "time_of_day 23:00-02:00 every day",
+   "why": "no hours that differ by day",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "c958337be22edf51",
+    "text": "ef15786c7263705b",
     "traits": "44136fa355b3678a",
     "facts": "8b0f7870497b38b6",
     "facts2": "8b0f7870497b38b6",
-    "all": "b3043cb0106c97ea"
+    "all": "ad75dfb2dbe1d70e"
    },
    "row_hash": "e64ce2672d85d2d8",
    "carried": true,
-   "pass": 7
+   "pass": 12
   },
   {
    "row": "L167",
@@ -4309,8 +4351,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 3,
+ "answered": 3,
  "pass_items": [],
  "unowed": []
 }

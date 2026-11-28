@@ -1,13 +1,13 @@
 {
  "piece": "P27",
- "pass": 21,
+ "pass": 22,
  "screens": {
   "zoe_door_sam.door": {
-   "text": "04292ed529b31c40",
+   "text": "bd261e7c80043e34",
    "traits": "fa1a0a429fa0ea30",
    "facts": "90eb2da01d074848",
    "facts2": "d6c41dbecb0893a1",
-   "all": "37301f7fe4e11fbb"
+   "all": "abacb4881f76f9ae"
   },
   "zoe_door_sam.after": {
    "text": "ab9509986b57a493",
@@ -16,7 +16,7 @@
    "facts2": "0a3f5a3f55dd11b9",
    "all": "0d3b0553b6350eb6"
   },
-  "*": "7804adb5f06d81d3"
+  "*": "183a52d59995daca"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -101,6 +101,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -190,27 +193,27 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
    "row": "B10",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
-   "why": "read at first and last minute and on a second visit: trigger: Sam present, Zoe absent from near_zoe_apartment, 12:00-18:00 end exclusive; Zoe has no row 15-18 and P83 puts her home (Zoe's Room) at 18:00 every day, so 'back at six' holds at 12:00 and 17:59; one-time screen; zoe_place_known set with met_zoe",
+   "line": "It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap",
+   "why": "first and last minute and a second visit: Sam present (12-24 near_zoe_apartment), Zoe absent, 12:00-18:00; 'Back at six' agrees with Zoe home at 18:00; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "B11",
@@ -373,27 +376,27 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
    "row": "B8",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "his eyes stop on your chest long enough that your nipples tighten. You cross your arms.",
-   "why": "no garment of hers named; the T-shirt is Sam's; no number on screen",
+   "line": "guy answering apartment door with guitar",
+   "why": "the T-shirt is Sam's; no garment of hers named; search words name only him, the door, the guitar",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "B9",
@@ -469,20 +472,20 @@
    "row": "C1158",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "a T-shirt he's clearly slept in",
-   "why": "no garment of hers is named; the T-shirt is his",
+   "line": "It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap",
+   "why": "the T-shirt is Sam's; no garment of hers named; search words name only him, the door, the guitar",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "f40f51a0fd6cfd10",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "C1173",
@@ -539,7 +542,7 @@
     "all": "37301f7fe4e11fbb"
    },
    "row_hash": "ef9bbbe96651efc7",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -637,20 +640,20 @@
    "row": "C1206",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "a T-shirt he's clearly slept in",
-   "why": "no garment of hers is named; the T-shirt is his",
+   "line": "It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap",
+   "why": "the T-shirt is Sam's; no garment of hers named; search words name only him, the door, the guitar",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "bfff76edbee583de",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "C1220",
@@ -1219,6 +1222,45 @@
    "pass": 20
   },
   {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "183a52d59995daca",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "barefoot young man leaning on door frame",
+   "why": "6-7 words, role and act; no name",
+   "cause": null,
+   "note": false,
+   "screen_hash": "183a52d59995daca",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "barefoot young man leaning on door frame",
+   "why": "one subject in a doorway with a guitar, a common pose; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "183a52d59995daca",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 22
+  },
+  {
    "row": "C286",
    "screen": "*",
    "verdict": "PASS",
@@ -1457,27 +1499,27 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
    "row": "C460",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
-   "why": "trigger: Sam present, Zoe absent from near_zoe_apartment, 12:00-18:00 end exclusive; Zoe has no row 15-18 and P83 puts her home (Zoe's Room) at 18:00 every day, so 'back at six' holds at 12:00 and 17:59; one-time screen; zoe_place_known set with met_zoe",
+   "line": "It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap",
+   "why": "every claim true on every playthrough that reaches it: Sam present (12-24 near_zoe_apartment), Zoe absent, 12:00-18:00; 'Back at six' agrees with Zoe home at 18:00; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "C461",
@@ -1508,27 +1550,27 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "310706ee076318f2",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
    "row": "C461",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
-   "why": "the rest is texture and the person's own manner; nothing can clash with the plan",
+   "line": "It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "310706ee076318f2",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "C519",
@@ -1923,7 +1965,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "def1348d483d0c40",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -1955,7 +1997,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "5c890033f6ac38b8",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -1987,7 +2029,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "265ece64add83676",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2019,7 +2061,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "6372efb027eb2034",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2051,7 +2093,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "df5ed7a36dbc74e4",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2083,7 +2125,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "4f83b0b5eb45f71b",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2115,7 +2157,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "71713a7e7ae739e7",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2147,7 +2189,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "d5a109f1ef88419a",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2179,7 +2221,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "c750f9b6ab4ace14",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2211,7 +2253,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "bd07273d5822f34f",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2243,7 +2285,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "7b2bb0dfdbcfe946",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2275,7 +2317,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "513927dd127fca04",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2307,7 +2349,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "791cd173e23fb130",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2339,7 +2381,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "177d1e1776fac74b",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2371,7 +2413,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2403,7 +2445,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "2c3ccc6bd9929d7f",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2435,7 +2477,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "18b0ecdf6d7fc901",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2467,7 +2509,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "beb57cd46fe906bf",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2499,7 +2541,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2544,27 +2586,27 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
    "row": "L106",
    "screen": "zoe_door_sam.door",
    "verdict": "PASS",
-   "line": "You're the one Zoe won't shut up about. She's out, sunshine. Back at six.",
-   "why": "only the screen's own person is placed there, and their rows put them there: trigger: Sam present, Zoe absent from near_zoe_apartment, 12:00-18:00 end exclusive",
+   "line": "It opens on a guy in his twenties, barefoot, a guitar hanging off him by the strap",
+   "why": "only the screen's own person is claimed there, and their rows put them there: Sam present (12-24 near_zoe_apartment), Zoe absent, 12:00-18:00; 'Back at six' agrees with Zoe home at 18:00",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "04292ed529b31c40",
+    "text": "bd261e7c80043e34",
     "traits": "fa1a0a429fa0ea30",
     "facts": "90eb2da01d074848",
     "facts2": "d6c41dbecb0893a1",
-    "all": "37301f7fe4e11fbb"
+    "all": "abacb4881f76f9ae"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": false,
-   "pass": 21
+   "pass": 22
   },
   {
    "row": "L119",
@@ -2647,7 +2689,7 @@
     "all": "0d3b0553b6350eb6"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": false,
+   "carried": true,
    "pass": 21
   },
   {
@@ -2705,8 +2747,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 33,
- "answered": 33,
+ "asked": 10,
+ "answered": 10,
  "pass_items": [],
  "unowed": []
 }

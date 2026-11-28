@@ -1,22 +1,22 @@
 {
  "piece": "P17",
- "pass": 20,
+ "pass": 22,
  "screens": {
   "drama_first.name": {
    "text": "7a2f62e5ee575f8a",
    "traits": "2875b58584de3c6e",
-   "facts": "f44b1d2b9b200264",
-   "facts2": "5c64fc8c02202032",
-   "all": "0ed5613ce14acc0c"
+   "facts": "0c9363336746cdc3",
+   "facts2": "ef247af92b2b0a6b",
+   "all": "2b6b86570ca7a196"
   },
   "drama_first.class": {
-   "text": "2169397d9f5735c0",
+   "text": "f65fa4a9f98cbca7",
    "traits": "2875b58584de3c6e",
-   "facts": "a5795dab8aa2122b",
-   "facts2": "525918bf83170956",
-   "all": "ddd491fa223cc642"
+   "facts": "d1ec5e67717ff965",
+   "facts2": "d3da3bb9fb66f441",
+   "all": "ce3f83cfa63cdad2"
   },
-  "*": "631e002f938f0b7c"
+  "*": "c6488c6494bb0fa5"
  },
  "rows": {
   "B1": "5276068df1ca6fa9",
@@ -98,6 +98,9 @@
   "C1274": "f44d59a3bd6bb921",
   "C1278": "4d23ccfdc4e41cd9",
   "C1277": "ee51917c5fb43c13",
+  "C2207": "07e2f7cc9eff74bc",
+  "C2208": "4247ea8697822bed",
+  "C2209": "1cae3508b9a1f8d1",
   "C1238": "6fd430204e984124",
   "C1255": "803b4c46f1e9d7c7",
   "C519": "e78502f7aa28746d",
@@ -175,37 +178,39 @@
    "row": "B10",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Brooke (theatre Tue/Thu 11-13) is one of \"the others\"/\"the whole room\", unnamed; only Cross is named, gated present; \"Somebody laughs\" stays true with her there.",
+   "line": "Every time it's your turn, his eyes stay on you after you've finished, down your body and back up.",
+   "why": "first and last minute and a second visit: one-time, Cross present by trigger Tue/Thu 11:00-11:29 inside his 11-18 rows; rehearsals Tue/Thu/Fri afternoons match his rows; the new search words claim nothing the screen doesn't",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "c1c0e2ac2588a579",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B10",
    "screen": "drama_first.name",
    "verdict": "PASS",
-   "line": "Phones away. Up on the stage with the others.",
-   "why": "Brooke (theatre Tue/Thu 11-13) is one of \"the others\"/\"the whole room\", unnamed; only Cross is named, gated present; \"Somebody laughs\" stays true with her there.",
+   "line": "You. New face. Name?",
+   "why": "First meeting, one-time; 'New face' true; Cross present by trigger and row.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7a2f62e5ee575f8a",
-    "facts": "f44b1d2b9b200264",
-    "facts2": "5c64fc8c02202032",
-    "all": "0ed5613ce14acc0c"
+    "traits": "2875b58584de3c6e",
+    "facts": "0c9363336746cdc3",
+    "facts2": "ef247af92b2b0a6b",
+    "all": "2b6b86570ca7a196"
    },
    "row_hash": "c1c0e2ac2588a579",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "B11",
@@ -341,37 +346,39 @@
    "row": "B8",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No garment named (\"Your nipples go hard, and you fold your arms over your chest\" is body only); \"late thirties\" agrees with Cross, 38.",
+   "line": "drama teacher sitting edge of stage",
+   "why": "no garment of hers named; search words name only him and the stage; late thirties agrees with 38",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "80d415cf08e0ebfe",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "B8",
    "screen": "drama_first.name",
    "verdict": "PASS",
-   "line": "Phones away. Up on the stage with the others.",
-   "why": "No garment, no number; \"late thirties\" agrees with Cross, 38.",
+   "line": "You. New face. Name?",
+   "why": "'late thirties' agrees with 38; only his black shirt (his texture), none of hers.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7a2f62e5ee575f8a",
-    "facts": "f44b1d2b9b200264",
-    "facts2": "5c64fc8c02202032",
-    "all": "0ed5613ce14acc0c"
+    "traits": "2875b58584de3c6e",
+    "facts": "0c9363336746cdc3",
+    "facts2": "ef247af92b2b0a6b",
+    "all": "2b6b86570ca7a196"
    },
    "row_hash": "80d415cf08e0ebfe",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "B9",
@@ -1048,8 +1055,47 @@
    "note": false,
    "screen_hash": "631e002f938f0b7c",
    "row_hash": "d8ebf6d6b2abf6a5",
-   "carried": false,
+   "carried": true,
    "pass": 20
+  },
+  {
+   "row": "C2207",
+   "screen": "*",
+   "verdict": "N/A",
+   "line": "",
+   "why": "no place picture in this piece's Builds; every spot here is a scene block, and C2207 judges a place's own picture (rule 2)",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c6488c6494bb0fa5",
+   "row_hash": "07e2f7cc9eff74bc",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C2208",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "drama teacher sitting edge of stage",
+   "why": "6 and 7 words, role and place only",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c6488c6494bb0fa5",
+   "row_hash": "4247ea8697822bed",
+   "carried": false,
+   "pass": 22
+  },
+  {
+   "row": "C2209",
+   "screen": "*",
+   "verdict": "PASS",
+   "line": "drama teacher sitting edge of stage",
+   "why": "one subject sitting on a stage edge, a common pose; no garment of hers",
+   "cause": null,
+   "note": false,
+   "screen_hash": "c6488c6494bb0fa5",
+   "row_hash": "1cae3508b9a1f8d1",
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C286",
@@ -1263,37 +1309,39 @@
    "row": "C460",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "True with Brooke present: \"the others\", \"the whole room\", \"anyone\" claim a class, and she is in it.",
+   "line": "Every time it's your turn, his eyes stay on you after you've finished, down your body and back up.",
+   "why": "every claim true on every playthrough that reaches it: one-time, Cross present by trigger Tue/Thu 11:00-11:29 inside his 11-18 rows; rehearsals Tue/Thu/Fri afternoons match his rows; the search words describe what the prose shows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "67e48e60d5053a2e",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C460",
    "screen": "drama_first.name",
    "verdict": "PASS",
-   "line": "Phones away. Up on the stage with the others.",
-   "why": "True with Brooke present: \"the others\", \"the whole room\", \"anyone\" claim a class, and she is in it.",
+   "line": "You. New face. Name?",
+   "why": "Claims true on the one visit it can show.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7a2f62e5ee575f8a",
-    "facts": "f44b1d2b9b200264",
-    "facts2": "5c64fc8c02202032",
-    "all": "0ed5613ce14acc0c"
+    "traits": "2875b58584de3c6e",
+    "facts": "0c9363336746cdc3",
+    "facts2": "ef247af92b2b0a6b",
+    "all": "2b6b86570ca7a196"
    },
    "row_hash": "67e48e60d5053a2e",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C461",
@@ -1312,37 +1360,39 @@
    "row": "C461",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Texture and dialogue fit Cross's cast entry.",
+   "line": "Every time it's your turn, his eyes stay on you after you've finished, down your body and back up.",
+   "why": "texture that can't clash and dialogue that fits the cast entry; the search line adds no claim",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "310706ee076318f2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C461",
    "screen": "drama_first.name",
    "verdict": "PASS",
-   "line": "Phones away. Up on the stage with the others.",
-   "why": "Texture and dialogue fit Cross's cast entry.",
+   "line": "You. New face. Name?",
+   "why": "Texture and his line only.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7a2f62e5ee575f8a",
-    "facts": "f44b1d2b9b200264",
-    "facts2": "5c64fc8c02202032",
-    "all": "0ed5613ce14acc0c"
+    "traits": "2875b58584de3c6e",
+    "facts": "0c9363336746cdc3",
+    "facts2": "ef247af92b2b0a6b",
+    "all": "2b6b86570ca7a196"
    },
    "row_hash": "310706ee076318f2",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C519",
@@ -1725,19 +1775,20 @@
    "row": "C889",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No label names a clock time or a duration (\"@player.\" / \"Do I have to?\" / \"Shout it\" / \"Done\").",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "'Done' names no time or duration.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "def1348d483d0c40",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C892",
@@ -1756,19 +1807,20 @@
    "row": "C892",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No hour in the act.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "The rehearsal days are information about his rows, not this act's hour.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "5c890033f6ac38b8",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C897",
@@ -1787,19 +1839,20 @@
    "row": "C897",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No time on rooms.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "120 minutes is the class; Done stays in the Theatre.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "265ece64add83676",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C900",
@@ -1818,37 +1871,39 @@
    "row": "C900",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "\"afternoons\" is a rule, not the time now.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "Names no current time; 'afternoons' is a schedule fact.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "6372efb027eb2034",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C902",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "True at 09:29 too.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "True read at 11:29.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "df5ed7a36dbc74e4",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C902",
@@ -1884,20 +1939,21 @@
   {
    "row": "C903",
    "screen": "drama_first.class",
-   "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "\"Rehearsals are Tuesday, Thursday and Friday afternoons\" is a one-time line behind the Tue/Thu trigger, and true (Cross Tue/Thu/Fri 14-18).",
+   "verdict": "N/A",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "Not a repeatable (is_repeatable false); the weekdays named are rehearsal days, true on his rows.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "4f83b0b5eb45f71b",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C906",
@@ -1916,37 +1972,39 @@
    "row": "C906",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No \"till X\" on any label.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "No 'till'.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "71713a7e7ae739e7",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C910",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Labels say no time and no energy; the meeting costs none.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "No label states time or energy.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "d5a109f1ef88419a",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C913",
@@ -1964,20 +2022,21 @@
   {
    "row": "C913",
    "screen": "drama_first.class",
-   "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "One-time event that plays on entry; hidden when shut is right; P09's drama row is the chosen one.",
+   "verdict": "N/A",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "A one-time event that fires on entry, not an activity she chooses; C916 governs.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "c750f9b6ab4ace14",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C914",
@@ -1995,20 +2054,21 @@
   {
    "row": "C914",
    "screen": "drama_first.class",
-   "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Shows no hours.",
+   "verdict": "N/A",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "No hours shown; event hidden when shut.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "bd07273d5822f34f",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C916",
@@ -2027,19 +2087,20 @@
    "row": "C916",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "An event that happens to her, hidden when shut.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "An event that happens to her (auto-fire on entry) stays hidden out of its window.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "7b2bb0dfdbcfe946",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C920",
@@ -2058,19 +2119,20 @@
    "row": "C920",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No hop: Done returns to the Theatre.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "Done targets the same Theatre; no hop cost.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "513927dd127fca04",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C924",
@@ -2088,20 +2150,21 @@
   {
    "row": "C924",
    "screen": "drama_first.class",
-   "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No travel.",
+   "verdict": "N/A",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "No travel on this screen.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "791cd173e23fb130",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C926",
@@ -2120,19 +2183,20 @@
    "row": "C926",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Clock moves by minutes only.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "Clock moves by 120 minutes only.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "177d1e1776fac74b",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C927",
@@ -2151,19 +2215,20 @@
    "row": "C927",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Done carries 120 minutes.",
+   "line": "Done / Leave",
+   "why": "every exit states its own minutes; no 3-minute default",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "4e86d143688ba8e5",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C928",
@@ -2182,37 +2247,39 @@
    "row": "C928",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
    "why": "No clock in prose.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "2c3ccc6bd9929d7f",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C929",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "No activity time on any label.",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "No time tag on any label.",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "18b0ecdf6d7fc901",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C930",
@@ -2230,20 +2297,21 @@
   {
    "row": "C930",
    "screen": "drama_first.class",
-   "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Not windowed work; a one-time event.",
+   "verdict": "N/A",
+   "line": "Rehearsals are Tuesday, Thursday and Friday afternoons. He tells the whole room, but he's looking at you.",
+   "why": "An event, not windowed work; hiding when shut is intended (C916).",
    "cause": null,
    "note": true,
    "screen_hash": {
     "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "c1038601dfebaaa0"
    },
    "row_hash": "beb57cd46fe906bf",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "C931",
@@ -2262,19 +2330,20 @@
    "row": "C931",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "11:00-11:30 end-exclusive.",
+   "line": "time_of_day window",
+   "why": "the trigger or button window is end exclusive and sits inside the person's row",
    "cause": null,
    "note": true,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "1aadffd96e76381c",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "C953",
@@ -2311,37 +2380,39 @@
    "row": "L106",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "Only Cross is claimed, and the trigger gates him present.",
+   "line": "Every time it's your turn, his eyes stay on you after you've finished, down your body and back up.",
+   "why": "only the screen's own person is claimed there, and their rows put them there: one-time, Cross present by trigger Tue/Thu 11:00-11:29 inside his 11-18 rows; rehearsals Tue/Thu/Fri afternoons match his rows",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "13a714429d15f3b2",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L106",
    "screen": "drama_first.name",
    "verdict": "PASS",
-   "line": "Phones away. Up on the stage with the others.",
-   "why": "Only Cross is claimed, and the trigger gates him present.",
+   "line": "You. New face. Name?",
+   "why": "Names only Cross ('the man'), present.",
    "cause": null,
    "note": false,
    "screen_hash": {
     "text": "7a2f62e5ee575f8a",
-    "facts": "f44b1d2b9b200264",
-    "facts2": "5c64fc8c02202032",
-    "all": "0ed5613ce14acc0c"
+    "traits": "2875b58584de3c6e",
+    "facts": "0c9363336746cdc3",
+    "facts2": "ef247af92b2b0a6b",
+    "all": "2b6b86570ca7a196"
    },
    "row_hash": "13a714429d15f3b2",
    "carried": true,
-   "pass": 3
+   "pass": 21
   },
   {
    "row": "L119",
@@ -2412,19 +2483,20 @@
    "row": "L167",
    "screen": "drama_first.class",
    "verdict": "PASS",
-   "line": "For the rest of the class he has you all walking, stopping, saying one line to the empty seats. ... He tells the whole room, but he's looking at you.",
-   "why": "One one-time canvas, no per-day rows.",
+   "line": "time_of_day window",
+   "why": "one row or button per activity, the same hours on each day it shows; no per-day-kind duplicates",
    "cause": null,
    "note": false,
    "screen_hash": {
-    "text": "2169397d9f5735c0",
-    "facts": "a5795dab8aa2122b",
-    "facts2": "525918bf83170956",
-    "all": "ddd491fa223cc642"
+    "text": "f65fa4a9f98cbca7",
+    "traits": "2875b58584de3c6e",
+    "facts": "d1ec5e67717ff965",
+    "facts2": "d3da3bb9fb66f441",
+    "all": "ce3f83cfa63cdad2"
    },
    "row_hash": "e64ce2672d85d2d8",
-   "carried": true,
-   "pass": 3
+   "carried": false,
+   "pass": 22
   },
   {
    "row": "L168",
@@ -2481,8 +2553,8 @@
  ],
  "causes": [],
  "pending": [],
- "asked": 1,
- "answered": 1,
+ "asked": 11,
+ "answered": 11,
  "pass_items": [],
  "unowed": []
 }
